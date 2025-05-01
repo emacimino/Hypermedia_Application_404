@@ -1,12 +1,12 @@
 <template>
   <div :class="$style.barraHome">
-    <img :class="$style.image5Icon" alt="" src="assets/Logo.png" />
+    <ClickableImage to="/" src="Logo.png" title="Vai alla home" />
 
     <!-- Uso del componente MenuItem per ogni voce -->
-    <MenuItem title="Activities" :onClick="onActivitiesContainerClick" />
-    <MenuItem title="Teachers" :onClick="onActivitiesContainerClick"/>
-    <MenuItem title="Highlights" :onClick="onActivitiesContainerClick"/>
-    <MenuItem title="About us" :onClick="onActivitiesContainerClick" />
+    <MenuItem label="Activities" to="/activityPage"  :large="true"/>
+    <MenuItem label="Teachers" to="/teachers"  :large="true"/>
+    <MenuItem label="Highlights" to="/highlights"  :large="true"/>
+    <MenuItem label="About us" to="/aboutUs"  :large="true"/>
 
     <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
   </div>
@@ -14,16 +14,13 @@
 <script setup lang="ts">
 
 
+import ClickableImage from "~/components/clickableImage.vue";
+
 function onActivitiesContainerClick() {
   // Add your code here
 }</script>
 <style  module>
-.image5Icon {
-  width: 92px;
-  position: relative;
-  max-height: 100%;
-  object-fit: cover;
-}
+
 
 .barraHome {
   width: 100%;

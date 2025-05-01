@@ -7,9 +7,9 @@
 </script>
 
 <template>
-<button class = "menu-item" :class="{ large }" @click = "handleClick">
+<div class = "menu-item" :class="{ large }" @click = "handleClick">
   {{label}}
-</button>
+</div>
 </template>
 
 <style scoped>
