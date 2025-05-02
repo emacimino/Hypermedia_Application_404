@@ -20,7 +20,6 @@ function onActivitiesContainerClick() {
   // Add your code here
 }</script>
 <style  module>
-//to push
 
 .barraHome {
   width: 100%;
