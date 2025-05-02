@@ -21,6 +21,7 @@ function onActivitiesContainerClick() {
 }</script>
 <style  module>
 
+
 .barraHome {
   width: 100%;
   position: relative;
@@ -32,8 +33,6 @@ function onActivitiesContainerClick() {
   justify-content: center;
   gap: 10px;
   text-align: left;
-  font-size: 36px;
-  color: #1f3a5f;
 }
 
 .landmarkFlagIcon {
