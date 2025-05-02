@@ -8,7 +8,16 @@ defineProps<{
 
 <template>
   <NuxtLink :to="to">
-    <img :src="src" :alt="alt" class="cursor-pointer" />
+    <img :src="src" :alt="alt" class="logo" />
   </NuxtLink>
 </template>
+
+<style>
+.logo{
+  vertical-align: middle;
+}
+.logo:hover{
+  cursor: pointer;
+}
+</style>
 

@@ -2,11 +2,10 @@
   <div :class="$style.barraHome">
     <ClickableImage to="/" src="Logo.png" title="Vai alla home" />
 
-    <!-- Uso del componente MenuItem per ogni voce -->
-    <MenuItem label="Activities" to="/activityPage"  :large="true"/>
-    <MenuItem label="Teachers" to="/teachers"  :large="true"/>
-    <MenuItem label="Highlights" to="/highlights"  :large="true"/>
-    <MenuItem label="About us" to="/aboutUs"  :large="true"/>
+    <MenuItem label="Activities" to="/activityPage"/>
+    <MenuItem label="Teachers" to="/teachers"/>
+    <MenuItem label="Highlights" to="/highlights"/>
+    <MenuItem label="About us" to="/aboutUs"/>
 
     <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
   </div>
@@ -17,11 +16,9 @@
 import ClickableImage from "~/components/clickableImage.vue";
 
 function onActivitiesContainerClick() {
-  // Add your code here
 }</script>
+
 <style  module>
-
-
 .barraHome {
   width: 100%;
   position: relative;
@@ -31,15 +28,14 @@ function onActivitiesContainerClick() {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 2%;
-  text-align: left;
+  gap: 4%;
 }
-
 .landmarkFlagIcon {
-  width: 70px;
+  width: 4.5%;
   position: relative;
-  max-height: 100%;
   object-fit: cover;
 }
-
+.barraHome * {
+  border: 1px dashed red;
+}
 </style>

@@ -1,20 +1,18 @@
-<script setup lang="ts">
-defineProps<{
-  label: string;
-  to: string;
-  large?: boolean;
-}>();
-</script>
-
 <template>
-  <NuxtLink :to="to" class="menu-item" :class="{ large }">
+  <NuxtLink :to="to" class="menu-item">
     {{ label }}
   </NuxtLink>
 </template>
 
+<script setup lang="ts">
+defineProps<{
+  label: string;
+  to: string;
+}>()
+</script>
+
 <style scoped>
 .menu-item {
-  width: 150px;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -29,12 +27,10 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 }
-
 .menu-item:hover {
   text-decoration: underline;
-}
-
-.menu-item.large {
-  width: 200px;
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: transform 0.15s ease;
 }
 </style>
