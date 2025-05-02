@@ -26,17 +26,17 @@ function onActivitiesContainerClick() {
   width: 100%;
   position: relative;
   background-color: #d0f0fd;
-  height: 93px;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 2%;
   text-align: left;
 }
 
 .landmarkFlagIcon {
-  width: 139px;
+  width: 70px;
   position: relative;
   max-height: 100%;
   object-fit: cover;

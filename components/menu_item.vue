@@ -14,17 +14,17 @@
 
 <style scoped>
 .menu-item {
-  width: 220px;
-  height: 75px;
+  width: 150px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   color: #1F3A5F;
-  font-size: 36px;
+  font-size: 28px;
   font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  line-height: 54px;
+  font-weight: 400;
+  line-height: 50px;
   word-wrap: break-word;
   text-align: center;
   text-decoration: none;
@@ -35,6 +35,6 @@
 }
 
 .menu-item.large {
-  width: 230px;
+  width: 200px;
 }
 </style>

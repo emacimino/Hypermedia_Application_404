@@ -41,8 +41,8 @@ defineProps<{
 }
 .imageWrapper {
   flex: 1;
-  max-width: 45%;
-  min-width: 300px;
+  max-width: 40%;
+  min-width: 30%;
 }
 .image {
   width: 100%;

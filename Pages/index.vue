@@ -2,7 +2,7 @@
   <presentation
       title="What do we offer?"
       :paragraphs="[
-      'At Serene Flow Yoga, we believe in creating a peaceful space where mind, body, and spirit connect. ' +
+      'At White Lotus Center, we believe in creating a peaceful space where mind, body, and spirit connect. ' +
        'Nestled in the heart of the city, our studio offers a calm retreat from the busy world outside — ' +
         'a place where you can breathe, move, and grow at your own pace.',
       'We offer a wide variety of yoga classes suitable for all levels, from complete beginners to experienced practitioners. ' +
