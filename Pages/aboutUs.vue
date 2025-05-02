@@ -7,24 +7,7 @@
     <img :class="$style.image19Icon" alt="" src="/image 19.png" />
     <div :class="$style.barraHome">
 
-      <div :class="$style.activities" @click="onActivitiesContainerClick">
-        <div :class="$style.activities1">Activities</div>
-      </div>
-      <div :class="$style.teachers">
-        <div :class="$style.activitiesWrapper">
-          <div :class="$style.activities1">Teachers</div>
-        </div>
-      </div>
-      <div :class="$style.contacts">
-        <div :class="$style.activitiesWrapper">
-          <div :class="$style.activities1">Highlights</div>
-        </div>
-      </div>
-      <div :class="$style.aboutUs1" @click="onAboutUsContainerClick">
-        <div :class="$style.activitiesWrapper">
-          <div :class="$style.activities1">About us</div>
-        </div>
-      </div>
+
       <!--<img :class="$style.landmarkFlagIcon" alt="" src="landmark_flag.png" /> -->
     </div>
     <div :class="$style.coursesPresentation">
@@ -38,10 +21,17 @@
     </div>
     <b :class="$style.contacts1">Contacts</b>
     <b :class="$style.addressZenflowYogaContainer">
-      <p :class="$style.atYogaCenter">📍 Address  Zenflow Yoga Center  42 Harmony Way  Rivervale, CA 90210  United States</p>
-      <p :class="$style.atYogaCenter">📞 Phone  +1 (310) 555-8123</p>
-      <p :class="$style.atYogaCenter">📧 Email info@zenflowyoga.com</p>
-      <p :class="$style.atYogaCenter">🌐 Website w
+      <p :class="$style.atYogaCenter">📍
+        Zenflow Yoga Center
+        42 Harmony Way <br />
+        Rivervale, CA 90210
+        United States</p>
+      <p :class="$style.atYogaCenter">📞 Phone
+        +1 (310) 555-8123</p>
+      <p :class="$style.atYogaCenter">📧 Email
+        info@zenflowyoga.com</p>
+      <p :class="$style.atYogaCenter">🌐 Website
+        w
         <a :class="$style.wwzenflowyogacom" href="http://www.zenflowyoga.com" target="_blank">
           <span :class="$style.wwzenflowyogacom1">ww.zenflowyoga.com</span>
         </a>
@@ -75,7 +65,7 @@ function onAboutUsContainerClick() {
 .image20Icon {
   position: absolute;
   top: 102px;
-  left: 760px;
+  left: 700px;
   border-radius: 33px;
   width: 1107px;
   height: 559px;
@@ -104,34 +94,7 @@ function onAboutUsContainerClick() {
   max-height: 100%;
   object-fit: cover;
 }
-.activities1 {
-  position: absolute;
-  width: calc(100% - 59px);
-  top: calc(50% - 25.5px);
-  left: 29px;
-  line-height: 150%;
-  font-weight: 500;
-  display: inline-block;
-  height: 52px;
-}
-.activities {
-  width: 220px;
-  position: relative;
-  height: 75px;
-  overflow: hidden;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.activitiesWrapper {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  left: 0%;
-  overflow: hidden;
-}
+
 .teachers {
   width: 220px;
   position: relative;
@@ -154,21 +117,7 @@ function onAboutUsContainerClick() {
   max-height: 100%;
   object-fit: cover;
 }
-.barraHome {
-  position: absolute;
-  top: 0px;
-  left: -26px;
-  background-color: #d0f0fd;
-  width: 1946px;
-  height: 93px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 36px;
-  font-family: 'Playfair Display';
-}
+
 .whatDoWe {
   width: 770px;
   position: relative;
