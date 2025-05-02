@@ -1,15 +1,15 @@
 <script setup lang="ts">
-  defineProps<{
-    label: string;
-    to: string;
-    large?: boolean
-  }>()
+defineProps<{
+  label: string;
+  to: string;
+  large?: boolean;
+}>();
 </script>
 
 <template>
-<div class = "menu-item" :class="{ large }" @click = "handleClick">
-  {{label}}
-</div>
+  <NuxtLink :to="to" class="menu-item" :class="{ large }">
+    {{ label }}
+  </NuxtLink>
 </template>
 
 <style scoped>
