@@ -6,6 +6,8 @@
     <MenuItem label="Teachers" to="/teachers"/>
     <MenuItem label="Highlights" to="/highlights"/>
     <MenuItem label="About us" to="/aboutUs"/>
+    <MenuItem label="Contacts" to="/contacts"/>
+
 
     <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
   </div>
