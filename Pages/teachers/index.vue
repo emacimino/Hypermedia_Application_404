@@ -116,8 +116,8 @@ const teachers = [
 .teachersGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 0 50px;
-  padding: 20px;
+  gap: 10%;
+  padding: 10%;
 }
 
 .teachersGrid * {
