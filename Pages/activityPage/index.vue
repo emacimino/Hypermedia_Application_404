@@ -36,47 +36,47 @@ const activities = [
   {
     title: 'Mindfulness',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/mindfulness.png'
   },
   {
     title: 'Meditation course',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/meditation.png'
   },
   {
     title: 'Vinyasa yoga',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/vinyasa.png'
   },
   {
     title: 'Workshops',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/workshops.png'
   },
   {
     title: 'Seminars',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/seminars.png'
   },
   {
     title: 'Retreats',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/retreats.png'
   },
   {
     title: 'Education',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/education.png'
   },
   {
     title: 'Crossfit',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/crossfit.png'
   },
   {
     title: 'Pilates',
     description: 'Description of fifth product',
-    image: '/hathayoga.png'
+    image: '/pilates.png'
   }
 ];
 </script>
