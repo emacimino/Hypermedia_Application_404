@@ -94,14 +94,14 @@ const teachers = [
     image: '/sofia.png'
   },
   {
-    name: 'Giulia Ferri',
+    name: 'Alba Diaz',
     description: 'Pilates & Breathwork Guide',
-    image: '/images/giulia.png'
+    image: '/alba.png'
   },
   {
-    name: 'Sara Vassari',
+    name: 'Martina Rossi',
     description: 'Functional Training Coach',
-    image: '/images/sara.png'
+    image: '/martina.png'
   },
   {
     name: 'Ginevra Sottili',
@@ -148,12 +148,17 @@ const teachers = [
   justify-content: center;
   gap: 4px;
 }
+
+
+
 .teachersGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 200px;
-  padding: 200px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 0 50px;
+  padding: 20px;
 }
 
+.teachersGrid * {
+  border: 1px dashed red;
+}
 </style>
