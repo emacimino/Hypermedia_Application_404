@@ -37,7 +37,5 @@ function onActivitiesContainerClick() {
   position: relative;
   object-fit: cover;
 }
-.barraHome * {
-  border: 1px dashed red;
-}
+
 </style>
