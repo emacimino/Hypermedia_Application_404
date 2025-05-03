@@ -11,6 +11,7 @@
       image="/presentation1.png"
       :reverse = true
   />
+
 </template>
 
 <script setup lang="ts">

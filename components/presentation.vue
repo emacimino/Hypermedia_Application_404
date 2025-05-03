@@ -31,7 +31,6 @@ defineProps<{
   gap: 60px;
   box-sizing: border-box;
   width: 100%;
-  background-color: #ffffff;
   font-family: Inter;
   color: #1f3a5f;
   flex-wrap: wrap;
