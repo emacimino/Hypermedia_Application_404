@@ -13,22 +13,6 @@
         image="/image 19.png"
         :reverse="true"
     />
-
-    <!-- Contacts section -->
-    <b :class="$style.contacts1">Contacts</b>
-    <b :class="$style.addressZenflowYogaContainer">
-      <p :class="$style.atYogaCenter">📍 Zenflow Yoga Center<br />42 Harmony Way<br />Rivervale, CA 90210<br />United States</p>
-      <p :class="$style.atYogaCenter">📞 Phone: +1 (310) 555-8123</p>
-      <p :class="$style.atYogaCenter">📧 Email: info@zenflowyoga.com</p>
-      <p :class="$style.atYogaCenter">🌐 Website:
-        <a :class="$style.wwzenflowyogacom" href="http://www.zenflowyoga.com" target="_blank">
-          <span :class="$style.wwzenflowyogacom1">www.zenflowyoga.com</span>
-        </a>
-      </p>
-      <p :class="$style.atYogaCenter">🕒 Opening Hours</p>
-      <p :class="$style.atYogaCenter">Monday – Friday: 7:00 AM – 9:00 PM</p>
-      <p :class="$style.atYogaCenter">Saturday – Sunday: 8:00 AM – 6:00 PM</p>
-    </b>
   </div>
 </template>
 
@@ -46,30 +30,5 @@ import Presentation from '../components/presentation.vue'
   font-size: 64px;
   color: #1f3a5f;
   font-family: Inter;
-}
-.contacts1 {
-  position: absolute;
-  top: 1192px;
-  left: 59px;
-  letter-spacing: -0.02em;
-  display: inline-block;
-  width: 770px;
-  height: 76px;
-}
-.addressZenflowYogaContainer {
-  position: absolute;
-  top: 1309px;
-  left: 49px;
-  font-size: 32px;
-  letter-spacing: -0.02em;
-}
-.atYogaCenter {
-  margin: 0;
-}
-.wwzenflowyogacom1 {
-  text-decoration: underline;
-}
-.wwzenflowyogacom {
-  color: inherit;
 }
 </style>
