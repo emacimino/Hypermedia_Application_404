@@ -1,7 +1,7 @@
 <template>
     <!-- Replaced static section with modular Presentation component -->
     <Presentation
-        title="What do we offer"
+        title="What do we offer?"
         :paragraphs="[
         'At Serene Flow Yoga, we believe in creating a peaceful space where mind, body, and spirit connect.',
         'Nestled in the heart of the city, our studio offers a calm retreat from the busy world outside — a place where you can breathe, move, and grow at your own pace.',
