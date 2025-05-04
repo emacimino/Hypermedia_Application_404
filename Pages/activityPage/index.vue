@@ -19,6 +19,8 @@
         :title="activity.title"
         :description="activity.description"
         :image="activity.image"
+        @click="goToActivityDetails(activity.title)"
+
     />
   </div>
 </template>
