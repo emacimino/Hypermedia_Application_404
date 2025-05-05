@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div :class="$style.container">
+    <b :class="$style.hathaYogaCourse">Hatha Yoga Course</b>
     <img :class="$style.image22Icon" alt="" src="/image 22.png" />
   </div>
   <div :class="$style.aboutUs">
@@ -17,11 +18,11 @@
   </div>
   <div :class="$style.aboutUs">
     <Presentation
-        title="Who we are"
+        title="Keep your pace"
         :paragraphs="[
-        'At White Lotus, wellness is a way of life rooted in mindfulness, balance, and a deep sense of community.',
-        'Born from the desire to create an inclusive and inspiring space, we offer yoga, meditation, Pilates, and holistic practices to support your journey.',
-        'Guided by passion and purpose, every class is designed to help you grow, heal, and reconnect — body, mind, and spirit.'
+        'Our weekly schedule offers a balanced mix of yoga, meditation and pilates, to support all levels and goals.',
+        'With classes available throughout the day, you can find the right pace - whether you are looking to energize, unwind or deepen your practice.',
+        'Each session is guided by experienced instructors in a welcoming and mindful environment.'
         ]"
         image="/calendar.png"
         :reverse="false"
@@ -110,14 +111,17 @@ import Presentation from '../components/presentation.vue'
   color: #1f3a5f;
   font-family: Inter;
 }
+
+.container {
+  position: relative;
+  display: inline-block; /* or block, depending on layout */
+}
+
 .image22Icon {
-   width: 100%;
-   position: relative;
-   max-width: 100%;
-   overflow: hidden;
-   max-height: 100%;
-   object-fit: cover;
- }
+  width: 100%; /* or your preferred size */
+  height: auto;
+  display: block;
+}
 .calendarIcon {
   width: 50%;
   position: relative;
@@ -240,12 +244,22 @@ import Presentation from '../components/presentation.vue'
 .prices {
   width: 100%;
   position: relative;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: #fff;
   height: 795px;
   overflow: hidden;
   text-align: center;
   font-size: 48px;
   color: #000;
   font-family: Inter;
+}
+.hathaYogaCourse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-100px, 200px);
+  color: #1f3a5f; /* or any contrast color */
+  padding: 8px;
+  font-size: 64px;
+
 }
 </style>
