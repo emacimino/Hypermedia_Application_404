@@ -1,9 +1,9 @@
 <template>
-  <div :class="$style.yogaCours">
-    <img :class="$style.imageIcon" :alt="title" :src="image" />
-    <div :class="$style.text">
-      <div :class="$style.title">{{ title }}</div>
-      <div :class="$style.description">{{ description }}</div>
+  <div :class="$style.card" @click="$emit('click')">
+    <img :src="image" :alt="title" :class="$style.image" />
+    <div :class="$style.content">
+      <h3 :class="$style.title">{{ title }}</h3>
+      <p :class="$style.description">{{ description }}</p>
     </div>
   </div>
 </template>
@@ -17,41 +17,38 @@ defineProps({
 </script>
 
 <style  module>
-.yogaCours {
-  position: relative;
-  height: 500px;
+.card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  background-color: white;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease;
 }
-.imageIcon {
+
+.card:hover {
+  transform: translateY(-0.25rem);
+}
+
+.image {
   width: 100%;
-  position: relative;
+  height: var(--img-height);
   object-fit: cover;
 }
+
+.content {
+  padding: 1rem;
+}
+
 .title {
-  align-self: stretch;
-  position: relative;
-  font-size: 25px;
-  color: #1f3a5f;
-  font-family: Inter;
+  font-size: var(--font-title);
+  font-weight: bold;
 }
 
 .description {
-  align-self: stretch;
-  position: relative;
-  font-size: 20px;
-  color: #1f3a5f;
-  font-family: Inter;
-}
-.text {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4px;
+  font-size: var(--font-base);
+  color: #555;
 }
 
 </style>

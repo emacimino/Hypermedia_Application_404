@@ -3,6 +3,16 @@ body {
     font-size: 16px;
     line-height: 1.6;
     background-color: #f4f4f4;
-    color: #995599;
+    color: #1F3A5F;
     padding: 20px;
+}
+
+:root {
+    --gap: 2rem;
+    --padding: 2rem;
+    --card-radius: 0.75rem;
+    --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    --img-height: 12rem;
+    --font-base: 1rem;
+    --font-title: 1.25rem;
 }

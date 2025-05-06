@@ -19,7 +19,7 @@
         :title="activity.title"
         :description="activity.description"
         :image="activity.image"
-        @click="goToActivityDetails(activity.title)"
+        @click=onClick(activity.title)
 
     />
   </div>
@@ -28,6 +28,8 @@
 <script setup>
 import SingleActivityCard from "~/components/singleActivityCard.vue";
 import Presentation from "~/components/presentation.vue";
+import {useRoute} from "vue-router";
+const router = useRouter();  // Access the current route
 
 const activities = [
   {
@@ -81,16 +83,55 @@ const activities = [
     image: '/pilates.png'
   }
 ];
+function onClick(title) {
+  console.log('Click sul bottone');
+  router.push(`/activityPage/${title}`);
+}
 </script>
 
 <style  module>
+@import "/assets/main.css";
+
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 0 10%;
-  padding: 10%;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--gap);
+  padding: var(--padding);
 }
-.courseGrid * {
-  border: 1px dashed red;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-0.25rem);
+}
+
+.card img {
+  width: 100%;
+  height: var(--img-height);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: var(--font-title);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: var(--font-base);
+  color: #555;
 }
 </style>

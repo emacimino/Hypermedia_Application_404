@@ -10,10 +10,10 @@ const contentMap = {
     title: "🌿 Yoga Course",
     subheading: "Subheading for description or instructions",
     paragraphs: [
-      "Discover balance, strength, and inner peace with our guided yoga course...",
-      "Led by certified instructors...",
-      "Join us to move, breathe, and grow.",
-      "🧘‍♀️ Weekly sessions | Small class sizes"
+      "Discover balance, strength, and inner peace with our guided yoga course open to all levels — from complete beginners to experienced practitioners. At White Lotus, we offer a welcoming space where you can deepen your practice, reconnect with your body, and find calm in the midst of daily life.",
+      "Led by certified instructors, each class combines mindful movement, breathwork, and relaxation techniques to improve flexibility, reduce stress, and enhance overall well-being. ",
+      "Whether you're looking to build a steady routine or simply explore the benefits of yoga, our course provides a supportive and inspiring environment for your journey.",
+      "Join us to move, breathe, and grow — both on and off the mat.🧘‍♀️ Weekly sessions | Small class sizes"
     ],
     imageSrc: "/hathayoga.png"
   },
@@ -32,7 +32,7 @@ const contentMap = {
 
 // Compute the content based on the route parameter
 const content = computed(() => {
-  const id = route.params.id as 'yoga' | 'pilates';
+  const id = route.params.id as 'Hatha Yoga' | 'pilates';
   return contentMap[id] || null;
 });
 </script>

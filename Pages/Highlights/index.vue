@@ -4,40 +4,39 @@
         v-for="(card, index) in cards"
         :key="index"
         v-bind="card"
+
     />
   </div>
 </template>
 
 <script setup>
 
+import SingleActivityCard from "~/components/singleActivityCard.vue";
+
 const cards = [
   {
-    image2: 'workshops.png',
-    shape1: 'shape1.svg',
-    shape2: 'shape2.svg',
+    name:"workshops",
+    activityImage: 'workshops.png',
     title: 'Craft it yourself!',
-    buttonText: 'See our labs'
+    buttonText: 'See our labs!'
   },
   {
-    image2: 'crossfit.png',
-    shape1: 'shape1.svg',
-    shape2: 'shape1.svg',
-    title: 'Make it yours',
-    buttonText: 'Start now'
+    name:"seminars",
+    activityImage: 'seminars.png',
+    title: 'Try something new!',
+    buttonText: 'Start now!'
   },
   {
-    image2: 'crossfit.png',
-    shape1: 'shape1.svg',
-    shape2: 'shape1.svg',
-    title: 'Make it yours',
-    buttonText: 'Start now'
+    name:"mindfulness",
+    activityImage: 'mindfulness.png',
+    title: 'Find yourself!',
+    buttonText: 'Go relax!'
   },
   {
-    image2: 'crossfit.png',
-    shape1: 'shape1.svg',
-    shape2: 'shape1.svg',
-    title: 'Make it yours',
-    buttonText: 'Start now'
+    name:"pilates",
+    activityImage: 'pilates.png',
+    title: 'Open your horizons!',
+    buttonText: 'Start practising!'
   }
 
 ]
