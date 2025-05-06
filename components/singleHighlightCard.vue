@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.property1default">
-    <img :class="$style.imageIcon" alt="" :src="image1" />
     <img :class="$style.shapeIcon" alt="" :src="shape1" />
     <img :class="$style.imageIcon" alt="" :src="image2" />
     <img :class="$style.shapeIcon1" alt="" :src="shape2" />
@@ -23,22 +22,22 @@
 
 <script setup>
 defineProps({
-  image1: String,
   image2: String,
   shape1: String,
   shape2: String,
   title: {
     type: String,
-    default: 'Craft it yourself!',
+    default: 'Discover our activity!',
   },
   buttonText: {
     type: String,
-    default: 'Go see our workshops',
+    default: 'Go see it!',
   }
 })
 </script>
 <style  module>.imageIcon {
   position: absolute;
+  border-radius: 2%;
   top: 10.47%;     /* 201 / 1920 */
   left: 15.56%;    /* 168 / 1080 */
   width: 68.89%;   /* 744 / 1080 */
@@ -80,19 +79,19 @@ defineProps({
   top: 78.44%;      /* 1506 / 1920 */
   left: 15.56%;     /* 168 / 1080 */
   width: 46.11%;    /* 498 / 1080 */
-  height: 6.77%;    /* 130 / 1920 */
+  height: 3.77%;    /* 130 / 1920 */
 }
 
 .craftItYourself {
   position: absolute;
   top: 64.11%;      /* 1231 / 1920 */
   left: 15.56%;     /* 168 / 1080 */
-  font-size: 6.67vw; /* 128/1920 -> meglio usare vw per testo responsive */
+  font-size: 3vw; /* 128/1920 -> meglio usare vw per testo responsive */
   line-height: 90%;
   display: inline-block;
   text-align: left;
   width: 83.7%;     /* 904 / 1080 */
-  height: 12.4%;    /* 238 / 1920 */
+  height: 8.4%;    /* 238 / 1920 */
 }
 
 .grad {
@@ -154,7 +153,7 @@ defineProps({
   position: relative;
   border-radius: 0.28vw; /* 3 / 1080 */
   background-color: #0769a2;
-  height: 90.57vw; /* 1739 / 1920 ≈ 90.57% of 1080vw (used to preserve aspect ratio) */
+  height: 45.57vw; /* 1739 / 1920 ≈ 90.57% of 1080vw (used to preserve aspect ratio) */
   overflow: hidden;
   text-align: center;
   font-size: 2.81vw;  /* 54 / 1920 */

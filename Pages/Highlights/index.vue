@@ -12,21 +12,33 @@
 
 const cards = [
   {
-    image1: 'alba.png',
-    image2: 'crossfit.png',
+    image2: 'workshops.png',
     shape1: 'shape1.svg',
     shape2: 'shape2.svg',
     title: 'Craft it yourself!',
     buttonText: 'See our labs'
   },
   {
-    image1: 'alba.png',
-    image2: 'crossfit.png.png',
+    image2: 'crossfit.png',
     shape1: 'shape1.svg',
     shape2: 'shape1.svg',
     title: 'Make it yours',
     buttonText: 'Start now'
   },
+  {
+    image2: 'crossfit.png',
+    shape1: 'shape1.svg',
+    shape2: 'shape1.svg',
+    title: 'Make it yours',
+    buttonText: 'Start now'
+  },
+  {
+    image2: 'crossfit.png',
+    shape1: 'shape1.svg',
+    shape2: 'shape1.svg',
+    title: 'Make it yours',
+    buttonText: 'Start now'
+  }
 
 ]
 </script>
