@@ -13,55 +13,15 @@
         image="/image 11.png"
         :reverse="true"
     />
+    <elemGrid :activities="teachers"></elemGrid>
 
-    <!-- Teacher grid -->
-    <div :class="$style.teachersGrid">
-      <div :class="$style.teachersGrid">
-        <SingleActivityCard
-            v-for="(teacher, index) in teachers"
-            :key="index"
-            :title="teacher.name"
-            :description="teacher.description"
-            :image="teacher.image"
-        />
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div :class="$style.navigationFooter">
-      <div :class="$style.items">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.items1">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.items2">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.whiteLotusCenter">White Lotus Center</div>
-      <div :class="$style.socialIcons">
-        <!-- <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" /> -->
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Presentation from '../../components/presentation.vue'
 import SingleActivityCard from '../../components/singleActivityCard.vue'
+import ElemGrid from "~/components/elemGrid.vue";
 
 function onYogaTeacherContainerClick() {
   // Add your code here
@@ -113,14 +73,5 @@ const teachers = [
 
 <style  module>
 
-.teachersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0 10%;
-  padding: 10%;
-}
 
-.teachersGrid * {
-  border: 1px dashed red;
-}
 </style>
