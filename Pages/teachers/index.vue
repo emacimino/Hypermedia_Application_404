@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.teachers">
+
     <!-- Reusable header section -->
     <Presentation
         title="Our qualified team"
@@ -15,7 +15,7 @@
     />
     <elemGrid :activities="teachers"></elemGrid>
 
-  </div>
+
 </template>
 
 <script setup lang="ts">
