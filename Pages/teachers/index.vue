@@ -72,6 +72,15 @@ const teachers = [
 </script>
 
 <style  module>
+.teachersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 10%;
+  padding: 10%;
+}
 
+.teachersGrid * {
+  border: 1px dashed red;
+}
 
 </style>

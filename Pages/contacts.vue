@@ -8,11 +8,31 @@
       <h2>Opening Hours</h2>
       <p>Monday – Friday: 7:00 AM – 9:00 PM<br />Saturday – Sunday: 8:00 AM – 6:00 PM</p>
     </div>
-    <img :class="$style.image" src="/map.png" alt="Location map" />
+   <!-- <img :class="$style.image" src="/map.png" alt="Location map" /> -->
+    <ClientOnly>
+      <div id="map" style="height: 500px ; width: 60%;"></div>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, nextTick } from 'vue'
+
+onMounted(async () => {
+  await nextTick() // Ensure DOM is ready
+
+  const L = await import('leaflet')
+
+  const map = L.map('map').setView([45.4565, 9.2019], 16)
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map)
+
+  L.marker([45.4565, 9.2019]).addTo(map)
+      .bindPopup('Via Orti 15, Milano')
+      .openPopup()
+})
 </script>
 
 <style module>
