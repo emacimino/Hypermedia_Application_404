@@ -14,3 +14,6 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/icon"]
 })
+export default defineNuxtConfig({
+  css: ['leaflet/dist/leaflet.css'],
+})

@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.teachers">
+
     <!-- Reusable header section -->
     <Presentation
         title="Our qualified team"
@@ -14,7 +14,8 @@
         :reverse="true"
     />
     <elemGrid :activities="teachers"></elemGrid>
-  </div>
+
+
 </template>
 
 <script setup lang="ts">
@@ -28,56 +29,58 @@ function onYogaTeacherContainerClick() {
 
 const teachers = [
   {
-    title: 'Marco Rossi',
+    name: 'Marco Rossi',
     description: 'Meditation & Hatha Yoga Instructor',
-    image: '/marco.png',
-    address: "teachers"
+    image: '/marco.png'
   },
   {
-    title: 'Giulia Ferri',
+    name: 'Giulia Ferri',
     description: 'Pilates & Breathwork Guide',
-    image: '/giulia.png',
-    address: "teachers"
+    image: '/giulia.png'
   },
   {
-    title: 'Sara Vassari',
+    name: 'Sara Vassari',
     description: 'Functional Training Coach',
-    image: '/sara.png',
-    address: "teachers"
+    image: '/sara.png'
   },
   {
-    title: 'Luca Neroni',
+    name: 'Luca Neroni',
     description: 'Yoga Philosophy & Retreat Leader',
-    image: '/luca.png',
-    address: "teachers"
+    image: '/luca.png'
   },
   {
-    title: 'Sofia Bianchi',
+    name: 'Sofia Bianchi',
     description: 'Meditation & Hatha Yoga Instructor',
-    image: '/sofia.png',
-    address: "teachers"
+    image: '/sofia.png'
   },
   {
-    title: 'Alba Diaz',
+    name: 'Alba Diaz',
     description: 'Pilates & Breathwork Guide',
-    image: '/alba.png',
-    address: "teachers"
+    image: '/alba.png'
   },
   {
-    title: 'Martina Rossi',
+    name: 'Martina Rossi',
     description: 'Functional Training Coach',
-    image: '/martina.png',
-    address: "teachers"
+    image: '/martina.png'
   },
   {
-    title: 'Ginevra Sottili',
+    name: 'Ginevra Sottili',
     description: 'Yoga Philosophy & Retreat Leader',
-    image: '/ginevra.png',
-    address: "teachers"
+    image: '/ginevra.png'
   }
 ]
 </script>
 
 <style  module>
+.teachersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 10%;
+  padding: 10%;
+}
+
+.teachersGrid * {
+  border: 1px dashed red;
+}
 
 </style>

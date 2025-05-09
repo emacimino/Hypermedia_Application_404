@@ -28,76 +28,27 @@
         :reverse="false"
     />
   </div>
+  <!--<div :class="$style.prices"> -->
   <div :class="$style.prices">
-    <div :class="$style.price">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price1">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price2">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price3">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price4">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price5">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price6">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
-    <div :class="$style.price7">
-      <div :class="$style.type">
-        <div :class="$style.tipoPacchetto">tipo pacchetto</div>
-      </div>
-      <div :class="$style.wrapper">
-        <div :class="$style.div">500$</div>
-      </div>
-    </div>
+    <packet
+        v-for="(item, index) in packets"
+        :key="index"
+        :type="item.type"
+        :price="item.price"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import Presentation from '../components/presentation.vue'
+import packet from '@/components/packet.vue'
+
+
+const packets = Array.from({ length: 8 }, (_, i) => ({
+  price: `500$`,
+  type: `Pacchetto ${i + 1}`
+}))
+
 </script>
 
 <style module>
@@ -130,127 +81,19 @@ import Presentation from '../components/presentation.vue'
   height: 876px;
 }
 
-
-.tipoPacchetto {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  display: inline-block;
-  width: 384px;
-  height: 77px;
-}
-.type {
-  position: absolute;
-  top: 141px;
-  left: 0px;
-  width: 384px;
-  height: 77px;
-  overflow: hidden;
-}
-.div {
-  position: absolute;
-  top: 18px;
-  left: 0px;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  display: inline-block;
-  width: 384px;
-  height: 105px;
-}
-.wrapper {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background-color: #ffe5b4;
-  width: 384px;
-  height: 141px;
-  overflow: hidden;
-  font-size: 96px;
-}
-.price {
-  position: absolute;
-  top: 51px;
-  left: 79px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price1 {
-  position: absolute;
-  top: 53px;
-  left: 541px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price2 {
-  position: absolute;
-  top: 51px;
-  left: 999px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price3 {
-  position: absolute;
-  top: 51px;
-  left: 1457px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price4 {
-  position: absolute;
-  top: 360px;
-  left: 79px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price5 {
-  position: absolute;
-  top: 362px;
-  left: 541px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price6 {
-  position: absolute;
-  top: 360px;
-  left: 999px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
-.price7 {
-  position: absolute;
-  top: 360px;
-  left: 1457px;
-  background-color: rgba(255, 255, 255, 0);
-  width: 384px;
-  height: 218px;
-  overflow: hidden;
-}
 .prices {
   width: 100%;
   position: relative;
   background-color: #fff;
-  height: 795px;
   overflow: hidden;
   text-align: center;
   font-size: 48px;
   color: #000;
   font-family: Inter;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Exactly 4 per row */
+  gap: 2rem;
+  justify-items: center; /* Center each packet horizontally */
 }
 .hathaYogaCourse {
   position: absolute;
