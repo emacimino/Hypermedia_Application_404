@@ -2,7 +2,7 @@
   <div :class="$style.content">
     <div>
       <h2>Where are we?</h2>
-      <p>📍 White Lotus Center<br />42 Harmony Way<br />Rivervale, CA 90210<br />United States</p>
+      <p>📍 White Lotus Center<br />via Orti 15<br />Milano, MI 20134<br />Italy</p>
       <h2>Contacts</h2>
       <p>📞 Phone: +1 (310) 555-8123<br />📧 Email: info@whitelotus.com</p>
       <h2>Opening Hours</h2>
