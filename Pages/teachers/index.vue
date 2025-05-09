@@ -13,55 +13,14 @@
         image="/image 11.png"
         :reverse="true"
     />
-
-    <!-- Teacher grid -->
-    <div :class="$style.teachersGrid">
-      <div :class="$style.teachersGrid">
-        <SingleActivityCard
-            v-for="(teacher, index) in teachers"
-            :key="index"
-            :title="teacher.name"
-            :description="teacher.description"
-            :image="teacher.image"
-        />
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div :class="$style.navigationFooter">
-      <div :class="$style.items">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.items1">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.items2">
-        <div :class="$style.descriptionOfFifth">Topic</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-        <div :class="$style.descriptionOfFifth">Page</div>
-      </div>
-      <div :class="$style.whiteLotusCenter">White Lotus Center</div>
-      <div :class="$style.socialIcons">
-        <!-- <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" />
-         <img :class="$style.buttonsIcon" alt="" src="Buttons / Icon.png" /> -->
-      </div>
-    </div>
+    <elemGrid :activities="teachers"></elemGrid>
   </div>
 </template>
 
 <script setup lang="ts">
 import Presentation from '../../components/presentation.vue'
 import SingleActivityCard from '../../components/singleActivityCard.vue'
+import ElemGrid from "~/components/elemGrid.vue";
 
 function onYogaTeacherContainerClick() {
   // Add your code here
@@ -69,58 +28,56 @@ function onYogaTeacherContainerClick() {
 
 const teachers = [
   {
-    name: 'Marco Rossi',
+    title: 'Marco Rossi',
     description: 'Meditation & Hatha Yoga Instructor',
-    image: '/marco.png'
+    image: '/marco.png',
+    address: "teachers"
   },
   {
-    name: 'Giulia Ferri',
+    title: 'Giulia Ferri',
     description: 'Pilates & Breathwork Guide',
-    image: '/giulia.png'
+    image: '/giulia.png',
+    address: "teachers"
   },
   {
-    name: 'Sara Vassari',
+    title: 'Sara Vassari',
     description: 'Functional Training Coach',
-    image: '/sara.png'
+    image: '/sara.png',
+    address: "teachers"
   },
   {
-    name: 'Luca Neroni',
+    title: 'Luca Neroni',
     description: 'Yoga Philosophy & Retreat Leader',
-    image: '/luca.png'
+    image: '/luca.png',
+    address: "teachers"
   },
   {
-    name: 'Sofia Bianchi',
+    title: 'Sofia Bianchi',
     description: 'Meditation & Hatha Yoga Instructor',
-    image: '/sofia.png'
+    image: '/sofia.png',
+    address: "teachers"
   },
   {
-    name: 'Alba Diaz',
+    title: 'Alba Diaz',
     description: 'Pilates & Breathwork Guide',
-    image: '/alba.png'
+    image: '/alba.png',
+    address: "teachers"
   },
   {
-    name: 'Martina Rossi',
+    title: 'Martina Rossi',
     description: 'Functional Training Coach',
-    image: '/martina.png'
+    image: '/martina.png',
+    address: "teachers"
   },
   {
-    name: 'Ginevra Sottili',
+    title: 'Ginevra Sottili',
     description: 'Yoga Philosophy & Retreat Leader',
-    image: '/ginevra.png'
+    image: '/ginevra.png',
+    address: "teachers"
   }
 ]
 </script>
 
 <style  module>
 
-.teachersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0 10%;
-  padding: 10%;
-}
-
-.teachersGrid * {
-  border: 1px dashed red;
-}
 </style>

@@ -5,17 +5,16 @@ import Presentation from "~/components/presentation.vue";
 import {useRoute} from "vue-router";
 const router = useRouter();  // Access the current route
 
-const props = defineProps<{
+const props = defineProps({
   activities: {
-    title: string;
-    description: string;
-    image: string;
-  }[];
-}>();
+    type: Array,
+    default: () => []
+  }
+});
 
 function onClick(title) {
   console.log('Click sul bottone');
-  router.push(`/activityPage/${title}`);
+  router.push(`/${address}/${title}`);
 }
 </script>
 

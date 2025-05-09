@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <b :class="$style.hathaYogaCourse">Hatha Yoga Course</b>
-    <img :class="$style.image22Icon" alt="" src="/image 22.png" />
+    <img :class="$style.image22Icon" alt="" src="/Home%20room.png" />
   </div>
   <div :class="$style.aboutUs">
     <!-- Replaced static section with modular Presentation component -->

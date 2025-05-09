@@ -18,58 +18,17 @@
 <script setup>
 import SingleActivityCard from "~/components/singleActivityCard.vue";
 import ElemGrid from "~/components/elemGrid.vue";
-const activities = [
-  {
-    title: 'Hatha Yoga',
-    description: 'Description of fifth product',
-    image: '/hathayoga.png'
-  },
-  {
-    title: 'Mindfulness',
-    description: 'Description of fifth product',
-    image: '/mindfulness.png'
-  },
-  {
-    title: 'Meditation course',
-    description: 'Description of fifth product',
-    image: '/meditation.png'
-  },
-  {
-    title: 'Vinyasa yoga',
-    description: 'Description of fifth product',
-    image: '/vinyasa.png'
-  },
-  {
-    title: 'Workshops',
-    description: 'Description of fifth product',
-    image: '/workshops.png'
-  },
-  {
-    title: 'Seminars',
-    description: 'Description of fifth product',
-    image: '/seminars.png'
-  },
-  {
-    title: 'Retreats',
-    description: 'Description of fifth product',
-    image: '/retreats.png'
-  },
-  {
-    title: 'Education',
-    description: 'Description of fifth product',
-    image: '/education.png'
-  },
-  {
-    title: 'Crossfit',
-    description: 'Description of fifth product',
-    image: '/crossfit.png'
-  },
-  {
-    title: 'Pilates',
-    description: 'Description of fifth product',
-    image: '/pilates.png'
-  }
-];
+import {supabase} from "assets/supabase-client.js";
+import { useAsyncData } from "#app";
+
+const { data: activities, error } = await useAsyncData("activities", async () => {
+  const { data, error } = await supabase.from("Activities").select("*");
+  if (error) {
+    console.error("Error fetching activities:", error);
+    return [];  }
+  return data || [];
+});
+
 </script>
 
 <style  module>
