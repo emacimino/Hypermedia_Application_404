@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import Presentation from '../components/presentation.vue'
-import packet from '@/components/packet.vue'
+import packet from '../components/packet.vue'
 
 
 const packets = Array.from({ length: 8 }, (_, i) => ({

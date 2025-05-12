@@ -18,16 +18,18 @@
 <script setup>
 import SingleActivityCard from "~/components/singleActivityCard.vue";
 import ElemGrid from "~/components/elemGrid.vue";
-import {supabase} from "assets/supabase-client.js";
 import { useAsyncData } from "#app";
 
-const { data: activities, error } = await useAsyncData("activities", async () => {
-  const { data, error } = await supabase.from("Activities").select("*");
+const supabase = useSupabaseClient()
+
+const { data: activities, error } = await useAsyncData('activities', async () => {
+  const { data, error } = await supabase.from('Activities').select('*')
   if (error) {
-    console.error("Error fetching activities:", error);
-    return [];  }
-  return data || [];
-});
+    console.error('Error fetching activities:', error)
+    throw error // important for Nuxt to register it as a real error
+  }
+  return data ?? []
+})
 
 </script>
 

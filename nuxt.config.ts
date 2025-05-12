@@ -9,11 +9,15 @@ export default defineNuxtConfig({
   },
 
   css: [
-      "~/assets/main.css",
+    "~/assets/main.css"
+    /*'leaflet/dist/leaflet.css'*/
   ],
 
-  modules: ["@nuxt/icon"]
-})
-export default defineNuxtConfig({
-  css: ['leaflet/dist/leaflet.css'],
+  modules: ["@nuxt/icon",'@nuxtjs/supabase'],
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_ANON_KEY
+    }
+  }
 })
