@@ -13,11 +13,15 @@ export default defineNuxtConfig({
     /*'leaflet/dist/leaflet.css'*/
   ],
 
+  supabase: {
+    redirect: false,
+  },
+
   modules: ["@nuxt/icon",'@nuxtjs/supabase'],
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
-      supabaseKey: process.env.SUPABASE_ANON_KEY
+      supabaseKey: process.env.SUPABASE_KEY
     }
   }
 })

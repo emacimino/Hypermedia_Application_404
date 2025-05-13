@@ -4,7 +4,7 @@
     <img :class="$style.image22Icon" alt="" src="/Home%20room.png" />
   </div>
   <div :class="$style.aboutUs">
-    <!-- Replaced static section with modular Presentation component -->
+
     <Presentation
         title="Who we are"
         :paragraphs="[
