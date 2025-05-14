@@ -26,26 +26,21 @@ defineProps({
   overflow: hidden;
   transition: transform 0.2s ease;
 }
-
 .card:hover {
   transform: translateY(-0.25rem);
 }
-
 .image {
   width: 100%;
   height: var(--img-height);
   object-fit: cover;
 }
-
 .content {
   padding: 1rem;
 }
-
 .title {
   font-size: var(--font-title);
   font-weight: bold;
 }
-
 .description {
   font-size: var(--font-base);
   color: #555;

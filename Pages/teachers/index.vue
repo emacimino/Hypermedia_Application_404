@@ -13,74 +13,34 @@
         image="/image 11.png"
         :reverse="true"
     />
-    <elemGrid :activities="teachers"></elemGrid>
+  <elemGrid :activities="teachers"></elemGrid>
 
 
 </template>
 
-<script setup lang="ts">
-import Presentation from '../../components/presentation.vue'
-import SingleActivityCard from '../../components/singleActivityCard.vue'
+<script setup>
+import SingleActivityCard from "~/components/singleActivityCard.vue";
 import ElemGrid from "~/components/elemGrid.vue";
+import { useAsyncData } from "#app";
 
-function onYogaTeacherContainerClick() {
-  // Add your code here
-}
+const supabase = useSupabaseClient()
 
-const teachers = [
-  {
-    name: 'Marco Rossi',
-    description: 'Meditation & Hatha Yoga Instructor',
-    image: '/marco.png'
-  },
-  {
-    name: 'Giulia Ferri',
-    description: 'Pilates & Breathwork Guide',
-    image: '/giulia.png'
-  },
-  {
-    name: 'Sara Vassari',
-    description: 'Functional Training Coach',
-    image: '/sara.png'
-  },
-  {
-    name: 'Luca Neroni',
-    description: 'Yoga Philosophy & Retreat Leader',
-    image: '/luca.png'
-  },
-  {
-    name: 'Sofia Bianchi',
-    description: 'Meditation & Hatha Yoga Instructor',
-    image: '/sofia.png'
-  },
-  {
-    name: 'Alba Diaz',
-    description: 'Pilates & Breathwork Guide',
-    image: '/alba.png'
-  },
-  {
-    name: 'Martina Rossi',
-    description: 'Functional Training Coach',
-    image: '/martina.png'
-  },
-  {
-    name: 'Ginevra Sottili',
-    description: 'Yoga Philosophy & Retreat Leader',
-    image: '/ginevra.png'
+// Fetching the data from the Teachers table
+const { data: teachers, error } = await useAsyncData('teachers', async () => {
+  const { data, error } = await supabase.from('Teachers').select('*')
+  if (error) {
+    console.error('Error fetching teachers:', error)
+    throw error // important for Nuxt to register it as a real error
   }
-]
+  return data ?? []
+})
 </script>
 
-<style  module>
-.teachersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0 10%;
-  padding: 10%;
-}
 
-.teachersGrid * {
-  border: 1px dashed red;
-}
+<style  module>
+
+</style>
+
+<style  module>
 
 </style>

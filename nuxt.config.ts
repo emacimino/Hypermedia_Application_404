@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   alias:{
-    "@":resolve(__dirname,"/"),
+    "@":resolve(__dirname,"."),
   },
 
   css: [

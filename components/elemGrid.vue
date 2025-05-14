@@ -1,32 +1,41 @@
 <script setup lang="ts">
-
 import SingleActivityCard from "~/components/singleActivityCard.vue";
 import Presentation from "~/components/presentation.vue";
-import {useRoute} from "vue-router";
-const router = useRouter();  // Access the current route
+import { useRouter, useRoute } from "vue-router";
 
-const props = defineProps({
-  activities: {
-    type: Array,
-    default: () => []
-  }
-});
+const router = useRouter();
+const route = useRoute();
 
-function onClick(title) {
+const address = route.params.address as string;
+
+interface Activity {
+  Title: string;
+  Description: string;
+  Image: string;
+}
+
+const props = defineProps<{
+  activities: Activity[];
+}>();
+console.log('Activities:', props.activities);
+
+
+function onClick(title: string) {
   console.log('Click sul bottone');
   router.push(`/${address}/${title}`);
 }
 </script>
+
 
 <template>
   <div :class="$style.courseGrid">
     <singleActivityCard
         v-for="(activity, index) in props.activities"
         :key="index"
-        :title="activity.title"
-        :description="activity.description"
-        :image="activity.image"
-        @click="() => onClick(activity.title)"
+        :title="activity.Title"
+        :description="activity.Description"
+        :image="activity.Image"
+        @click="() => onClick(activity.Title)"
 
     />
   </div>
@@ -41,40 +50,10 @@ function onClick(title) {
   gap: var(--gap);
   padding: var(--padding);
 }
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-0.25rem);
-}
-
 .card img {
   width: 100%;
   height: var(--img-height);
   object-fit: cover;
   aspect-ratio: 4 / 3;
-}
-
-.card-content {
-  padding: 1rem;
-}
-
-.card-title {
-  font-size: var(--font-title);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.card-description {
-  font-size: var(--font-base);
-  color: #555;
 }
 </style>
