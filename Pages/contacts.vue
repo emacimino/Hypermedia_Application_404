@@ -30,16 +30,11 @@
 import { onMounted, nextTick, ref } from 'vue'
 import 'leaflet/dist/leaflet.css'
 
-const mapLoaded = ref(false)
-
 onMounted(async () => {
   await nextTick()
 
   // Dinamicamente importa Leaflet solo sul client
   const L = await import('leaflet')
-
-  // Crea il container per la mappa se non esiste
-  const mapElement = document.getElementById('map')
 
   // Inizializza la mappa
   const map = L.map('map').setView([45.4565, 9.2019], 16)
@@ -52,12 +47,6 @@ onMounted(async () => {
       .addTo(map)
       .bindPopup('Via Orti 15, Milano')
       .openPopup()
-
-  // Forza un resize della mappa per risolvere problemi di rendering
-  setTimeout(() => {
-    map.invalidateSize()
-    mapLoaded.value = true
-  }, 100)
 })
 </script>
 
