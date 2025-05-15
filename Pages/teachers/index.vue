@@ -8,7 +8,7 @@
         'With empathy, presence, and a deep commitment to your growth, our team is here not just to teach — but to inspire, support, and walk alongside you every step of the way.'
         ]"
 
-        image="/image 11.png"
+        image="/TeacherGroup.png"
         :reverse="true"
     />
   <elemGrid :activities="teachers"></elemGrid>
