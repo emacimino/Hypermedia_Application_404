@@ -9,8 +9,8 @@ export default defineNuxtConfig({
   },
 
   css: [
-    "~/assets/main.css"
-    /*'leaflet/dist/leaflet.css'*/
+    "~/assets/main.css",
+    'leaflet/dist/leaflet.css'
   ],
 
   supabase: {
