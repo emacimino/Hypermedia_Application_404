@@ -8,7 +8,7 @@
       <h2>Opening Hours</h2>
       <p>Monday – Friday: 7:00 AM – 9:00 PM<br />Saturday – Sunday: 8:00 AM – 6:00 PM</p>
     </div>
-   <!-- <img :class="$style.image" src="/map.png" alt="Location map" /> -->
+
     <ClientOnly>
       <div id="map" style="height: 500px ; width: 60%;"></div>
     </ClientOnly>

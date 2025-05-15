@@ -1,6 +1,4 @@
 <template>
-
-    <!-- Reusable header section -->
     <Presentation
         title="Our qualified team"
         :paragraphs="[
@@ -8,18 +6,15 @@
         'Each instructor brings a unique blend of experience, training, and insight, creating a supportive, engaging, and inclusive space for all participants.',
         'Whether you\'re joining us for meditation, yoga, or functional training, our teachers skillfully adapt each session to meet your needs, offering personalized guidance and encouraging a mindful, sustainable practice.',
         'With empathy, presence, and a deep commitment to your growth, our team is here not just to teach — but to inspire, support, and walk alongside you every step of the way.'
-         ]"
+        ]"
 
         image="/image 11.png"
         :reverse="true"
     />
   <elemGrid :activities="teachers"></elemGrid>
-
-
 </template>
 
 <script setup>
-import SingleActivityCard from "~/components/singleActivityCard.vue";
 import ElemGrid from "~/components/elemGrid.vue";
 import { useAsyncData } from "#app";
 
@@ -35,7 +30,6 @@ const { data: teachers, error } = await useAsyncData('teachers', async () => {
   return data ?? []
 })
 </script>
-
 
 <style  module>
 

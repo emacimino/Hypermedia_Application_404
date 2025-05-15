@@ -1,5 +1,4 @@
 <template>
-    <!-- Replaced static section with modular Presentation component -->
     <Presentation
         title="What do we offer?"
         :paragraphs="[
@@ -16,7 +15,6 @@
 </template>
 
 <script setup>
-import SingleActivityCard from "~/components/singleActivityCard.vue";
 import ElemGrid from "~/components/elemGrid.vue";
 import { useAsyncData } from "#app";
 

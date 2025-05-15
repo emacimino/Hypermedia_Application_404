@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import SingleActivityCard from "~/components/singleActivityCard.vue";
-import Presentation from "~/components/presentation.vue";
-import { useRouter, useRoute } from "vue-router";
-
-const router = useRouter();
-const route = useRoute();
-
-const address = route.params.address as string;
 
 interface Activity {
   Title: string;
@@ -18,12 +11,6 @@ const props = defineProps<{
   activities: Activity[];
 }>();
 console.log('Activities:', props.activities);
-
-
-function onClick(title: string) {
-  console.log('Click sul bottone');
-  router.push(`/${address}/${title}`);
-}
 </script>
 
 
@@ -35,8 +22,6 @@ function onClick(title: string) {
         :title="activity.Title"
         :description="activity.Description"
         :image="activity.Image"
-        @click="() => onClick(activity.Title)"
-
     />
   </div>
 </template>
