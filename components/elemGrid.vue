@@ -3,7 +3,7 @@ import SingleActivityCard from "~/components/singleActivityCard.vue";
 
 interface Activity {
   Title: string;
-  Description: string;
+  ShortDescription: string;
   Image: string;
 }
 
@@ -20,7 +20,7 @@ console.log('Activities:', props.activities);
         v-for="(activity, index) in props.activities"
         :key="index"
         :title="activity.Title"
-        :description="activity.Description"
+        :description="activity.ShortDescription"
         :image="activity.Image"
     />
   </div>
