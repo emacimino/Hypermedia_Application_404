@@ -8,15 +8,15 @@ defineProps<{
 
 <template>
   <NuxtLink :to="to">
-    <img :src="src" :alt="alt" class="logo" />
+    <img :src="src" :alt="alt" class="img" />
   </NuxtLink>
 </template>
 
 <style>
-.logo{
+.img{
   vertical-align: middle;
 }
-.logo:hover{
+.img:hover{
   cursor: pointer;
 }
 </style>

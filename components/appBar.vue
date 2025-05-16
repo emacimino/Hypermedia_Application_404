@@ -1,41 +1,51 @@
 <template>
   <div :class="$style.barraHome">
-    <ClickableImage to="/" src="Logo.png" title="Vai alla home" />
+    <div :class="$style.left">
+      <ClickableImage to="/" src="Logo.png" title="Vai alla home" />
+    </div>
 
-    <MenuItem label="Activities" to="/activityPage"/>
-    <MenuItem label="Teachers" to="/teachers"/>
-    <MenuItem label="Highlights" to="/highlights"/>
-    <MenuItem label="About us" to="/aboutUs"/>
-    <MenuItem label="Contacts" to="/contacts"/>
+    <div :class="$style.center">
+      <MenuItem label="Activities" to="/activityPage"/>
+      <MenuItem label="Teachers" to="/teachers"/>
+      <MenuItem label="Highlights" to="/highlights"/>
+      <MenuItem label="About us" to="/aboutUs"/>
+      <MenuItem label="Contacts" to="/contacts"/>
+    </div>
 
-
-    <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
+    <div :class="$style.right">
+      <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
+    </div>
   </div>
 </template>
+
+
 <script setup lang="ts">
+</script>
 
-
-import ClickableImage from "~/components/clickableImage.vue";
-
-function onActivitiesContainerClick() {
-}</script>
-
-<style  module>
+<style module>
 .barraHome {
   width: 100%;
-  position: relative;
-  background-color: #d0f0fd;
   height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: #d0f0fd;
+  padding: 0 2%;
+  box-sizing: border-box;
+}
+.left, .center, .right {
+  display: flex;
+  align-items: center;
+}
+.center {
   gap: 4%;
+  flex-grow: 1;
+  justify-content: center;
 }
 .landmarkFlagIcon {
-  width: 4.5%;
-  position: relative;
+  width: 80px;
+  height: auto;
   object-fit: cover;
 }
-
 </style>
