@@ -1,7 +1,20 @@
+<template>
+  <div :class="$style.courseGrid">
+    <singleActivityCard
+        v-for="(activity, index) in props.activities"
+        :key="index"
+        :id="activity.Id"
+        :title="activity.Title"
+        :short_escription="activity.ShortDescription"
+        :image="activity.Image"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
-import SingleActivityCard from "~/components/singleActivityCard.vue";
 
 interface Activity {
+  Id: number;
   Title: string;
   ShortDescription: string;
   Image: string;
@@ -13,21 +26,8 @@ const props = defineProps<{
 console.log('Activities:', props.activities);
 </script>
 
-
-<template>
-  <div :class="$style.courseGrid">
-    <singleActivityCard
-        v-for="(activity, index) in props.activities"
-        :key="index"
-        :title="activity.Title"
-        :description="activity.ShortDescription"
-        :image="activity.Image"
-    />
-  </div>
-</template>
-
 <style module>
-@import "/assets/main.css";
+/*@import "/assets/main.css";*/
 
 .courseGrid {
   display: grid;

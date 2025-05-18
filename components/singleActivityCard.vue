@@ -1,17 +1,20 @@
 <template>
-  <div :class="$style.card" @click="$emit('click')">
-    <img :src="image" :alt="title" :class="$style.image" />
-    <div :class="$style.content">
-      <h3 :class="$style.title">{{ title }}</h3>
-      <p :class="$style.description">{{ description }}</p>
+  <nuxt-link :to="`/activityPage/${id}`">
+    <div :class="$style.card">
+      <img :src="image" :alt="title" :class="$style.image" />
+      <div :class="$style.content">
+        <h3 :class="$style.title">{{ title }}</h3>
+        <p :class="$style.description">{{ short_description }}</p>
+      </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script setup>
 defineProps({
+  id: Number,
   title: String,
-  description: String,
+  short_description: String,
   image: String
 });
 </script>

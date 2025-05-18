@@ -6,8 +6,9 @@
     <div :class="$style.textContainer">
       <b :class="$style.title">{{ title }}</b>
       <div :class="$style.paragraphs">
-        <p v-for="(paragraph, index) in paragraphs" :key="index">{{ paragraph }}</p>
+        <p>{{ paragraphs }}</p>
       </div>
+
     </div>
   </div>
 </template>
@@ -15,7 +16,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string
-  paragraphs: string[]
+  paragraphs: string
   image: string
   reverse?: boolean
 }>()
