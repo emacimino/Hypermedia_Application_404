@@ -7,7 +7,10 @@
 
     <Presentation
         title="Who we are"
-        paragraphs="At White Lotus, wellness is a way of life rooted in mindfulness, balance, and a deep sense of community. Born from the desire to create an inclusive and inspiring space, we offer yoga, meditation, Pilates, and holistic practices to support your journey. Guided by passion and purpose, every class is designed to help you grow, heal, and reconnect — body, mind, and spirit."
+        paragraphs="At White Lotus, wellness is a way of life rooted in mindfulness, balance, and a deep sense of community.
+        Born from the desire to create an inclusive and inspiring space, we offer yoga, meditation, Pilates, and holistic practices
+        to support your journey. Guided by passion and purpose, every class is designed to help you grow, heal, and reconnect — body,
+        mind, and spirit."
         image="/presentation1.png"
         :reverse="true"
     />
@@ -15,7 +18,9 @@
   <div :class="$style.aboutUs">
     <Presentation
         title="Keep your pace"
-        paragraphs="Our weekly schedule offers a balanced mix of yoga, meditation and pilates, to support all levels and goals. With classes available throughout the day, you can find the right pace - whether you are looking to energize, unwind or deepen your practice. Each session is guided by experienced instructors in a welcoming and mindful environment."
+        paragraphs="Our weekly schedule offers a balanced mix of yoga, meditation and pilates, to support all levels and goals.
+        With classes available throughout the day, you can find the right pace - whether you are looking to energize, unwind or
+        deepen your practice. Each session is guided by experienced instructors in a welcoming and mindful environment."
         image="/calendar.png"
         :reverse="false"
     />

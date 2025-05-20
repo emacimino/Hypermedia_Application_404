@@ -1,12 +1,12 @@
 <template>
   <div :class="$style.barraHome">
     <div :class="$style.left">
-      <ClickableImage to="/" src="Logo.png" title="Vai alla home" />
+      <ClickableImage to="/" src="Logo.png" title="Go to home" />
     </div>
 
     <div :class="$style.center">
       <MenuItem label="Activities" to="/activityPage"/>
-      <MenuItem label="Teachers" to="/teachers"/>
+      <MenuItem label="Teachers" to="/teacherPage"/>
       <MenuItem label="Highlights" to="/highlights"/>
       <MenuItem label="About us" to="/aboutUs"/>
       <MenuItem label="Contacts" to="/contacts"/>

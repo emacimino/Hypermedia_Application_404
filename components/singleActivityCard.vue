@@ -21,7 +21,7 @@ const props = defineProps<{
 }>();
 
 const link = computed(() => {
-  return props.Id > 50 ? `/teachers/${props.Id}` : `/activityPage/${props.Id}`;
+  return props.Id > 50 ? `/teacherPage/${props.Id}` : `/activityPage/${props.Id}`;
 });
 </script>
 
