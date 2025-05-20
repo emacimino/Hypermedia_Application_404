@@ -20,20 +20,11 @@ import { useAsyncData } from "#app";
 
 const supabase = useSupabaseClient()
 
-// Fetching the data from the Teachers table
-const { data: teachers, error } = await useAsyncData('teachers', async () => {
-  const { data, error } = await supabase.from('Teachers').select('*')
-  if (error) {
-    console.error('Error fetching teachers:', error)
-    throw error // important for Nuxt to register it as a real error
-  }
+const { data: teachers } = await useAsyncData('teachers', async () => {
+  const { data } = await supabase.from('Teachers').select('*')
   return data ?? []
 })
 </script>
-
-<style  module>
-
-</style>
 
 <style  module>
 

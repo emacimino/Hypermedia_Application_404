@@ -1,9 +1,8 @@
 <template>
   <Presentation
-      v-if="activity"
-      :title="activity?.Title"
-      :paragraphs="activity?.LongDescription"
-      :image="activity?.Image"
+      :title="activity.Title"
+      :paragraphs="activity.LongDescription"
+      :image="activity.Image"
       :reverse="true"
   />
   <Subscription />
