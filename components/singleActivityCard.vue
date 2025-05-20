@@ -1,23 +1,24 @@
 <template>
-  <nuxt-link :to="`/activityPage/${id}`">
+  <nuxt-link :to="`/activityPage/${Id}`">
     <div :class="$style.card">
-      <img :src="image" :alt="title" :class="$style.image" />
+      <img :src="Image" :alt="Title" :class="$style.image" />
       <div :class="$style.content">
-        <h3 :class="$style.title">{{ title }}</h3>
-        <p :class="$style.description">{{ short_description }}</p>
+        <h3 :class="$style.title">{{ Title }}</h3>
+        <p :class="$style.description">{{ ShortDescription }}</p>
       </div>
     </div>
   </nuxt-link>
 </template>
 
-<script setup>
-defineProps({
-  id: Number,
-  title: String,
-  short_description: String,
-  image: String
-});
+<script setup lang="ts">
+const props = defineProps<{
+  Id: number;
+  Title: string;
+  ShortDescription: string;
+  Image: string;
+}>();
 </script>
+
 
 <style  module>
 .card {

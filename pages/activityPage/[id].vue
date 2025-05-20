@@ -13,10 +13,10 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useAsyncData } from "#app";
-import Subscription from "~/components/Activity_page_components/subscription.vue";
+import Subscription from "~/components/subscription.vue";
 
 interface Activity {
-  id: number;
+  Id: number;
   Title: string;
   LongDescription: string;
   Image: string;
@@ -33,14 +33,11 @@ const { data: activity } = await useAsyncData<Activity | null>(`activity-${activ
   const { data, error } = await supabase
       .from("Activities")
       .select("*")
-      .eq("id", activityId.value)
+      .eq("Id", activityId.value)
       .single();
 
-  if (error) console.error("Errore caricamento attività:", error);
   return data;
 });
-console.log("route.params.id:", route.params.id);
-console.log("activityId:", activityId.value);
 </script>
 
 <style scoped>

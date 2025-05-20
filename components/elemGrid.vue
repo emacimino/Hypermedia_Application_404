@@ -3,16 +3,15 @@
     <singleActivityCard
         v-for="(activity, index) in props.activities"
         :key="index"
-        :id="activity.Id"
-        :title="activity.Title"
-        :short_escription="activity.ShortDescription"
-        :image="activity.Image"
+        :Id="activity.Id"
+        :Title="activity.Title"
+        :ShortDescription="activity.ShortDescription"
+        :Image="activity.Image"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-
 interface Activity {
   Id: number;
   Title: string;
@@ -23,8 +22,8 @@ interface Activity {
 const props = defineProps<{
   activities: Activity[];
 }>();
-console.log('Activities:', props.activities);
 </script>
+
 
 <style module>
 /*@import "/assets/main.css";*/
