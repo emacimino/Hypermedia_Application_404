@@ -8,7 +8,7 @@
         image="/presentation1.png"
         :reverse="true"
     />
-  <elemGrid :activities="activities"></elemGrid>
+  <elemGrid :cards="cards"></elemGrid>
 </template>
 
 <script setup>
@@ -17,7 +17,7 @@ import { useAsyncData } from "#app";
 
 const supabase = useSupabaseClient()
 
-const { data: activities } = await useAsyncData('activities', async () => {
+const { data: cards } = await useAsyncData('cards', async () => {
   const { data } = await supabase.from('Activities').select('*')
   return data ?? []
 })

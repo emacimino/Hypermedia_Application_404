@@ -1,12 +1,15 @@
 <template>
-  <Presentation
-      :title="activity.Title"
-      :paragraphs="activity.LongDescription"
-      :image="activity.Image"
-      :reverse="true"
-  />
-  <Subscription />
+  <div v-if="activity">
+    <Presentation
+        :title="activity.Title"
+        :paragraphs="activity.LongDescription"
+        :image="activity.Image"
+        :reverse="true"
+    />
+    <Subscription />
+  </div>
 </template>
+
 
 <script setup lang="ts">
 import { computed } from "vue";
@@ -29,16 +32,15 @@ const activityId = computed(() => Number(route.params.id));
 const { data: activity } = await useAsyncData<Activity | null>(`activity-${activityId.value}`, async () => {
   if (isNaN(activityId.value)) return null;
 
-  const { data, error } = await supabase
+  const result = await supabase
       .from("Activities")
       .select("*")
       .eq("Id", activityId.value)
       .single();
 
-  return data;
+  return result.data;
 });
 </script>
 
 <style scoped>
-
 </style>

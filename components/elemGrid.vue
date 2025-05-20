@@ -1,18 +1,18 @@
 <template>
   <div :class="$style.courseGrid">
     <singleActivityCard
-        v-for="(activity, index) in props.activities"
+        v-for="(card, index) in props.cards"
         :key="index"
-        :Id="activity.Id"
-        :Title="activity.Title"
-        :ShortDescription="activity.ShortDescription"
-        :Image="activity.Image"
+        :Id="card.Id"
+        :Title="card.Title"
+        :ShortDescription="card.ShortDescription"
+        :Image="card.Image"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-interface Activity {
+interface Cards {
   Id: number;
   Title: string;
   ShortDescription: string;
@@ -20,7 +20,7 @@ interface Activity {
 }
 
 const props = defineProps<{
-  activities: Activity[];
+  cards: Cards[];
 }>();
 </script>
 

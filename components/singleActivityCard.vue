@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/activityPage/${Id}`">
+  <nuxt-link :to="link">
     <div :class="$style.card">
       <img :src="Image" :alt="Title" :class="$style.image" />
       <div :class="$style.content">
@@ -11,13 +11,20 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 const props = defineProps<{
   Id: number;
   Title: string;
   ShortDescription: string;
   Image: string;
 }>();
+
+const link = computed(() => {
+  return props.Id > 50 ? `/teachers/${props.Id}` : `/activityPage/${props.Id}`;
+});
 </script>
+
 
 
 <style  module>
