@@ -48,6 +48,7 @@ onMounted(async () => {
       .bindPopup('Via Orti 15, Milano')
       .openPopup()
 })
+
 </script>
 
 <style module>
