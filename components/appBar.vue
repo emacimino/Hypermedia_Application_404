@@ -5,21 +5,29 @@
     </div>
 
     <div :class="$style.center">
-      <MenuItem label="Activities" to="/activityPage"/>
-      <MenuItem label="Teachers" to="/teacherPage"/>
-      <MenuItem label="Highlights" to="/highlights"/>
-      <MenuItem label="About us" to="/aboutUs"/>
-      <MenuItem label="Contacts" to="/contacts"/>
+      <MenuItem :label="t('activities')" to="/activityPage" />
+      <MenuItem :label="t('teachers')" to="/teacherPage" />
+      <MenuItem :label="t('highlights')" to="/highlights" />
+      <MenuItem :label="t('aboutUs')" to="/aboutUs" />
+      <MenuItem :label="t('contacts')" to="/contacts" />
     </div>
 
     <div :class="$style.right">
-      <img :class="$style.landmarkFlagIcon" alt="" src="assets/LanguageEN.png" />
+      <button @click="toggleLanguage" :class="$style.languageButton" title="Change language">
+        <img :class="$style.landmarkFlagIcon" alt="Language" :src="getIcon(currentLang)" />
+      </button>
     </div>
   </div>
 </template>
 
-
 <script setup lang="ts">
+import { useLanguage } from '../composables/useLanguage'
+
+const { currentLang, t, toggleLanguage } = useLanguage()
+
+function getIcon(lang: string) {
+  return lang === 'en' ? 'LanguageEN.png' : 'LanguageIT.png'
+}
 </script>
 
 <style module>
@@ -34,7 +42,9 @@
   padding: 0 2%;
   box-sizing: border-box;
 }
-.left, .center, .right {
+.left,
+.center,
+.right {
   display: flex;
   align-items: center;
 }
@@ -47,5 +57,11 @@
   width: 80px;
   height: auto;
   object-fit: cover;
+}
+.languageButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 </style>
