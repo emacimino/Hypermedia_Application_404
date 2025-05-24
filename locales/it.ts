@@ -5,6 +5,17 @@ export default {
     aboutUs: 'Chi siamo',
     contacts: 'Contatti',
     pages: {
+        index: {
+            hathaTitle: 'Corso di Hatha Yoga',
+            section1: {
+                title: 'Chi siamo',
+                description: 'Al White Lotus, il benessere è uno stile di vita radicato nella consapevolezza, nell\'equilibrio e in un profondo senso di comunità. Nato dal desiderio di creare uno spazio inclusivo e stimolante, offriamo yoga, meditazione, Pilates e pratiche olistiche per accompagnarti nel tuo percorso. Guidati dalla passione e da uno scopo, ogni lezione è pensata per aiutarti a crescere, guarire e riconnetterti — con il corpo, la mente e lo spirito.'
+            },
+            section2: {
+                title: 'Trova il tuo ritmo',
+                description: 'Il nostro programma settimanale offre un mix equilibrato di yoga, meditazione e pilates, per supportare tutti i livelli e obiettivi. Con lezioni disponibili durante tutta la giornata, puoi trovare il ritmo giusto — che tu voglia energizzarti, rilassarti o approfondire la tua pratica. Ogni sessione è guidata da istruttori esperti in un ambiente accogliente e consapevole.'
+            }
+        },
         aboutUs: {
             title: 'Chi siamo',
             description: `Al White Lotus Center, crediamo che il benessere sia più di una pratica —

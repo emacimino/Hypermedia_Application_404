@@ -5,6 +5,22 @@ export default {
     aboutUs: 'About us',
     contacts: 'Contacts',
     pages: {
+        index: {
+            hathaTitle: 'Hatha Yoga Course',
+            section1: {
+                title: 'Who we are',
+                description: `At White Lotus, wellness is a way of life rooted in mindfulness, balance, and a deep sense of community.
+                Born from the desire to create an inclusive and inspiring space, we offer yoga, meditation, Pilates, and holistic practices
+                to support your journey. Guided by passion and purpose, every class is designed to help you grow, heal, and reconnect — body,
+                mind, and spirit.`
+            },
+            section2: {
+                title: 'Keep your pace',
+                description: `Our weekly schedule offers a balanced mix of yoga, meditation and pilates, to support all levels and goals.
+                With classes available throughout the day, you can find the right pace — whether you are looking to energize, unwind or
+                deepen your practice. Each session is guided by experienced instructors in a welcoming and mindful environment.`
+            }
+        },
         aboutUs: {
             title: 'About us',
             description: `At White Lotus Center, we believe that wellness is more than a practice —
