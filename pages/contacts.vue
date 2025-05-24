@@ -1,25 +1,14 @@
 <template>
   <div :class="$style.content">
     <div>
-      <h2>Where are we?</h2>
-      <p>
-        📍 White Lotus Center<br />
-        via Orti 15<br />
-        Milano, MI 20134<br />
-        Italy
-      </p>
+      <h2>{{ t('pages.contacts.locationTitle') }}</h2>
+      <p v-html="t('pages.contacts.address')" />
 
-      <h2>Contacts</h2>
-      <p>
-        📞 Phone: +1 (310) 555-8123<br />
-        📧 Email: info@whitelotus.com
-      </p>
+      <h2>{{ t('pages.contacts.contactTitle') }}</h2>
+      <p v-html="t('pages.contacts.contactDetails')" />
 
-      <h2>Opening Hours</h2>
-      <p>
-        Monday – Friday: 7:00 AM – 9:00 PM<br />
-        Saturday – Sunday: 8:00 AM – 6:00 PM
-      </p>
+      <h2>{{ t('pages.contacts.hoursTitle') }}</h2>
+      <p v-html="t('pages.contacts.hoursDetails')" />
     </div>
 
     <div id="map" :class="$style.map"></div>
@@ -27,16 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick, ref } from 'vue'
+import { onMounted, nextTick } from 'vue'
+import { useLanguage } from '../composables/useLanguage'
 import 'leaflet/dist/leaflet.css'
+
+const { t } = useLanguage()
 
 onMounted(async () => {
   await nextTick()
-
-  // Dinamicamente importa Leaflet solo sul client
   const L = await import('leaflet')
-
-  // Inizializza la mappa
   const map = L.map('map').setView([45.4565, 9.2019], 16)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -48,7 +36,6 @@ onMounted(async () => {
       .bindPopup('Via Orti 15, Milano')
       .openPopup()
 })
-
 </script>
 
 <style module>
@@ -74,7 +61,5 @@ onMounted(async () => {
   min-width: 300px;
   border-radius: 12px;
   border: 1px solid #ccc;
-  position: relative;
-  z-index: 1;
 }
 </style>
