@@ -64,5 +64,6 @@ defineProps<{
   font-size: 20px;
   line-height: 1.6;
   letter-spacing: -0.01em;
+  white-space: pre-line;
 }
 </style>

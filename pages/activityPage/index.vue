@@ -1,26 +1,52 @@
 <template>
+  <div v-if="fetchedData && fetchedData.cards && fetchedData.presData">
     <Presentation
-        title="What do we offer?"
-        paragraphs="At Serene Flow Yoga, we believe in creating a peaceful space where mind, body, and spirit connect.
-        Nestled in the heart of the city, our studio offers a calm retreat from the busy world outside — a place where you can breathe, move, and grow at your own pace.
-        We offer a wide variety of yoga classes suitable for all levels, from complete beginners to experienced practitioners.
-        Whether you're seeking strength, flexibility, balance, or inner peace, you'll find a class that suits your needs."
-        image="/presentation1.png"
+        v-if="fetchedData.presData.length"
+        :title="fetchedData.presData[0].title"
+        :paragraphs="fetchedData.presData[0].paragraphs"
+        :image="fetchedData.presData[0].image"
         :reverse="true"
     />
-  <elemGrid :cards="cards"></elemGrid>
+    <elemGrid v-if="fetchedData.cards.length" :cards="fetchedData.cards" />
+  </div>
+
+  <div v-else>
+    <p>Loading...</p>
+  </div>
 </template>
 
 <script setup>
-import ElemGrid from "~/components/elemGrid.vue";
-import { useAsyncData } from "#app";
+import ElemGrid from '~/components/elemGrid.vue'
+import Presentation from '~/components/presentation.vue'
+import { useAsyncData } from '#app'
+import { useSupabaseClient } from '#imports'
 
 const supabase = useSupabaseClient()
 
-const { data: cards } = await useAsyncData('cards', async () => {
-  const { data } = await supabase.from('Activities').select('*')
-  return data ?? []
+const { data: fetchedData, error } = await useAsyncData('presentationData', async () => {
+  const { data: presData, error: presError } = await supabase
+      .from('Presentation')
+      .select('title, paragraphs, image')
+      .eq('title', 'What do we offer?')
+
+  if (presError) {
+    console.error('❌ Errore nella tabella Presentation:', presError.message)
+  }
+
+  const { data: cardsData, error: cardsError } = await supabase
+      .from('Activities')
+      .select('*')
+
+  if (cardsError) {
+    console.error('❌ Errore nella tabella Activities:', cardsError.message)
+  }
+
+  return {
+    presData: presData ?? [],
+    cards: Array.isArray(cardsData) ? cardsData : []
+  }
 })
+
 </script>
 
 <style  module>

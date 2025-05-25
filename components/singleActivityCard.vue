@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="link">
+  <nuxt-link :to="link" class="linkWrapper">
     <div :class="$style.card">
       <img :src="Image" :alt="Title" :class="$style.image" />
       <div :class="$style.content">
@@ -55,6 +55,10 @@ const link = computed(() => {
 .description {
   font-size: var(--font-base);
   color: #555;
+}
+:global(.linkWrapper) {
+  text-decoration: none;
+  color: inherit;
 }
 
 </style>
