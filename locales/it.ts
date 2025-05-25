@@ -30,6 +30,13 @@ export default {
             hoursTitle: 'Orari di apertura',
             hoursDetails: `Lunedì – Venerdì: 7:00 – 21:00<br />Sabato – Domenica: 8:00 – 18:00`
         },
+        activities: {
+            title: 'Cosa offriamo?',
+            description: `Al Serene Flow Yoga, crediamo nel creare uno spazio pacifico in cui mente, corpo e spirito possano connettersi.
+            Nel cuore della città, il nostro studio offre un rifugio tranquillo dal caos quotidiano — un luogo dove puoi respirare, muoverti e crescere al tuo ritmo.
+            Offriamo una vasta gamma di corsi di yoga adatti a tutti i livelli, dai principianti agli esperti.
+            Che tu cerchi forza, flessibilità, equilibrio o pace interiore, troverai la lezione giusta per te.`
+        },
         teachers: {
             heading: 'I nostri insegnanti',
             description: 'I nostri insegnanti sono professionisti qualificati...',

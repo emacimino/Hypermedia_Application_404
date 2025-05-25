@@ -35,6 +35,13 @@ export default {
             hoursTitle: 'Opening Hours',
             hoursDetails: `Monday – Friday: 7:00 AM – 9:00 PM<br />Saturday – Sunday: 8:00 AM – 6:00 PM`
         },
+        activities: {
+            title: 'What do we offer?',
+            description: `At Serene Flow Yoga, we believe in creating a peaceful space where mind, body, and spirit connect.
+            Nestled in the heart of the city, our studio offers a calm retreat from the busy world outside — a place where you can breathe, move, and grow at your own pace.
+            We offer a wide variety of yoga classes suitable for all levels, from complete beginners to experienced practitioners.
+            Whether you're seeking strength, flexibility, balance, or inner peace, you'll find a class that suits your needs.`
+        },
         teachers: {
             heading: 'Our Teachers',
             description: 'Our teachers are qualified professionals...',
