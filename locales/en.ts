@@ -1,7 +1,7 @@
 export default {
     activities: 'Activities',
     teachers: 'Teachers',
-    highlights: 'Highlights',
+    highlights: 'highlights',
     aboutUs: 'About us',
     contacts: 'Contacts',
     pages: {
