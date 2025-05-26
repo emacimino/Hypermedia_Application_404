@@ -4,8 +4,9 @@
   <nav
       class="hidden md:flex w-full items-center justify-between bg-blue-100 px-6 py-4"
   >
+    <ClickableImage to="/" src="Logo.png" title="Go to home" />
     <div class="flex items-center gap-6">
-      <ClickableImage to="/" src="Logo.png" title="Go to home" />
+
 
       <MenuItem label="Activities" to="/activityPage" />
       <MenuItem label="Teachers"   to="/teacherPage"  />
