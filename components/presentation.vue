@@ -1,15 +1,17 @@
 <template>
   <div :class="[$style.property1default, reverse ? $style.reversed : '']">
+
     <div :class="$style.imageWrapper">
-      <img :class="$style.image" :src="image" alt="" />
+      <img :class="$style.image" :src="image" alt="image"/>
     </div>
+    
     <div :class="$style.textContainer">
       <b :class="$style.title">{{ title }}</b>
       <div :class="$style.paragraphs">
         <p>{{ paragraphs }}</p>
       </div>
-
     </div>
+    
   </div>
 </template>
 
@@ -33,8 +35,6 @@ defineProps<{
   box-sizing: border-box;
   width: 100%;
   font-family: Inter;
-  color: #1f3a5f;
-  flex-wrap: wrap;
 }
 .reversed {
   flex-direction: row-reverse;
@@ -56,14 +56,41 @@ defineProps<{
   min-width: 300px;
 }
 .title {
-  font-size: 48px;
-  margin-bottom: 24px;
-  display: block;
+  font-size: 3rem;
 }
 .paragraphs {
-  font-size: 20px;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  white-space: pre-line;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .property1default {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 24px;
+  }
+  .imageWrapper,
+  .textContainer {
+    max-width: 100%;
+    min-width: 0;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .paragraphs {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .property1default {
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 24px;
+  }
+  .imageWrapper,
+  .textContainer {
+    max-width: 100%;
+    min-width: 0;
+  }
 }
 </style>
