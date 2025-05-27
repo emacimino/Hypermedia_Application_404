@@ -1,5 +1,6 @@
 <template>
   <flow-image :images="images" />
+
   <Presentation
       :title="t('pages.index.section1.title')"
       :paragraphs="t('pages.index.section1.description')"
@@ -12,7 +13,8 @@
       image="/calendar.png"
       :reverse="false"
   />
-  <div :class="$style.courseGrid">
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-8">
     <Packet price="€50" type="Monthly" color="#d0f4c5" />
     <Packet price="€130" type="Quarterly" color="#a9e5a3" />
     <Packet price="€240" type="Semiannual" color="#00c853" />
@@ -24,51 +26,34 @@
     <Packet price="€30" type="Private lesson" color="#9c27b0" />
     <Packet price="€20" type="Mandatory membership card" color="#2196f3" />
   </div>
-
 </template>
 
 <script setup lang="ts">
-import { useLanguage } from '../composables/useLanguage'
+import { useLanguage } from '~/composables/useLanguage'
 import packet from '../components/packet.vue'
-import {useAsyncData} from "#app";
-const { data: images, error } = await useAsyncData('images', async () => {
-  const { data: imageArray, error: imageError } = await supabase
+import { useAsyncData } from '#app'
+import {useSupabaseClient} from "#imports";
+const supabase = useSupabaseClient()
+
+
+interface ImageEntry {
+  Title: string
+  ImageUrl: string
+}
+
+const { data: images, error } = useAsyncData<ImageEntry[]>('images', async () => {
+  const { data, error } = await supabase
       .from('Slideshow')
       .select('Title, ImageUrl')
 
-  if (imageError) {
-    console.error('❌ Errore nella tabella Slideshow:', imageError.message)
+  if (error) {
+    console.error('❌ Errore:', error.message)
   }
 
-  return imageArray ?? []
+  return data ?? []
 })
-console.log(images);
+
+console.log(images.value);
+
 const { t } = useLanguage()
 </script>
-
-<style module>
-.container {
-  position: relative;
-  display: inline-block;
-}
-.image22Icon {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.hathaYogaCourse {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(-100px, 200px);
-  color: #1f3a5f;
-  padding: 8px;
-  font-size: 64px;
-}
-.courseGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--gap);
-  padding: var(--padding);
-}
-</style>
