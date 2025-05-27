@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
-  modules: ["@nuxt/icon",'@nuxtjs/supabase','@nuxtjs/tailwindcss'],
+  modules: ["@nuxt/icon",'@nuxtjs/supabase','@nuxtjs/tailwindcss','@nuxt/ui'],
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,

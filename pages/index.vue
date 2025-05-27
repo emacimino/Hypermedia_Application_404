@@ -1,8 +1,5 @@
 <template>
-  <div :class="$style.container">
-    <b :class="$style.hathaYogaCourse">{{ t('pages.index.hathaTitle') }}</b>
-    <img :class="$style.image22Icon" alt="" src="/Home%20room.png" />
-  </div>
+  <flow-image :images="images" />
   <Presentation
       :title="t('pages.index.section1.title')"
       :paragraphs="t('pages.index.section1.description')"
@@ -31,8 +28,21 @@
 </template>
 
 <script setup lang="ts">
-import { useLanguage } from '~/composables/useLanguage'
+import { useLanguage } from '../composables/useLanguage'
+import packet from '../components/packet.vue'
+import {useAsyncData} from "#app";
+const { data: images, error } = await useAsyncData('images', async () => {
+  const { data: imageArray, error: imageError } = await supabase
+      .from('Slideshow')
+      .select('Title, ImageUrl')
 
+  if (imageError) {
+    console.error('❌ Errore nella tabella Slideshow:', imageError.message)
+  }
+
+  return imageArray ?? []
+})
+console.log(images);
 const { t } = useLanguage()
 </script>
 
