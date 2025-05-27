@@ -27,7 +27,7 @@ const supabase = useSupabaseClient()
 const { data: retrievedData, error  } = await useAsyncData('teachers', async () => {
   const { data: teachRaw, error: teachError } = await supabase
       .from("Presentation")
-      .select('Title, Paragraph, Image')
+      .select('Title, Title_it, Paragraph, Paragraph_it, Image')
       .eq('Title', 'Our qualified team')
 
   const { data: cardsRaw, error: cardsError } = await supabase
