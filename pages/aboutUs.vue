@@ -18,7 +18,6 @@ const { t } = useLanguage()
 .aboutUs {
   width: 100%;
   position: relative;
-  background-color: #fff;
   overflow: hidden;
   text-align: left;
   font-size: 64px;

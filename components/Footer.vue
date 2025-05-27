@@ -24,14 +24,12 @@
   padding-left: 80px;
   box-sizing: border-box;
 }
-
 .whiteLotusCenter {
   font-size: 24px;
   line-height: 150%;
   color: #1f3a5f;
   margin-bottom: 12px;
 }
-
 .socialIcon {
   display: flex;
   gap: 16px;
