@@ -2,9 +2,9 @@
   <div v-if="retrievedData && retrievedData.cardsTeachers && retrievedData.teachData">
     <Presentation
         v-if="retrievedData.teachData.length"
-        :title="retrievedData.teachData[0].title"
-        :paragraphs="retrievedData.teachData[0].paragraphs"
-        :image="retrievedData.teachData[0].image"
+        :title="retrievedData.teachData[0].Title"
+        :paragraphs="retrievedData.teachData[0].Paragraph"
+        :image="retrievedData.teachData[0].Image"
         :reverse="true"
     />
     <elemGrid v-if="retrievedData.cardsTeachers.length" :cards="retrievedData.cardsTeachers" />
@@ -25,8 +25,8 @@ const supabase = useSupabaseClient()
 const { data: retrievedData, error  } = await useAsyncData('teachers', async () => {
   const { data: teachData, error: teachError } = await supabase
       .from('Presentation')
-      .select('title, paragraphs, image')
-      .eq('title', 'Our qualified team')
+      .select('Title, Paragraph, Image')
+      .eq('Title', 'Our qualified team')
 
 
 
