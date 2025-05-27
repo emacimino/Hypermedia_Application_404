@@ -38,7 +38,7 @@ const link = computed(() => {
   transition: transform 0.2s ease;
 }
 .card:hover {
-  transform: translateY(-0.25rem);
+  transform: translateY(-0.30rem) scale(1.07);
 }
 .image {
   width: 100%;
