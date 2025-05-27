@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue'
-import { useLanguage } from '../composables/useLanguage'
+import { useLanguage } from '~/composables/useLanguage'
 import 'leaflet/dist/leaflet.css'
 
 const { t } = useLanguage()
@@ -50,10 +50,11 @@ onMounted(async () => {
   gap: 24px;
 }
 .content h2 {
-  margin-bottom: 0;
+  font-size: 28px;
+  font-weight: bold;
 }
 .content p {
-  margin-top: 0;
+  margin-bottom: 40px;
 }
 .map {
   height: 500px;
