@@ -55,35 +55,42 @@ onUnmounted(() => {
 
 <template>
   <div class="h-screen flex flex-col">
-    <div class="slider flex h-[100%]">
-      <div class="flex mx-auto justify-center relative w-[500px] h-[300px] m-auto">
+    <div class="slider flex relative w-full h-full">
+      <div class="flex mx-auto justify-center items-center w-full h-full px-4">
         <template v-for="(image, index) in images" :key="index">
           <transition name="fade">
-            <div v-if="index === currentSliderIndex" class="absolute w-full h-full">
-              <!-- Titolo sopra la foto -->
-              <div class="absolute top-0 left-0 w-full text-center text-white bg-black bg-opacity-50 py-2 z-40">
-                <h2 class="text-xl font-semibold">{{ image.Title }}</h2>
+            <div v-if="index === currentSliderIndex" class="absolute inset-0">
+              <div class="relative w-full aspect-[16/9] sm:h-full overflow-hidden rounded-lg shadow-md">
+                <!-- Titolo in basso a destra -->
+                <h2 class="absolute bottom-4 left-4 z-[100] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
+                  {{ image.Title }}
+                </h2>
+
+                <img
+                    :src="image.ImageUrl"
+                    :alt="image.Title"
+                    class="w-full h-full object-cover"
+                />
               </div>
-              <!-- Immagine -->
-              <img :src="image.ImageUrl" :alt="image.Title" class="aspect-[16/9] w-full h-full object-cover" />
             </div>
           </transition>
         </template>
 
-        <!-- next and previous buttons -->
+        <!-- Pulsanti -->
         <i class="fas fa-caret-right absolute right-0 top-1/3 text-4xl m-2 cursor-pointer text-white z-50"
            @click="nextSlide"></i>
         <i class="fas fa-caret-left absolute left-0 top-1/3 text-4xl m-2 cursor-pointer text-white z-50"
            @click="prevSlide"></i>
 
-        <!-- play or pause buttons -->
+        <!-- Play/Pause -->
         <i class="fa-solid fa-circle-play absolute bottom-5 text-3xl m-2 cursor-pointer text-gray-500 z-50"
            @click="playSlider" v-if="isTimerPaused"></i>
-        <i class="fa-solid fa-pause absolute bottom-5 text-3xl  m-2 cursor-pointer shadow-2xl text-gray-500 z-50"
-           @click="stopSlider" v-else="isTimerPaused"></i>
+        <i class="fa-solid fa-pause absolute bottom-5 text-3xl m-2 cursor-pointer text-gray-500 z-50"
+           @click="stopSlider" v-else></i>
       </div>
     </div>
   </div>
+
 </template>
 
 
