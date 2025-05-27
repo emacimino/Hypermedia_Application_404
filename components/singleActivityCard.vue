@@ -35,10 +35,11 @@ const link = computed(() => {
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   overflow: hidden;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
   transform: translateY(-0.30rem) scale(1.07);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 .image {
   width: 100%;

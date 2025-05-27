@@ -1,50 +1,59 @@
-<script setup lang="ts">
-defineProps<{
-  price: string
-  type: string
-}>()
-</script>
-
 <template>
-  <div :class="$style.packet">
-    <div :class="$style.wrapper">
-      <div :class="$style.div">{{ price }}</div>
+  <div :class="$style.packet" :style="{ borderColor: color }">
+    <div :class="$style.top" :style="{ backgroundColor: color + '70' }">
+      <div :class="$style.price">{{ price }}</div>
     </div>
-    <div :class="$style.type">
-      <div :class="$style.tipoPacchetto">Tipo: {{ type }}</div>
+    <div :class="$style.bottom">
+      <div :class="$style.type">{{ type }}</div>
     </div>
   </div>
 </template>
 
+<script setup lang="ts">
+defineProps<{
+  price: string
+  type: string
+  color: string
+}>()
+</script>
+
 <style module>
-
-.tipoPacchetto {
-
-  top: 0px;
-  left: 0px;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  display: inline-block;
-  width: 384px;
-  height: 77px;
+.packet {
+  border: 2px solid;
+  border-radius: 12px;
+  width: 18rem;
+  height: 13rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.packet:hover {
+  transform: translateY(-0.30rem) scale(1.07);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+.top {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.price {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1f3a5f;
 }
 
+.bottom {
+  height: 100%;
+  background-color: #fff;
+  padding: 12px 16px;
+}
 .type {
-
-  top: 141px;
-  left: 0px;
-  width: 384px;
-  height: 77px;
-  overflow: hidden;
-}
-.wrapper {
-
-  top: 0px;
-  left: 0px;
-  background-color: #ffe5b4;
-  width: 384px;
-  height: 141px;
-  overflow: hidden;
-  font-size: 96px;
+  font-size: 1.75em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444;
 }
 </style>
