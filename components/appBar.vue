@@ -15,10 +15,13 @@
       <MenuItem label="Contacts"   to="/contacts"      />
     </div>
 
+
+
     <img
-        class="w-8 h-8 object-cover"
-        src="public/LanguageEN.png"
-        alt="Language icon"
+        class="w-17 h-17 object-cover cursor-pointer"
+        :src="currentLang === 'en' ? 'LanguageEN.png' : 'LanguageIT.png'"
+        alt="Switch language"
+        @click="toggleLanguage"
     />
   </nav>
 
@@ -78,8 +81,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import MenuItem        from '~/components/menu_item.vue';
-import ClickableImage  from '~/components/clickableImage.vue';
+import MenuItem from '~/components/menu_item.vue';
+import ClickableImage from '~/components/clickableImage.vue';
 
 const isMenuOpen = ref(false);
 
@@ -90,6 +93,8 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false;
 };
+
+const { toggleLanguage, currentLang } = useLanguage()
 
 const items = [
   { label: 'Activities', to: '/activityPage' },
