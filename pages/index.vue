@@ -40,6 +40,7 @@ import calendar from '../components/calendar.vue'
 const supabase = useSupabaseClient()
 
 
+
 interface ImageEntry {
   Title: string
   ImageUrl: string
