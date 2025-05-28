@@ -6,15 +6,18 @@
       :paragraphs="t('pages.index.section1.description')"
       image="/presentation1.png"
       :reverse="true"
+      class="px-app-padding"
   />
   <Presentation
       :title="t('pages.index.section2.title')"
       :paragraphs="t('pages.index.section2.description')"
       image="/calendar.png"
       :reverse="false"
+      class="px-app-padding"
   />
+<calendar/>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-app-gap px-app-padding py-app-padding">
     <Packet price="€50" type="Monthly" color="#d0f4c5" />
     <Packet price="€130" type="Quarterly" color="#a9e5a3" />
     <Packet price="€240" type="Semiannual" color="#00c853" />
@@ -33,6 +36,7 @@ import { useLanguage } from '~/composables/useLanguage'
 import packet from '../components/packet.vue'
 import { useAsyncData } from '#app'
 import {useSupabaseClient} from "#imports";
+import calendar from '../components/calendar.vue'
 const supabase = useSupabaseClient()
 
 
@@ -41,7 +45,7 @@ interface ImageEntry {
   ImageUrl: string
 }
 
-const { data: images, error } = useAsyncData<ImageEntry[]>('images', async () => {
+const { data: images, error } = useAsyncData('images', async () => {
   const { data, error } = await supabase
       .from('Slideshow')
       .select('Title, ImageUrl')

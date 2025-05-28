@@ -6,6 +6,8 @@
         :paragraphs="retrievedData.teachData[0].Paragraph"
         :image="retrievedData.teachData[0].Image"
         :reverse="true"
+        class="px-4"
+
     />
     <elemGrid v-if="retrievedData.cardsTeachers.length" :cards="retrievedData.cardsTeachers" />
   </div>

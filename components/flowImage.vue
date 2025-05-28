@@ -29,7 +29,7 @@ const startSlider = () => {
   clearInterval(intervalId);
   intervalId = setInterval(() => {
     nextSlide();
-  }, 3000);
+  }, 5000);
 };
 
 const playSlider = () => {
@@ -60,8 +60,7 @@ onUnmounted(() => {
         <template v-for="(image, index) in images" :key="index">
           <transition name="fade">
             <div v-if="index === currentSliderIndex" class="absolute inset-0">
-              <div class="relative w-full aspect-[16/9] sm:h-full overflow-hidden rounded-lg shadow-md">
-                <!-- Titolo in basso a destra -->
+              <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md">
                 <h2 class="absolute bottom-4 left-4 z-[100] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
                   {{ image.Title }}
                 </h2>
@@ -69,7 +68,7 @@ onUnmounted(() => {
                 <img
                     :src="image.ImageUrl"
                     :alt="image.Title"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover block"
                 />
               </div>
             </div>
