@@ -21,12 +21,6 @@ export default {
                 deepen your practice. Each session is guided by experienced instructors in a welcoming and mindful environment.`
             }
         },
-        aboutUs: {
-            title: 'About us',
-            description: `At White Lotus Center, we believe that wellness is more than a practice —
-            it's a lifestyle rooted in balance, awareness, and community. Founded with the intention of creating a space where everyone
-            feels welcome, supported, and inspired, our center offers a holistic approach...`,
-        },
         contacts: {
             locationTitle: 'Where are we?',
             address: `📍 White Lotus Center<br />via Orti 15<br />Milano, MI 20134<br />Italy`,
