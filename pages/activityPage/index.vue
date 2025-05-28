@@ -47,7 +47,7 @@ const fetchData = async () => {
   const { data: presRaw } = await supabase.from('Presentation').select('*')
   const { data: cardsRaw } = await supabase.from('Activities').select('*')
 
-  const presData = (presRaw || []).map((item) => ({
+  const presData = (presRaw || []).map((item: RawPresentation) => ({
     Title: currentLang.value === 'it' ? item.Title_it : item.Title,
     Paragraph: currentLang.value === 'it' ? item.Paragraph_it : item.Paragraph,
     Image: item.Image,
@@ -64,10 +64,10 @@ const fetchData = async () => {
   fetchedData.value = { presData, cards }
 }
 
-// Esegui il fetch iniziale
+// Execute initial fetch
 onMounted(fetchData)
 
-// Reagisci al cambio lingua
+// React dynamically to the change language
 watch(currentLang, fetchData)
 
 
