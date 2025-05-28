@@ -1,21 +1,33 @@
 <template>
   <flow-image :images="images" />
 
-  <Presentation
-      :title="t('pages.index.section1.title')"
-      :paragraphs="t('pages.index.section1.description')"
-      image="/presentation1.png"
-      :reverse="true"
-      class="px-app-padding"
-  />
-  <Presentation
-      :title="t('pages.index.section2.title')"
-      :paragraphs="t('pages.index.section2.description')"
-      image="/calendar.png"
-      :reverse="false"
-      class="px-app-padding"
-  />
-<calendar/>
+  <div v-if="homePageContent">
+    <Presentation
+        :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
+        :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
+        :image="homePageContent.Image"
+        :reverse="true"
+        class="px-app-padding"
+    />
+  </div>
+  <div v-else>
+    <p>Loading...</p>
+  </div>
+
+  <div v-if="homePageContent2">
+    <Presentation
+        :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
+        :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"
+        :image="homePageContent2.Image"
+        :reverse="false"
+        class="px-app-padding"
+    />
+  </div>
+  <div v-else>
+    <p>Loading...</p>
+  </div>
+
+  <calendar />
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-app-gap px-app-padding py-app-padding">
     <Packet price="€50" type="Monthly" color="#d0f4c5" />
@@ -32,33 +44,65 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import packet from '../components/packet.vue'
-import { useAsyncData } from '#app'
-import {useSupabaseClient} from "#imports";
 import calendar from '../components/calendar.vue'
+import Presentation from '~/components/presentation.vue'
+import Packet from '../components/packet.vue'
+
 const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 
-
+interface PresentationContent {
+  Title: string
+  Paragraph: string
+  Paragraph_it: string
+  Image: string
+  Title_it: string
+}
 
 interface ImageEntry {
   Title: string
   ImageUrl: string
 }
 
-const { data: images, error } = useAsyncData('images', async () => {
-  const { data, error } = await supabase
-      .from('Slideshow')
-      .select('Title, ImageUrl')
+const images = ref<ImageEntry[]>([])
+const homePageContent = ref<PresentationContent | null>(null)
+const homePageContent2 = ref<PresentationContent | null>(null)
 
-  if (error) {
-    console.error('❌ Errore:', error.message)
+const fetchImages = async () => {
+  const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl')
+  if (error) console.error('Errore slideshow:', error)
+  images.value = data ?? []
+}
+
+const fetchPresentationContent = async () => {
+  const { data: data1, error: err1 } = await supabase
+      .from('Presentation')
+      .select('*')
+      .eq('Id', 4)
+      .single()
+
+  const { data: data2, error: err2 } = await supabase
+      .from('Presentation')
+      .select('*')
+      .eq('Id', 5)
+      .single()
+
+  if (err1 || err2) {
+    console.error('Errore presentation:', err1 ?? err2)
+    return
   }
 
-  return data ?? []
+  homePageContent.value = data1
+  homePageContent2.value = data2
+}
+
+onMounted(() => {
+  fetchImages()
+  fetchPresentationContent()
 })
 
-console.log(images.value);
-
-const { t } = useLanguage()
+watch(currentLang, fetchPresentationContent)
 </script>
