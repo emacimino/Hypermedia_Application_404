@@ -1,4 +1,5 @@
 <template>
+  <UApp>
   <div class="layout">
     <header>
       <appBar />
@@ -10,6 +11,7 @@
       <Footer />
     </footer>
   </div>
+  </UApp>
 </template>
 
 <script setup lang="ts">

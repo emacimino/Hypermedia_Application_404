@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import Header from './Header.vue'
-import calendarGrid from './calendarGrid.vue'
+import {CalendarDate} from "@internationalized/date";
+
+const value = ref(new CalendarDate(2022, 2, 3))
 </script>
 
 <template>
-  <main class="w-[500px] pb-[30px] rounded bg-azure shadow-[5px_5px_20px_rgba(0,0,0,0.5)] max-w-[90vw]">
-    <!-- Using Header and calendarGrid Component -->
-    <Header />
-    <calendarGrid />
-  </main>
+  <UCalendar v-model="value" />
 </template>
