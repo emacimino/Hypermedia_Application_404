@@ -2,59 +2,60 @@
   <div v-if="teacher">
     <Presentation
         :title="teacher.Title"
-        :paragraphs="teacher.LongDescription"
+        :paragraphs="currentLang === 'it' ? teacher.LongDescription_it : teacher.LongDescription"
         :image="teacher.Image"
         :reverse="true"
     />
+    <Subscription />
+  </div>
+  <div v-else>
+    <p>Loading...</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { useAsyncData } from "#app";
-import {useLanguage} from "~/composables/useLanguage";
-const { currentLang } = useLanguage();
+import { ref, watch, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useSupabaseClient } from '#imports'
+import Subscription from '~/components/subscription.vue'
+import { useLanguage } from '~/composables/useLanguage'
 
-interface Teacher {
-  Id: number;
-  Title: string;
-  LongDescription: string;
-  Image: string;
-}
+const { currentLang } = useLanguage()
+const supabase = useSupabaseClient()
+const route = useRoute()
+
 interface RawTeacher {
-  Id: number;
-  Title: string;
-  LongDescription: string;
-  LongDescription_it: string;
-  Image: string;
+  Id: number
+  Title_it: string
+  Title: string
+  LongDescription_it: string
+  LongDescription: string
+  Image: string
 }
 
-const route = useRoute();
-const supabase = useSupabaseClient();
+const teacher = ref<RawTeacher | null>(null)
+const teacherId = computed(() => Number(route.params.id))
 
-const teacherId = computed(() => Number(route.params.id));
+const fetchTeacher = async () => {
+  if (isNaN(teacherId.value)) return
 
-const { data: teacher } = await useAsyncData<Teacher | null>(`teacher-${teacherId.value}`, async () => {
-  if (isNaN(teacherId.value)) return null;
+  const { data, error } = await supabase
+      .from('Teachers')
+      .select('*')
+      .eq('Id', teacherId.value)
+      .single()
 
-  const result = await supabase
-      .from("Teachers")
-      .select("*")
-      .eq("Id", teacherId.value)
-      .single();
-
-  if (!result.data) return null
-
-  const raw = result.data as RawTeacher
-
-  return {
-    Id: raw.Id,
-    Title: raw.Title,
-    LongDescription: currentLang.value === 'it' && raw.LongDescription_it ? raw.LongDescription_it : raw.LongDescription,
-    Image: raw.Image
+  if (!data || error) {
+    console.error('Errore nel caricamento teacher:', error)
+    teacher.value = null
+    return
   }
-});
+
+  teacher.value = data
+}
+
+onMounted(fetchTeacher)
+watch(currentLang, fetchTeacher)
 </script>
 
 <style scoped>

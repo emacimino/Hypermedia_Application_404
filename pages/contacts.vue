@@ -33,7 +33,7 @@ onMounted(async () => {
 
   L.marker([45.4565, 9.2019])
       .addTo(map)
-      .bindPopup('Via Orti 15, Milano')
+      .bindPopup('Via Privata Siracusa, Milano')
       .openPopup()
 })
 </script>

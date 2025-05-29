@@ -18,7 +18,7 @@ export default {
         },
         contacts: {
             locationTitle: 'Dove siamo?',
-            address: `📍 White Lotus Center<br />via Orti 15<br />Milano, MI 20134<br />Italia`,
+            address: `📍 White Lotus Center<br />via Privata Siracusa 1<br />Milano, MI 20134<br />Italia`,
             contactTitle: 'Contatti',
             contactDetails: `📞 Telefono: +1 (310) 555-8123<br />📧 Email: info@whitelotus.com`,
             hoursTitle: 'Orari di apertura',

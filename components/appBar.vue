@@ -17,7 +17,7 @@
 
     <img
         class="w-17 h-17 object-cover cursor-pointer"
-        :src="currentLang === 'en' ? 'LanguageEN.png' : 'LanguageIT.png'"
+        :src="currentLang === 'en' ? '/LanguageEN.png' : '/LanguageIT.png'"
         alt="Switch language"
         @click="toggleLanguage"
     />
