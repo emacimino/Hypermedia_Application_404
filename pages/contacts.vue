@@ -1,14 +1,14 @@
 <template>
   <div :class="$style.content">
     <div>
-      <h2>{{ t('pages.contacts.locationTitle') }}</h2>
-      <p v-html="t('pages.contacts.address')" />
+      <h2>{{ t.pages.contacts.locationTitle }}</h2>
+      <p v-html="t.pages.contacts.address" />
 
-      <h2>{{ t('pages.contacts.contactTitle') }}</h2>
-      <p v-html="t('pages.contacts.contactDetails')" />
+      <h2>{{ t.pages.contacts.contactTitle }}</h2>
+      <p v-html="t.pages.contacts.contactDetails" />
 
-      <h2>{{ t('pages.contacts.hoursTitle') }}</h2>
-      <p v-html="t('pages.contacts.hoursDetails')" />
+      <h2>{{ t.pages.contacts.hoursTitle }}</h2>
+      <p v-html="t.pages.contacts.hoursDetails" />
     </div>
 
     <div id="map" :class="$style.map"></div>

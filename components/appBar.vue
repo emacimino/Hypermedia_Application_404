@@ -6,11 +6,12 @@
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
     <div class="flex items-center gap-10">
-      <MenuItem label="Activities" to="/activityPage" />
-      <MenuItem label="Teachers"   to="/teacherPage"  />
-      <MenuItem label="Highlights" to="/highlights"    />
-      <MenuItem label="About us"   to="/aboutUs"       />
-      <MenuItem label="Contacts"   to="/contacts"      />
+      <MenuItem
+          v-for="item in items"
+          :key="item.to"
+          :label="item.label"
+          :to="item.to"
+      />
     </div>
 
 
@@ -78,9 +79,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import MenuItem from '~/components/menu_item.vue';
 import ClickableImage from '~/components/clickableImage.vue';
+import { useLanguage } from '~/composables/useLanguage';
 
 const isMenuOpen = ref(false);
 
@@ -92,13 +94,14 @@ const closeMenu = () => {
   isMenuOpen.value = false;
 };
 
-const { toggleLanguage, currentLang } = useLanguage()
+const { toggleLanguage, currentLang, t } = useLanguage()
 
-const items = [
-  { label: 'Activities', to: '/activityPage' },
-  { label: 'Teachers',   to: '/teacherPage'     },
-  { label: 'highlights', to: '/highlights'   },
-  { label: 'About us',   to: '/aboutUs'      },
-  { label: 'Contacts',   to: '/contacts'     }
-];
+// Dynamically generate items based on current language
+const items = computed(() => [
+  { label: t.value.activities, to: '/activityPage' },
+  { label: t.value.teachers,   to: '/teacherPage' },
+  { label: t.value.highlights, to: '/highlights' },
+  { label: t.value.aboutUs,   to: '/aboutUs' },
+  { label: t.value.contacts,   to: '/contacts' }
+]);
 </script>

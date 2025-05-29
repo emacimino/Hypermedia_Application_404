@@ -1,29 +1,26 @@
-import { useState } from '#app'
-import { onMounted } from 'vue'
+// ~/composables/useLanguage.ts
+import { ref, computed } from 'vue'
 import en from '~/locales/en'
 import it from '~/locales/it'
 
-const translations = { en, it }
+// ✅ Global reactive state (shared across components)
+const currentLanguage = ref<'en' | 'it'>('en')
 
-export function useLanguage() {
-    const currentLang = useState<'en' | 'it'>('language', () => 'en')
+const translations = {
+    en,
+    it
+}
 
-    const t = (path: string): string => {
-        const keys = path.split('.')
-        return keys.reduce((obj: any, key) => obj?.[key], translations[currentLang.value]) || path
+const t = computed(() => translations[currentLanguage.value])
+
+const toggleLanguage = () => {
+    currentLanguage.value = currentLanguage.value === 'en' ? 'it' : 'en'
+}
+
+export const useLanguage = () => {
+    return {
+        t,
+        toggleLanguage,
+        currentLang: currentLanguage
     }
-
-    const toggleLanguage = () => {
-        currentLang.value = currentLang.value === 'en' ? 'it' : 'en'
-        localStorage.setItem('language', currentLang.value)
-    }
-
-    onMounted(() => {
-        const saved = localStorage.getItem('language')
-        if (saved === 'en' || saved === 'it') {
-            currentLang.value = saved
-        }
-    })
-
-    return { currentLang, t, toggleLanguage }
 }
