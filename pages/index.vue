@@ -18,8 +18,8 @@
     <Presentation
         :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
         :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"
-        :image="homePageContent2.Image"
         :reverse="false"
+        :calendar="true"
         class="px-app-padding"
     />
   </div>
@@ -27,7 +27,6 @@
     <p>Loading...</p>
   </div>
 
-  <calendar />
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-app-gap px-app-padding py-app-padding">
     <Packet price="€50" type="Monthly" color="#d0f4c5" />
@@ -47,7 +46,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import calendar from '../components/calendar.vue'
+import Calendar from '../components/Calendar.vue'
 import Presentation from '~/components/presentation.vue'
 import Packet from '../components/packet.vue'
 

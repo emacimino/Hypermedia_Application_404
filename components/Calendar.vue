@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {CalendarDate} from "@internationalized/date";
 
-const value = ref(new CalendarDate(2022, 2, 3))
+const value = ref(new CalendarDate(2025, 6, 20))
 </script>
 
 <template>

@@ -7,7 +7,15 @@
   >
     <!-- Image -->
     <div class="flex-1 max-w-full lg:max-w-[40%] min-w-[30%]">
-      <img :src="image" :alt="title" class="w-full h-auto object-cover rounded-lg" />
+      <div v-if="image">
+        <img :src="image" :alt="title" class="w-full h-auto object-cover rounded-lg" />
+      </div>
+      <div v-else-if="calendar">
+        <Calendar />
+      </div>
+      <div v-else>
+        <p>Nessun contenuto disponibile</p>
+      </div>
     </div>
 
     <!-- Text: vertically centered on large screens -->
@@ -22,7 +30,8 @@
 defineProps<{
   title: string
   paragraphs: string
-  image: string
+  image?: string
   reverse?: boolean
+  calendar?: boolean
 }>()
 </script>
