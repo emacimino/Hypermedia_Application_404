@@ -8,7 +8,7 @@ const cMonth = computed(() => dayjs().month(month.value).format("MMMM"))
 
 function modifyMonth(v){
   month.value += v
-  yearEmit("selected",month.value)
+  monthEmit("selected",month.value)
 }
 </script>
 

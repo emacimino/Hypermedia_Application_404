@@ -12,14 +12,18 @@ const selectedValues = reactive({
 )
 
 function changeMonth(v: number) {
-  selectedValues.month.value = v
+  selectedValues.month = v
 }
 
 function changeYear(v: number){
-  selectedValues.year.value = v
+  selectedValues.year = v
 }
 
-const selectedDataValue = ref(dayjs().date())
+function changeDate(v: number){
+  selectedDateValue.value = v
+}
+
+const selectedDateValue = ref(dayjs().date())
 </script>
 
 <template>
@@ -27,15 +31,10 @@ const selectedDataValue = ref(dayjs().date())
     <div class="flex flex-col">
       <Year @selected="changeYear"/>
       <Month @selected="changeMonth"/>
-      <Dates :selectedValues="selectedValues" :selectedDate="selectedDate" />
+      <Dates :selectedValues="selectedValues" :selectedDate="selectedDateValue" />
     </div>
   </div>
-  <div class="w=1/2">
-    <span v-if="selectedDataValue">
-      You have selected <br/>
-      {{selectedDataValue}}
-    </span>
-  </div>
+
 </template>
 
 <style scoped>
