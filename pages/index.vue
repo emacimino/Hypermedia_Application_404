@@ -46,7 +46,6 @@
 import { ref, onMounted, watch } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import Calendar from '../components/Calendar.vue'
 import Presentation from '~/components/presentation.vue'
 import Packet from '../components/packet.vue'
 
