@@ -80,7 +80,7 @@ function selected(d: number) {
             'bg-gray-800 text-gray-100': d.date === dayjs().date() &&
               dateProps.selectedValues.month === dayjs().month() &&
               dateProps.selectedValues.year === dayjs().year(),
-            'bg-emerald-500 text-white': d.date === date
+            'bg-blue-500 text-white': d.date === date
           }"
         >
           <span>{{ d.date }}</span>

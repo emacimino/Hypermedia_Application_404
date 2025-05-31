@@ -13,7 +13,7 @@ function modifyMonth(v){
 </script>
 
 <template>
-  <div class="bg-blue-700 p-3 grid place-items-center">
+  <div class="bg-blue-200 p-3 grid place-items-center">
   <span class="flex items-center space-x-3 select-none text-gray-50">
     <ChevronLeftIcon class="h-5 w-5 text-gray-400 cursor pointer" @click="()=>modifyMonth(-1)"/>
     <span class="w-20 text-center">{{cMonth}}</span>

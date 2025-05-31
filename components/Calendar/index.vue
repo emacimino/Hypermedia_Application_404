@@ -27,7 +27,7 @@ const selectedDateValue = ref(dayjs().date())
 </script>
 
 <template>
-  <div class="flex space-x-5 w-full" >
+  <div >
     <div class="flex flex-col">
       <Year @selected="changeYear"/>
       <Month @selected="changeMonth"/>
