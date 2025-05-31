@@ -92,7 +92,7 @@ const fetchPresentationContent = async () => {
       .single()
 
   if (err1 || err2) {
-    console.error('Errore presentation:', err1 ?? err2)
+    console.error('Error presentation:', err1 ?? err2)
     return
   }
 
