@@ -9,7 +9,7 @@ type SelectedValues = {
 
 const dateProps = defineProps<{
   selectedValues: SelectedValues
-  selectedDate: number
+  selectedDate: number | null
 }>()
 
 const dateEmit = defineEmits<{
