@@ -7,6 +7,10 @@
         :reverse="true"
     />
     <Subscription />
+
+    <div v-if="cvList.length" class="mt-8">
+      <TeacherCVTable :cvs="cvList" />
+    </div>
   </div>
   <div v-else>
     <p>Loading...</p>
@@ -18,6 +22,7 @@ import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
 import Subscription from '~/components/subscription.vue'
+import TeacherCVTable from '~/components/CV_experience.vue'
 import { useLanguage } from '~/composables/useLanguage'
 
 const { currentLang } = useLanguage()
@@ -33,7 +38,19 @@ interface RawTeacher {
   Image: string
 }
 
+interface CV {
+  ID: number
+  TEACHER_ID: number
+  TITLE: string
+  DESCRIPTION: string
+  START_DATE: string
+  END_DATE: string
+  LOCATION: string
+  CREATED_AT: string
+}
+
 const teacher = ref<RawTeacher | null>(null)
+const cvList = ref<CV[]>([])
 const teacherId = computed(() => Number(route.params.id))
 
 const fetchTeacher = async () => {
@@ -54,9 +71,27 @@ const fetchTeacher = async () => {
   teacher.value = data
 }
 
-onMounted(fetchTeacher)
+const fetchCV = async () => {
+  if (isNaN(teacherId.value)) return
+
+  const { data, error } = await supabase
+      .from('Teachers_cv')
+      .select('*')
+      .eq('TEACHER_ID', teacherId.value)
+      .order('START_DATE', { ascending: false })
+
+  if (error) {
+    console.error('Errore nel caricamento CV:', error)
+    return
+  }
+
+  cvList.value = data || []
+}
+
+onMounted(async () => {
+  await fetchTeacher()
+  await fetchCV()
+})
+
 watch(currentLang, fetchTeacher)
 </script>
-
-<style scoped>
-</style>
