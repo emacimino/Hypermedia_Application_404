@@ -27,18 +27,21 @@
     <p>Loading...</p>
   </div>
 
+  <div class="w-full max-w-screen-xl mx-auto">
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-app-gap px-app-padding py-app-padding">
-    <Packet price="€50" type="Monthly" color="#d0f4c5" />
-    <Packet price="€130" type="Quarterly" color="#a9e5a3" />
-    <Packet price="€240" type="Semiannual" color="#00c853" />
-    <Packet price="€450" type="Annual" color="#1b5e20" />
-    <Packet price="€30" type="Single lesson" color="#ffcdd2" />
-    <Packet price="50" type="5 lessons package" color="#ef9a9a" />
-    <Packet price="85" type="10 lessons package" color="#f44336" />
-    <Packet price="€150" type="20 lessons package" color="#b71c1c" />
-    <Packet price="€30" type="Private lesson" color="#9c27b0" />
-    <Packet price="€20" type="Mandatory membership card" color="#2196f3" />
+    <div class="grid grid-cols-auto-fit gap-8 p-8" style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
+      <Packet price="€50" type="Monthly" color="#d0f4c5" />
+      <Packet price="€130" type="Quarterly" color="#a9e5a3" />
+      <Packet price="€240" type="Semiannual" color="#00c853" />
+      <Packet price="€450" type="Annual" color="#1b5e20" />
+      <Packet price="€30" type="Single lesson" color="#ffcdd2" />
+      <Packet price="50" type="5 lessons package" color="#ef9a9a" />
+      <Packet price="85" type="10 lessons package" color="#f44336" />
+      <Packet price="€150" type="20 lessons package" color="#b71c1c" />
+      <Packet price="€30" type="Private lesson" color="#9c27b0" />
+      <Packet price="€20" type="Mandatory membership card" color="#2196f3" />
+
+    </div>
   </div>
 </template>
 
