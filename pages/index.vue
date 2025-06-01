@@ -1,6 +1,7 @@
 <template>
+  <div class="w-full aspect-video max-h-[80vh]">
   <flow-image :images="images" />
-
+  </div>
   <Presentation v-if="homePageContent"
       :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
       :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"

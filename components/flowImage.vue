@@ -54,8 +54,8 @@ onUnmounted(() => {
 
 
 <template>
-  <div class="h-screen flex flex-col">
-    <div class="slider flex relative w-full h-full">
+  <div >
+    <div class="flex relative w-full h-full">
       <div class="flex mx-auto justify-center items-center w-full h-full px-4">
         <template v-for="(image, index) in images" :key="index">
           <transition name="fade">
