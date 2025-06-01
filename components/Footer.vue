@@ -15,7 +15,7 @@
 <style module>
 .barraFooter {
   width: 100%;
-  height: 140px;
+  height: 100px;
   background-color: #d0f0fd;
   display: flex;
   flex-direction: column;

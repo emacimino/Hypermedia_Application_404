@@ -2,7 +2,7 @@
 <template>
   <!-- ***** DESKTOP NAVBAR ************************************************ -->
   <nav
-      class="hidden md:flex w-full items-center justify-between bg-blue-100 px-6 py-4"
+      class="hidden md:flex w-full items-center justify-between bg-blue-100 px-6 py-1"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
     <div class="flex items-center gap-10">
@@ -13,8 +13,6 @@
           :to="item.to"
       />
     </div>
-
-
 
     <img
         class="w-17 h-17 object-cover cursor-pointer"
@@ -96,7 +94,6 @@ const closeMenu = () => {
 
 const { toggleLanguage, currentLang, t } = useLanguage()
 
-// Dynamically generate items based on current language
 const items = computed(() => [
   { label: t.value.activities, to: '/activityPage' },
   { label: t.value.teachers,   to: '/teacherPage' },

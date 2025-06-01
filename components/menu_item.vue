@@ -19,7 +19,7 @@ defineProps<{
   align-items: center;
   overflow: hidden;
   color: #1F3A5F;
-  font-size: 28px;
+  font-size: 26px;
   font-family: 'Playfair Display', serif;
   font-weight: 400;
   line-height: 50px;
