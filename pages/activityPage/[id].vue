@@ -6,7 +6,7 @@
         :image="activity.Image"
         :reverse="true"
     />
-    <Subscription />
+    <Subscription :Title="activity.Title"/>
   </div>
   <div v-else>
     <p>Loading...</p>

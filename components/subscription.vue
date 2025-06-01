@@ -50,17 +50,15 @@
 
       <div :class="$style.row">
         <div :class="$style.input3">
-          <div :class="$style.firstName">Your message *</div>
-          <div :class="[$style.field, $style.fieldTextarea, errors.message && $style.fieldError]">
+          <div :class="$style.firstName">Your message</div>
+          <div :class="[$style.field, $style.fieldTextarea]">
             <textarea
                 v-model="formData.message"
                 placeholder="Enter your question or message"
                 :class="[$style.inputField, $style.textarea]"
-                rows="6"
-                required
+                rows="5"
             ></textarea>
           </div>
-          <div v-if="errors.message" :class="$style.error">{{ errors.message }}</div>
         </div>
       </div>
 
@@ -80,7 +78,10 @@
 <script setup lang="ts">
 import {reactive, ref} from 'vue'
 
-// Form data
+const prop = defineProps<{
+  Title: string
+}>()
+
 const formData = reactive({
   firstName: '',
   lastName: '',
@@ -88,21 +89,17 @@ const formData = reactive({
   message: ''
 })
 
-// Form validation and submission state
 const isSubmitting = ref(false)
 const errors = reactive({
   firstName: '',
   lastName: '',
   email: '',
-  message: ''
 })
 
-// Validate form
 const validateForm = () => {
   errors.firstName = ''
   errors.lastName = ''
   errors.email = ''
-  errors.message = ''
 
   let isValid = true
 
@@ -121,34 +118,26 @@ const validateForm = () => {
     errors.email = 'Please enter a valid email address'
     isValid = false
   }
-  if (!formData.message.trim()) {
-    errors.message = 'Message is required'
-    isValid = false
-  }
 
   return isValid
 }
 
-// Submit form
 const submitForm = async () => {
   if (!validateForm()) return
 
   isSubmitting.value = true
 
   try {
-    // Create mailto link with form data
-    const subject = encodeURIComponent('New subscription form submission')
-    const body = encodeURIComponent(`
-      Name: ${formData.firstName}
-      Last name: ${formData.lastName}
-      Email: ${formData.email}
-      Message: ${formData.message}
-    `.trim())
+    const subject = encodeURIComponent(`New subscription for ${prop.Title}`)
+    const body = encodeURIComponent(
+        `Name: ${formData.firstName}\n` +
+        `Last name: ${formData.lastName}\n` +
+        `Email: ${formData.email}\n` +
+        `Message: ${formData.message}`
+    )
 
-    // Open email client
     window.location.href = `mailto:gabriele.lorenzetti18@gmail.com?subject=${subject}&body=${body}`
 
-    // Reset form after successful submission
     setTimeout(() => {
       formData.firstName = ''
       formData.lastName = ''
