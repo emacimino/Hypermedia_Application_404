@@ -73,10 +73,6 @@ defineProps<{
     padding: 24px 20px;
     gap: 24px;
   }
-  .imageWrapper {
-    flex: 1;
-    min-width: 40%;
-  }
   .title {
     font-size: 2rem;
   }
