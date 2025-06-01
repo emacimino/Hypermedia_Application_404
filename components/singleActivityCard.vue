@@ -25,8 +25,6 @@ const link = computed(() => {
 });
 </script>
 
-
-
 <style  module>
 .card {
   display: flex;

@@ -1,47 +1,37 @@
 <template>
   <flow-image :images="images" />
 
-  <div v-if="homePageContent">
-    <Presentation
-        :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
-        :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
-        :image="homePageContent.Image"
-        :reverse="true"
-        class="px-app-padding"
-    />
-  </div>
+  <Presentation v-if="homePageContent"
+      :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
+      :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
+      :image="homePageContent.Image"
+      :reverse="true"
+  />
   <div v-else>
     <p>Loading...</p>
   </div>
 
-  <div v-if="homePageContent2">
-    <Presentation
-        :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
-        :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"
-        :reverse="false"
-        :calendar="true"
-        class="px-app-padding"
-    />
-  </div>
+  <Presentation v-if="homePageContent2"
+      :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
+      :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"
+      :reverse="false"
+      :calendar="true"
+  />
   <div v-else>
     <p>Loading...</p>
   </div>
 
-  <div class="w-full max-w-screen-xl mx-auto">
-
-    <div class="grid grid-cols-auto-fit gap-8 p-8" style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));">
-      <Packet price="€50" type="Monthly" color="#d0f4c5" />
-      <Packet price="€130" type="Quarterly" color="#a9e5a3" />
-      <Packet price="€240" type="Semiannual" color="#00c853" />
-      <Packet price="€450" type="Annual" color="#1b5e20" />
-      <Packet price="€30" type="Single lesson" color="#ffcdd2" />
-      <Packet price="50" type="5 lessons package" color="#ef9a9a" />
-      <Packet price="85" type="10 lessons package" color="#f44336" />
-      <Packet price="€150" type="20 lessons package" color="#b71c1c" />
-      <Packet price="€30" type="Private lesson" color="#9c27b0" />
-      <Packet price="€20" type="Mandatory membership card" color="#2196f3" />
-
-    </div>
+  <div :class="$style.courseGrid">
+    <Packet price="€50" type="Monthly" color="#d0f4c5" />
+    <Packet price="€130" type="Quarterly" color="#a9e5a3" />
+    <Packet price="€240" type="Semiannual" color="#00c853" />
+    <Packet price="€450" type="Annual" color="#1b5e20" />
+    <Packet price="€30" type="Single lesson" color="#ffcdd2" />
+    <Packet price="50" type="5 lessons package" color="#ef9a9a" />
+    <Packet price="85" type="10 lessons package" color="#f44336" />
+    <Packet price="€150" type="20 lessons package" color="#b71c1c" />
+    <Packet price="€30" type="Private lesson" color="#9c27b0" />
+    <Packet price="€20" type="Membership card" color="#2196f3" />
   </div>
 </template>
 
@@ -107,3 +97,13 @@ onMounted(() => {
 
 watch(currentLang, fetchPresentationContent)
 </script>
+
+<style module>
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--gap);
+  padding: var(--padding);
+  place-items: center;
+}
+</style>

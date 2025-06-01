@@ -21,11 +21,10 @@ defineProps<{
 .packet {
   border: 2px solid;
   border-radius: 12px;
-  width: 18rem;
-  height: 13rem;
+  width: 15rem;
+  height: 9rem;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: sans-serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .packet:hover {
@@ -33,7 +32,7 @@ defineProps<{
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 .top {
-  padding: 16px;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,14 +42,12 @@ defineProps<{
   font-weight: bold;
   color: #1f3a5f;
 }
-
 .bottom {
-  height: 100%;
-  background-color: #fff;
-  padding: 12px 16px;
+  height: 40%;
+  background-color: white;
 }
 .type {
-  font-size: 1.75em;
+  font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
