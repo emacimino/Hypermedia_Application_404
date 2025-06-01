@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import ElemGrid from '~/components/elemGrid.vue'
 import Presentation from '~/components/presentation.vue'
 import { useSupabaseClient } from '#imports'
@@ -27,8 +27,8 @@ const supabase = useSupabaseClient()
 
 interface RawActivity {
   Id: number
-  Title_it: string
   Title: string
+  Title_it: string
   ShortDescription_it: string
   ShortDescription: string
   Image: string
@@ -40,25 +40,34 @@ interface PresentationItem {
   Paragraph: string
   Image: string
 }
+interface RawPresentation {
+  Title: string
+  Title_it: string
+  Paragraph: string
+  Paragraph_it: string
+  Image: string
+}
 
 const fetchedData = ref<{ presData: PresentationItem[]; cards: RawActivity[] } | null>(null)
 
 const fetchData = async () => {
-  const { data: presRaw } = await supabase.from('Presentation').select('*')
+  const { data: presRaw } = await supabase.from('Presentation').select('*').eq('Id', 6)
   const { data: cardsRaw } = await supabase.from('Activities').select('*')
 
-  const presData = (presRaw || []).map((item: RawPresentation) => ({
+  const presData = ((presRaw || []) as RawPresentation[]).map((item) => ({
     Title: currentLang.value === 'it' ? item.Title_it : item.Title,
     Paragraph: currentLang.value === 'it' ? item.Paragraph_it : item.Paragraph,
     Image: item.Image,
   }))
 
-  const cards = (cardsRaw || []).map((item) => ({
+  const cards = ((cardsRaw || []) as RawActivity[]).map((item) => ({
     Id: item.Id,
     Image: item.Image,
     Link: item.Link,
     Title: currentLang.value === 'it' ? item.Title_it : item.Title,
+    Title_it: currentLang.value === 'en' ? item.Title : item.Title_it,
     ShortDescription: currentLang.value === 'it' ? item.ShortDescription_it : item.ShortDescription,
+    ShortDescription_it: currentLang.value === 'en' ? item.ShortDescription : item.ShortDescription_it,
   }))
 
   fetchedData.value = { presData, cards }
