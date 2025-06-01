@@ -1,32 +1,26 @@
 <template>
-  <div class="p-4">
-    <h2 class="text-2xl font-bold mb-4">Esperienze Docenti</h2>
-    <table class="min-w-full table-auto border border-gray-300">
-      <thead class="bg-gray-100">
-      <tr>
-        <th class="px-4 py-2 border">Teacher ID</th>
-        <th class="px-4 py-2 border">Titolo</th>
-        <th class="px-4 py-2 border">Descrizione</th>
-        <th class="px-4 py-2 border">Data Inizio</th>
-        <th class="px-4 py-2 border">Data Fine</th>
-        <th class="px-4 py-2 border">Luogo</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr
-          v-for="cv in cvs"
-          :key="cv.ID"
-          class="hover:bg-gray-50 transition-colors"
-      >
-        <td class="px-4 py-2 border text-center">{{ cv.TEACHER_ID }}</td>
-        <td class="px-4 py-2 border">{{ cv.TITLE }}</td>
-        <td class="px-4 py-2 border">{{ cv.DESCRIPTION }}</td>
-        <td class="px-4 py-2 border text-center">{{ formatDate(cv.START_DATE) }}</td>
-        <td class="px-4 py-2 border text-center">{{ formatDate(cv.END_DATE) }}</td>
-        <td class="px-4 py-2 border">{{ cv.LOCATION }}</td>
-      </tr>
-      </tbody>
-    </table>
+  <div>
+    <h2 class="text-lg font-semibold">
+      Experiences
+    </h2>
+    <div v-if="cvs.length === 0" class="text-gray-500 italic">No previous experiebce.</div>
+    <div class="grid md:grid-cols-2 gap-6">
+
+    <div
+        v-for="work in cvs"
+        :key="work.ID"
+        class="bg-white border rounded p-4 shadow md:grid md:grid-cols-2"
+    >
+      <div>
+        <h3 class="text-blue-700 font-semibold">{{ work.TITLE }}</h3>
+        <span class="text-sm text-gray-600">{{ work.DESCRIPTION }}</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-1">
+        Corso: <strong>{{ work.START_DATE }}</strong><br />
+        Insegnante: <strong>{{ work.END_DATE }}</strong>
+      </p>
+    </div>
+    </div>
   </div>
 </template>
 

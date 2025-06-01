@@ -6,10 +6,9 @@
         :image="teacher.Image"
         :reverse="true"
     />
-    <Subscription />
 
     <div v-if="cvList.length" class="mt-8">
-      <TeacherCVTable :cvs="cvList" />
+      <TeacherCVTable :cvs="cvList" class="m-2" />
     </div>
   </div>
   <div v-else>
@@ -21,7 +20,6 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
-import Subscription from '~/components/subscription.vue'
 import TeacherCVTable from '~/components/CV_experience.vue'
 import { useLanguage } from '~/composables/useLanguage'
 

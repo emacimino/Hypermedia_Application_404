@@ -1,6 +1,5 @@
 <!-- /components/AppNavbar.vue -->
 <template>
-  <!-- ***** DESKTOP NAVBAR ************************************************ -->
   <nav
       class="hidden md:flex w-full items-center justify-between bg-blue-100 px-6 py-1"
   >
@@ -22,7 +21,6 @@
     />
   </nav>
 
-  <!-- ***** MOBILE TOP BAR ************************************************ -->
   <nav
       class="flex md:hidden w-full items-center justify-between bg-blue-100 px-4 py-3"
   >
