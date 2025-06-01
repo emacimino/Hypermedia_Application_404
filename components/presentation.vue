@@ -73,29 +73,15 @@ defineProps<{
     padding: 24px 20px;
     gap: 24px;
   }
-  .imageWrapper,
-  .textContainer {
-    max-width: 100%;
-    min-width: 0;
+  .imageWrapper {
+    flex: 1;
+    min-width: 40%;
   }
   .title {
     font-size: 2rem;
   }
   .paragraphs {
     font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .property1default {
-    flex-direction: column;
-    padding: 24px 20px;
-    gap: 24px;
-  }
-  .imageWrapper,
-  .textContainer {
-    max-width: 100%;
-    min-width: 0;
   }
 }
 </style>
