@@ -1,7 +1,7 @@
 
 <template>
   <div :class="$style.content">
-    <div :class="$style.textContent">
+    <div>
       <h2>{{ whereAreWeTitle }}</h2>
       <p v-html="whereAreWeParagraph" />
 
@@ -55,7 +55,7 @@ watchEffect(async () => {
 
   if (!error && data) {
     whereAreWeTitle.value = data[titleCol]
-    whereAreWeParagraph.value = data[paragraphCol]
+    whereAreWeParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
   }
 })
 
@@ -71,7 +71,7 @@ watchEffect(async () => {
 
   if (!error && data) {
     contactsTitle.value = data[titleCol]
-    contactsParagraph.value = data[paragraphCol]
+    contactsParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
   }
 })
 
@@ -87,7 +87,7 @@ watchEffect(async () => {
 
   if (!error && data) {
     openingHoursTitle.value = data[titleCol]
-    openingHoursParagraph.value = data[paragraphCol]
+    openingHoursParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
   }
 })
 
@@ -112,20 +112,16 @@ onMounted(async () => {
 <style module>
 .content {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 32px;
-  font-size: 20px;
-  color: #1f3a5f;
-  gap: 24px;
+  align-items: center;
+  padding: 2rem;
 }
 .content h2 {
-  font-size: 28px;
+  font-size: clamp(1rem, 3vw, 2rem);
   font-weight: bold;
 }
-.textContent {
-  margin-top: 140px;
+.content p {
+  font-size: clamp(0.75rem, 2vw, 1.5rem);
 }
 .map {
   height: 500px;
@@ -133,5 +129,23 @@ onMounted(async () => {
   min-width: 300px;
   border-radius: 12px;
   border: 1px solid #ccc;
+}
+
+
+@media (max-width: 760px) {
+  .content{
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .content h2 {
+    font-size: 1.5rem;
+  }
+  .content p {
+    font-size: 1rem;
+  }
+  .map{
+    min-width: 100%
+  }
 }
 </style>
