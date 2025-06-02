@@ -1,4 +1,7 @@
 <template>
+
+  <UBreadcrumb :items="items" style="padding: 1rem 0 0 2rem;"/>
+
   <div v-if="activity">
     <Presentation
         :title="currentLang === 'it' ? activity.Title_it : activity.Title"
@@ -27,10 +30,9 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
-import Subscription from '~/components/subscription.vue'
 import { useLanguage } from '~/composables/useLanguage'
-import WeeklyView from "~/components/Calendar/WeeklyView.vue";
 import dayjs from "dayjs";
+import type {BreadcrumbItem} from "@nuxt/ui";
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
@@ -69,6 +71,41 @@ const fetchActivity = async () => {
 
 onMounted(fetchActivity)
 watch(currentLang, fetchActivity)
+
+const items = ref<BreadcrumbItem[]>([
+  {
+    label: 'Activities',
+    to: '/activityPage',
+    ui: {
+      linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+    }
+  },
+  {
+    label: 'teacherPage',
+    ui: {
+      linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+    }
+  }
+])
+watch(activity, (newVal) => {
+  if (newVal) {
+    items.value = [
+      {
+        label: 'Activities',
+        to: '/activityPage',
+        ui: {
+          linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+        }
+      },
+      {
+        label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
+        ui: {
+          linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+    ]
+  }
+})
 </script>
 
 <style scoped>

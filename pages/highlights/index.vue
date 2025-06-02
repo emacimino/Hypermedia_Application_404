@@ -10,9 +10,6 @@
 </template>
 
 <script setup>
-
-import SingleActivityCard from "~/components/singleActivityCard.vue";
-
 const cards = [
   {
     name:"Workshops",

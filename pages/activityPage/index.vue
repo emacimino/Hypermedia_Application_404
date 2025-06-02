@@ -73,13 +73,9 @@ const fetchData = async () => {
   fetchedData.value = { presData, cards }
 }
 
-// Execute initial fetch
 onMounted(fetchData)
 
-// React dynamically to the change language
 watch(currentLang, fetchData)
-
-
 </script>
 
 <style  module>

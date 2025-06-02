@@ -1,4 +1,7 @@
 <template>
+
+  <UBreadcrumb :items="items" style="padding: 1rem 0 0 2rem;"/>
+
   <div v-if="teacher">
     <Presentation
         :title="teacher.Title"
@@ -22,6 +25,7 @@ import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
 import TeacherCVTable from '~/components/CV_experience.vue'
 import { useLanguage } from '~/composables/useLanguage'
+import type {BreadcrumbItem} from "@nuxt/ui";
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
@@ -92,4 +96,39 @@ onMounted(async () => {
 })
 
 watch(currentLang, fetchTeacher)
+
+const items = ref<BreadcrumbItem[]>([
+  {
+    label: 'Teachers',
+    to: '/teacherPage',
+    ui: {
+      linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+    }
+  },
+  {
+    label: 'teacherPage',
+    ui: {
+      linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+    }
+  }
+])
+watch(teacher, (newVal) => {
+  if (newVal) {
+    items.value = [
+      {
+        label: 'Teachers',
+        to: '/teacherPage',
+        ui: {
+          linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+        }
+      },
+      {
+        label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
+        ui: {
+          linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+    ]
+  }
+})
 </script>
