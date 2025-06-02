@@ -16,7 +16,9 @@ import { computed } from 'vue';
 const props = defineProps<{
   Id: number;
   Title: string;
+  Title_it: string;
   ShortDescription: string;
+  ShortDescription_it: string;
   Image: string;
 }>();
 

@@ -1,27 +1,97 @@
+
 <template>
   <div :class="$style.content">
-    <div>
-      <h2>{{ t.pages.contacts.locationTitle }}</h2>
-      <p v-html="t.pages.contacts.address" />
+    <div :class="$style.textContent">
+      <h2>{{ whereAreWeTitle }}</h2>
+      <p v-html="whereAreWeParagraph" />
 
-      <h2>{{ t.pages.contacts.contactTitle }}</h2>
-      <p v-html="t.pages.contacts.contactDetails" />
+      <h2>{{ contactsTitle }}</h2>
+      <p v-html="contactsParagraph" />
 
-      <h2>{{ t.pages.contacts.hoursTitle }}</h2>
-      <p v-html="t.pages.contacts.hoursDetails" />
+      <h2>{{ openingHoursTitle }}</h2>
+      <p v-html="openingHoursParagraph" />
     </div>
 
     <div id="map" :class="$style.map"></div>
   </div>
 </template>
 
+
+
+
 <script setup lang="ts">
-import { onMounted, nextTick } from 'vue'
+import { ref, watchEffect, onMounted, nextTick } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import 'leaflet/dist/leaflet.css'
 
-const { t } = useLanguage()
+const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 
+// Reactive refs for each section
+const whereAreWeTitle = ref('')
+const whereAreWeParagraph = ref('')
+
+const contactsTitle = ref('')
+const contactsParagraph = ref('')
+
+const openingHoursTitle = ref('')
+const openingHoursParagraph = ref('')
+
+// Utility function to get correct column names
+function getColumnName(base: string): string {
+  return currentLang.value === 'it' ? `${base}_it` : base
+}
+
+// WatchEffect per section
+watchEffect(async () => {
+  const titleCol = getColumnName('Title')
+  const paragraphCol = getColumnName('Paragraph')
+
+  const { data, error } = await supabase
+      .from('Presentation')
+      .select(`${titleCol}, ${paragraphCol}`)
+      .eq('Title', 'Where are we?')
+      .single()
+
+  if (!error && data) {
+    whereAreWeTitle.value = data[titleCol]
+    whereAreWeParagraph.value = data[paragraphCol]
+  }
+})
+
+watchEffect(async () => {
+  const titleCol = getColumnName('Title')
+  const paragraphCol = getColumnName('Paragraph')
+
+  const { data, error } = await supabase
+      .from('Presentation')
+      .select(`${titleCol}, ${paragraphCol}`)
+      .eq('Title', 'Contacts')
+      .single()
+
+  if (!error && data) {
+    contactsTitle.value = data[titleCol]
+    contactsParagraph.value = data[paragraphCol]
+  }
+})
+
+watchEffect(async () => {
+  const titleCol = getColumnName('Title')
+  const paragraphCol = getColumnName('Paragraph')
+
+  const { data, error } = await supabase
+      .from('Presentation')
+      .select(`${titleCol}, ${paragraphCol}`)
+      .eq('Title', 'Opening Hours')
+      .single()
+
+  if (!error && data) {
+    openingHoursTitle.value = data[titleCol]
+    openingHoursParagraph.value = data[paragraphCol]
+  }
+})
+
+// Leaflet map
 onMounted(async () => {
   await nextTick()
   const L = await import('leaflet')
@@ -38,6 +108,7 @@ onMounted(async () => {
 })
 </script>
 
+
 <style module>
 .content {
   display: flex;
@@ -53,8 +124,8 @@ onMounted(async () => {
   font-size: 28px;
   font-weight: bold;
 }
-.content p {
-  margin-bottom: 40px;
+.textContent {
+  margin-top: 140px;
 }
 .map {
   height: 500px;
