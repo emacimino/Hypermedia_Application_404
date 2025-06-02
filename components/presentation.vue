@@ -36,7 +36,6 @@
 import {defineAsyncComponent} from "vue"
 import Subscription from "~/components/subscription.vue";
 import WeeklyView from "~/components/Calendar/WeeklyView.vue";
-import dayjs from "dayjs";
 
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 defineProps<{
@@ -60,8 +59,8 @@ defineProps<{
 .property_default {
   display: flex;
   flex-direction: row;
-  padding: 3rem 4rem;
-  gap: 4rem;
+  padding: 2rem;
+  gap: 3rem;
   box-sizing: border-box;
   width: 100%;
   font-family: Inter;
@@ -71,8 +70,7 @@ defineProps<{
   flex-direction: row-reverse;
 }
 .imageWrapper {
-  flex: 1;
-  min-width: 40%;
+  width: 40%;
 }
 .image {
   width: 100%;
@@ -81,7 +79,7 @@ defineProps<{
   border-radius: 12px;
 }
 .calendar {
-  min-width: 40%;
+  width: 40%;
 }
 .title {
   font-size: 3rem;
@@ -93,7 +91,6 @@ defineProps<{
   width: 100%;
   margin-bottom: 2rem;
 }
-
 .content {
   flex: 1;
 }
@@ -103,6 +100,12 @@ defineProps<{
     flex-direction: column;
     padding: 24px 20px;
     gap: 24px;
+  }
+  .imageWrapper {
+    min-width: 90%;
+  }
+  .calendar {
+    min-width: 90%;
   }
   .title {
     font-size: 2rem;
