@@ -2,16 +2,19 @@
   <div class="w-full aspect-video max-h-[80vh]">
   <flow-image :images="images" />
   </div>
+  <div class="flex flex-row">
+
   <Presentation v-if="homePageContent"
       :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
       :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
       :image="homePageContent.Image"
       :reverse="true"
   />
+
   <div v-else>
     <p>Loading...</p>
   </div>
-
+  </div>
   <Presentation v-if="homePageContent2"
       :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
       :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"

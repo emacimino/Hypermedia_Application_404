@@ -1,5 +1,7 @@
 <template>
   <div v-if="retrievedData && retrievedData.cardsTeachers.length && retrievedData.teachData.length">
+    <div class="flex flex-row">
+
     <Presentation
         :title="retrievedData.teachData[0].Title"
         :paragraphs="retrievedData.teachData[0].Paragraph"
@@ -7,6 +9,7 @@
         :reverse="true"
         class="px-4"
     />
+    </div>
     <elemGrid :cards="retrievedData.cardsTeachers" />
   </div>
 

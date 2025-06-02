@@ -5,8 +5,18 @@
         :paragraphs="currentLang === 'it' ? activity.LongDescription_it : activity.LongDescription"
         :image="activity.Image"
         :reverse="true"
+
     />
-    <Subscription :Title="activity.Title"/>
+    <Presentation
+        :weekProgramming="true"
+        :subscribe="true"
+        :calendar="false"
+        :Title="activity.Title"
+        :currentDate="dayjs()"
+        :activeDate="dayjs()"
+        :selectedWeekday-index="0"
+    :day-events="[]"
+    />
   </div>
   <div v-else>
     <p>Loading...</p>
@@ -19,10 +29,13 @@ import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
 import Subscription from '~/components/subscription.vue'
 import { useLanguage } from '~/composables/useLanguage'
+import WeeklyView from "~/components/Calendar/WeeklyView.vue";
+import dayjs from "dayjs";
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 const route = useRoute()
+
 
 interface RawActivity {
   Id: number

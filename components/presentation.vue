@@ -1,43 +1,67 @@
 <template>
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
-
     <div v-if="image" :class="$style.imageWrapper">
       <img :class="$style.image" :src="image" :alt="title"/>
     </div>
-    <Calendar v-else-if="calendar" :class="$style.calendar" />
-    <div v-else>
-      <p>No content available</p>
+
+    <div v-else-if="calendar === true" :class="$style.calendar">
+      <calendarComponent />
     </div>
 
-    <div>
-      <b :class="$style.title">{{ title }}</b>
-      <div :class="$style.paragraphs">
-        <p>{{ paragraphs }}</p>
+    <div v-else-if="calendar === false && weekProgramming === true" :class="$style.weekWrapper">
+      <WeeklyView
+          :current-date="currentDate"
+          :active-date="activeDate"
+          :selected-weekday-index="selectedWeekdayIndex"
+          :day-events="dayEvents"
+      />
+    </div>
+
+    <div :class="$style.content">
+      <div v-if="subscribe && Title">
+        <Subscription :Title="Title"/>
+      </div>
+      <div v-else>
+        <b :class="$style.title">{{ title }}</b>
+        <div :class="$style.paragraphs">
+          <p>{{ paragraphs }}</p>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
+
 <script setup lang="ts">
 import {defineAsyncComponent} from "vue"
+import Subscription from "~/components/subscription.vue";
+import WeeklyView from "~/components/Calendar/WeeklyView.vue";
+import dayjs from "dayjs";
 
-const calendar = defineAsyncComponent(() => import("./Calendar/index.vue"))
+const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 defineProps<{
-  title: string
-  paragraphs: string
+  title?: string
+  paragraphs?: string
   image?: string
   reverse?: boolean
   calendar?: boolean
+  weekProgramming?: boolean
+  subscribe?: boolean
+  Title?: string
+  currentDate?: any
+  activeDate?: any
+  selectedWeekdayIndex?: number | null
+  dayEvents?: any[]
 }>()
+
 </script>
 
 <style module>
 .property_default {
   display: flex;
   flex-direction: row;
-  padding: 48px 60px;
-  gap: 60px;
+  padding: 3rem 4rem;
+  gap: 4rem;
   box-sizing: border-box;
   width: 100%;
   font-family: Inter;
@@ -65,7 +89,14 @@ defineProps<{
 .paragraphs {
   font-size: 1.5rem;
 }
+.weekWrapper {
+  width: 100%;
+  margin-bottom: 2rem;
+}
 
+.content {
+  flex: 1;
+}
 
 @media (max-width: 768px) {
   .property_default {
