@@ -15,25 +15,25 @@ import SingleActivityCard from "~/components/singleActivityCard.vue";
 
 const cards = [
   {
-    name:"workshops",
+    name:"Workshops",
     activityImage: 'workshops.png',
     title: 'Craft it yourself!',
     buttonText: 'See our labs!'
   },
   {
-    name:"seminars",
+    name:"Seminars",
     activityImage: 'seminars.png',
     title: 'Try something new!',
     buttonText: 'Start now!'
   },
   {
-    name:"mindfulness",
+    name:"Mindfulness",
     activityImage: 'mindfulness.png',
     title: 'Find yourself!',
     buttonText: 'Go relax!'
   },
   {
-    name:"pilates",
+    name:"Pilates",
     activityImage: 'pilates.png',
     title: 'Open your horizons!',
     buttonText: 'Start practising!'

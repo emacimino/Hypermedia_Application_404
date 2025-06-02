@@ -26,9 +26,9 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
+import { useSupabaseClient } from '#imports'
 
-const router = useRouter();
+const supabase = useSupabaseClient()
 
 const props = defineProps({
   name: String,
@@ -43,23 +43,34 @@ const props = defineProps({
   }
 })
 
-const hoverClass = ref('');
-const style = useCssModule();
+const hoverClass = ref('')
+const style = useCssModule()
 
 function onHover() {
-  console.log('Hover sul bottone');
-  hoverClass.value = style.hoverEffect;
+  hoverClass.value = style.hoverEffect
 }
 
 function onLeave() {
-  hoverClass.value = ''; // rimuove classe
+  hoverClass.value = ''
 }
 
-function onClick() {
-  console.log('Click sul bottone');
-  router.push(`/activityPage/${props.name}`);
-}
+async function onClick() {
+  console.log('Click sul bottone')
 
+  const { data, error } = await supabase
+      .from('Activities') // your table name
+      .select('Id')
+      .eq('Title', props.name) // assuming the 'name' field in Supabase is 'Name'
+      .single()
+
+  if (error || !data) {
+    console.error('Activity not found:', error)
+    return
+  }
+
+  const activityId = data.Id
+  navigateTo(`/activityPage/${activityId}`)
+}
 </script>
 <style  module>
 .property1default {
