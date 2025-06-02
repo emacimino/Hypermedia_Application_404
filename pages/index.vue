@@ -31,11 +31,11 @@
     <Packet price="€240" type="Semiannual" color="#00c853" />
     <Packet price="€450" type="Annual" color="#1b5e20" />
     <Packet price="€30" type="Single lesson" color="#ffcdd2" />
-    <Packet price="50" type="5 lessons package" color="#ef9a9a" />
-    <Packet price="85" type="10 lessons package" color="#f44336" />
-    <Packet price="€150" type="20 lessons package" color="#b71c1c" />
+    <Packet price="€50" type="5 lessons" color="#ef9a9a" />
+    <Packet price="€85" type="10 lessons" color="#f44336" />
+    <Packet price="€150" type="20 lessons" color="#b71c1c" />
     <Packet price="€30" type="Private lesson" color="#9c27b0" />
-    <Packet price="€20" type="Membership card" color="#2196f3" />
+    <Packet price="€20" type="Membership" color="#2196f3" />
   </div>
 </template>
 
@@ -105,9 +105,20 @@ watch(currentLang, fetchPresentationContent)
 <style module>
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: var(--gap);
   padding: var(--padding);
   place-items: center;
+}
+
+
+@media (max-width: 760px) {
+  .courseGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: var(--gap);
+    padding: 1rem;
+    place-items: center;
+  }
 }
 </style>

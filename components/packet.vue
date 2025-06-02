@@ -21,8 +21,8 @@ defineProps<{
 .packet {
   border: 2px solid;
   border-radius: 12px;
-  width: 15rem;
-  height: 9rem;
+  width: clamp(11rem, 4vw, 15rem);
+  height: clamp(7rem, 4vw, 9rem);
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -53,4 +53,19 @@ defineProps<{
   align-items: center;
   color: #444;
 }
+
+
+@media (max-width: 760px) {
+  .packet {
+    width: 8rem;
+    height: 5rem;
+  }
+  .price {
+    font-size: 1.75rem;
+  }
+  .type {
+    font-size: 1rem;
+  }
+}
+
 </style>

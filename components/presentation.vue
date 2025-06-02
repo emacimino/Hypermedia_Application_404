@@ -82,10 +82,10 @@ defineProps<{
   width: 40%;
 }
 .title {
-  font-size: 3rem;
+  font-size: clamp(2rem, 4vw, 3rem);
 }
 .paragraphs {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 2rem);
 }
 .weekWrapper {
   width: 100%;
@@ -95,23 +95,31 @@ defineProps<{
   flex: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 760px) {
   .property_default {
     flex-direction: column;
-    padding: 24px 20px;
-    gap: 24px;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .reversed {
+    flex-direction: column;
   }
   .imageWrapper {
-    min-width: 90%;
+    order: 2;
+    min-width: 100%;
   }
   .calendar {
-    min-width: 90%;
+    order: 2;
+    min-width: 100%;
+  }
+  .content {
+    order: 1;
   }
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .paragraphs {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 </style>
