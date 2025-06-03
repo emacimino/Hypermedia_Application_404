@@ -167,7 +167,7 @@ async function onClick() {
   align-items: center;
   justify-content: center;
   padding: 0.5vw 1.5vw; /* horizontal space around text */
-  background-color: #fff; /* or your button color */
+  background-color: #0077B6;
   border-radius: 1vw;
   min-height: 2.5vw;
   height: 2.5vw; /* fixed vertical height */
