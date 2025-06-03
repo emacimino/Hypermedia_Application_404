@@ -3,7 +3,7 @@
       class="hidden md:flex w-full items-center justify-between px-6 py-1" style="background-color: #d0f0fd"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
-    <div class="flex items-center gap-10">
+    <div class="flex items-center md:gap-10 gap-4">
       <MenuItem
           v-for="item in items"
           :key="item.to"
