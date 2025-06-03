@@ -8,6 +8,7 @@
         :day-events="dayEvents"
         @back="resetToCalendar"
         @navigate="handleWeekNavigation"
+        :visualizeButton="true"
     />
   </div>
 

@@ -1,35 +1,33 @@
 <template>
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
+    <!-- Immagine -->
     <div v-if="image" :class="$style.imageWrapper">
-      <img :class="$style.image" :src="image" :alt="title"/>
+      <img :class="$style.image" :src="image" :alt="title" />
     </div>
 
+    <!-- Calendario -->
     <div v-else-if="calendar === true" :class="$style.calendar">
       <calendarComponent />
     </div>
 
+    <!-- Vista Settimanale -->
     <div v-else-if="calendar === false && weekProgramming === true" :class="$style.weekWrapper">
       <WeeklyView
-          :current-date="props.currentDate"
+          :current-date="internalCurrentDate"
           :active-date="activeDate"
           :selected-weekday-index="selectedWeekdayIndex"
           :day-events="props.dayEvents ?? []"
           @update:activeDate="val => activeDate = val"
           @update:selectedWeekdayIndex="val => selectedWeekdayIndex = val"
+          @navigate="handleNavigate"
+          :visualizeButton="false"
       />
-
-
-
-
     </div>
 
+    <!-- Contenuto -->
     <div :class="$style.content">
-
-      <Subscription v-if="subscribe && Title" :Title="Title"/>
-
-      <CV_experience v-else-if="cv" :cvs="experience" class="m-2">
-
-      </CV_experience>
+      <Subscription v-if="subscribe && Title" :Title="Title" />
+      <CV_experience v-else-if="cv" :cvs="experience" class="m-2" />
       <div v-else>
         <b :class="$style.title">{{ title }}</b>
         <div v-if="paragraphs" :class="$style.paragraphs">
@@ -40,12 +38,15 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import {defineAsyncComponent} from "vue"
-import Subscription from "~/components/subscription.vue";
-import WeeklyView from "~/components/Calendar/WeeklyView.vue";
+import { ref, watch } from "vue"
+import { defineAsyncComponent } from "vue"
+import dayjs from "dayjs"
+
+import WeeklyView from "~/components/Calendar/WeeklyView.vue"
+import Subscription from "~/components/subscription.vue"
 import CV_experience from "~/components/CV_experience.vue"
+
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 
 const props = defineProps<{
@@ -65,11 +66,24 @@ const props = defineProps<{
   experience?: any[]
 }>()
 
+// Stato interno reattivo per la settimana
+const internalCurrentDate = ref(props.currentDate ?? dayjs())
+
+// Aggiorna internalCurrentDate se cambia prop
+watch(() => props.currentDate, (val) => {
+  if (val) internalCurrentDate.value = val
+})
+
+// Stato per giorno selezionato
 const activeDate = ref(props.activeDate ?? null)
 const selectedWeekdayIndex = ref(props.selectedWeekdayIndex ?? 0)
 
-
+// Gestione evento di navigazione
+function handleNavigate(dir: 'prev' | 'next') {
+  internalCurrentDate.value = internalCurrentDate.value.add(dir === 'next' ? 1 : -1, 'week')
+}
 </script>
+
 
 <style module>
 .property_default {

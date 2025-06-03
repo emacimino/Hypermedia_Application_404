@@ -9,6 +9,7 @@ const props = defineProps<{
   activeDate?: any
   selectedWeekdayIndex?: number | null
   dayEvents?: any[] | null
+  visualizeButton?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -125,7 +126,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </button>
     <span class="font-semibold">
       {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
-      <button @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+      <button v-if="visualizeButton === true" @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
         <CalendarIcon class="h-5 w-5 inline" />
       </button>
     </span>
