@@ -289,10 +289,4 @@ const submitForm = async () => {
   flex-direction: row;
   width: 100%;
 }
-
-
-@media (max-width: 760px) {
-  .subscription{
-  }
-}
 </style>
