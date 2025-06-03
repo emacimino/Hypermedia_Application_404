@@ -1,6 +1,6 @@
 <template>
 
-  <UBreadcrumb :items="items" style="padding: 1rem 0 0 2rem;"/>
+  <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="teacher">
     <Presentation
@@ -148,3 +148,16 @@ watch(teacher, (newVal) => {
   }
 })
 </script>
+
+<style module>
+.bread{
+  padding: 1rem 0 0 2rem
+}
+
+
+@media (max-width: 760px) {
+  .bread{
+    padding: 0.5rem 0 0 1rem
+  }
+}
+</style>
