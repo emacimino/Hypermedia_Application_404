@@ -1,6 +1,6 @@
 <template>
 
-  <UBreadcrumb :items="items" style="padding: 1rem 0 0 2rem;"/>
+  <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="activity">
     <Presentation
@@ -18,7 +18,7 @@
         :currentDate="dayjs()"
         :activeDate="dayjs()"
         :selectedWeekday-index="0"
-    :day-events="[]"
+        :day-events="[]"
     />
   </div>
   <div v-else>
@@ -77,13 +77,13 @@ const items = ref<BreadcrumbItem[]>([
     label: 'Activities',
     to: '/activityPage',
     ui: {
-      linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+      linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
     }
   },
   {
     label: 'teacherPage',
     ui: {
-      linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+      linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
     }
   }
 ])
@@ -94,13 +94,13 @@ watch(activity, (newVal) => {
         label: 'Activities',
         to: '/activityPage',
         ui: {
-          linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+          linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
         }
       },
       {
         label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
         ui: {
-          linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+          linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
         }
       }
     ]
@@ -108,5 +108,15 @@ watch(activity, (newVal) => {
 })
 </script>
 
-<style scoped>
+<style module>
+.bread{
+  padding: 1rem 0 0 2rem
+}
+
+
+@media (max-width: 760px) {
+  .bread{
+    padding: 0.5rem 0 0 1rem
+  }
+}
 </style>

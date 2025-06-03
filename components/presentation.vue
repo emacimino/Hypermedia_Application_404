@@ -18,9 +18,7 @@
     </div>
 
     <div :class="$style.content">
-      <div v-if="subscribe && Title">
-        <Subscription :Title="Title"/>
-      </div>
+      <Subscription v-if="subscribe && Title" :Title="Title"/>
       <div v-else>
         <b :class="$style.title">{{ title }}</b>
         <div :class="$style.paragraphs">
@@ -61,8 +59,6 @@ defineProps<{
   flex-direction: row;
   padding: 2rem;
   gap: 3rem;
-  box-sizing: border-box;
-  width: 100%;
   font-family: Inter;
   align-items: center;
 }
@@ -89,10 +85,11 @@ defineProps<{
 }
 .weekWrapper {
   width: 100%;
-  margin-bottom: 2rem;
 }
 .content {
-  flex: 1;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (max-width: 760px) {

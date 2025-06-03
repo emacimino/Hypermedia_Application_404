@@ -157,10 +157,8 @@ const submitForm = async () => {
 
 <style module>
 .subscribe {
-  align-self: stretch;
-  position: relative;
-  line-height: 120%;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: clamp(2rem, 4vw, 3rem);
 }
 .firstName {
   align-self: stretch;
@@ -178,7 +176,6 @@ const submitForm = async () => {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: flex-start;
   padding: 12px 16px;
   transition: border-color 0.2s ease;
 }
@@ -194,15 +191,8 @@ const submitForm = async () => {
   min-height: 120px;
 }
 .inputField {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: 150%;
-  font-weight: 500;
-  color: #1f3a5f;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .inputField::placeholder {
   color: #7ec8e3;
@@ -287,17 +277,8 @@ const submitForm = async () => {
   font-size: 16px;
 }
 .subscription {
-  max-width: 50vw;
-  margin-left: auto;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding: 70px 99px 70px 106px;
-  box-sizing: border-box;
-  gap: 58px;
   text-align: left;
   font-size: 40px;
   color: #1f3a5f;
@@ -306,7 +287,12 @@ const submitForm = async () => {
 .row {
   display: flex;
   flex-direction: row;
-  gap: 32px;
   width: 100%;
+}
+
+
+@media (max-width: 760px) {
+  .subscription{
+  }
 }
 </style>
