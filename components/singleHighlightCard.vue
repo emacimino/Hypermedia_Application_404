@@ -4,14 +4,13 @@
     <img :class="$style.activityImage" alt="" :src="activityImage" />
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
 
+    <b :class="$style.craftItYourself">{{ resolvedTitle }}</b>
 
-    <b :class="$style.craftItYourself">{{ title }}</b>
-
-    <div :class="[$style.btn,hoverClass]"
+    <div :class="[$style.btn, hoverClass]"
          @mouseover="onHover"
          @mouseleave="onLeave"
          @click="onClick">
-      <b :class="$style.details">{{ buttonText }}</b>
+      <b :class="$style.details">{{ resolvedParagraph }}</b>
       <img :class="$style.arrow" alt="" src="/Arrow.svg" />
     </div>
 
@@ -20,18 +19,19 @@
       <div :class="$style.pushingItSafeArea" />
       <div :class="$style.safeArea" />
     </div>
-
-
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, watchEffect } from 'vue'
 import { useSupabaseClient } from '#imports'
+import { useLanguage } from '@/composables/useLanguage'
 
 const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 
 const props = defineProps({
-  name: String,
+  name: String, // used as key for Supabase match
   activityImage: String,
   title: {
     type: String,
@@ -43,6 +43,30 @@ const props = defineProps({
   }
 })
 
+const resolvedTitle = ref(props.title)
+const resolvedParagraph = ref(props.buttonText)
+
+function getColumnName(base: string): string {
+  return currentLang.value === 'it' ? `${base}_it` : base
+}
+
+watchEffect(async () => {
+  const titleCol = getColumnName('Title')
+  const paragraphCol = getColumnName('Paragraph')
+
+  const { data, error } = await supabase
+      .from('Presentation')
+      .select(`${titleCol}, ${paragraphCol}`)
+      .eq('Title', props.title)
+      .single()
+
+  if (!error && data) {
+    resolvedTitle.value = data[titleCol]
+    resolvedParagraph.value = data[paragraphCol]
+  }
+})
+
+// Hover + click logic
 const hoverClass = ref('')
 const style = useCssModule()
 
@@ -55,12 +79,10 @@ function onLeave() {
 }
 
 async function onClick() {
-  console.log('Click sul bottone')
-
   const { data, error } = await supabase
-      .from('Activities') // your table name
+      .from('Activities')
       .select('Id')
-      .eq('Title', props.name) // assuming the 'name' field in Supabase is 'Name'
+      .eq('Title', props.name)
       .single()
 
   if (error || !data) {
@@ -72,6 +94,8 @@ async function onClick() {
   navigateTo(`/activityPage/${activityId}`)
 }
 </script>
+
+
 <style  module>
 .property1default {
   position: relative;
