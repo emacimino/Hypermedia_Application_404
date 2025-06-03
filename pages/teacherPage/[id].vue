@@ -10,8 +10,20 @@
         :reverse="true"
     />
 
+
     <div v-if="cvList.length" class="mt-8">
-      <TeacherCVTable :cvs="cvList" class="m-2" />
+      <Presentation
+          :weekProgramming="true"
+          :subscribe="false"
+          :calendar="false"
+          :cv="true"
+          :Title="teacher.Title"
+          :currentDate="dayjs()"
+          :activeDate="dayjs()"
+          :selectedWeekdayIndex="0"
+          :dayEvents="teacher.value ?? []"
+          :experience="cvList"
+      />
     </div>
   </div>
   <div v-else>
@@ -26,6 +38,7 @@ import { useSupabaseClient } from '#imports'
 import TeacherCVTable from '~/components/CV_experience.vue'
 import { useLanguage } from '~/composables/useLanguage'
 import type {BreadcrumbItem} from "@nuxt/ui";
+import dayjs from "dayjs";
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
@@ -59,9 +72,12 @@ const fetchTeacher = async () => {
   if (isNaN(teacherId.value)) return
 
   const { data, error } = await supabase
-      .from('Teachers')
-      .select('*')
-      .eq('Id', teacherId.value)
+      .from("Teachers")
+      .select(`
+    *,
+    events:events ( * )
+  `)
+      .eq("Id", teacherId.value)
       .single()
 
   if (!data || error) {

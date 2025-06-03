@@ -24,10 +24,15 @@
     </div>
 
     <div :class="$style.content">
+
       <Subscription v-if="subscribe && Title" :Title="Title"/>
+
+      <CV_experience v-else-if="cv" :cvs="experience" class="m-2">
+
+      </CV_experience>
       <div v-else>
         <b :class="$style.title">{{ title }}</b>
-        <div :class="$style.paragraphs">
+        <div v-if="paragraphs" :class="$style.paragraphs">
           <p>{{ paragraphs }}</p>
         </div>
       </div>
@@ -40,7 +45,7 @@
 import {defineAsyncComponent} from "vue"
 import Subscription from "~/components/subscription.vue";
 import WeeklyView from "~/components/Calendar/WeeklyView.vue";
-
+import CV_experience from "~/components/CV_experience.vue"
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 
 const props = defineProps<{
@@ -51,11 +56,13 @@ const props = defineProps<{
   calendar?: boolean
   weekProgramming?: boolean
   subscribe?: boolean
+  cv?: boolean
   Title?: string
   currentDate?: any
   activeDate?: any
   selectedWeekdayIndex?: number | null
   dayEvents?: any[]
+  experience?: any[]
 }>()
 
 const activeDate = ref(props.activeDate ?? null)
