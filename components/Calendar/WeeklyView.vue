@@ -8,13 +8,14 @@ const props = defineProps<{
   currentDate?: any
   activeDate?: any
   selectedWeekdayIndex?: number | null
-  dayEvents?: any[]
+  dayEvents?: any[] | null
 }>()
 
 const emit = defineEmits<{
   (e: 'back'): void
   (e: 'navigate', dir: 'prev' | 'next'): void
   (e: 'update:activeDate', v: any): void
+  (e: 'update:selectedWeekdayIndex', v: number): void
   (e: 'day-click', v: any): void
 }>()
 
@@ -23,56 +24,57 @@ const supabase = useSupabaseClient()
 const internalDate = ref(props.currentDate ?? dayjs())
 const internalEvents = ref<any[]>([])
 
-// Se non è controllato, gestisco internamente la data selezionata
 const selectedLocalDate = ref((props.activeDate ?? internalDate.value).startOf('isoWeek'))
+const selectedLocalIndex = ref(props.selectedWeekdayIndex ?? ((selectedLocalDate.value.day() + 6) % 7))
 
-const internalActiveDate = computed(() =>
-    props.activeDate ?? selectedLocalDate.value
-)
-
-const internalWeekdayIndex = computed(() =>
-    props.selectedWeekdayIndex ?? ((internalActiveDate.value.day() + 6) % 7)
-)
+const internalActiveDate = computed(() => props.activeDate ?? selectedLocalDate.value)
+const internalWeekdayIndex = computed(() => props.selectedWeekdayIndex ?? selectedLocalIndex.value)
 
 const displayedEvents = computed(() => {
   const source = props.dayEvents ?? internalEvents.value
   const dateStr = internalActiveDate.value.format("YYYY-MM-DD")
   const weekdayStr = internalActiveDate.value.format("dddd")
 
-  return source.filter(event => {
-    return (event.Type === 'onetime' && event.Date === dateStr) ||
-        (event.Type === 'recurring' && event.Weekday === weekdayStr)
-  })
+  return source.filter(event =>
+      (event.Type === 'onetime' && event.Date === dateStr) ||
+      (event.Type === 'recurring' && event.Weekday === weekdayStr)
+  )
 })
 
 function selectDay(index: number) {
   const selected = (props.currentDate ?? internalDate.value).startOf('isoWeek').add(index, 'day')
-  console.log("🟦 Giorno selezionato:", selected.format("YYYY-MM-DD"))
-
   if (props.activeDate) {
     emit('update:activeDate', selected)
   } else {
     selectedLocalDate.value = selected
   }
 
+  if (props.selectedWeekdayIndex != null) {
+    emit('update:selectedWeekdayIndex', index)
+  } else {
+    selectedLocalIndex.value = index
+  }
+
   emit('day-click', selected)
 }
 
 function goToPreviousWeek() {
-  if (props.currentDate) emit('navigate', 'prev')
-  else {
+  if (props.currentDate) {
+    emit('navigate', 'prev')
+  } else {
     internalDate.value = internalDate.value.subtract(1, 'week')
-    fetchEvents()
-    selectedLocalDate.value = internalDate.value.startOf('isoWeek') // reset selezione al lunedì
+    selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    if (!props.dayEvents) fetchEvents()
   }
 }
 
 function goToNextWeek() {
-  if (props.currentDate) emit('navigate', 'next')
-  else {
+  if (props.currentDate) {
+    emit('navigate', 'next')
+  } else {
     internalDate.value = internalDate.value.add(1, 'week')
-    fetchEvents()
-    selectedLocalDate.value = internalDate.value.startOf('isoWeek') // reset selezione al lunedì
+    selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    if (!props.dayEvents) fetchEvents()
   }
 }
 
@@ -101,22 +103,18 @@ async function fetchEvents() {
   internalEvents.value = [...(onetimeEvents ?? []), ...(recurringEvents ?? [])]
 }
 
+// Solo se dayEvents non è fornito
 onMounted(() => {
-  if (!props.dayEvents) {
-    fetchEvents()
-  }
+  if (!props.dayEvents) fetchEvents()
 })
 
-watch(internalDate, () => {
-  if (!props.dayEvents) {
-    fetchEvents()
-  }
+watch(() => internalDate.value.format("YYYY-MM-DD"), () => {
+  if (!props.dayEvents) fetchEvents()
 })
-watch(selectedLocalDate, () => {
-  if (!props.dayEvents) {
-    fetchEvents()
-  }
+watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
+  if (!props.dayEvents) fetchEvents()
 })
+
 </script>
 
 <template>
@@ -153,6 +151,8 @@ watch(selectedLocalDate, () => {
 
   <!-- Eventi -->
   <div class="space-y-4">
+    <p>{{ paragraphs }}</p>
+
     <h2 class="text-lg font-semibold">
       Events for {{ internalActiveDate.format("dddd DD MMMM") }}
     </h2>

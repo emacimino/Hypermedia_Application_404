@@ -10,11 +10,17 @@
 
     <div v-else-if="calendar === false && weekProgramming === true" :class="$style.weekWrapper">
       <WeeklyView
-          :current-date="currentDate"
+          :current-date="props.currentDate"
           :active-date="activeDate"
           :selected-weekday-index="selectedWeekdayIndex"
-          :day-events="dayEvents"
+          :day-events="props.dayEvents ?? []"
+          @update:activeDate="val => activeDate = val"
+          @update:selectedWeekdayIndex="val => selectedWeekdayIndex = val"
       />
+
+
+
+
     </div>
 
     <div :class="$style.content">
@@ -36,7 +42,8 @@ import Subscription from "~/components/subscription.vue";
 import WeeklyView from "~/components/Calendar/WeeklyView.vue";
 
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
-defineProps<{
+
+const props = defineProps<{
   title?: string
   paragraphs?: string
   image?: string
@@ -50,6 +57,10 @@ defineProps<{
   selectedWeekdayIndex?: number | null
   dayEvents?: any[]
 }>()
+
+const activeDate = ref(props.activeDate ?? null)
+const selectedWeekdayIndex = ref(props.selectedWeekdayIndex ?? 0)
+
 
 </script>
 

@@ -17,8 +17,8 @@
         :Title="activity.Title"
         :currentDate="dayjs()"
         :activeDate="dayjs()"
-        :selectedWeekday-index="0"
-        :day-events="[]"
+        :selectedWeekdayIndex="0"
+        :dayEvents="activity.events ?? []"
     />
   </div>
   <div v-else>
@@ -39,14 +39,24 @@ const supabase = useSupabaseClient()
 const route = useRoute()
 
 
+interface EventItem {
+  Id: number
+  Course_id: number
+  Date?: string
+  Type?: string
+  Teacher_name?: string
+}
+
 interface RawActivity {
   Id: number
-  Title_it: string
   Title: string
-  LongDescription_it: string
+  Title_it: string
   LongDescription: string
+  LongDescription_it: string
   Image: string
+  events?: EventItem[]
 }
+
 
 const activity = ref<RawActivity | null>(null)
 const activityId = computed(() => Number(route.params.id))
@@ -55,9 +65,12 @@ const fetchActivity = async () => {
   if (isNaN(activityId.value)) return
 
   const { data, error } = await supabase
-      .from('Activities')
-      .select('*')
-      .eq('Id', activityId.value)
+      .from("Activities")
+      .select(`
+    *,
+    events:events ( * )
+  `)
+      .eq("Id", activityId.value)
       .single()
 
   if (!data || error) {
