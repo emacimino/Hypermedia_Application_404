@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.property1default">
     <img :class="$style.shapeIcon" alt="" src="/shape1.svg" />
-    <img :class="$style.activityImage" alt="" :src="activityImage" />
+    <img :class="$style.activityImage" alt="" :src="activityImagePath" />
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
 
     <b :class="$style.craftItYourself">{{ resolvedTitle }}</b>
@@ -11,7 +11,7 @@
          @mouseleave="onLeave"
          @click="onClick">
       <b :class="$style.details">{{ resolvedParagraph }}</b>
-      <img :class="$style.arrow" alt="" src="/Arrow.svg" />
+      <img :class="$style.arrow" alt="Arrow icon" src='/Arrow.svg' />
     </div>
 
     <div :class="$style.turnOffWhenSavingOut">
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref, onMounted, watchEffect } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '@/composables/useLanguage'
 
@@ -32,7 +32,6 @@ const { currentLang } = useLanguage()
 
 const props = defineProps({
   name: String, // used as key for Supabase match
-  activityImage: String,
   title: {
     type: String,
     default: 'Discover our activity!',
@@ -45,11 +44,13 @@ const props = defineProps({
 
 const resolvedTitle = ref(props.title)
 const resolvedParagraph = ref(props.buttonText)
+const activityImagePath = ref<string | null>(null)
 
 function getColumnName(base: string): string {
   return currentLang.value === 'it' ? `${base}_it` : base
 }
 
+// Caricamento testi localizzati
 watchEffect(async () => {
   const titleCol = getColumnName('Title')
   const paragraphCol = getColumnName('Paragraph')
@@ -63,6 +64,21 @@ watchEffect(async () => {
   if (!error && data) {
     resolvedTitle.value = data[titleCol]
     resolvedParagraph.value = data[paragraphCol]
+  }
+})
+
+// Caricamento immagine all'avvio
+onMounted(async () => {
+  const { data, error } = await supabase
+      .from('Activities')
+      .select('Image')
+      .eq('Title', props.name)
+      .single()
+
+  if (!error && data) {
+    activityImagePath.value = data.Image
+  } else {
+    console.error('Could not fetch activity image:', error)
   }
 })
 

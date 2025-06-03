@@ -13,25 +13,21 @@
 const cards = [
   {
     name:"Workshops",
-    activityImage: 'workshops.png',
     title: 'Craft it yourself!',
     buttonText: 'See our labs!'
   },
   {
     name:"Seminars",
-    activityImage: 'seminars.png',
     title: 'Try something new!',
     buttonText: 'Start now!'
   },
   {
     name:"Mindfulness",
-    activityImage: 'mindfulness.png',
     title: 'Find yourself!',
     buttonText: 'Go relax!'
   },
   {
     name:"Pilates",
-    activityImage: 'pilates.png',
     title: 'Open your horizons!',
     buttonText: 'Start practising!'
   }
