@@ -167,7 +167,7 @@ async function onClick() {
   align-items: center;
   justify-content: center;
   padding: 0.5vw 1.5vw; /* horizontal space around text */
-  background-color: #0077B6;
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 1vw;
   min-height: 2.5vw;
   height: 2.5vw; /* fixed vertical height */
@@ -193,7 +193,7 @@ async function onClick() {
 
 /* HOVER EFFECT */
 .btn:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #0077B6;
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
