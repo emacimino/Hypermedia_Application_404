@@ -66,7 +66,6 @@ watchEffect(async () => {
   }
 })
 
-// Hover + click logic
 const hoverClass = ref('')
 const style = useCssModule()
 
@@ -100,7 +99,7 @@ async function onClick() {
 .property1default {
   position: relative;
   width: 100%;
-  height: 45.57vw; /* 1739 / 1920 */
+  height: 45.57vw;
   background-color: #0769a2;
   overflow: hidden;
   display: flex;
@@ -114,8 +113,6 @@ async function onClick() {
   font-family: 'Rounded Mplus 1c Bold', serif;
   border-radius: 0.38vw;
 }
-
-/* SHAPE decorative dietro */
 .shapeIcon {
   position: absolute;
   top: 1.15%;
@@ -126,7 +123,6 @@ async function onClick() {
   opacity: 0.3;
   z-index: 0;
 }
-
 .shapeIcon1 {
   position: absolute;
   top: 63.49%;
@@ -137,8 +133,6 @@ async function onClick() {
   opacity: 0.3;
   z-index: 0;
 }
-
-/* CONTENUTO principale centrato */
 .activityImage {
   position: relative;
   z-index: 1;
@@ -148,9 +142,8 @@ async function onClick() {
   object-fit: cover;
   margin-bottom: 2vw;
 }
-
 .craftItYourself {
-  min-height: 3.5vw; /* Ensures same height across all cards */
+  min-height: 3.5vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,68 +154,59 @@ async function onClick() {
   line-height: 1.2;
   word-wrap: break-word;
 }
-
 .btn {
-  display: inline-flex; /* let button size match content */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5vw 1.5vw; /* horizontal space around text */
+  padding: 0.5vw 1.5vw;
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 1vw;
   min-height: 2.5vw;
-  height: 2.5vw; /* fixed vertical height */
+  height: 2.5vw;
   max-width: 100%;
-  white-space: nowrap; /* keep on one line */
+  white-space: nowrap;
   gap: 0.5vw;
   transition: transform 0.2s ease;
   cursor: pointer;
 }
-
+.btn:hover {
+  background-color: #0077B6;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #ffe5b4;
+}
+.btn:hover .arrow {
+  transform: translateX(5px);
+}
 .details {
   font-size: 1.2vw;
   line-height: 1;
-  white-space: nowrap; /* prevent wrap */
+  white-space: nowrap;
   padding: 0;
   margin: 0;
 }
-
 .arrow {
   width: 1.8vw;
   transition: transform 0.3s ease;
 }
-
-/* HOVER EFFECT */
-.btn:hover {
-  background-color: #0077B6;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.btn:hover .arrow {
-  transform: translateX(5px);
-}
-
-/* Sezioni non centrali (non toccate) */
 .turnOffWhenSavingOut {
   position: absolute;
   top: -0.26%;
-  left: 0px;
+  left: 0;
   width: 100%;
   height: 100%;
   display: none;
 }
-
 .grad {
   position: absolute;
   height: 100%;
   width: 100%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  left: 0%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0) 21.35%, rgba(0, 0, 0, 0) 86.41%, rgba(0, 0, 0, 0.15));
 }
-
 .pushingItSafeArea {
   position: absolute;
   height: 81.09%;
@@ -235,7 +219,6 @@ async function onClick() {
   border: 0.19vw solid #404df2;
   box-sizing: border-box;
 }
-
 .safeArea {
   position: absolute;
   height: 74.17%;

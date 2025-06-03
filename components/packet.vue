@@ -27,10 +27,6 @@ defineProps<{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.packet:hover {
-  transform: translateY(-0.30rem) scale(1.07);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
 .top {
   height: 60%;
   display: flex;
