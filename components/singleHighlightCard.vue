@@ -150,33 +150,40 @@ async function onClick() {
 }
 
 .craftItYourself {
-  position: relative;
-  z-index: 1;
-  font-size: 2.5vw;
-  line-height: 90%;
-  width: 83.7%;
-  margin-bottom: 1.5vw;
+  min-height: 3.5vw; /* Ensures same height across all cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.8vw;
+  margin-bottom: 1vw;
+  padding: 0 1vw;
+  line-height: 1.2;
+  word-wrap: break-word;
 }
 
 .btn {
-  position: relative;
-  z-index: 1;
-  display: flex;
+  display: inline-flex; /* let button size match content */
   align-items: center;
-  justify-content: space-between;
-  width: 40%;
-  padding: 0.8vw 1.5vw;
-  background-color: transparent;
-  border: 2px solid #ffe5b4;
-  border-radius: 0.4vw;
+  justify-content: center;
+  padding: 0.5vw 1.5vw; /* horizontal space around text */
+  background-color: #fff; /* or your button color */
+  border-radius: 1vw;
+  min-height: 2.5vw;
+  height: 2.5vw; /* fixed vertical height */
+  max-width: 100%;
+  white-space: nowrap; /* keep on one line */
+  gap: 0.5vw;
+  transition: transform 0.2s ease;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .details {
-  letter-spacing: 0.01em;
-  line-height: 120%;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
+  line-height: 1;
+  white-space: nowrap; /* prevent wrap */
+  padding: 0;
+  margin: 0;
 }
 
 .arrow {
