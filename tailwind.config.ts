@@ -9,7 +9,7 @@ const config: Config = {
         './app.vue',
         './plugins/**/*.{js,ts}',
         './nuxt.config.{js,ts}',
-        './node_modules/@nuxthq/ui/dist/**/*.{js,ts,vue}' // 👈 essenziale!
+        './node_modules/@nuxthq/ui/dist/**/*.{js,ts,vue}'
     ],
     theme: {
         extend: {
@@ -23,13 +23,14 @@ const config: Config = {
                     200: '#bfdbfe',
                     300: '#93c5fd',
                     400: '#60a5fa',
-                    500: '#1F3A5F', // il tuo colore personalizzato
+                    500: '#1F3A5F',
                     600: '#2563eb',
                     700: '#1d4ed8',
                     800: '#1e40af',
                     900: '#1e3a8a'
                 },
-                'bg-light': '#f4f4f4'
+                'bg-light': '#f4f4f4',
+                appBar: '#d0f0fd'
             },
             spacing: {
                 'app-gap': '2rem',

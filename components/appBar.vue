@@ -1,7 +1,6 @@
-<!-- /components/AppNavbar.vue -->
 <template>
   <nav
-      class="hidden md:flex w-full items-center justify-between bg-blue-100 px-6 py-1"
+      class="hidden md:flex w-full items-center justify-between px-6 py-1" style="background-color: #d0f0fd"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
     <div class="flex items-center gap-10">
@@ -22,7 +21,7 @@
   </nav>
 
   <nav
-      class="flex md:hidden w-full items-center justify-between bg-blue-100 px-4 py-3"
+      class="flex md:hidden w-full items-center justify-between px-4 py-3" style="background-color: #d0f0fd"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
 
@@ -61,7 +60,7 @@
   <!-- ***** MOBILE OVERLAY MENU ******************************************* -->
   <div
       v-if="isMenuOpen"
-      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-white transition-opacity duration-300"
+      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 transition-opacity duration-300" style="background-color: #d0f0fd"
   >
     <MenuItem
         v-for="item in items"
