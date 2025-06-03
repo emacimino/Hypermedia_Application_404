@@ -58,7 +58,7 @@ defineProps<{
   display: flex;
   flex-direction: row;
   padding: 2rem;
-  gap: 3rem;
+  gap: 2rem;
   font-family: Inter;
   align-items: center;
 }
@@ -66,7 +66,7 @@ defineProps<{
   flex-direction: row-reverse;
 }
 .imageWrapper {
-  width: 40%;
+  width: 50%;
 }
 .image {
   width: 100%;
@@ -75,7 +75,7 @@ defineProps<{
   border-radius: 12px;
 }
 .calendar {
-  width: 40%;
+  width: 100%;
 }
 .title {
   font-size: clamp(2rem, 4vw, 3rem);
