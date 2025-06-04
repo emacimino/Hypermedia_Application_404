@@ -121,16 +121,16 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 <template>
   <!-- Navigazione -->
   <div class="flex justify-between items-center my-4">
-    <button @click="goToPreviousWeek" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+    <button @click="goToPreviousWeek" class="px-3 py-1 bg-gray-200 text-bg-blue-500 rounded hover:bg-gray-300 ">
       ← Settimana precedente
     </button>
     <span class="font-semibold">
       {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
-      <button v-if="visualizeButton === true" @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-400 text-white rounded hover:bg-blue-600">
+      <button v-if="visualizeButton === true" @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-300 text-white rounded hover:bg-blue-400">
         <CalendarIcon class="h-5 w-5 inline" />
       </button>
     </span>
-    <button @click="goToNextWeek" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">
+    <button @click="goToNextWeek" class="px-3 py-1 text-bg-blue-500 bg-gray-200 rounded hover:bg-gray-300">
       Settimana successiva →
     </button>
   </div>
@@ -142,8 +142,8 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
         :key="index"
         @click="selectDay(index)"
         :class="[
-        'py-2 rounded font-semibold w-full',
-        index === internalWeekdayIndex ? 'bg-blue-400 text-white' : 'bg-gray-100 text-gray-700'
+        'py-2 rounded font-semibold w-full hover:scale-y-[1.05] hover:scale-x-[1.05] hover:bg-blue-300 active:scale-y-[1.05] active:scale-x-[1.05] active:bg-blue-300',
+        index === internalWeekdayIndex ? 'bg-blue-300 text-white' : 'bg-gray-100 text-bg-blue-500'
       ]"
     >
       {{ day }}
@@ -157,7 +157,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     <h2 class="text-lg font-semibold">
       Events for {{ internalActiveDate.format("dddd DD MMMM") }}
     </h2>
-    <div v-if="displayedEvents.length === 0" class="text-gray-500 italic">Nessun evento.</div>
+    <div v-if="displayedEvents.length === 0" class="text-bg-blue-500 italic">Nessun evento.</div>
 
     <div
         v-for="event in displayedEvents"
@@ -165,20 +165,20 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
         class="bg-white border rounded p-4 shadow"
     >
       <div class="flex justify-between items-center">
-        <h3 class="text-blue-500 font-semibold">{{ event.Title }}</h3>
+        <h3 class="text-blue-400 font-semibold">{{ event.Title }}</h3>
         <span class="text-sm text-gray-600">{{ event.Time }}</span>
       </div>
       <div class="mt-2 flex flex-col md:flex-row md:items-center md:gap-6">
         <nuxt-link
             :to="`/activityPage/${event.Course_Id}`"
-            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-400 rounded hover:bg-blue-500 active:bg-blue-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
+            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-300 rounded hover:bg-blue-400 active:bg-blue-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
         >
           Tipo Corso: <strong>{{ event.Course_title }}</strong>
         </nuxt-link>
 
         <nuxt-link
             :to="`/teacherPage/${event.Teacher_id}`"
-            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-400 rounded hover:bg-blue-500 active:bg-green-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
+            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-300 rounded hover:bg-blue-400 active:bg-green-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
         >
           Insegnante: <strong>{{ event.Teacher_name }}</strong>
         </nuxt-link>

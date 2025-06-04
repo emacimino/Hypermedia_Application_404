@@ -19,17 +19,19 @@ const config: Config = {
             colors: {
                 primary: {
                     50: '#eff6ff',
-                    100: '#dbeafe',
+                    100: '#d0f0fd',
                     200: '#bfdbfe',
-                    300: '#93c5fd',
-                    400: '#60a5fa',
+                    300: '#7EC8E3',
+                    400: '#0077B6',
                     500: '#1F3A5F',
                     600: '#2563eb',
                     700: '#1d4ed8',
                     800: '#1e40af',
                     900: '#1e3a8a'
+
                 },
                 'bg-light': '#f4f4f4',
+
                 appBar: '#d0f0fd'
             },
             spacing: {
