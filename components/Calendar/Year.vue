@@ -13,14 +13,21 @@ function modifyYear(v){
 </script>
 
 <template>
-<div class="bg-blue-400 p-3 rounded-t-md grid place-items-center">
-  <span class="flex items-center space-x-3 select-none text-gray-50">
-    <ChevronLeftIcon class="h-5 w-5 text-gray-800 cursor pointer" @click="()=>modifyYear(-1)"/>
-    <span>{{year}}</span>
-    <ChevronRightIcon class="h-5 w-5 text-gray-800 cursor pointer" @click="()=>modifyYear(1)"/>
-  </span>
-</div>
+  <div class="bg-blue-400 p-[1vw] rounded-t-md grid place-items-center">
+    <span class="flex items-center gap-[1.5vw] select-none text-gray-50 text-[clamp(16px,1.2vw,24px)]">
+      <ChevronLeftIcon
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px]"
+          @click="() => modifyYear(-1)"
+      />
+      <span>{{ year }}</span>
+      <ChevronRightIcon
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px]"
+          @click="() => modifyYear(1)"
+      />
+    </span>
+  </div>
 </template>
+
 
 <style scoped>
 
