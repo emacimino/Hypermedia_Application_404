@@ -145,7 +145,9 @@ onMounted(async () => {
     font-size: 1rem;
   }
   .map{
-    min-width: 100%
+    min-width: 100%;
+    position: relative;
+    z-index: 1;
   }
 }
 </style>

@@ -61,7 +61,7 @@ onUnmounted(() => {
           <transition name="fade">
             <div v-if="index === currentSliderIndex" class="absolute inset-0">
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md">
-                <h2 class="absolute bottom-4 left-4 z-[100] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
+                <h2 class="absolute bottom-4 left-4 z-[40] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
                   {{ image.Title }}
                 </h2>
 
@@ -95,14 +95,5 @@ onUnmounted(() => {
 
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s, transform 1s;
-}
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateX(0);
-}
 </style>
