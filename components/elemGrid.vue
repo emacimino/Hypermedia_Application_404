@@ -26,18 +26,17 @@ const props = defineProps<{
 
 
 <style module>
-/*@import "/assets/main.css";*/
-
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
   gap: var(--gap);
   padding: var(--padding);
 }
-.card img {
-  width: 100%;
-  height: var(--img-height);
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
+
+
+@media (max-width: 760px) {
+  .courseGrid {
+    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+  }
 }
 </style>

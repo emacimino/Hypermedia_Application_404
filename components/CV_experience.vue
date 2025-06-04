@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-lg font-semibold">
+    <h2 style="font-size: 1.75vw; font-weight: 600;">
       Experiences
     </h2>
     <div v-if="cvs.length === 0" class="text-gray-500 italic">No previous experiebce.</div>
