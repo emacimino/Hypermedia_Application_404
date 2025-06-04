@@ -84,12 +84,11 @@ function handleNavigate(dir: 'prev' | 'next') {
 }
 </script>
 
-
 <style module>
 .property_default {
   display: flex;
   flex-direction: row;
-  padding: 2rem;
+  padding: 1.75vw;
   gap: 2rem;
   font-family: Inter;
   align-items: center;
@@ -110,10 +109,10 @@ function handleNavigate(dir: 'prev' | 'next') {
   width: 100%;
 }
 .title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: 3.5vw;
 }
 .paragraphs {
-  font-size: clamp(1rem, 2vw, 2rem);
+  font-size: 2vw;
 }
 .weekWrapper {
   width: 100%;
@@ -127,8 +126,9 @@ function handleNavigate(dir: 'prev' | 'next') {
 @media (max-width: 760px) {
   .property_default {
     flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+    padding-bottom: 2vw;
+    padding-top: 2vw;
+    gap: 1vw;
   }
   .reversed {
     flex-direction: column;
@@ -145,10 +145,10 @@ function handleNavigate(dir: 'prev' | 'next') {
     order: 1;
   }
   .title {
-    font-size: 1.5rem;
+    font-size: 5.5vw;
   }
   .paragraphs {
-    font-size: 1rem;
+    font-size: 3.75vw;
   }
 }
 </style>
