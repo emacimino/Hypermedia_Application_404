@@ -88,8 +88,8 @@ function handleNavigate(dir: 'prev' | 'next') {
 .property_default {
   display: flex;
   flex-direction: row;
-  padding: 1.75vw;
-  gap: 2rem;
+  padding: 1.5vw;
+  gap: 1.75vw;
   font-family: Inter;
   align-items: center;
 }

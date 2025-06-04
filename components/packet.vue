@@ -53,14 +53,14 @@ defineProps<{
 
 @media (max-width: 760px) {
   .packet {
-    width: 8rem;
-    height: 5rem;
+    width: 30vw;
+    height: 22.5vw;
   }
   .price {
-    font-size: 1.75rem;
+    font-size: 8vw;
   }
   .type {
-    font-size: 1rem;
+    font-size: 4vw;
   }
 }
 
