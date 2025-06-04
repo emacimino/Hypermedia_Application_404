@@ -123,13 +123,6 @@ watch(activity, (newVal) => {
 
 <style module>
 .bread{
-  padding: 1rem 0 0 2rem
-}
-
-
-@media (max-width: 760px) {
-  .bread{
-    padding: 0.5rem 0 0 1rem
-  }
+  padding: 1vw 0 0 1.5vw
 }
 </style>

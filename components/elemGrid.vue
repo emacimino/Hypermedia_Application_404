@@ -26,8 +26,6 @@ const props = defineProps<{
 
 
 <style module>
-/*@import "/assets/main.css";*/
-
 .courseGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
@@ -40,4 +38,22 @@ const props = defineProps<{
   object-fit: cover;
   aspect-ratio: 4 / 3;
 }
+
+/*.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+  gap: 2.5vw;
+  padding: 1.5vw;
+}
+
+
+@media (max-width: 760px) {
+  .courseGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
+    gap: 3vw;
+    padding: 2vw;
+    place-items: center;
+  }
+}*/
 </style>

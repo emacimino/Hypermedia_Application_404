@@ -1,6 +1,6 @@
 <template>
   <nav
-      class="hidden md:flex w-full items-center justify-between px-6 py-1 bg-blue-100 rounded-md"
+      class="hidden md:flex w-full items-center justify-between px-6 py-1 rounded-md" style="background-color: #d0f0fd"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
     <div class="flex items-center md:gap-10 gap-4">

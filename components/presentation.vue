@@ -109,10 +109,10 @@ function handleNavigate(dir: 'prev' | 'next') {
   width: 100%;
 }
 .title {
-  font-size: 3.5vw;
+  font-size: 2.5vw;
 }
 .paragraphs {
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 .weekWrapper {
   width: 100%;

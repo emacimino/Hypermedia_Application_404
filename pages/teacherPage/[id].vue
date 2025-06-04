@@ -34,7 +34,6 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
-import TeacherCVTable from '~/components/CV_experience.vue'
 import { useLanguage } from '~/composables/useLanguage'
 import type {BreadcrumbItem} from "@nuxt/ui";
 import dayjs from "dayjs";
@@ -150,13 +149,6 @@ watch(teacher, (newVal) => {
 
 <style module>
 .bread{
-  padding: 1rem 0 0 2rem
-}
-
-
-@media (max-width: 760px) {
-  .bread{
-    padding: 0.5rem 0 0 1rem
-  }
+  padding: 1vw 0 0 1.5vw
 }
 </style>
