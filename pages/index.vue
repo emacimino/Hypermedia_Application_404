@@ -107,19 +107,15 @@ watch(currentLang, fetchPresentationContent)
 .courseGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12vw, 1fr));
-  gap: 1.75vw;
-  padding: 1.5vw;
+  gap: var(--gap);
+  padding: var(--padding);
   place-items: center;
 }
 
 
 @media (max-width: 760px) {
   .courseGrid {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
-    gap: 2.5vw;
-    padding: 2vw;
-    place-items: center;
   }
 }
 </style>

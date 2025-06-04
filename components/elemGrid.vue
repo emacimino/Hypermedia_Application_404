@@ -28,32 +28,15 @@ const props = defineProps<{
 <style module>
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
   gap: var(--gap);
   padding: var(--padding);
-}
-.card img {
-  width: 100%;
-  height: var(--img-height);
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
-}
-
-/*.courseGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
-  gap: 2.5vw;
-  padding: 1.5vw;
 }
 
 
 @media (max-width: 760px) {
   .courseGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
-    gap: 3vw;
-    padding: 2vw;
-    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
   }
-}*/
+}
 </style>
