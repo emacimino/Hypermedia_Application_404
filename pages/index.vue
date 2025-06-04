@@ -115,9 +115,9 @@ watch(currentLang, fetchPresentationContent)
 @media (max-width: 760px) {
   .courseGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
-    gap: var(--gap);
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
+    gap:2vw;
+    padding: 2vw;
     place-items: center;
   }
 }
