@@ -10,7 +10,6 @@
         :reverse="true"
     />
 
-
     <div v-if="cvList.length" class="mt-8">
       <Presentation
           :weekProgramming="true"
@@ -21,7 +20,7 @@
           :currentDate="dayjs()"
           :activeDate="dayjs()"
           :selectedWeekdayIndex="0"
-          :dayEvents="teacher.value ?? []"
+          :dayEvents="teacher.events ?? []"
           :experience="cvList"
       />
     </div>

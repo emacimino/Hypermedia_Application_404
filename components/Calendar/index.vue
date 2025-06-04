@@ -32,7 +32,7 @@ import { defineAsyncComponent, ref, reactive, computed, watch, onMounted } from 
 import isoWeek from 'dayjs/plugin/isoWeek'
 import { useSupabaseClient } from "#imports"
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
-
+//to update vercel
 dayjs.extend(isoWeek)
 
 const Year = defineAsyncComponent(() => import("~/components/Calendar/Year.vue"))
