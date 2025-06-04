@@ -1,6 +1,6 @@
 <template>
 
-  <h1 :class="$style.pageTitle">🔥 Highlights of the Week</h1>
+  <h1 :class="$style.Title">🔥 Highlights of the Week</h1>
 
   <div :class="$style.gridContainer">
     <single-highlight-card
@@ -45,14 +45,13 @@ const cards = [
   gap: 32px;
   padding: 32px;
 }
-.pageTitle {
-  font-size: 6vw;
+.Title {
+  font-size: 5vw;
+  padding: 2vw;
   font-weight: bold;
   font-family: 'Rounded Mplus 1c Bold', serif;
   color:#0769a2;
   text-align: center;
-  margin-top: 3vw;
-  margin-bottom: 2vw;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 </style>

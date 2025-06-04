@@ -105,9 +105,9 @@ watch(currentLang, fetchPresentationContent)
 <style module>
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  gap: var(--gap);
-  padding: var(--padding);
+  grid-template-columns: repeat(auto-fit, minmax(12vw, 1fr));
+  gap: 2vw;
+  padding: 2vw;
   place-items: center;
 }
 

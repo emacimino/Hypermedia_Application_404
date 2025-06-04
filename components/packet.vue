@@ -19,10 +19,10 @@ defineProps<{
 
 <style module>
 .packet {
-  border: 2px solid;
+  border: 0.15vw solid;
   border-radius: 12px;
-  width: clamp(11rem, 4vw, 15rem);
-  height: clamp(7rem, 4vw, 9rem);
+  width: 12vw;
+  height: 9vw;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -34,7 +34,7 @@ defineProps<{
   align-items: center;
 }
 .price {
-  font-size: 3rem;
+  font-size: 3vw;
   font-weight: bold;
   color: #1f3a5f;
 }
@@ -43,7 +43,7 @@ defineProps<{
   background-color: white;
 }
 .type {
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   display: flex;
   justify-content: center;
   align-items: center;

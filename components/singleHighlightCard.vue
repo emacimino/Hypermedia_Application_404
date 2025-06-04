@@ -115,7 +115,7 @@ async function onClick() {
 .property1default {
   position: relative;
   width: 100%;
-  height: 45.57vw;
+  height: 35vw;
   background-color: #0769a2;
   overflow: hidden;
   display: flex;
