@@ -153,7 +153,7 @@ async function onClick() {
   position: relative;
   z-index: 1;
   width: 68.89%;
-  height: auto;
+  height: 20vw;
   border-radius: 2%;
   object-fit: cover;
   margin-bottom: 2vw;
