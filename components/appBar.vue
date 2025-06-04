@@ -1,9 +1,12 @@
 <template>
+  <!-- DESKTOP NAVIGATION -->
   <nav
-      class="hidden md:flex w-full items-center justify-between px-6 py-1 bg-blue-100 rounded-md"
+      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
+      style="padding: 0.5vw 3vw"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
-    <div class="flex items-center md:gap-10 gap-4">
+
+    <div class="flex items-center" style="gap: 2vw">
       <MenuItem
           v-for="item in items"
           :key="item.to"
@@ -13,61 +16,69 @@
     </div>
 
     <img
-        class="w-17 h-17 object-cover cursor-pointer"
+        class="object-cover cursor-pointer"
+        style="width: 4vw; height: 4vw; min-width: 32px; min-height: 32px"
         :src="currentLang === 'en' ? '/LanguageEN.png' : '/LanguageIT.png'"
         alt="Switch language"
         @click="toggleLanguage"
     />
   </nav>
 
+  <!-- MOBILE NAVIGATION -->
   <nav
-      class="flex md:hidden w-full items-center justify-between px-4 py-3" style="background-color: #d0f0fd"
+      class="flex md:hidden w-full items-center justify-between"
+      style="background-color: #d0f0fd; padding: 3vw 4vw"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
 
-    <!-- HAMBURGER -->
+    <!-- HAMBURGER BUTTON -->
     <button
         type="button"
         @click="toggleMenu"
-        class="relative z-50 flex flex-col justify-between w-8 h-6 cursor-pointer focus:outline-none"
+        class="relative z-50 flex flex-col justify-between cursor-pointer focus:outline-none"
+        style="width: 8vw; height: 6vw; min-width: 32px; min-height: 24px"
         aria-label="Toggle navigation"
         :aria-expanded="isMenuOpen.toString()"
     >
-      <!-- line 1 -->
+      <!-- Line 1 -->
       <span
           :class="[
-          'block h-0.5 w-full bg-gray-800 transition-transform duration-300',
-          isMenuOpen ? 'translate-y-[7px] rotate-45' : ''
+          'block w-full bg-gray-800 transition-transform duration-300',
+          isMenuOpen ? 'translate-y-[1.4vw] rotate-45' : '',
         ]"
+          style="height: 0.4vw; min-height: 2px"
       />
-      <!-- line 2 -->
+      <!-- Line 2 -->
       <span
           :class="[
-          'block h-0.5 w-full bg-gray-800 transition-opacity  duration-300',
-          isMenuOpen ? 'opacity-0' : 'opacity-100'
+          'block w-full bg-gray-800 transition-opacity duration-300',
+          isMenuOpen ? 'opacity-0' : 'opacity-100',
         ]"
+          style="height: 0.4vw; min-height: 2px"
       />
-      <!-- line 3 -->
+      <!-- Line 3 -->
       <span
           :class="[
-          'block h-0.5 w-full bg-gray-800 transition-transform duration-300',
-          isMenuOpen ? '-translate-y-[7px] -rotate-45' : ''
+          'block w-full bg-gray-800 transition-transform duration-300',
+          isMenuOpen ? '-translate-y-[1.4vw] -rotate-45' : '',
         ]"
+          style="height: 0.4vw; min-height: 2px"
       />
     </button>
   </nav>
 
-  <!-- ***** MOBILE OVERLAY MENU ******************************************* -->
+  <!-- MOBILE MENU OVERLAY -->
   <div
       v-if="isMenuOpen"
-      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 transition-opacity duration-300" style="background-color: #d0f0fd"
+      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300"
+      style="background-color: #d0f0fd"
   >
     <MenuItem
         v-for="item in items"
         :key="item.to"
         :label="item.label"
         :to="item.to"
-        class="text-2xl font-medium hover:underline"
+        class="text-[5vw] font-medium hover:underline text-center"
         @click="closeMenu"
     />
   </div>
