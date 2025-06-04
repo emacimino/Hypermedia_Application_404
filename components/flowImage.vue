@@ -58,6 +58,12 @@ onUnmounted(() => {
 <template>
   <div >
     <div class="flex relative w-full h-full">
+      <div class="w-full overflow-visible z-[25] flex justify-center items-center space-x-2 space-y-2">
+      <h1 class="font-bold text-xl sm:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap
+             bg-blue-300/50 px-4 py-2 rounded shadow-2xl border border-white/30
+             backdrop-blur-sm text-[#1F3A5F] transition-all duration-300 ease-in-out
+             hover:scale-105 hover:shadow-blue-500/50">White Lotus</h1>
+      </div>
       <div class="flex mx-auto justify-center items-center w-full h-full px-4">
         <template v-for="(image, index) in images" :key="index">
           <transition name="fade">
@@ -65,7 +71,7 @@ onUnmounted(() => {
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md">
                 <nuxt-link :to="`/activityPage/${image.Course_Id}`" class="linkWrapper">
 
-                <h2 class="absolute bottom-4 left-4 z-[20] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
+                <h2 class="absolute bottom-4 left-4 z-[20] text-[#1F3A5F] text-4xl sm:text-5xl font-bold bg-blue-300/50 px-4 py-2 rounded">
                   {{ image.Title }}
                 </h2>
                 <img

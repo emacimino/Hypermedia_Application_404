@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.barraFooter">
+  <div class = "bg-blue-100" :class="$style.barraFooter">
     <div :class="$style.whiteLotusCenter">White Lotus Center</div>
     <div :class="$style.socialIcon">
       <Icon name="mdi:facebook" :class="$style.responsiveIcon" />
@@ -13,7 +13,6 @@
 .barraFooter {
   width: 100%;
   height: 7vw;
-  background-color: #d0f0fd;
   padding-left: 5vw;
   box-sizing: border-box;
 }

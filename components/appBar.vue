@@ -1,7 +1,7 @@
 <template>
   <!-- DESKTOP NAVIGATION -->
   <nav
-      class="hidden md:flex w-full items-center justify-between bg-[#d0f0fd] rounded-md"
+      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
       style="padding: 0.5vw 3vw"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />

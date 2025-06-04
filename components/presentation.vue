@@ -92,6 +92,8 @@ function handleNavigate(dir: 'prev' | 'next') {
   gap: 1.75vw;
   font-family: Inter;
   align-items: center;
+  color: #1F3A5F;
+
 }
 .reversed {
   flex-direction: row-reverse;
