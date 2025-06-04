@@ -60,6 +60,7 @@ interface PresentationContent {
 interface ImageEntry {
   Title: string
   ImageUrl: string
+  Course_Id: number
 }
 
 const images = ref<ImageEntry[]>([])
@@ -67,7 +68,7 @@ const homePageContent = ref<PresentationContent | null>(null)
 const homePageContent2 = ref<PresentationContent | null>(null)
 
 const fetchImages = async () => {
-  const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl')
+  const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl,Course_Id')
   if (error) console.error('Errore slideshow:', error)
   images.value = data ?? []
 }

@@ -126,7 +126,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </button>
     <span class="font-semibold">
       {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
-      <button v-if="visualizeButton === true" @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+      <button v-if="visualizeButton === true" @click="resetToCalendar" class="ml-4 px-3 py-1 bg-blue-400 text-white rounded hover:bg-blue-600">
         <CalendarIcon class="h-5 w-5 inline" />
       </button>
     </span>
@@ -143,7 +143,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
         @click="selectDay(index)"
         :class="[
         'py-2 rounded font-semibold w-full',
-        index === internalWeekdayIndex ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-700'
+        index === internalWeekdayIndex ? 'bg-blue-400 text-white' : 'bg-gray-100 text-gray-700'
       ]"
     >
       {{ day }}
@@ -165,13 +165,24 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
         class="bg-white border rounded p-4 shadow"
     >
       <div class="flex justify-between items-center">
-        <h3 class="text-blue-700 font-semibold">{{ event.Title }}</h3>
+        <h3 class="text-blue-500 font-semibold">{{ event.Title }}</h3>
         <span class="text-sm text-gray-600">{{ event.Time }}</span>
       </div>
-      <p class="text-sm text-gray-700 mt-1">
-        Corso: <strong>{{ event.Course_title }}</strong><br />
-        Insegnante: <strong>{{ event.Teacher_name }}</strong>
-      </p>
+      <div class="mt-2 flex flex-col md:flex-row md:items-center md:gap-6">
+        <nuxt-link
+            :to="`/activityPage/${event.Course_Id}`"
+            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-400 rounded hover:bg-blue-500 active:bg-blue-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
+        >
+          Tipo Corso: <strong>{{ event.Course_title }}</strong>
+        </nuxt-link>
+
+        <nuxt-link
+            :to="`/teacherPage/${event.Teacher_id}`"
+            class="inline-block px-4 py-2 mt-2 md:mt-0 text-white bg-blue-400 rounded hover:bg-blue-500 active:bg-green-800 transition-transform duration-200 hover:scale-y-[1.05] hover:scale-x-[1.05] active:scale-y-[1.05] active:scale-x-[1.05]"
+        >
+          Insegnante: <strong>{{ event.Teacher_name }}</strong>
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>

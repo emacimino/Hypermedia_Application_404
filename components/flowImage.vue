@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, onUnmounted, computed} from 'vue';
 import { defineProps } from 'vue';
 
 // Props
@@ -49,6 +49,8 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(intervalId);
 });
+
+
 </script>
 
 
@@ -61,15 +63,17 @@ onUnmounted(() => {
           <transition name="fade">
             <div v-if="index === currentSliderIndex" class="absolute inset-0">
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md">
-                <h2 class="absolute bottom-4 left-4 z-[40] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
+                <nuxt-link :to="`/activityPage/${image.Course_Id}`" class="linkWrapper">
+
+                <h2 class="absolute bottom-4 left-4 z-[20] text-white text-4xl sm:text-5xl font-bold bg-black/50 px-4 py-2 rounded">
                   {{ image.Title }}
                 </h2>
-
                 <img
                     :src="image.ImageUrl"
                     :alt="image.Title"
                     class="w-full h-full object-cover block"
                 />
+                </nuxt-link>
               </div>
             </div>
           </transition>
@@ -95,5 +99,8 @@ onUnmounted(() => {
 
 
 <style>
-
+:global(.linkWrapper) {
+  text-decoration: none;
+  color: inherit;
+}
 </style>
