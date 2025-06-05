@@ -1,21 +1,23 @@
 <template>
   <div class="w-full aspect-video max-h-[80vh]">
-  <flow-image :images="images" />
+    <flow-image :images="images" />
   </div>
+
   <div class="flex flex-row">
-
-  <Presentation v-if="homePageContent"
-      :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
-      :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
-      :image="homePageContent.Image"
-      :reverse="true"
-  />
-
-  <div v-else>
-    <p>Loading...</p>
+    <Presentation
+        v-if="homePageContent"
+        :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
+        :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
+        :image="homePageContent.Image"
+        :reverse="true"
+    />
+    <div v-else>
+      <p>Loading...</p>
+    </div>
   </div>
-  </div>
-  <Presentation v-if="homePageContent2"
+
+  <Presentation
+      v-if="homePageContent2"
       :title="currentLang === 'it' ? homePageContent2.Title_it : homePageContent2.Title"
       :paragraphs="currentLang === 'it' ? homePageContent2.Paragraph_it : homePageContent2.Paragraph"
       :reverse="false"
@@ -25,19 +27,18 @@
     <p>Loading...</p>
   </div>
 
+
   <div :class="$style.courseGrid">
-    <Packet price="€50" type="Monthly" color="#d0f4c5" />
-    <Packet price="€130" type="Quarterly" color="#a9e5a3" />
-    <Packet price="€240" type="Semiannual" color="#00c853" />
-    <Packet price="€450" type="Annual" color="#1b5e20" />
-    <Packet price="€30" type="Single lesson" color="#ffcdd2" />
-    <Packet price="€50" type="5 lessons" color="#ef9a9a" />
-    <Packet price="€85" type="10 lessons" color="#f44336" />
-    <Packet price="€150" type="20 lessons" color="#b71c1c" />
-    <Packet price="€30" type="Private lesson" color="#9c27b0" />
-    <Packet price="€20" type="Membership" color="#2196f3" />
+    <Packet
+        v-for="packet in packets"
+        :id="packet.id"
+        :price="packet.price"
+        :duration="packet.duration"
+        :color="packet.color"
+    />
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
@@ -49,23 +50,9 @@ import Packet from '../components/packet.vue'
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 
-interface PresentationContent {
-  Title: string
-  Paragraph: string
-  Paragraph_it: string
-  Image: string
-  Title_it: string
-}
-
-interface ImageEntry {
-  Title: string
-  ImageUrl: string
-  Course_Id: number
-}
-
-const images = ref<ImageEntry[]>([])
-const homePageContent = ref<PresentationContent | null>(null)
-const homePageContent2 = ref<PresentationContent | null>(null)
+const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
+const homePageContent = ref<any>(null)
+const homePageContent2 = ref<any>(null)
 
 const fetchImages = async () => {
   const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl,Course_Id')
@@ -101,7 +88,39 @@ onMounted(() => {
 })
 
 watch(currentLang, fetchPresentationContent)
+
+const packets = ref<Array<{ id: string; price: string; duration: string; color: string }>>([])
+
+const fetchPackets = async () => {
+  const lang = currentLang.value
+
+  const { data, error } = await supabase
+      .from('Packets')
+      .select('Id, Price, Duration, Duration_it, Color')
+
+  if (!error && data) {
+    console.log('🎯 PACKETS FETCHED:', data)
+
+    packets.value = (data as Array<{
+      Id: string
+      Price: string
+      Duration: string
+      Duration_it: string
+      Color: string
+    }>).map(p => ({
+      id: String(p.Id),
+      price: p.Price,
+      duration: lang === 'it' ? p.Duration_it : p.Duration,
+      color: p.Color
+    }))
+  } else {
+    console.error('⚠️ Supabase error:', error)
+  }
+}
+
+watch(currentLang, fetchPackets, { immediate: true })
 </script>
+
 
 <style module>
 .courseGrid {
@@ -111,7 +130,6 @@ watch(currentLang, fetchPresentationContent)
   padding: var(--padding);
   place-items: center;
 }
-
 
 @media (max-width: 760px) {
   .courseGrid {

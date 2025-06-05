@@ -4,15 +4,23 @@
       <div :class="$style.price">{{ price }}</div>
     </div>
     <div :class="$style.bottom">
-      <div :class="$style.type">{{ type }}</div>
+      <div :class="$style.type">{{ duration }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useSupabaseClient } from '#imports'
+import { useLanguage } from '~/composables/useLanguage'
+
+
+const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 defineProps<{
+  id: string
   price: string
-  type: string
+  duration: string
   color: string
 }>()
 </script>
