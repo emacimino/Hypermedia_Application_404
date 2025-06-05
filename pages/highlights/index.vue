@@ -1,6 +1,6 @@
 <template>
 
-  <h1 :class="$style.Title">🔥 Highlights of the Week</h1>
+  <h1 :class="$style.Title">{{ title }}</h1>
 
   <div :class="$style.gridContainer">
     <single-highlight-card
@@ -12,7 +12,41 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useSupabaseClient } from '#imports'
+import { useLanguage } from '~/composables/useLanguage'
+
+type Presentation = {
+  Title: string
+  Title_it: string
+}
+
+const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
+
+const title = ref('')
+
+const fetchTitle = async () => {
+  const { data, error } = await supabase
+      .from('Presentation')
+      .select('Title, Title_it')
+      .eq('Id', 14)
+      .single<Presentation>() // 👈 Add the generic type here
+
+  if (error || !data) {
+    console.error('Error fetching title:', error?.message)
+    return
+  }
+
+  title.value = currentLang.value === 'it'
+      ? data.Title_it ?? data.Title
+      : data.Title ?? data.Title_it
+}
+
+// Fetch immediately and on language change
+watch(currentLang, fetchTitle, { immediate: true })
+
 const cards = [
   {
     name:"Workshops",

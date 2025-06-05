@@ -10,6 +10,13 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useSupabaseClient } from '#imports'
+import { useLanguage } from '~/composables/useLanguage'
+
+
+const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 defineProps<{
   id: string
   price: string
