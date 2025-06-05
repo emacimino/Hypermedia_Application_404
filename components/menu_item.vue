@@ -24,7 +24,7 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 
-  font-size: clamp(1rem, 2.2vw, 2rem);     /* scala dinamica */
+  font-size: clamp(1rem, 2.2vw, 6rem);     /* scala dinamica */
   height: clamp(40px, 6vw, 60px);          /* altezza fluida */
   line-height: clamp(40px, 6vw, 60px);     /* coerente con altezza */
 

@@ -48,7 +48,11 @@ const config: Config = {
             fontSize: {
                 base: '1rem',
                 title: '1.25rem'
+            },
+            fontFamily: {
+                playfair: ['"Playfair Display"', 'serif'],
             }
+
         }
     },
     plugins: []
