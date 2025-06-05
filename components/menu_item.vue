@@ -13,34 +13,29 @@ defineProps<{
 
 <style scoped>
 .menu-item {
-  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   color: #1F3A5F;
-  font-size: 1.5rem;
   font-family: 'Playfair Display', serif;
   font-weight: 400;
-  line-height: 50px;
   word-wrap: break-word;
   text-align: center;
   text-decoration: none;
-}
 
-@media (max-width: 1024px) {
-  .menu-item {
-    font-size: 1.2rem;
-    height: 42px;
-    line-height: 42px;
-  }
+  font-size: clamp(1rem, 2.2vw, 2rem);     /* scala dinamica */
+  height: clamp(40px, 6vw, 60px);          /* altezza fluida */
+  line-height: clamp(40px, 6vw, 60px);     /* coerente con altezza */
+
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 .menu-item:hover {
-  text-decoration: underline !important;
   cursor: pointer;
-  transform: scale(1.2) !important;
-  transition: transform 0.15s ease;
+  transform: scale(1.08);
+  text-shadow: 0 0 4px rgba(31, 58, 95, 0.4);
 }
+
 
 </style>
