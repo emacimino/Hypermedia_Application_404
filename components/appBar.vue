@@ -26,8 +26,8 @@
 
   <!-- MOBILE NAVIGATION -->
   <nav
-      class="flex md:hidden w-full items-center justify-between"
-      style="background-color: #d0f0fd; padding: 3vw 4vw"
+      class="flex md:hidden w-full items-center justify-between bg-blue-100"
+      style=" padding: 3vw 4vw"
   >
     <ClickableImage to="/" src="Logo.png" title="Go to home" />
 
@@ -70,8 +70,7 @@
   <!-- MOBILE MENU OVERLAY -->
   <div
       v-if="isMenuOpen"
-      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300"
-      style="background-color: #d0f0fd"
+      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300 bg-blue-100"
   >
     <MenuItem
         v-for="item in items"
