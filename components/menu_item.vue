@@ -24,17 +24,17 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 
-  font-size: clamp(1rem, 2.2vw, 6rem);     /* scala dinamica */
-  height: clamp(40px, 6vw, 60px);          /* altezza fluida */
-  line-height: clamp(40px, 6vw, 60px);     /* coerente con altezza */
+  font-size: clamp(1rem, 2.2vw, 6rem);
+  height: clamp(40px, 6vw, 60px);
+  line-height: clamp(40px, 6vw, 60px);
 
   transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 .menu-item:hover {
   cursor: pointer;
-  transform: scale(1.08);
-  text-shadow: 0 0 4px rgba(31, 58, 95, 0.4);
+  transform: scale(1.15);
+  text-shadow: 0 0 10px rgba(31, 58, 95, 0.5);
 }
 
 

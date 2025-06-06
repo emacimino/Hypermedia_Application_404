@@ -2,7 +2,7 @@
   <!-- DESKTOP NAVIGATION -->
   <nav
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
-      style="padding: 0.5vw 3vw"
+      style="padding: 0 2.75vw"
   >
 <div  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
 >
@@ -33,7 +33,7 @@
   <!-- MOBILE NAVIGATION -->
   <nav
       class="flex md:hidden w-full items-center justify-between bg-blue-100"
-      style=" padding: 3vw 4vw"
+      style=" padding: 1vw 4vw"
   >
     <div  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
     >

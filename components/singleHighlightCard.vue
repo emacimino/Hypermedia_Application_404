@@ -31,7 +31,7 @@ const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 
 const props = defineProps({
-  name: String, // used as key for Supabase match
+  name: String,
   title: {
     type: String,
     default: 'Discover our activity!',
@@ -50,7 +50,6 @@ function getColumnName(base: string): string {
   return currentLang.value === 'it' ? `${base}_it` : base
 }
 
-// Caricamento testi localizzati
 watchEffect(async () => {
   const titleCol = getColumnName('Title')
   const paragraphCol = getColumnName('Paragraph')
@@ -67,7 +66,6 @@ watchEffect(async () => {
   }
 })
 
-// Caricamento immagine all'avvio
 onMounted(async () => {
   const { data, error } = await supabase
       .from('Activities')
@@ -192,7 +190,7 @@ async function onClick() {
   border: 2px solid #ffe5b4;
 }
 .btn:hover .arrow {
-  transform: translateX(5px);
+  transform: translateX(0.7vw);
 }
 .details {
   font-size: 1.2vw;
@@ -248,4 +246,28 @@ async function onClick() {
   box-sizing: border-box;
 }
 
+
+@media (max-width: 760px) {
+  .property1default{
+    height: 70vw;
+  }
+  .activityImage{
+    height: 40vw;
+  }
+  .craftItYourself{
+    font-size: 7vw;
+    margin-bottom: 2vw;
+  }
+  .details{
+    font-size: 5vw;
+  }
+  .arrow {
+    width: 4vw;
+  }
+  .btn{
+    height: 7vw;
+    border-radius: 3vw;
+    padding: 1vw 3vw;
+  }
+}
 </style>

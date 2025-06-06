@@ -133,7 +133,7 @@ watch(currentLang, fetchPackets, { immediate: true })
 
 @media (max-width: 760px) {
   .courseGrid {
-    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
   }
 }
 </style>
