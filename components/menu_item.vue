@@ -36,6 +36,12 @@ defineProps<{
   transform: scale(1.15);
   text-shadow: 0 0 10px rgba(31, 58, 95, 0.5);
 }
-
+@media (max-width: 768px) {
+  .menu-item {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    height: clamp(60px, 12vw, 80px);
+    line-height: clamp(60px, 12vw, 80px);
+  }
+}
 
 </style>
