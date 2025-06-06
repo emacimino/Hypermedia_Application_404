@@ -43,7 +43,7 @@ const config: Config = {
                 card: '0.75rem'
             },
             boxShadow: {
-                card: '0 2px 6px rgba(0, 0, 0, 0.1)'
+                card: '0 2px 6px rgba(0, 0, 0, 0.1)',
             },
             fontSize: {
                 base: '1rem',

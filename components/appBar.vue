@@ -4,7 +4,7 @@
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
       style="padding: 0 2.75vw"
   >
-<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group "
+<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
 >
   <NuxtImg src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
   <h2 class="text-[2.8vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
@@ -24,7 +24,7 @@
     <img
         class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group"
         style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
-        :src="currentLang === 'en' ? '/LanguageEN.png' : '/LanguageIT.png'"
+        :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
         alt="Switch language"
         @click="toggleLanguage"
     />
@@ -35,7 +35,8 @@
       class="flex md:hidden w-full items-center justify-between bg-blue-100"
       style=" padding: 1vw 4vw"
   >
-    <NuxtLink to="/"  alt="White lotus" class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
+    <NuxtLink to="/"  alt="White lotus"
+              class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
     >
       <NuxtImg  src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[40px] max-w-[80px]" />
       <h2 class="text-[6vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
