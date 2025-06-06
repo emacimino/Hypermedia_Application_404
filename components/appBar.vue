@@ -4,13 +4,13 @@
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
       style="padding: 0 2.75vw"
   >
-<div  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
+<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
 >
-  <ClickableImage to="/" src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
+  <NuxtImg src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
   <h2 class="text-[2.8vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
     White Lotus
   </h2>
-</div>
+</NuxtLink>
 
     <div class="flex items-center" style="gap: 2vw">
       <MenuItem
@@ -35,13 +35,13 @@
       class="flex md:hidden w-full items-center justify-between bg-blue-100"
       style=" padding: 1vw 4vw"
   >
-    <div  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
+    <NuxtLink to="/"  alt="White lotus" class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
     >
-      <ClickableImage to="/" src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[40px] max-w-[80px]" />
+      <NuxtImg  src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[40px] max-w-[80px]" />
       <h2 class="text-[6vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
         White Lotus
       </h2>
-    </div>
+    </NuxtLink>
     <!-- HAMBURGER BUTTON -->
     <button
         type="button"
