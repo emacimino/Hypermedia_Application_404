@@ -16,14 +16,14 @@ function modifyMonth(v){
   <div class="bg-blue-300 p-[1vw] grid place-items-center">
     <span class="flex items-center gap-[1.5vw] select-none text-gray-50 text-[clamp(16px,1.2vw,24px)]">
       <ChevronLeftIcon
-          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px]"
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 group active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
           @click="() => modifyMonth(-1)"
       />
       <span class=" w-[6vw] min-w-[64px]">
         {{ cMonth }}
       </span>
       <ChevronRightIcon
-          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px]"
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 group active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
           @click="() => modifyMonth(1)"
       />
     </span>
