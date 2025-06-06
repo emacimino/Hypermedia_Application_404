@@ -89,7 +89,7 @@
         :key="item.to"
         :label="item.label"
         :to="item.to"
-        class="text-[5vw] font-medium hover:underline text-center"
+        class=" font-medium hover:underline text-center"
         @click="closeMenu"
     />
   </div>
