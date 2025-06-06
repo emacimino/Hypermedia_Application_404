@@ -4,7 +4,7 @@
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
       style="padding: 0 2.75vw"
   >
-<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer"
+<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group "
 >
   <NuxtImg src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
   <h2 class="text-[2.8vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
@@ -22,8 +22,8 @@
     </div>
 
     <img
-        class="object-cover cursor-pointer"
-        style="width: 4vw; height: 4vw; min-width: 32px; min-height: 32px"
+        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group"
+        style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
         :src="currentLang === 'en' ? '/LanguageEN.png' : '/LanguageIT.png'"
         alt="Switch language"
         @click="toggleLanguage"
@@ -97,7 +97,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import MenuItem from '~/components/menu_item.vue';
-import ClickableImage from '~/components/clickableImage.vue';
 import { useLanguage } from '~/composables/useLanguage';
 
 const isMenuOpen = ref(false);
