@@ -59,7 +59,7 @@ function selected(d: number) {
     <div class="grid grid-cols-7 place-items-center gap-x-2 gap-y-4">
       <!-- Giorni della settimana -->
       <div v-for="day in days" :key="day">
-        <span class="text-gray-500 font-semibold">{{ day }}</span>
+        <span class="text-[#1F3A5F] font-semibold">{{ day }}</span>
       </div>
 
       <!-- Date -->
@@ -75,9 +75,9 @@ function selected(d: number) {
 
         <button
             @click="selected(d.date)"
-            class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold"
+            class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold cursor-pointer hover:rounded-full hover:bg-blue-300"
             :class="{
-            'bg-gray-800 text-gray-100': d.date === dayjs().date() &&
+            'bg-blue-400 text-gray-100': d.date === dayjs().date() &&
               dateProps.selectedValues.month === dayjs().month() &&
               dateProps.selectedValues.year === dayjs().year(),
             'bg-blue-500 text-white': d.date === date

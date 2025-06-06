@@ -19,7 +19,7 @@ function modifyMonth(v){
           class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px]"
           @click="() => modifyMonth(-1)"
       />
-      <span class="text-center w-[6vw] min-w-[64px]">
+      <span class=" w-[6vw] min-w-[64px]">
         {{ cMonth }}
       </span>
       <ChevronRightIcon
