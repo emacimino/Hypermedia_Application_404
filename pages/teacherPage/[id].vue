@@ -20,7 +20,7 @@
           :currentDate="dayjs()"
           :activeDate="dayjs()"
           :selectedWeekdayIndex="0"
-          :dayEvents="teacher.events ?? []"
+          :dayEvents="teacher.Events ?? []"
           :experience="cvList"
       />
     </div>
@@ -73,7 +73,7 @@ const fetchTeacher = async () => {
       .from("Teachers")
       .select(`
     *,
-    events:events ( * )
+    Events:Events ( * )
   `)
       .eq("Id", teacherId.value)
       .single()

@@ -110,14 +110,14 @@ async function fetchWeeklyEvents() {
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
   const { data: onetimeEvents } = await supabase
-      .from("events")
+      .from("Events")
       .select("*")
       .eq("Type", "onetime")
       .gte("Date", from)
       .lte("Date", to)
 
   const { data: recurringEvents } = await supabase
-      .from("events")
+      .from("Events")
       .select("*")
       .eq("Type", "recurring")
       .in("Weekday", weekdays)

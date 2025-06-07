@@ -32,7 +32,7 @@ onMounted(async () => {
 
   // Fetch onetime events (with explicit date)
   const { data: onetimeEvents, error: err1 } = await supabase
-      .from('events')
+      .from('Events')
       .select('*')
       .eq('type', 'onetime')
       .gte('date', start)
@@ -42,7 +42,7 @@ onMounted(async () => {
 
   // Fetch recurring events (match weekday)
   const { data: recurringEvents, error: err2 } = await supabase
-      .from('events')
+      .from('Events')
       .select('*')
       .eq('type', 'recurring')
       .in('weekday', weekdays)

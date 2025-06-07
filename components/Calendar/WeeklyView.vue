@@ -89,14 +89,14 @@ async function fetchEvents() {
   const end = base.endOf('isoWeek').format("YYYY-MM-DD")
 
   const { data: onetimeEvents } = await supabase
-      .from("events")
+      .from("Events")
       .select("*")
       .eq("Type", "onetime")
       .gte("Date", start)
       .lte("Date", end)
 
   const { data: recurringEvents } = await supabase
-      .from("events")
+      .from("Events")
       .select("*")
       .eq("Type", "recurring")
       .in("Weekday", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])

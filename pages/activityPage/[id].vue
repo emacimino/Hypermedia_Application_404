@@ -18,7 +18,7 @@
         :currentDate="dayjs()"
         :activeDate="dayjs()"
         :selectedWeekdayIndex="0"
-        :dayEvents="activity.events ?? []"
+        :dayEvents="activity.Events ?? []"
     />
   </div>
   <div v-else>
@@ -54,7 +54,7 @@ interface RawActivity {
   LongDescription: string
   LongDescription_it: string
   Image: string
-  events?: EventItem[]
+  Events?: EventItem[]
 }
 
 
@@ -68,7 +68,7 @@ const fetchActivity = async () => {
       .from("Activities")
       .select(`
     *,
-    events:events ( * )
+    Events:Events ( * )
   `)
       .eq("Id", activityId.value)
       .single()
