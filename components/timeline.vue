@@ -1,30 +1,49 @@
 <script setup>
 const items = [
   {
-    date: 'Mar 15, 2025',
-    title: 'Project Kickoff',
-    description: 'Kicked off the project with team alignment. Set up project milestones and allocated resources.',
-    icon: '🚀'
+    date: 'Jan 2024',
+    title: 'Vision & Foundation',
+    description: 'The idea for the center was born from a desire to create a space for well-being and inner growth.',
+    icon: '🌱'
   },
   {
-    date: 'Mar 22 2025',
-    title: 'Design Phase',
-    description: 'User research and design workshops. Created wireframes and prototypes for user testing.',
-    icon: '🎨'
+    date: 'Apr 2024',
+    title: 'Location Found',
+    description: 'We found the perfect venue: bright, peaceful, and surrounded by nature.',
+    icon: '🏡'
   },
   {
-    date: 'Mar 29 2025',
-    title: 'Development Sprint',
-    description: 'Frontend and backend development. Implemented core features and integrated with APIs.',
-    icon: '💻'
+    date: 'Jun 2024',
+    title: 'Renovation & Setup',
+    description: 'The space was renovated using natural materials and carefully decorated to promote harmony.',
+    icon: '🛠️'
   },
   {
-    date: 'Apr 5 2025',
-    title: 'Testing & Deployment',
-    description: 'QA testing and performance optimization. Deployed the application to production.',
-    icon: '✅'
+    date: 'Sep 2024',
+    title: 'Center Opening',
+    description: 'Official opening with a day of free classes, guided meditation, and shared tea.',
+    icon: '🎉'
+  },
+  {
+    date: 'Nov 2024',
+    title: 'First Full Class',
+    description: 'Our first fully booked class — a sign that our community is starting to grow.',
+    icon: '🙏'
+  },
+  {
+    date: 'Mar 2025',
+    title: 'First Yoga Retreat',
+    description: 'We successfully hosted our first weekend yoga retreat surrounded by nature.',
+    icon: '🌄'
+  },
+  {
+    date: 'May 2025',
+    title: '100+ Active Members',
+    description: 'We reached over 100 active members — a milestone that fills us with gratitude.',
+    icon: '💖'
   }
 ]
+
 </script>
 
 <template>
