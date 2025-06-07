@@ -92,6 +92,13 @@
         class=" font-medium hover:underline text-center"
         @click="closeMenu"
     />
+    <NuxtImg
+        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group"
+        style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
+        :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
+        alt="Switch language"
+        @click="toggleLanguage"
+    />
   </div>
 </template>
 
