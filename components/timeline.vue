@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const items = [
   {
     date: 'Jan 2024',
@@ -44,27 +44,98 @@ const items = [
   }
 ]
 
+const visibleItems = ref<boolean[]>(Array(items.length).fill(false))
+
+onMounted(() => {
+  nextTick(() => {
+    const observers = document.querySelectorAll('.timeline-item')
+
+    observers.forEach((el, index) => {
+      const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                visibleItems.value[index] = true
+                observer.unobserve(entry.target)
+              }
+            })
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '-100px 0px -100px 0px'
+          }
+      )
+      observer.observe(el)
+    })
+  })
+})
 </script>
 
 <template>
-  <div class="relative border-l border-gray-300 ml-8 mt-10 max-w-3xl ">
+  <div :class="$style.timelineContainer">
     <div
         v-for="(item, index) in items"
         :key="index"
-        class="mb-10 ml-6"
+        :class="[$style.timelineItem, { [$style.visible]: visibleItems[index] }]"
+        class="timeline-item"
     >
-      <span class="absolute -left-4 flex items-center justify-center w-8 h-8 bg-blue-300 rounded-full text-white text-sm ring-4 ring-white">
-        {{ item.icon }}
-      </span>
+      <span :class="$style.iconCircle">{{ item.icon }}</span>
 
-      <p class="text-sm text-gray-500">{{ item.date }}</p>
-      <h3 class="text-lg font-semibold text-gray-900">{{ item.title }}</h3>
-      <p class="text-base text-gray-700">{{ item.description }}</p>
+      <p :class="$style.dateText">{{ item.date }}</p>
+      <h3 :class="$style.titleText">{{ item.title }}</h3>
+      <p :class="$style.descriptionText">{{ item.description }}</p>
     </div>
   </div>
 </template>
 
-
-<style scoped>
-
+<style module>
+.timelineContainer {
+  position: relative;
+  border-left: 2px solid #d1d5db;
+  margin-left: 2rem;
+  margin-top: 2.5rem;
+  max-width: 48rem;
+}
+.timelineItem {
+  margin-bottom: 2.5rem;
+  margin-left: 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.timelineItem.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.iconCircle {
+  position: absolute;
+  left: -2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #93c5fd;
+  border-radius: 9999px;
+  color: white;
+  font-size: 0.875rem;
+  box-shadow: 0 0 0 4px white;
+}
+.dateText {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.25rem 0;
+}
+.titleText {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
+}
+.descriptionText {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0;
+}
 </style>
