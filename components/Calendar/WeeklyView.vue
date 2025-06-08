@@ -120,7 +120,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 <template>
   <div class="flex justify-between items-center my-[2vw] px-[2vw]">
     <button @click="goToPreviousWeek" class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300">
-      ← Settimana precedente
+      ← {{currentLang == 'it' ? 'Settimana precedente' : 'Previous Week' }}
     </button>
 
     <span class="font-semibold text-center">
@@ -131,7 +131,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </span>
 
     <button @click="goToNextWeek" class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300">
-      Settimana successiva →
+      {{currentLang == 'it' ? 'Settimana successiva' : 'Next Week' }} →
     </button>
   </div>
 
