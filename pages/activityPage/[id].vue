@@ -1,5 +1,4 @@
 <template>
-
   <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="activity">
@@ -8,7 +7,6 @@
         :paragraphs="currentLang === 'it' ? activity.LongDescription_it : activity.LongDescription"
         :image="activity.Image"
         :reverse="true"
-
     />
     <Presentation
         :weekProgramming="true"
@@ -35,9 +33,9 @@ import dayjs from "dayjs";
 import type {BreadcrumbItem} from "@nuxt/ui";
 
 const { currentLang } = useLanguage()
+const { createActivityUrl, extractIdFromSlug } = useActivityUrl()
 const supabase = useSupabaseClient()
 const route = useRoute()
-
 
 interface EventItem {
   Id: number
@@ -57,12 +55,16 @@ interface RawActivity {
   Events?: EventItem[]
 }
 
-
 const activity = ref<RawActivity | null>(null)
-const activityId = computed(() => Number(route.params.id))
-//Retrieve events
+const activityId = computed(() => extractIdFromSlug(route.params.id as string))
+
+// Retrieve events
 const fetchActivity = async () => {
-  if (isNaN(activityId.value)) return
+  if (isNaN(activityId.value)) {
+    console.error('ID attività non valido')
+    activity.value = null
+    return
+  }
 
   const { data, error } = await supabase
       .from("Activities")
@@ -80,6 +82,13 @@ const fetchActivity = async () => {
   }
 
   activity.value = data
+
+  // Opzionale: Reindirizza alla URL corretta se lo slug non corrisponde
+  const correctUrl = createActivityUrl(data)
+  const currentPath = route.path
+  if (currentPath !== correctUrl) {
+    await navigateTo(correctUrl, { replace: true })
+  }
 }
 
 onMounted(fetchActivity)
@@ -94,12 +103,13 @@ const items = ref<BreadcrumbItem[]>([
     }
   },
   {
-    label: 'teacherPage',
+    label: 'Loading...',
     ui: {
       linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
     }
   }
 ])
+
 watch(activity, (newVal) => {
   if (newVal) {
     items.value = [

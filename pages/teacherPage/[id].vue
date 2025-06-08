@@ -1,5 +1,4 @@
 <template>
-
   <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="teacher">
@@ -39,6 +38,7 @@ import type {BreadcrumbItem} from "@nuxt/ui";
 import dayjs from "dayjs";
 
 const { currentLang } = useLanguage()
+const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
 const supabase = useSupabaseClient()
 const route = useRoute()
 
@@ -49,6 +49,7 @@ interface RawTeacher {
   LongDescription_it: string
   LongDescription: string
   Image: string
+  Events?: any[]
 }
 
 interface CV {
@@ -64,10 +65,14 @@ interface CV {
 
 const teacher = ref<RawTeacher | null>(null)
 const cvList = ref<CV[]>([])
-const teacherId = computed(() => Number(route.params.id))
+const teacherId = computed(() => extractIdFromSlug(route.params.id as string))
 
 const fetchTeacher = async () => {
-  if (isNaN(teacherId.value)) return
+  if (isNaN(teacherId.value)) {
+    console.error('ID teacher non valido')
+    teacher.value = null
+    return
+  }
 
   const { data, error } = await supabase
       .from("Teachers")
@@ -85,6 +90,13 @@ const fetchTeacher = async () => {
   }
 
   teacher.value = data
+
+  // Opzionale: Reindirizza alla URL corretta se lo slug non corrisponde
+  const correctUrl = createTeacherUrl(data)
+  const currentPath = route.path
+  if (currentPath !== correctUrl) {
+    await navigateTo(correctUrl, { replace: true })
+  }
 }
 
 const fetchCV = async () => {
@@ -120,12 +132,13 @@ const items = ref<BreadcrumbItem[]>([
     }
   },
   {
-    label: 'teacherPage',
+    label: 'Loading...',
     ui: {
       linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
     }
   }
 ])
+
 watch(teacher, (newVal) => {
   if (newVal) {
     items.value = [

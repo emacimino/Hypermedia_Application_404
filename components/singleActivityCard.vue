@@ -22,12 +22,28 @@ const props = defineProps<{
   Image: string;
 }>();
 
+const { createActivityUrl, createTeacherUrl } = useActivityUrl();
+
 const link = computed(() => {
-  return props.Id > 50 ? `/teacherPage/${props.Id}` : `/activityPage/${props.Id}`;
+  if (props.Id > 50) {
+    // Per i teacher, usa il composable per creare URL con ID-nome
+    return createTeacherUrl({
+      Id: props.Id,
+      Title: props.Title,
+      Title_it: props.Title_it
+    });
+  } else {
+    // Per le attività, usa il composable per creare URL con ID-titolo
+    return createActivityUrl({
+      Id: props.Id,
+      Title: props.Title,
+      Title_it: props.Title_it
+    });
+  }
 });
 </script>
 
-<style  module>
+<style module>
 .card {
   display: flex;
   flex-direction: column;
@@ -61,5 +77,4 @@ const link = computed(() => {
   text-decoration: none;
   color: inherit;
 }
-
 </style>
