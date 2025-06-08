@@ -27,6 +27,9 @@
     <p>Loading...</p>
   </div>
 
+  <div :class="$style.packetsTitle">
+    <h2>🎁 Our Packages</h2>
+  </div>
 
   <div :class="$style.courseGrid">
     <Packet
@@ -129,6 +132,15 @@ watch(currentLang, fetchPackets, { immediate: true })
   gap: var(--gap);
   padding: var(--padding);
   place-items: center;
+}
+.packetsTitle {
+  margin-top: 2vw;
+  font-size: 5vw;
+  font-weight: bold;
+  font-family: 'Rounded Mplus 1c Bold', serif;
+  color:#0769a2;
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 760px) {

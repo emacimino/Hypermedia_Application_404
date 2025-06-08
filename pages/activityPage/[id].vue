@@ -60,7 +60,7 @@ interface RawActivity {
 
 const activity = ref<RawActivity | null>(null)
 const activityId = computed(() => Number(route.params.id))
-
+//Retrieve events
 const fetchActivity = async () => {
   if (isNaN(activityId.value)) return
 
