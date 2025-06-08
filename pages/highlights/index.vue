@@ -1,5 +1,4 @@
 <template>
-
   <h1 :class="[$style.Title, showTitle ? $style.titleEnter : '']">
     {{ title }}
   </h1>
@@ -9,7 +8,6 @@
         v-for="(card, index) in cards"
         :key="index"
         v-bind="card"
-
     />
   </div>
 </template>
@@ -23,9 +21,21 @@ import { onMounted } from 'vue'
 const showTitle = ref(false)
 
 onMounted(() => {
+  if (document.readyState === 'complete') {
+    setTimeout(() => {
+      showTitle.value = true
+    }, 300)
+  } else {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        showTitle.value = true
+      }, 300)
+    })
+  }
+
   setTimeout(() => {
     showTitle.value = true
-  }, 80)
+  }, 2000)
 })
 
 type Presentation = {
@@ -43,7 +53,7 @@ const fetchTitle = async () => {
       .from('Presentation')
       .select('Title, Title_it')
       .eq('Id', 14)
-      .single<Presentation>() // 👈 Add the generic type here
+      .single<Presentation>()
 
   if (error || !data) {
     console.error('Error fetching title:', error?.message)
@@ -78,7 +88,6 @@ const cards = [
     title: 'Open your horizons!',
     buttonText: 'Start practising!'
   }
-
 ]
 </script>
 
@@ -98,8 +107,6 @@ const cards = [
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
 }
-
-
 @keyframes fadeSlideDown {
   0% {
     opacity: 0;
@@ -112,6 +119,10 @@ const cards = [
 }
 .titleEnter {
   animation: fadeSlideDown 0.8s ease-out forwards;
+}
+.Title:not(.titleEnter) {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
 

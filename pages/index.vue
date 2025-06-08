@@ -27,7 +27,11 @@
     <p>Loading...</p>
   </div>
 
-  <div :class="$style.packetsTitle">
+  <div
+      ref="packagesTitleRef"
+      :class="[$style.packetsTitle, { [$style.titleVisible]: showPackagesTitle }]"
+      class="packages-title"
+  >
     <h2>🎁 Our Packages</h2>
   </div>
 
@@ -42,9 +46,8 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
@@ -56,6 +59,8 @@ const { currentLang } = useLanguage()
 const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
 const homePageContent = ref<any>(null)
 const homePageContent2 = ref<any>(null)
+const showPackagesTitle = ref(false)
+const packagesTitleRef = ref<HTMLElement | null>(null)
 
 const fetchImages = async () => {
   const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl,Course_Id')
@@ -85,9 +90,34 @@ const fetchPresentationContent = async () => {
   homePageContent2.value = data2
 }
 
+const setupTitleAnimation = () => {
+  nextTick(() => {
+    const titleElement = document.querySelector('.packages-title')
+
+    if (titleElement) {
+      const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                showPackagesTitle.value = true
+                observer.unobserve(entry.target)
+              }
+            })
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '-100px 0px -100px 0px'
+          }
+      )
+      observer.observe(titleElement)
+    }
+  })
+}
+
 onMounted(() => {
   fetchImages()
   fetchPresentationContent()
+  setupTitleAnimation()
 })
 
 watch(currentLang, fetchPresentationContent)
@@ -124,7 +154,6 @@ const fetchPackets = async () => {
 watch(currentLang, fetchPackets, { immediate: true })
 </script>
 
-
 <style module>
 .courseGrid {
   display: grid;
@@ -133,15 +162,24 @@ watch(currentLang, fetchPackets, { immediate: true })
   padding: var(--padding);
   place-items: center;
 }
+
 .packetsTitle {
   margin-top: 2vw;
   font-size: 5vw;
   font-weight: bold;
   font-family: 'Rounded Mplus 1c Bold', serif;
-  color:#0769a2;
+  color: #0769a2;
   text-align: center;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+.packetsTitle.titleVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 
 @media (max-width: 760px) {
   .courseGrid {

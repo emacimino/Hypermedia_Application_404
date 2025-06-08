@@ -1,3 +1,20 @@
+<template>
+  <div :class="$style.timelineContainer">
+    <div
+        v-for="(item, index) in items"
+        :key="index"
+        :class="[$style.timelineItem, { [$style.visible]: visibleItems[index] }]"
+        class="timeline-item"
+    >
+      <span :class="$style.iconCircle">{{ item.icon }}</span>
+
+      <p :class="$style.dateText">{{ item.date }}</p>
+      <h3 :class="$style.titleText">{{ item.title }}</h3>
+      <p :class="$style.descriptionText">{{ item.description }}</p>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 const items = [
   {
@@ -70,23 +87,6 @@ onMounted(() => {
   })
 })
 </script>
-
-<template>
-  <div :class="$style.timelineContainer">
-    <div
-        v-for="(item, index) in items"
-        :key="index"
-        :class="[$style.timelineItem, { [$style.visible]: visibleItems[index] }]"
-        class="timeline-item"
-    >
-      <span :class="$style.iconCircle">{{ item.icon }}</span>
-
-      <p :class="$style.dateText">{{ item.date }}</p>
-      <h3 :class="$style.titleText">{{ item.title }}</h3>
-      <p :class="$style.descriptionText">{{ item.description }}</p>
-    </div>
-  </div>
-</template>
 
 <style module>
 .timelineContainer {
