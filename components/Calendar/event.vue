@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { createClient } from '@supabase/supabase-js'
+import { useSupabaseClient } from '#imports'
+import { useLanguage } from '@/composables/useLanguage'
 
+const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
 
-const supabase = useSupabaseClient();
+const getField = (entry: any, key: string) => {
+  return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key]
+}
 
 const weeklyEvents = ref([])
 
 function getCurrentWeekDates(): { start: string; end: string; weekdays: string[] } {
   const today = new Date()
   const start = new Date(today)
-  start.setDate(today.getDate() - today.getDay()) // Domenica
+  start.setDate(today.getDate() - today.getDay()) // Sunday
   const end = new Date(start)
-  end.setDate(start.getDate() + 6) // Sabato
+  end.setDate(start.getDate() + 6) // Saturday
 
   const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const weekDaysInRange = []
@@ -30,22 +35,20 @@ function getCurrentWeekDates(): { start: string; end: string; weekdays: string[]
 onMounted(async () => {
   const { start, end, weekdays } = getCurrentWeekDates()
 
-  // Fetch onetime events (with explicit date)
   const { data: onetimeEvents, error: err1 } = await supabase
       .from('Events')
       .select('*')
-      .eq('type', 'onetime')
-      .gte('date', start)
-      .lte('date', end)
+      .eq('Type', 'onetime')
+      .gte('Date', start)
+      .lte('Date', end)
 
   if (err1) console.error('Errore eventi one-time:', err1)
 
-  // Fetch recurring events (match weekday)
   const { data: recurringEvents, error: err2 } = await supabase
       .from('Events')
       .select('*')
-      .eq('type', 'recurring')
-      .in('weekday', weekdays)
+      .eq('Type', 'recurring')
+      .in('Weekday', weekdays)
 
   if (err2) console.error('Errore eventi ricorrenti:', err2)
 

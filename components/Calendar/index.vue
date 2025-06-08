@@ -31,9 +31,15 @@ import dayjs from "dayjs"
 import { defineAsyncComponent, ref, reactive, computed, watch, onMounted } from "vue"
 import isoWeek from 'dayjs/plugin/isoWeek'
 import { useSupabaseClient } from "#imports"
+import { useLanguage } from '@/composables/useLanguage'
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
-//to update vercel
+
 dayjs.extend(isoWeek)
+const { currentLang } = useLanguage()
+
+const getField = (entry: any, key: string) => {
+  return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key];
+}
 
 const Year = defineAsyncComponent(() => import("~/components/Calendar/Year.vue"))
 const Month = defineAsyncComponent(() => import("~/components/Calendar/Month.vue"))
@@ -50,7 +56,6 @@ const selectedValues = reactive({
 })
 
 const selectedDateValue = ref<number | null>(null)
-
 const selectedFullDate = ref(dayjs())
 
 watch(selectedDateValue, () => {
@@ -61,7 +66,6 @@ watch(selectedDateValue, () => {
         .date(selectedDateValue.value)
   }
 })
-
 
 const activeDate = computed(() => selectedFullDate.value ?? currentDate.value)
 
@@ -78,8 +82,10 @@ const dayEvents = computed(() => {
   const weekdayStr = activeDate.value.format("dddd")
 
   return weeklyEvents.value.filter(event => {
-    return (event.Type === 'onetime' && event.Date === dateStr) ||
-        (event.Type === 'recurring' && event.Weekday === weekdayStr)
+    const type = event.Type // always in English
+    const weekday = event.Weekday // always in English
+    return (type === 'onetime' && event.Date === dateStr) ||
+        (type === 'recurring' && weekday === weekdayStr)
   })
 })
 

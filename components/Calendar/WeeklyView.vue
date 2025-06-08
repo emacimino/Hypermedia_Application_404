@@ -3,6 +3,13 @@ import { CalendarIcon } from "@heroicons/vue/24/outline"
 import dayjs from "dayjs"
 import { ref, computed, onMounted, watch } from "vue"
 import { useSupabaseClient } from "#imports"
+import { useLanguage } from '@/composables/useLanguage'
+
+const { currentLang } = useLanguage()
+
+const getField = (entry: any, key: string) => {
+  return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key]
+}
 
 const props = defineProps<{
   currentDate?: any
@@ -44,17 +51,11 @@ const displayedEvents = computed(() => {
 
 function selectDay(index: number) {
   const selected = (props.currentDate ?? internalDate.value).startOf('isoWeek').add(index, 'day')
-  if (props.activeDate) {
-    emit('update:activeDate', selected)
-  } else {
-    selectedLocalDate.value = selected
-  }
+  if (props.activeDate) emit('update:activeDate', selected)
+  else selectedLocalDate.value = selected
 
-  if (props.selectedWeekdayIndex != null) {
-    emit('update:selectedWeekdayIndex', index)
-  } else {
-    selectedLocalIndex.value = index
-  }
+  if (props.selectedWeekdayIndex != null) emit('update:selectedWeekdayIndex', index)
+  else selectedLocalIndex.value = index
 
   emit('day-click', selected)
 }
@@ -104,7 +105,6 @@ async function fetchEvents() {
   internalEvents.value = [...(onetimeEvents ?? []), ...(recurringEvents ?? [])]
 }
 
-// Solo se dayEvents non è fornito
 onMounted(() => {
   if (!props.dayEvents) fetchEvents()
 })
@@ -115,46 +115,33 @@ watch(() => internalDate.value.format("YYYY-MM-DD"), () => {
 watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
   if (!props.dayEvents) fetchEvents()
 })
-
 </script>
 
 <template>
-  <!-- Navigazione -->
   <div class="flex justify-between items-center my-[2vw] px-[2vw]">
-    <button
-        @click="goToPreviousWeek"
-        class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300 text-[clamp(14px,1.1vw,18px)]"
-    >
+    <button @click="goToPreviousWeek" class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300">
       ← Settimana precedente
     </button>
 
-    <span class="font-semibold text-[clamp(14px,1.2vw,20px)] text-center">
+    <span class="font-semibold text-center">
       {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
-      <button
-          v-if="visualizeButton === true"
-          @click="resetToCalendar"
-          class="ml-[1vw] px-[1.5vw] py-[0.8vw] bg-blue-300 text-white rounded hover:bg-blue-400"
-      >
-        <CalendarIcon class="inline w-[1.8vw] h-[1.8vw] min-w-[20px] min-h-[20px]" />
+      <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] bg-blue-300 text-white rounded hover:bg-blue-400">
+        <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
       </button>
     </span>
 
-    <button
-        @click="goToNextWeek"
-        class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300 text-[clamp(14px,1.1vw,18px)]"
-    >
+    <button @click="goToNextWeek" class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300">
       Settimana successiva →
     </button>
   </div>
 
-  <!-- Giorni della settimana -->
   <div class="grid grid-cols-7 gap-[1vw] text-center mb-[2vw] px-[1vw]">
     <button
-        v-for="(day, index) in ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom']"
+        v-for="(day, index) in ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']"
         :key="index"
         @click="selectDay(index)"
         :class="[
-        'py-[1.2vw] rounded font-semibold w-full text-[clamp(14px,1.1vw,18px)] transition-transform',
+        'py-[1.2vw] rounded font-semibold w-full transition-transform',
         'hover:scale-105 hover:bg-blue-300 active:scale-105 active:bg-blue-300',
         index === internalWeekdayIndex ? 'bg-blue-300 text-white' : 'bg-gray-100 text-blue-500'
       ]"
@@ -163,11 +150,8 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </button>
   </div>
 
-  <!-- Eventi -->
   <div class="space-y-[2vw] px-[2vw]">
-    <p class="text-[clamp(14px,1.1vw,18px)]">{{ paragraphs }}</p>
-
-    <h2 class="text-[clamp(16px,1.4vw,22px)] font-semibold">
+    <h2 class="text-lg font-semibold">
       Events for {{ internalActiveDate.format("dddd DD MMMM") }}
     </h2>
 
@@ -181,26 +165,27 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
         class="bg-white border rounded p-[2vw] shadow"
     >
       <div class="flex justify-between items-center">
-        <h3 class="text-blue-400 font-semibold text-[clamp(16px,1.3vw,20px)]">{{ event.Title }}</h3>
-        <span class="text-[clamp(12px,1vw,16px)] text-gray-600">{{ event.Time }}</span>
+        <h3 class="text-blue-400 font-semibold">{{ getField(event, 'Title') }}</h3>
+        <span class="text-gray-600">{{ event.Time }}</span>
       </div>
 
-      <div class="mt-[1.5vw] flex flex-col md:flex-row md:items-center md:gap-[2vw]">
+      <div class="mt-4 flex flex-col md:flex-row md:items-center md:gap-4">
         <nuxt-link
             :to="`/activityPage/${event.Course_Id}`"
-            class="inline-block px-[2vw] py-[1vw] mt-[1vw] md:mt-0 text-white bg-blue-300 rounded hover:bg-blue-400 active:bg-blue-800 transition-transform duration-200 hover:scale-105 active:scale-105 text-[clamp(14px,1.1vw,18px)]"
+            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400"
         >
-          Tipo Corso: <strong>{{ event.Course_title }}</strong>
+          {{ currentLang === 'it' ? 'Tipo Corso' : 'Course type' }}:
+          <strong>{{ getField(event, 'Course_title') }}</strong>
         </nuxt-link>
 
         <nuxt-link
             :to="`/teacherPage/${event.Teacher_id}`"
-            class="inline-block px-[2vw] py-[1vw] mt-[1vw] md:mt-0 text-white bg-blue-300 rounded hover:bg-blue-400 active:bg-green-800 transition-transform duration-200 hover:scale-105 active:scale-105 text-[clamp(14px,1.1vw,18px)]"
+            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400"
         >
-          Insegnante: <strong>{{ event.Teacher_name }}</strong>
+          {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
+          <strong>{{ getField(event, 'Teacher_name') }}</strong>
         </nuxt-link>
       </div>
     </div>
   </div>
 </template>
-
