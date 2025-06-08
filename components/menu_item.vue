@@ -24,9 +24,9 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 
-  font-size: clamp(1rem, 2.2vw, 6rem);
-  height: clamp(40px, 6vw, 60px);
-  line-height: clamp(40px, 6vw, 60px);
+  font-size: clamp(1rem, 1.5vw, 2.2rem);
+  height: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.2;
 
   transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
@@ -38,9 +38,8 @@ defineProps<{
 }
 @media (max-width: 767px) {
   .menu-item {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    height: clamp(60px, 12vw, 80px);
-    line-height: clamp(60px, 12vw, 80px);
+    font-size: clamp(2rem, 4vw, 3rem);
+    height: clamp(2.5rem, 10vw, 3.5rem);
   }
 }
 

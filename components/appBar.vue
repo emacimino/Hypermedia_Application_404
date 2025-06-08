@@ -1,13 +1,13 @@
 <template>
   <!-- DESKTOP NAVIGATION -->
   <nav
-      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md"
+      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[4rem] max-h-[10vh]"
       style="padding: 0 2.75vw"
   >
 <NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
 >
   <NuxtImg src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
-  <h2 class="hidden md:block lg:hidden text-[2.8vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+  <h2 class=" text-[clamp(2rem,4.5vw,4rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
     White Lotus
   </h2>
 </NuxtLink>
@@ -22,7 +22,7 @@
     </div>
 
     <NuxtImg
-        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group"
+        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group w-[6vw] min-w-[2rem] max-w-[6rem]"
         style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
         :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
         alt="Switch language"
@@ -32,7 +32,7 @@
 
   <!-- MOBILE NAVIGATION -->
   <nav
-      class="flex md:hidden w-full items-center justify-between bg-blue-100"
+      class="flex md:hidden w-full items-center justify-between bg-blue-100 "
       style=" padding: 1vw 4vw"
   >
     <NuxtLink to="/"  alt="White lotus"
@@ -82,7 +82,8 @@
   <!-- MOBILE MENU OVERLAY -->
   <div
       v-if="isMenuOpen"
-      class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300 bg-blue-100"
+      ref="menuRef"
+      class="fixed inset-y-10 right-0 w-2/3 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300 bg-blue-100 rounded-s"
   >
     <MenuItem
         v-for="item in items"
@@ -93,8 +94,7 @@
         @click="closeMenu"
     />
     <NuxtImg
-        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group"
-        style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
+        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group w-[clamp(2rem,6vw,6rem)] h-[clamp(2rem,6vw,6rem)]"
         :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
         alt="Switch language"
         @click="toggleLanguage"
@@ -103,27 +103,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import MenuItem from '~/components/menu_item.vue';
-import { useLanguage } from '~/composables/useLanguage';
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { useLanguage } from '~/composables/useLanguage'
 
-const isMenuOpen = ref(false);
+const isMenuOpen = ref(false)
+const menuRef = ref<HTMLElement | null>(null)
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+  isMenuOpen.value = !isMenuOpen.value
+}
 
 const closeMenu = () => {
-  isMenuOpen.value = false;
-};
+  isMenuOpen.value = false
+}
 
+onMounted(() => {
+  window.addEventListener('scroll', closeMenu)
+  document.addEventListener('mousedown', handleClickOutside)
+  document.addEventListener('touchstart', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', closeMenu)
+  document.removeEventListener('mousedown', handleClickOutside)
+  document.removeEventListener('touchstart', handleClickOutside)
+})
+
+function handleClickOutside(event: MouseEvent | TouchEvent) {
+  if (
+      isMenuOpen.value &&
+      menuRef.value &&
+      !menuRef.value.contains(event.target as Node)
+  ) {
+    closeMenu()
+  }
+}
+
+// Multilingua
 const { toggleLanguage, currentLang, t } = useLanguage()
 
+// Voci di menu
 const items = computed(() => [
   { label: t.value.activities, to: '/activityPage' },
   { label: t.value.teachers,   to: '/teacherPage' },
   { label: t.value.highlights, to: '/highlights' },
-  { label: t.value.aboutUs,   to: '/aboutUs' },
+  { label: t.value.aboutUs,    to: '/aboutUs' },
   { label: t.value.contacts,   to: '/contacts' }
-]);
+])
 </script>
