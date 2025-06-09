@@ -24,10 +24,13 @@ type CalendarDate = {
 const dates = ref<CalendarDate[]>([])
 const date = ref<number | null>(null)
 
-const days = [
-  "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
-]
+const { currentLang } = useLanguage()
 
+const days = computed(() =>
+    currentLang.value === 'it'
+        ? ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
+        : ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+)
 onMounted(() => {
   generateDatesForThatMonth(dateProps.selectedValues.month, dateProps.selectedValues.year)
 })

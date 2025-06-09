@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { CalendarIcon } from "@heroicons/vue/24/outline"
 import dayjs from "dayjs"
+import 'dayjs/locale/it';
+import 'dayjs/locale/en';
 import { ref, computed, onMounted, watch } from "vue"
 import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
@@ -41,7 +43,9 @@ const selectedLocalIndex = ref(props.selectedWeekdayIndex ?? ((selectedLocalDate
 
 const internalActiveDate = computed(() => props.activeDate ?? selectedLocalDate.value)
 const internalWeekdayIndex = computed(() => props.selectedWeekdayIndex ?? selectedLocalIndex.value)
-
+const localizedDate = computed(() =>
+    internalActiveDate.value.locale(currentLang.value).format('dddd DD MMMM')
+);
 const displayedEvents = computed(() => {
   const source = props.dayEvents ?? internalEvents.value
   const dateStr = internalActiveDate.value.format("YYYY-MM-DD")
@@ -52,6 +56,11 @@ const displayedEvents = computed(() => {
       (event.Type === 'recurring' && event.Weekday === weekdayStr)
   )
 })
+const formattedWeekDate = computed(() =>
+    (props.currentDate ?? internalDate.value)
+        .locale(currentLang.value)
+        .format("DD MMM YYYY")
+);
 
 function selectDay(index: number) {
   const selected = (props.currentDate ?? internalDate.value).startOf('isoWeek').add(index, 'day')
@@ -128,7 +137,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </button>
 
     <span class="font-semibold text-center">
-      {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
+      {{ currentLang === 'it' ? 'Settimana ' + formattedWeekDate : formattedWeekDate + ' week' }}
       <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] bg-blue-300 text-white rounded hover:bg-blue-400">
         <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
       </button>
@@ -156,11 +165,12 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 
   <div class="space-y-[2vw] px-[2vw]">
     <h2 class="text-lg font-semibold">
-      Events for {{ internalActiveDate.format("dddd DD MMMM") }}
+      {{ currentLang === 'it' ? 'Eventi di' : 'Events for' }} {{ localizedDate }}
+
     </h2>
 
     <div v-if="displayedEvents.length === 0" class="text-blue-500 italic">
-      Nessun evento.
+      {{ currentLang == 'it' ? 'Nessun evento' : 'No events' }}
     </div>
 
     <div
