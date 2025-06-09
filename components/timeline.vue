@@ -1,73 +1,68 @@
 <template>
   <div :class="$style.timelineContainer">
     <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in translatedItems"
         :key="index"
         :class="[$style.timelineItem, { [$style.visible]: visibleItems[index] }]"
         class="timeline-item"
     >
-      <span :class="$style.iconCircle">{{ item.icon }}</span>
-
-      <p :class="$style.dateText">{{ item.date }}</p>
-      <h3 :class="$style.titleText">{{ item.title }}</h3>
-      <p :class="$style.descriptionText">{{ item.description }}</p>
+      <span :class="$style.iconCircle">{{ item.Icon }}</span>
+      <p :class="$style.dateText">{{ item.Date }}</p>
+      <h3 :class="$style.titleText">{{ item.Title }}</h3>
+      <p :class="$style.descriptionText">{{ item.Description }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const items = [
-  {
-    date: 'Jan 2024',
-    title: 'Vision & Foundation',
-    description: 'The idea for the center was born from a desire to create a space for well-being and inner growth.',
-    icon: '🌱'
-  },
-  {
-    date: 'Apr 2024',
-    title: 'Location Found',
-    description: 'We found the perfect venue: bright, peaceful, and surrounded by nature.',
-    icon: '🏡'
-  },
-  {
-    date: 'Jun 2024',
-    title: 'Renovation & Setup',
-    description: 'The space was renovated using natural materials and carefully decorated to promote harmony.',
-    icon: '🛠️'
-  },
-  {
-    date: 'Sep 2024',
-    title: 'Center Opening',
-    description: 'Official opening with a day of free classes, guided meditation, and shared tea.',
-    icon: '🎉'
-  },
-  {
-    date: 'Nov 2024',
-    title: 'First Full Class',
-    description: 'Our first fully booked class — a sign that our community is starting to grow.',
-    icon: '🙏'
-  },
-  {
-    date: 'Mar 2025',
-    title: 'First Yoga Retreat',
-    description: 'We successfully hosted our first weekend yoga retreat surrounded by nature.',
-    icon: '🌄'
-  },
-  {
-    date: 'May 2025',
-    title: '100+ Active Members',
-    description: 'We reached over 100 active members — a milestone that fills us with gratitude.',
-    icon: '💖'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import { useSupabaseClient } from '#imports'
+import { useLanguage } from '~/composables/useLanguage'
+
+const { currentLang } = useLanguage()
+const supabase = useSupabaseClient()
+
+interface TimelineItem {
+  Date: string
+  Icon: string
+  Title: string
+  Title_it?: string
+  Description: string
+  Description_it?: string
+}
+
+const items = ref<TimelineItem[]>([])
+const visibleItems = ref<boolean[]>([])
+
+const fetchTimeline = async () => {
+  const { data, error } = await supabase
+      .from('Timeline')
+      .select('*')
+      .order('Date', { ascending: true })
+
+  if (error) {
+    console.error('Errore nel caricamento della timeline:', error)
+    return
   }
-]
 
-const visibleItems = ref<boolean[]>(Array(items.length).fill(false))
+  items.value = data || []
+  visibleItems.value = Array(data?.length || 0).fill(false)
+}
 
-onMounted(() => {
+const translatedItems = computed(() =>
+    items.value.map(item => ({
+      ...item,
+      Title: currentLang.value === 'it' ? item.Title_it : item.Title,
+      Description: currentLang.value === 'it' ? item.Description_it : item.Description,
+    }))
+)
+
+onMounted(async () => {
+  await fetchTimeline()
   nextTick(() => {
-    const observers = document.querySelectorAll('.timeline-item')
+    const elements = document.querySelectorAll('.timeline-item')
 
-    observers.forEach((el, index) => {
+    elements.forEach((el, index) => {
       const observer = new IntersectionObserver(
           entries => {
             entries.forEach(entry => {
