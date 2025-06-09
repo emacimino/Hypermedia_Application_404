@@ -4,7 +4,13 @@ import {ref,computed} from "vue"
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/outline"
 const monthEmit = defineEmits<{(e: "selected", v: number):void}>()
 const month = ref<number>(dayjs().month())
-const cMonth = computed(() => dayjs().month(month.value).format("MMMM"))
+import { useLanguage } from '@/composables/useLanguage'
+
+const { currentLang } = useLanguage()
+
+const cMonth = computed(() =>
+    dayjs().locale(currentLang.value).month(month.value).format("MMMM")
+)
 
 function modifyMonth(v){
   month.value += v
