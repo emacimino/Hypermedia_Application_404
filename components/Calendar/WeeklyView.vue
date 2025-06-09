@@ -10,7 +10,11 @@ const { currentLang } = useLanguage()
 const getField = (entry: any, key: string) => {
   return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key]
 }
-
+const weekdayLabels = computed(() =>
+    currentLang.value === 'it'
+        ? ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom']
+        : ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
+);
 const props = defineProps<{
   currentDate?: any
   activeDate?: any
@@ -137,7 +141,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 
   <div class="grid grid-cols-7 gap-[1vw] text-center mb-[2vw] px-[1vw]">
     <button
-        v-for="(day, index) in ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']"
+        v-for="(day, index) in weekdayLabels"
         :key="index"
         @click="selectDay(index)"
         :class="[

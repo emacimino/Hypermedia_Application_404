@@ -32,7 +32,7 @@
       :class="[$style.packetsTitle, { [$style.titleVisible]: showPackagesTitle }]"
       class="packages-title"
   >
-    <h2>🎁 Our Packages</h2>
+    <h2>🎁 {{currentLang  == 'it' ? 'I nostri pacchetti' : 'Our Packages' }}</h2>
   </div>
 
   <div :class="$style.courseGrid">
