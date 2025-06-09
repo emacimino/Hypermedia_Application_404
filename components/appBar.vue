@@ -110,6 +110,8 @@ const isMenuOpen = ref(false)
 const menuRef = ref<HTMLElement | null>(null)
 
 const toggleMenu = () => {
+  console.log('Toggle menu', !isMenuOpen.value)
+
   isMenuOpen.value = !isMenuOpen.value
 }
 
@@ -117,26 +119,37 @@ const closeMenu = () => {
   isMenuOpen.value = false
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', closeMenu)
-  document.addEventListener('mousedown', handleClickOutside)
-  document.addEventListener('touchstart', handleClickOutside)
+import { watch } from 'vue'
+
+watch(isMenuOpen, (newVal) => {
+  console.log(`isMenuOpen changed:`, newVal)
+
+  if (newVal) {
+    window.addEventListener('scroll', closeMenu)
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+  } else {
+    window.removeEventListener('scroll', closeMenu)
+    document.removeEventListener('mousedown', handleClickOutside)
+    document.removeEventListener('touchstart', handleClickOutside)
+  }
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', closeMenu)
-  document.removeEventListener('mousedown', handleClickOutside)
-  document.removeEventListener('touchstart', handleClickOutside)
-})
 
 function handleClickOutside(event: MouseEvent | TouchEvent) {
-  if (
-      isMenuOpen.value &&
-      menuRef.value &&
-      !menuRef.value.contains(event.target as Node)
-  ) {
-    closeMenu()
-  }
+  const target = event.target as HTMLElement
+
+  if (!isMenuOpen.value) return
+
+  setTimeout(() => {
+    if (
+        menuRef.value &&
+        !menuRef.value.contains(target) &&
+        !target.closest('button[aria-label="Toggle navigation"]')
+    ) {
+      closeMenu()
+    }
+  }, 0)
 }
 
 // Multilingua
