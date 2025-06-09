@@ -2,7 +2,7 @@
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
     <!-- Immagine -->
     <div v-if="image" :class="$style.imageWrapper">
-      <img :class="$style.image" :src="image" :alt="alt" />
+      <img :class="$style.image" :src="image" :alt="currentLang === 'it' ? alt : item.ShortDescription" />
     </div>
 
     <!-- Calendario -->
@@ -42,12 +42,14 @@
 import { useHead } from '#imports'
 import { ref, watch } from "vue"
 import { defineAsyncComponent } from "vue"
+
 import dayjs from "dayjs"
 
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import Subscription from "~/components/subscription.vue"
 import CV_experience from "~/components/CV_experience.vue"
-
+import { useLanguage } from '~/composables/useLanguage'
+const { currentLang } = useLanguage()
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 
 const props = defineProps<{

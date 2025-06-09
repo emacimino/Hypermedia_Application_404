@@ -16,15 +16,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref, watch} from 'vue'
 import ElemGrid from '~/components/elemGrid.vue'
 import Presentation from '~/components/presentation.vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
+import {pageTitles} from "~/locales/pages";
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
-
+watch(currentLang, (lang) => {
+  useHead({
+    title: pageTitles.index[lang] || 'White Lotus Activities'
+  })
+}, { immediate: true })
 interface RawActivity {
   Id: number
   Title: string

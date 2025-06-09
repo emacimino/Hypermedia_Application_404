@@ -8,7 +8,7 @@
     >
       <span :class="$style.iconCircle">{{ item.Icon }}</span>
       <p :class="$style.dateText">{{ item.Date }}</p>
-      <h3 :class="$style.titleText">{{ item.Title }}</h3>
+      <h2 :class="$style.titleText">{{ item.Title }}</h2>
       <p :class="$style.descriptionText">{{ item.Description }}</p>
     </div>
   </div>

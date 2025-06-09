@@ -4,6 +4,7 @@
         :title="currentLang === 'it' ? aboutUsContent.Title_it : aboutUsContent.Title"
         :paragraphs="currentLang === 'it' ? aboutUsContent.Paragraph_it : aboutUsContent.Paragraph"
         :image="aboutUsContent.Image"
+        :alt="currentLang === 'it' ? `Questa è un'immagine del centro` : `Center descriptive image`"
         :reverse="true"
     />
   </div>
@@ -39,13 +40,6 @@ interface PresentationContent {
   Paragraph_it: string
 }
 
-interface TimelineItem {
-  date: string
-  title: string
-  description: string
-  icon?: string
-}
-
 const { data: aboutUsContent } = await useAsyncData<PresentationContent | null>('aboutUs', async () => {
   const { data, error } = await supabase
       .from('Presentation')
@@ -57,32 +51,6 @@ const { data: aboutUsContent } = await useAsyncData<PresentationContent | null>(
   return data
 })
 
-const items = ref<TimelineItem[]>([
-  {
-    date: '15 Mar 2025',
-    title: 'Avvio del Progetto',
-    description: 'Inizio del progetto con allineamento del team e definizione delle milestone.',
-    icon: 'i-lucide-rocket'
-  },
-  {
-    date: '22 Mar 2025',
-    title: 'Fase di Design',
-    description: 'Ricerca utenti e workshop di design. Creazione di wireframe e prototipi.',
-    icon: 'i-lucide-palette'
-  },
-  {
-    date: '29 Mar 2025',
-    title: 'Sprint di Sviluppo',
-    description: 'Sviluppo frontend e backend. Implementazione delle funzionalità core.',
-    icon: 'i-lucide-code'
-  },
-  {
-    date: '5 Apr 2025',
-    title: 'Testing e Deployment',
-    description: 'Test QA e ottimizzazione delle performance. Deployment in produzione.',
-    icon: 'i-lucide-check-circle'
-  }
-])
 </script>
 
 <style module>

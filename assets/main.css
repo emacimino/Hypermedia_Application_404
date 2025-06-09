@@ -19,7 +19,7 @@ body {
     --card-radius: 0.75rem;
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     --img-height: 12vw;
-    --font-base: 1.2vw;
+    --font-base: 1rem;
     --font-title: 1.5vw;
 }
 
@@ -28,7 +28,7 @@ body {
         --gap: 3vw;
         --padding: 4vw;
         --img-height: 24vw;
-        --font-base: 3.5vw;
+        --font-base: 1 rem;
         --font-title: 5vw;
     }
 }

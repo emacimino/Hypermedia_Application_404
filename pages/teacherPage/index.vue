@@ -31,7 +31,7 @@ const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.index[lang] || 'White Lotus'
+    title: pageTitles.index[lang] || 'White Lotus teachers'
   })
 }, { immediate: true })
 interface RawTeacher {
