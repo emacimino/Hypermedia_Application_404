@@ -50,13 +50,6 @@ import CV_experience from "~/components/CV_experience.vue"
 
 const calendarComponent = defineAsyncComponent(() => import("./Calendar/index.vue"))
 
-watch(currentLang, (lang) => {
-  useHead({
-    title: lang === 'it'
-        ? 'Home – White Lotus'
-        : 'Home – White Lotus'
-  })
-}, { immediate: true })
 const props = defineProps<{
   title?: string
   paragraphs?: string
