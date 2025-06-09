@@ -3,7 +3,7 @@
 
   <div v-if="teacher">
     <Presentation
-        :title="currentLang === 'it' ? teacher.Title_it : teacher.Title"
+        :title="teacher.Title"
         :paragraphs="currentLang === 'it' ? teacher.LongDescription_it : teacher.LongDescription"
         :image="teacher.Image"
         :reverse="true"
@@ -153,7 +153,7 @@ watch(teacher, (newVal) => {
         }
       },
       {
-        label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
+        label: newVal.Title,
         ui: {
           linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
         }
