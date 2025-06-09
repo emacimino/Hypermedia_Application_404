@@ -54,9 +54,11 @@ import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
 import Packet from '../components/packet.vue'
 
+
+
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
-const yogaClass = "yoga class"
+const yogaClass = "yoga"
 
 const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
 const homePageContent = ref<any>(null)

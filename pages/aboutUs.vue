@@ -23,10 +23,13 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
 import Timeline from '~/components/timeline.vue'
+import { pageTitles } from '~/locales/pages'
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
-
+useHead({
+  title: pageTitles.aboutUs[currentLang.value] || pageTitles.aboutUs.en
+})
 interface PresentationContent {
   id: number
   Title: string

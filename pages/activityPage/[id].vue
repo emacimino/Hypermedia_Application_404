@@ -27,10 +27,11 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useSupabaseClient } from '#imports'
+import { useHead,useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import dayjs from "dayjs";
 import type {BreadcrumbItem} from "@nuxt/ui";
+import { pageTitles } from '@/locales/pages'
 
 const { currentLang } = useLanguage()
 const { createActivityUrl, extractIdFromSlug } = useActivityUrl()
@@ -108,6 +109,8 @@ const items = ref<BreadcrumbItem[]>([
 
 watch(activity, (newVal) => {
   if (newVal) {
+    const localizedTitle = currentLang.value === 'it' ? newVal.Title_it : newVal.Title
+
     items.value = [
       {
         label: 'Activities',
@@ -117,12 +120,16 @@ watch(activity, (newVal) => {
         }
       },
       {
-        label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
+        label: localizedTitle,
         ui: {
           linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
         }
       }
     ]
+
+    useHead({
+      title: pageTitles.dynamicActivity(localizedTitle, currentLang.value)
+    })
   }
 })
 </script>

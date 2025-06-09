@@ -10,6 +10,7 @@ const config: Config = {
         './plugins/**/*.{js,ts}',
         './nuxt.config.{js,ts}',
         './node_modules/@nuxthq/ui/dist/**/*.{js,ts,vue}'
+
     ],
     theme: {
         extend: {
@@ -17,15 +18,15 @@ const config: Config = {
                 'auto-fit': 'repeat(auto-fit, minmax(16rem, 1fr))',
             },
             colors: {
-                primary: {
+                blue: {
                     50: '#eff6ff',
                     100: '#d0f0fd',
                     200: '#bfdbfe',
-                    300: '#7EC8E3',
-                    400: '#0077b6',
+                    300: '#0077b6',
+                    400: '#005a8b',
                     500: '#1F3A5F',
                     600: '#1F3A5F',
-                    700: '#1d4ed8',
+                    700: '#005a8b',
                     800: '#1e40af',
                     900: '#1e3a8a'
 
