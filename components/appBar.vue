@@ -1,7 +1,7 @@
 <template>
   <!-- DESKTOP NAVIGATION -->
   <nav
-      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[4rem] max-h-[10vh]"
+      class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[5vh] max-h-[10vh]"
       style="padding: 0 2.75vw"
   >
 <NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
