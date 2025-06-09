@@ -9,6 +9,7 @@ defineProps<{
   label: string;
   to: string;
 }>()
+//.
 </script>
 
 <style scoped>
