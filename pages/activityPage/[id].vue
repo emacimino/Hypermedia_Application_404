@@ -60,11 +60,7 @@ const activityId = computed(() => extractIdFromSlug(route.params.id as string))
 
 // Retrieve events
 const fetchActivity = async () => {
-  if (isNaN(activityId.value)) {
-    console.error('ID attività non valido')
-    activity.value = null
-    return
-  }
+  if (isNaN(activityId.value)) {return}
 
   const { data, error } = await supabase
       .from("Activities")
