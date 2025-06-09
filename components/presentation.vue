@@ -2,7 +2,7 @@
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
     <!-- Immagine -->
     <div v-if="image" :class="$style.imageWrapper">
-      <img :class="$style.image" :src="image" :alt="title" />
+      <img :class="$style.image" :src="image" :alt="alt" />
     </div>
 
     <!-- Calendario -->
