@@ -16,8 +16,8 @@
         <span class="text-sm text-gray-600">{{ work.DESCRIPTION }}</span>
       </div>
       <p class="text-sm text-gray-700 mt-1">
-        Corso: <strong>{{ work.START_DATE }}</strong><br />
-        Insegnante: <strong>{{ work.END_DATE }}</strong>
+        {{currentLang == 'it' ? 'Inizio:' : 'Start:'}} <strong>{{ work.START_DATE }}</strong><br />
+        {{ currentLang == 'it' ? 'Fine:' : 'End:' }} <strong>{{ work.END_DATE }}</strong>
       </p>
     </div>
     </div>
@@ -26,7 +26,8 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
-
+import { useLanguage } from '~/composables/useLanguage'
+const { currentLang } = useLanguage()
 type CvItem = {
   ID: number
   TEACHER_ID: number

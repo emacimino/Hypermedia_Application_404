@@ -20,7 +20,7 @@
           :activeDate="dayjs()"
           :selectedWeekdayIndex="0"
           :dayEvents="teacher.Events ?? []"
-          :experience="cvList"
+          :experience="translatedCvList"
       />
     </div>
   </div>
@@ -34,8 +34,8 @@ import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import type {BreadcrumbItem} from "@nuxt/ui";
-import dayjs from "dayjs";
+import type { BreadcrumbItem } from "@nuxt/ui"
+import dayjs from "dayjs"
 
 const { currentLang } = useLanguage()
 const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
@@ -56,10 +56,13 @@ interface CV {
   ID: number
   TEACHER_ID: number
   TITLE: string
+  TITLE_it: string
   DESCRIPTION: string
+  DESCRIPTION_it: string
   START_DATE: string
   END_DATE: string
   LOCATION: string
+  LOCATION_it: string
   CREATED_AT: string
 }
 
@@ -67,15 +70,14 @@ const teacher = ref<RawTeacher | null>(null)
 const cvList = ref<CV[]>([])
 const teacherId = computed(() => extractIdFromSlug(route.params.id as string))
 
+
+
 const fetchTeacher = async () => {
-  if (isNaN(teacherId.value)) {return}
+  if (isNaN(teacherId.value)) return
 
   const { data, error } = await supabase
       .from("Teachers")
-      .select(`
-    *,
-    Events:Events ( * )
-  `)
+      .select("*, Events:Events ( * )")
       .eq("Id", teacherId.value)
       .single()
 
@@ -87,10 +89,8 @@ const fetchTeacher = async () => {
 
   teacher.value = data
 
-  // Opzionale: Reindirizza alla URL corretta se lo slug non corrisponde
   const correctUrl = createTeacherUrl(data)
-  const currentPath = route.path
-  if (currentPath !== correctUrl) {
+  if (route.path !== correctUrl) {
     await navigateTo(correctUrl, { replace: true })
   }
 }
@@ -111,7 +111,14 @@ const fetchCV = async () => {
 
   cvList.value = data || []
 }
-
+const translatedCvList = computed(() =>
+    cvList.value.map((entry) => ({
+      ...entry,
+      TITLE: currentLang.value === 'it' ? entry.TITLE_it : entry.TITLE,
+      DESCRIPTION: currentLang.value === 'it' ? entry.DESCRIPTION_it : entry.DESCRIPTION,
+      LOCATION: currentLang.value === 'it' ? entry.LOCATION_it : entry.LOCATION
+    }))
+)
 onMounted(async () => {
   await fetchTeacher()
   await fetchCV()
@@ -155,6 +162,7 @@ watch(teacher, (newVal) => {
   }
 })
 </script>
+
 
 <style module>
 .bread{
