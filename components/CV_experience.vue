@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 style="font-size: 1.75vw; font-weight: 600;">
-      Experiences
+      {{currentLang == 'it' ? 'Esperienze' : 'Experiences'}}
     </h2>
     <div v-if="cvs.length === 0" class="text-gray-500 italic">No previous experiebce.</div>
     <div class="grid md:grid-cols-2 gap-6">
