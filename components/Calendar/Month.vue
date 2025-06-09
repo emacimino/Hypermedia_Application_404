@@ -21,17 +21,23 @@ function modifyMonth(v){
 <template>
   <div class="bg-blue-300 p-[1vw] grid place-items-center">
     <span class="flex items-center gap-[1.5vw] select-none text-gray-50 text-[clamp(16px,1.2vw,24px)]">
-      <ChevronLeftIcon
-          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 group active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
+      <button
           @click="() => modifyMonth(-1)"
-      />
+          aria-label="Mese precedente"
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 active:scale-115 hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
+      >
+  <ChevronLeftIcon aria-hidden="true" />
+</button>
       <span class=" w-[6vw] min-w-[64px]">
         {{ cMonth }}
       </span>
-      <ChevronRightIcon
-          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 group active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
+      <button
           @click="() => modifyMonth(1)"
-      />
+          aria-label="Mese successivo"
+          class="cursor-pointer text-gray-800 w-[2vw] h-[2vw] min-w-[20px] min-h-[20px] hover:scale-115 active:scale-115 hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
+      >
+  <ChevronRightIcon aria-hidden="true" />
+</button>
     </span>
   </div>
 </template>

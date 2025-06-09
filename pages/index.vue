@@ -9,6 +9,7 @@
         :title="currentLang === 'it' ? homePageContent.Title_it : homePageContent.Title"
         :paragraphs="currentLang === 'it' ? homePageContent.Paragraph_it : homePageContent.Paragraph"
         :image="homePageContent.Image"
+        :alt="yogaClass"
         :reverse="true"
     />
     <div v-else>
@@ -55,6 +56,7 @@ import Packet from '../components/packet.vue'
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
+const yogaClass = "yoga class"
 
 const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
 const homePageContent = ref<any>(null)

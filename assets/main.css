@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@tailwind components;
+@tailwind utilities;
 
 
 body {
@@ -33,4 +35,20 @@ body {
 
 html, body {
     overflow-x: hidden;
+}
+
+@layer components {
+    .btn {
+        @apply px-6 py-3 text-white text-lg font-medium rounded-md
+        bg-blue-300 transition-colors duration-200 ease-in-out;
+    }
+
+    .btn:hover:not(:disabled),
+    .btn:active:not(:disabled) {
+        @apply bg-blue-400;
+    }
+
+    .btn:disabled {
+        @apply bg-gray-400 cursor-not-allowed;
+    }
 }
