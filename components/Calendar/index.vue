@@ -57,6 +57,9 @@ const selectedValues = reactive({
 
 const selectedDateValue = ref<number | null>(null)
 const selectedFullDate = ref(dayjs())
+const currentMonthLabel = computed(() =>
+    dayjs().locale(currentLang.value).format('MMMM')
+);
 
 watch(selectedDateValue, () => {
   if (selectedDateValue.value !== null) {

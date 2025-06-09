@@ -56,6 +56,11 @@ const displayedEvents = computed(() => {
       (event.Type === 'recurring' && event.Weekday === weekdayStr)
   )
 })
+const formattedWeekDate = computed(() =>
+    (props.currentDate ?? internalDate.value)
+        .locale(currentLang.value)
+        .format("DD MMM YYYY")
+);
 
 function selectDay(index: number) {
   const selected = (props.currentDate ?? internalDate.value).startOf('isoWeek').add(index, 'day')
@@ -132,7 +137,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     </button>
 
     <span class="font-semibold text-center">
-      {{ (props.currentDate ?? internalDate).format("DD MMM YYYY") }} week
+      {{ currentLang === 'it' ? 'Settimana ' + formattedWeekDate : formattedWeekDate + ' week' }}
       <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] bg-blue-300 text-white rounded hover:bg-blue-400">
         <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
       </button>
