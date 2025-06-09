@@ -1,7 +1,7 @@
 <template>
   <nuxt-link :to="link" class="linkWrapper">
     <div :class="$style.card">
-      <img :src="Image" :alt="Title" :class="$style.image" />
+      <img :src="Image" :class="$style.image" />
       <div :class="$style.content">
         <h3 :class="$style.title">{{ Title }}</h3>
         <p :class="$style.description">{{ ShortDescription }}</p>

@@ -7,6 +7,7 @@
         :paragraphs="retrievedData.teachData[0].Paragraph"
         :image="retrievedData.teachData[0].Image"
         :reverse="true"
+        :alt="currentLang === 'it' ? 'Insegnanti' : 'Teachers'"
         class="px-4"
     />
     </div>
@@ -24,10 +25,15 @@ import ElemGrid from '~/components/elemGrid.vue'
 import Presentation from '~/components/presentation.vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
+import { pageTitles } from '~/locales/pages'
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
-
+watch(currentLang, (lang) => {
+  useHead({
+    title: pageTitles.index[lang] || 'White Lotus'
+  })
+}, { immediate: true })
 interface RawTeacher {
   Id: number
   Image: string
