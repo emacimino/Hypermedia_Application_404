@@ -4,7 +4,7 @@
         :title="currentLang === 'it' ? aboutUsContent.Title_it : aboutUsContent.Title"
         :paragraphs="currentLang === 'it' ? aboutUsContent.Paragraph_it : aboutUsContent.Paragraph"
         :image="aboutUsContent.Image"
-        :alt="currentLang === 'it' ? `Questa è un'immagine del centro` : `Center descriptive image`"
+        :alt="currentLang === 'it' ? `Una sala del centro` : `A center room`"
         :reverse="true"
     />
   </div>
