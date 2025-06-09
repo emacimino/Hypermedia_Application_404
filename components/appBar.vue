@@ -4,12 +4,11 @@
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[4rem] max-h-[10vh]"
       style="padding: 0 2.75vw"
   >
-<NuxtLink to="/"  class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
->
-  <NuxtImg src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
-  <h2 class=" text-[clamp(2rem,4.5vw,4rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
-    White Lotus
-  </h2>
+  <NuxtLink to="/" title="Go to home" alt="Website logo, go to home" class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
+    <NuxtImg src="Logo2.png" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
+    <h2 class=" text-[clamp(2rem,4.5vw,4rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+      White Lotus
+    </h2>
 </NuxtLink>
 
     <div class="flex items-center" style="gap: 2vw">
