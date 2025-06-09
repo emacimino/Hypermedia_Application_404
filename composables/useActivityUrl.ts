@@ -1,15 +1,8 @@
 import { useLanguage } from '~/composables/useLanguage'
 
-interface RawActivity {
+interface Raw {
     Id: number
     Title: string
-    Title_it: string
-}
-
-interface RawTeacher {
-    Id: number
-    Title: string
-    Title_it: string
 }
 
 export const useActivityUrl = () => {
@@ -26,14 +19,14 @@ export const useActivityUrl = () => {
             .replace(/^-|-$/g, '') // Rimuove trattini all'inizio e alla fine
     }
 
-    const createActivityUrl = (activity: RawActivity): string => {
-        const title = currentLang.value === 'it' ? activity.Title_it : activity.Title
+    const createActivityUrl = (activity: Raw): string => {
+        const title = activity.Title
         const slug = createSlug(title)
         return `/activityPage/${activity.Id}-${slug}`
     }
 
-    const createTeacherUrl = (teacher: RawTeacher): string => {
-        const title = currentLang.value === 'it' ? teacher.Title_it : teacher.Title
+    const createTeacherUrl = (teacher: Raw): string => {
+        const title = teacher.Title
         const slug = createSlug(title)
         return `/teacherPage/${teacher.Id}-${slug}`
     }

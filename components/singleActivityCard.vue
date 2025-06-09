@@ -16,28 +16,22 @@ import { computed } from 'vue';
 const props = defineProps<{
   Id: number;
   Title: string;
-  Title_it: string;
   ShortDescription: string;
-  ShortDescription_it: string;
   Image: string;
 }>();
 
 const { createActivityUrl, createTeacherUrl } = useActivityUrl();
 
 const link = computed(() => {
-  if (props.Id > 50) {
-    // Per i teacher, usa il composable per creare URL con ID-nome
+  if (props.Id > 49) {
     return createTeacherUrl({
       Id: props.Id,
       Title: props.Title,
-      Title_it: props.Title_it
     });
   } else {
-    // Per le attività, usa il composable per creare URL con ID-titolo
     return createActivityUrl({
       Id: props.Id,
       Title: props.Title,
-      Title_it: props.Title_it
     });
   }
 });

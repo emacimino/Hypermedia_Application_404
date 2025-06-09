@@ -3,7 +3,7 @@
 
   <div v-if="teacher">
     <Presentation
-        :title="teacher.Title"
+        :title="currentLang === 'it' ? teacher.Title_it : teacher.Title"
         :paragraphs="currentLang === 'it' ? teacher.LongDescription_it : teacher.LongDescription"
         :image="teacher.Image"
         :reverse="true"
@@ -68,11 +68,7 @@ const cvList = ref<CV[]>([])
 const teacherId = computed(() => extractIdFromSlug(route.params.id as string))
 
 const fetchTeacher = async () => {
-  if (isNaN(teacherId.value)) {
-    console.error('ID teacher non valido')
-    teacher.value = null
-    return
-  }
+  if (isNaN(teacherId.value)) {return}
 
   const { data, error } = await supabase
       .from("Teachers")
@@ -128,13 +124,13 @@ const items = ref<BreadcrumbItem[]>([
     label: 'Teachers',
     to: '/teacherPage',
     ui: {
-      linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+      linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
     }
   },
   {
     label: 'Loading...',
     ui: {
-      linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+      linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
     }
   }
 ])
@@ -146,13 +142,13 @@ watch(teacher, (newVal) => {
         label: 'Teachers',
         to: '/teacherPage',
         ui: {
-          linkLabel: 'text-xl text-[#1F3A5F] font-sans'
+          linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
         }
       },
       {
         label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
         ui: {
-          linkLabel: 'text-2xl text-[#1F3A5F] font-sans font-bold underline'
+          linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
         }
       }
     ]
