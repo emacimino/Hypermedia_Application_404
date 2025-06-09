@@ -4,7 +4,8 @@
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[5vh] max-h-[10vh]"
       style="padding: 0 2.75vw"
   >
-  <NuxtLink to="/" title="Go to home" alt="Website logo, go to home" class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
+  <NuxtLink to="/" title="Go to home" alt="Website logo, go to home"
+            class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
     <NuxtImg src="Logo2.png" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
     <h2 class=" text-[clamp(2rem,4.5vw,4rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
       White Lotus
@@ -31,14 +32,14 @@
 
   <!-- MOBILE NAVIGATION -->
   <nav
-      class="flex md:hidden w-full items-center justify-between bg-blue-100 "
+      class="flex md:hidden w-full items-center justify-between bg-blue-100 rounded-md min-h-[5vh] max-h-[10vh]"
       style=" padding: 1vw 4vw"
   >
-    <NuxtLink to="/"  alt="White lotus"
-              class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-105 group cursor-pointer hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]"
+    <NuxtLink to="/" title="Go to home" alt="Website logo, go to home"
+              class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out cursor-pointer hover:scale-115 active:scale-115 hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)] group"
     >
-      <NuxtImg  src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[40px] max-w-[80px]" />
-      <h2 class="text-[6vw] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+      <NuxtImg  src="Logo2.png" title="Go to home" class="w-[6vw] min-w-[2rem] max-w-[6rem]" />
+      <h2 class="text-[clamp(2rem,4.5vw,4rem)]] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
         White Lotus
       </h2>
     </NuxtLink>
@@ -47,7 +48,7 @@
         type="button"
         @click="toggleMenu"
         class="relative z-50 flex flex-col justify-between cursor-pointer focus:outline-none"
-        style="width: 8vw; height: 6vw; min-width: 32px; min-height: 24px"
+        style="width: 8vw; height: 6vw; min-width: 2rem; min-height: 1.5rem"
         aria-label="Toggle navigation"
         :aria-expanded="isMenuOpen.toString()"
     >
@@ -93,7 +94,7 @@
         @click="closeMenu"
     />
     <NuxtImg
-        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group w-[clamp(2rem,6vw,6rem)] h-[clamp(2rem,6vw,6rem)]"
+        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group w-[clamp(3rem,15vw,6rem)] h-[clamp(3rem,15vw,6rem)]"
         :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
         alt="Switch language"
         @click="toggleLanguage"

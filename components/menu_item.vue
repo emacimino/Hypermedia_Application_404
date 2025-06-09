@@ -9,7 +9,7 @@ defineProps<{
   label: string;
   to: string;
 }>()
-//.
+
 </script>
 
 <style scoped>
@@ -39,8 +39,8 @@ defineProps<{
 }
 @media (max-width: 767px) {
   .menu-item {
-    font-size: clamp(2rem, 4vw, 3rem);
-    height: clamp(2.5rem, 10vw, 3.5rem);
+    font-size: clamp(2rem, 3vw, 3rem);
+    height: clamp(2.5rem, 7vw, 3.5rem);
   }
 }
 
