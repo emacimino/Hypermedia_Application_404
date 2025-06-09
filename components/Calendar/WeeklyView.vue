@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { CalendarIcon } from "@heroicons/vue/24/outline"
 import dayjs from "dayjs"
+import 'dayjs/locale/it';
+import 'dayjs/locale/en';
 import { ref, computed, onMounted, watch } from "vue"
 import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
@@ -41,7 +43,9 @@ const selectedLocalIndex = ref(props.selectedWeekdayIndex ?? ((selectedLocalDate
 
 const internalActiveDate = computed(() => props.activeDate ?? selectedLocalDate.value)
 const internalWeekdayIndex = computed(() => props.selectedWeekdayIndex ?? selectedLocalIndex.value)
-
+const localizedDate = computed(() =>
+    internalActiveDate.value.locale(currentLang.value).format('dddd DD MMMM')
+);
 const displayedEvents = computed(() => {
   const source = props.dayEvents ?? internalEvents.value
   const dateStr = internalActiveDate.value.format("YYYY-MM-DD")
@@ -156,11 +160,12 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 
   <div class="space-y-[2vw] px-[2vw]">
     <h2 class="text-lg font-semibold">
-      Events for {{ internalActiveDate.format("dddd DD MMMM") }}
+      {{ currentLang === 'it' ? 'Eventi di' : 'Events for' }} {{ localizedDate }}
+
     </h2>
 
     <div v-if="displayedEvents.length === 0" class="text-blue-500 italic">
-      Nessun evento.
+      {{ currentLang == 'it' ? 'Nessun evento' : 'No events' }}
     </div>
 
     <div
