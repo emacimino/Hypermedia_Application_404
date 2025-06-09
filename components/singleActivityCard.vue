@@ -1,9 +1,9 @@
 <template>
   <nuxt-link :to="link" class="linkWrapper">
     <div :class="$style.card">
-      <img :src="Image" :class="$style.image" />
+      <img :src="Image" :alt="currentLang === 'it' ? 'Insegnante '+ Title : 'Teacher ' + Title" :class="$style.image" />
       <div :class="$style.content">
-        <h3 :class="$style.title">{{ Title }}</h3>
+        <h2 :class="$style.title">{{ Title }}</h2>
         <p :class="$style.description">{{ ShortDescription }}</p>
       </div>
     </div>
@@ -12,7 +12,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-
+import { useLanguage } from '~/composables/useLanguage'
+const { currentLang } = useLanguage()
 const props = defineProps<{
   Id: number;
   Title: string;
