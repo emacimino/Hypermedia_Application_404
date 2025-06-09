@@ -53,6 +53,7 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
 import Packet from '../components/packet.vue'
+import { pageTitles } from '~/locales/pages'
 
 
 
@@ -65,7 +66,11 @@ const homePageContent = ref<any>(null)
 const homePageContent2 = ref<any>(null)
 const showPackagesTitle = ref(false)
 const packagesTitleRef = ref<HTMLElement | null>(null)
-
+watch(currentLang, (lang) => {
+  useHead({
+    title: pageTitles.index[lang] || 'White Lotus'
+  })
+}, { immediate: true })
 const fetchImages = async () => {
   const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl,Course_Id')
   if (error) console.error('Errore slideshow:', error)
