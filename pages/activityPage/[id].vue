@@ -109,7 +109,6 @@ const items = ref<BreadcrumbItem[]>([
 
 watch(activity, (newVal) => {
   if (newVal) {
-    const localizedTitle = currentLang.value === 'it' ? newVal.Title_it : newVal.Title;
     const meta = pageMeta.dynamicActivity(newVal.Title, currentLang.value);
 
     useHead({
@@ -124,14 +123,14 @@ watch(activity, (newVal) => {
 
     items.value = [
       {
-        label: 'Activities',
+        label: currentLang.value === 'it' ? 'Attività' : 'Activities',
         to: '/activityPage',
         ui: {
           linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
         }
       },
       {
-        label: localizedTitle,
+        label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
         ui: {
           linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
         }
