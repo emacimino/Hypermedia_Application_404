@@ -1,6 +1,6 @@
 <template>
   <div class="w-full aspect-video max-h-[80vh]">
-    <flow-image :images="images" />
+    <flow-image :images="slideStore.slides" />
   </div>
 
   <div class="flex flex-row">
@@ -40,6 +40,7 @@ import {pageMeta} from '~/locales/pages'
 
 import { useHomePresentationStore } from '~/stores/homePresentationStore'
 import PacketGrid from "~/components/Grids/packetGrid.vue";
+import { useSlideStore } from '~/stores/slideshow'
 
 
 const supabase = useSupabaseClient()
@@ -49,6 +50,8 @@ const yogaClass = "yoga"
 const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
 
 const homeStore = useHomePresentationStore()
+const slideStore = useSlideStore()
+
 const { firstPresentation, secondPresentation } = storeToRefs(homeStore)
 
 
@@ -59,26 +62,20 @@ watch(currentLang, (lang) => {
       { name: 'description', content: pageMeta.index.description[currentLang] }
     ]
   })
+  homeStore.fetchPresentationContent(supabase)
+
 }, { immediate: true })
-const fetchImages = async () => {
-  const { data, error } = await supabase.from('Slideshow').select('Title, ImageUrl,Course_Id')
-  if (error) console.error('Errore slideshow:', error)
-  images.value = data ?? []
-}
+
 
 
 
 
 
 onMounted(() => {
-  fetchImages()
+  slideStore.fetchImages(currentLang,supabase)
   homeStore.fetchPresentationContent(supabase)
 })
-
-
-watch(currentLang, () => {
-  homeStore.fetchPresentationContent(supabase)
-}, { immediate: true })</script>
+</script>
 
 <style module>
 
