@@ -29,9 +29,9 @@ import {pageMeta} from '~/locales/pages'
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 useHead({
-  title: pageMeta.aboutUs[currentLang.value] || pageTitles.aboutUs.en,
+  title: pageMeta.aboutUs[currentLang.value] || pageMeta.aboutUs.en,
   meta: [
-    { name: 'description', content: pageMeta.aboutUs.description[currentLang] }
+    { name: 'description', content: pageMeta.aboutUs.description[currentLang.value] }
   ]
 })
 interface PresentationContent {
