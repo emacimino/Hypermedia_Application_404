@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watchEffect } from 'vue'
 import { useSupabaseClient } from '#imports'
-import { useLanguage } from '@/composables/useLanguage'
+import { useLanguage } from '~/composables/useLanguage'
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()

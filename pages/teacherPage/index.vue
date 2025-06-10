@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
-import ElemGrid from '~/components/elemGrid.vue'
-import Presentation from '~/components/presentation.vue'
+import ElemGrid from '~/components/Grids/elemGrid.vue'
+import Presentation from '~/components/Single_Elements/presentation.vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'

@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import AppBar from "~/components/appBar.vue";
-import Footer from "~/components/Footer.vue";
+import AppBar from "~/components/Frames_Header&Footer/appBar.vue";
+import Footer from "~/components/Frames_Header&Footer/Footer.vue";
 import { useLanguage } from '~/composables/useLanguage'
 import { useHead } from '#imports'
 

@@ -22,7 +22,7 @@
 import { useAsyncData } from '#app'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import Presentation from '~/components/presentation.vue'
+import Presentation from '~/components/Single_Elements/presentation.vue'
 import Timeline from '~/components/timeline.vue'
 import {pageMeta} from '~/locales/pages'
 
