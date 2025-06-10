@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import singleActivityCard from '~/components/Single_Elements/singleActivityCard.vue'
 interface Cards {
   Id: number;
   Title: string;

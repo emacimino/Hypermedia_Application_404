@@ -27,7 +27,7 @@ const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.activityPage[lang] || 'White Lotus Activities',
+    title: pageMeta.activityPage[lang] || 'White Lotus Activities',
     meta: [
       { name: 'description', content: pageMeta.activityPage.description[currentLang] }
     ]

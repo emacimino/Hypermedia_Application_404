@@ -4,7 +4,7 @@
   </h1>
 
   <div :class="$style.gridContainer">
-    <single-highlight-card
+    <singleHighlightCard
         v-for="(card, index) in cards"
         :key="index"
         v-bind="card"
@@ -18,6 +18,7 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { onMounted } from 'vue'
 import {pageMeta} from "~/locales/pages";
+import singleHighlightCard from '~/components/Single_Elements/singleHighlightCard.vue'
 
 const showTitle = ref(false)
 
