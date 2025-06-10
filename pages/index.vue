@@ -53,7 +53,7 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
 import Packet from '../components/packet.vue'
-import { pageTitles } from '~/locales/pages'
+import {pageMeta} from '~/locales/pages'
 
 
 
@@ -68,7 +68,10 @@ const showPackagesTitle = ref(false)
 const packagesTitleRef = ref<HTMLElement | null>(null)
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.index[lang] || 'White Lotus'
+    title: pageTitles.index[lang] || 'White Lotus',
+    meta: [
+      { name: 'description', content: pageMeta.index.description[currentLang] }
+    ]
   })
 }, { immediate: true })
 const fetchImages = async () => {

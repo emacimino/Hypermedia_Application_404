@@ -23,9 +23,17 @@
 import { ref, watchEffect, onMounted, nextTick } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import 'leaflet/dist/leaflet.css'
+import {useSupabaseClient} from "#imports";
+import {pageMeta} from "~/locales/pages";
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
+useHead({
+  title: pageMeta.contacts[currentLang] || pageTitles.contacts.en,
+  meta: [
+    { name: 'description', content: pageMeta.contacts.description[currentLang] }
+  ]
+})
 
 // Reactive refs for each section
 const whereAreWeTitle = ref('')

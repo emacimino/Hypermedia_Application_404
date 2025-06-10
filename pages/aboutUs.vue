@@ -24,12 +24,15 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/presentation.vue'
 import Timeline from '~/components/timeline.vue'
-import { pageTitles } from '~/locales/pages'
+import {pageMeta} from '~/locales/pages'
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 useHead({
-  title: pageTitles.aboutUs[currentLang.value] || pageTitles.aboutUs.en
+  title: pageMeta.aboutUs[currentLang.value] || pageTitles.aboutUs.en,
+  meta: [
+    { name: 'description', content: pageMeta.aboutUs.description[currentLang] }
+  ]
 })
 interface PresentationContent {
   id: number

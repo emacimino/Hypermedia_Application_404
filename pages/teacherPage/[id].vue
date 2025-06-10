@@ -36,6 +36,7 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import type { BreadcrumbItem } from "@nuxt/ui"
 import dayjs from "dayjs"
+import {pageMeta} from "~/locales/pages";
 
 const { currentLang } = useLanguage()
 const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
@@ -144,6 +145,17 @@ const items = ref<BreadcrumbItem[]>([
 
 watch(teacher, (newVal) => {
   if (newVal) {
+    const meta = pageMeta.dynamicTeacher(newVal.Title, currentLang.value)
+
+    useHead({
+      title: meta.title,
+      meta: [
+        {
+          name: 'description',
+          content: meta.description
+        }
+      ]
+    })
     items.value = [
       {
         label: 'Teachers',

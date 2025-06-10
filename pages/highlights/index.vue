@@ -17,7 +17,7 @@ import { ref, watch } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { onMounted } from 'vue'
-import {pageTitles} from "~/locales/pages";
+import {pageMeta} from "~/locales/pages";
 
 const showTitle = ref(false)
 
@@ -48,7 +48,10 @@ const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.index[lang] || 'White Lotus Activities'
+    title: pageMeta.highlights[lang] || 'White Lotus Activities',
+    meta: [
+      { name: 'description', content: pageMeta.highlights.description[currentLang] }
+    ]
   })
 }, { immediate: true })
 const title = ref('')

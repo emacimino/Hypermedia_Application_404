@@ -25,13 +25,16 @@ import ElemGrid from '~/components/elemGrid.vue'
 import Presentation from '~/components/presentation.vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
-import { pageTitles } from '~/locales/pages'
+import { pageMeta } from '~/locales/pages'
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.index[lang] || 'White Lotus teachers'
+    title: pageMeta.teacherPage[lang] || 'White Lotus teachers',
+    meta: [
+      { name: 'description', content: pageMeta.teacherPage.description[lang] }
+    ]
   })
 }, { immediate: true })
 interface RawTeacher {

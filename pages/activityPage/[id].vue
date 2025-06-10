@@ -31,7 +31,7 @@ import { useHead,useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import dayjs from "dayjs";
 import type {BreadcrumbItem} from "@nuxt/ui";
-import { pageTitles } from '@/locales/pages'
+import {pageMeta} from '@/locales/pages'
 
 const { currentLang } = useLanguage()
 const { createActivityUrl, extractIdFromSlug } = useActivityUrl()
@@ -109,7 +109,18 @@ const items = ref<BreadcrumbItem[]>([
 
 watch(activity, (newVal) => {
   if (newVal) {
-    const localizedTitle = currentLang.value === 'it' ? newVal.Title_it : newVal.Title
+    const localizedTitle = currentLang.value === 'it' ? newVal.Title_it : newVal.Title;
+    const meta = pageMeta.dynamicActivity(newVal.Title, currentLang.value);
+
+    useHead({
+      title: meta.title,
+      meta: [
+        {
+          name: 'description',
+          content: meta.description
+        }
+      ]
+    })
 
     items.value = [
       {
@@ -126,10 +137,6 @@ watch(activity, (newVal) => {
         }
       }
     ]
-
-    useHead({
-      title: pageTitles.dynamicActivity(localizedTitle, currentLang.value)
-    })
   }
 })
 </script>

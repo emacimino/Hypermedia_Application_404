@@ -152,6 +152,7 @@ function handleNavigate(dir: 'prev' | 'next') {
   }
   .title {
     font-size: 5.5vw;
+    font-weight: bold;
   }
   .paragraphs {
     font-size: 3.75vw;
