@@ -160,7 +160,7 @@ watch(teacher, (newVal) => {
 
     items.value = [
       {
-        label: currentLang.value === 'it' ? 'Insegnati' : 'Teachers',
+        label: currentLang.value === 'it' ? 'Insegnanti' : 'Teachers',
         to: '/teacherPage',
         ui: {
           linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
