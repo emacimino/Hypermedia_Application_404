@@ -29,7 +29,7 @@ import {pageMeta} from "~/locales/pages";
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 useHead({
-  title: pageMeta.contacts[currentLang.value] || pageMeta.contacts.en,
+  title: pageMeta.contacts.title[currentLang.value] || pageMeta.contacts.title.en,
   meta: [
     { name: 'description', content: pageMeta.contacts.description[currentLang.value] }
   ]

@@ -31,7 +31,7 @@ const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageMeta.teacherPage[lang] || 'White Lotus teachers',
+    title: pageMeta.teacherPage.title[lang] || 'White Lotus teachers',
     meta: [
       { name: 'description', content: pageMeta.teacherPage.description[lang] }
     ]

@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, watch} from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/Single_Elements/presentation.vue'
@@ -57,9 +57,9 @@ const { firstPresentation, secondPresentation } = storeToRefs(homeStore)
 
 watch(currentLang, (lang) => {
   useHead({
-    title: pageMeta.index[lang] || 'White Lotus',
+    title: pageMeta.index.title[lang] || 'White Lotus',
     meta: [
-      { name: 'description', content: pageMeta.index.description[currentLang] }
+      { name: 'description', content: pageMeta.index.description[lang] }
     ]
   })
   homeStore.fetchPresentationContent(supabase)
