@@ -68,7 +68,7 @@ const showPackagesTitle = ref(false)
 const packagesTitleRef = ref<HTMLElement | null>(null)
 watch(currentLang, (lang) => {
   useHead({
-    title: pageTitles.index[lang] || 'White Lotus',
+    title: pageMeta.index[lang] || 'White Lotus',
     meta: [
       { name: 'description', content: pageMeta.index.description[currentLang] }
     ]
