@@ -37,6 +37,7 @@ import { useLanguage } from '~/composables/useLanguage'
 import type { BreadcrumbItem } from "@nuxt/ui"
 import dayjs from "dayjs"
 import {pageMeta} from "~/locales/pages";
+import Presentation from '~/components/Single_Elements/presentation.vue'
 
 const { currentLang } = useLanguage()
 const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
