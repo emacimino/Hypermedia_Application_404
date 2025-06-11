@@ -10,12 +10,8 @@
   </div>
   <div v-else>
     <p>Loading...</p>
-
   </div>
   <Timeline/>
-
-
-
 </template>
 
 <script setup lang="ts">
