@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.property1default">
     <img :class="$style.shapeIcon" alt="" src="/shape1.svg" />
-    <img :class="$style.activityImage" alt="" :src="activityImagePath" />
+    <img :class="$style.activityImage" alt="" :src="card.link" />
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
 
     <b :class="$style.craftItYourself">{{ resolvedTitle }}</b>
@@ -22,64 +22,30 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from 'vue'
-import { useSupabaseClient } from '#imports'
+import { ref, watchEffect } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
+import { useRouter } from 'vue-router'
 
-const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
+const router = useRouter()
 
-const props = defineProps({
-  name: String,
-  title: {
-    type: String,
-    default: 'Discover our activity!',
-  },
-  buttonText: {
-    type: String,
-    default: 'Go see it!',
-  }
+const { card } = defineProps<{ card: HighlightItem }>()
+
+const resolvedTitle = ref('')
+const resolvedParagraph = ref('')
+
+watchEffect(() => {
+  resolvedTitle.value = card.title[currentLang.value] ?? ''
+  resolvedParagraph.value = card.subtitle[currentLang.value] ?? ''
 })
 
-const resolvedTitle = ref(props.title)
-const resolvedParagraph = ref(props.buttonText)
-const activityImagePath = ref<string | null>(null)
-
-function getColumnName(base: string): string {
-  return currentLang.value === 'it' ? `${base}_it` : base
+function onClick() {
+  router.push(`/activityPage/${card.id}`)
 }
 
-watchEffect(async () => {
-  const titleCol = getColumnName('Title')
-  const paragraphCol = getColumnName('Paragraph')
-
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select(`${titleCol}, ${paragraphCol}`)
-      .eq('Title', props.title)
-      .single()
-
-  if (!error && data) {
-    resolvedTitle.value = data[titleCol]
-    resolvedParagraph.value = data[paragraphCol]
-  }
-})
-
-onMounted(async () => {
-  const { data, error } = await supabase
-      .from('Activities')
-      .select('Image')
-      .eq('Title', props.name)
-      .single()
-
-  if (!error && data) {
-    activityImagePath.value = data.Image
-  } else {
-    console.error('Could not fetch activity image:', error)
-  }
-})
-
+const activityImagePath = ref(card.image)
 const hoverClass = ref('')
 const style = useCssModule()
 
@@ -89,22 +55,6 @@ function onHover() {
 
 function onLeave() {
   hoverClass.value = ''
-}
-
-async function onClick() {
-  const { data, error } = await supabase
-      .from('Activities')
-      .select('Id')
-      .eq('Title', props.name)
-      .single()
-
-  if (error || !data) {
-    console.error('Activity not found:', error)
-    return
-  }
-
-  const activityId = data.Id
-  navigateTo(`/activityPage/${activityId}`)
 }
 </script>
 
