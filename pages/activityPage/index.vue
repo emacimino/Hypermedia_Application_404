@@ -17,7 +17,7 @@
 
 
 <script setup lang="ts">
-import { watch} from 'vue'
+import {watch} from 'vue'
 import ElemGrid from '~/components/Grids/elemGrid.vue'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import {useSupabaseClient} from '#imports'
@@ -25,9 +25,9 @@ import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
 import { useActivityStore } from '~/stores/activityPageStore'
 const activityStore = useActivityStore()
-
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
+
 watch(currentLang, (lang) => {
   useHead({
     title: pageMeta.activityPage.title[lang] || 'White Lotus Activities',
