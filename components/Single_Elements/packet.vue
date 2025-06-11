@@ -10,13 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import { useSupabaseClient } from '#imports'
-import { useLanguage } from '~/composables/useLanguage'
-
-
-const supabase = useSupabaseClient()
-const { currentLang } = useLanguage()
 defineProps<{
   id: string
   price: string
@@ -27,13 +20,12 @@ defineProps<{
 
 <style module>
 .packet {
-  border: 0.15vw solid;
+  border: 0.15rem solid;
   border-radius: 12px;
-  width: 12vw;
-  height: 9vw;
+  width: 13.5rem;
+  height: 10rem;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 .top {
   height: 60%;
@@ -42,7 +34,7 @@ defineProps<{
   align-items: center;
 }
 .price {
-  font-size: 3vw;
+  font-size: 4rem;
   font-weight: bold;
   color: #1f3a5f;
 }
@@ -51,7 +43,7 @@ defineProps<{
   background-color: white;
 }
 .type {
-  font-size: 1.5vw;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,17 +51,29 @@ defineProps<{
 }
 
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .packet {
-    width: 30vw;
-    height: 22.5vw;
+    width: 9rem;
+    height: 7rem;
   }
   .price {
-    font-size: 8vw;
+    font-size: 2.75rem;
   }
   .type {
-    font-size: 4vw;
+    font-size: 1.25rem;
   }
 }
 
+@media (min-width: 2560px) {
+  .packet{
+    width: 20rem;
+    height: 14.5rem;
+  }
+  .price {
+    font-size: 5.5rem;
+  }
+  .type {
+    font-size: 3rem;
+  }
+}
 </style>

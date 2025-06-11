@@ -54,7 +54,6 @@ const slideStore = useSlideStore()
 
 const { firstPresentation, secondPresentation } = storeToRefs(homeStore)
 
-
 watch(currentLang, (lang) => {
   useHead({
     title: pageMeta.index.title[lang] || 'White Lotus',
@@ -65,11 +64,6 @@ watch(currentLang, (lang) => {
   homeStore.fetchPresentationContent(supabase)
 
 }, { immediate: true })
-
-
-
-
-
 
 onMounted(() => {
   slideStore.fetchImages(currentLang,supabase)

@@ -39,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { useHead } from '#imports'
 import { ref, watch } from "vue"
 import { defineAsyncComponent } from "vue"
 
@@ -48,8 +47,6 @@ import dayjs from "dayjs"
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import Subscription from "~/components/Single_Elements/subscription.vue"
 import CV_experience from "~/components/CV_experience.vue"
-import { useLanguage } from '~/composables/useLanguage'
-const { currentLang } = useLanguage()
 const calendarComponent = defineAsyncComponent(() => import("../Calendar/index.vue"))
 
 const props = defineProps<{
@@ -91,9 +88,8 @@ function handleNavigate(dir: 'prev' | 'next') {
 <style module>
 .property_default {
   display: flex;
-  flex-direction: row;
-  padding: 1.5vw;
-  gap: 1.75vw;
+  padding: var(--padding);
+  gap: var(--gap);
   font-family: Inter;
   align-items: center;
   color: #1F3A5F;
@@ -115,10 +111,11 @@ function handleNavigate(dir: 'prev' | 'next') {
   width: 100%;
 }
 .title {
-  font-size: 2.5vw;
+  font-size: 3rem;
+  font-weight: bold;
 }
 .paragraphs {
-  font-size: 1.5vw;
+  font-size: 1.75rem;
 }
 .weekWrapper {
   width: 100%;
@@ -129,12 +126,9 @@ function handleNavigate(dir: 'prev' | 'next') {
   min-width: 0;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .property_default {
     flex-direction: column;
-    padding-bottom: 2vw;
-    padding-top: 2vw;
-    gap: 1vw;
   }
   .reversed {
     flex-direction: column;
@@ -151,11 +145,19 @@ function handleNavigate(dir: 'prev' | 'next') {
     order: 1;
   }
   .title {
-    font-size: 5.5vw;
-    font-weight: bold;
+    font-size: 2.25rem;
   }
   .paragraphs {
-    font-size: 3.75vw;
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .title {
+    font-size: 5rem;
+  }
+  .paragraphs {
+    font-size: 3rem;
   }
 }
 </style>
