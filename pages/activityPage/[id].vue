@@ -43,13 +43,11 @@ const router = useRouter()
 
 const activityStore = useActivityIdStore()
 
-// Estraggo l'ID dall'URL
 const activityId = computed(() => {
   const { extractIdFromSlug } = useActivityUrl()
   return extractIdFromSlug(route.params.id as string)
 })
 
-// Redirect all'URL corretto se necessario
 const { createActivityUrl } = useActivityUrl()
 watch(() => activityStore.activity, (data) => {
   if (data) {
@@ -60,7 +58,6 @@ watch(() => activityStore.activity, (data) => {
   }
 })
 
-// Carico attività inizialmente e al cambio lingua
 const fetch = () => {
   if (activityId.value) {
     activityStore.fetchActivity(activityId.value, supabase)

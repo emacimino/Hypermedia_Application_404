@@ -5,10 +5,9 @@
 
   <div :class="$style.gridContainer">
     <singleHighlightCard
-        v-for="(card, index) in cards"
+        v-for="(card, index) in highlightsStore.highlights"
         :key="index"
-        v-bind="card"
-    />
+        :card="card"/>
   </div>
 </template>
 
@@ -18,7 +17,11 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { onMounted } from 'vue'
 import {pageMeta} from "~/locales/pages";
+
 import singleHighlightCard from '~/components/Single_Elements/singleHighlightCard.vue'
+import {useHighlightsStore} from "~/stores/highlightsStore";
+
+const highlightsStore = useHighlightsStore()
 
 const showTitle = ref(false)
 
@@ -38,6 +41,8 @@ onMounted(() => {
   setTimeout(() => {
     showTitle.value = true
   }, 2000)
+
+  highlightsStore.fetchHighlights(supabase)
 })
 
 type Presentation = {
@@ -57,47 +62,10 @@ watch(currentLang, (lang) => {
 }, { immediate: true })
 const title = ref('')
 
-const fetchTitle = async () => {
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select('Title, Title_it')
-      .eq('Id', 14)
-      .single<Presentation>()
+watch(currentLang, () => {
+  highlightsStore.fetchHighlights(supabase)
+}, { immediate: true })
 
-  if (error || !data) {
-    console.error('Error fetching title:', error?.message)
-    return
-  }
-
-  title.value = currentLang.value === 'it'
-      ? data.Title_it ?? data.Title
-      : data.Title ?? data.Title_it
-}
-
-watch(currentLang, fetchTitle, { immediate: true })
-
-const cards = [
-  {
-    name:"Workshops",
-    title: 'Craft it yourself!',
-    buttonText: 'See our labs!'
-  },
-  {
-    name:"Seminars",
-    title: 'Try something new!',
-    buttonText: 'Start now!'
-  },
-  {
-    name:"Mindfulness",
-    title: 'Find yourself!',
-    buttonText: 'Go relax!'
-  },
-  {
-    name:"Pilates",
-    title: 'Open your horizons!',
-    buttonText: 'Start practising!'
-  }
-]
 </script>
 
 <style module>
