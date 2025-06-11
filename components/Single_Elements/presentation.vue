@@ -145,10 +145,10 @@ function handleNavigate(dir: 'prev' | 'next') {
     order: 1;
   }
   .title {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
   .paragraphs {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }
 

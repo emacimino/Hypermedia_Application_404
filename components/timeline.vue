@@ -96,7 +96,7 @@ onMounted(async () => {
   margin-left: 1.5rem;
   position: relative;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(3rem);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 .timelineItem.visible {
