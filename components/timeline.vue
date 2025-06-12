@@ -18,36 +18,15 @@
 import { ref, onMounted, nextTick, computed } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
+import { useTimelineStore } from '~/stores/timelineStore'
+import { storeToRefs } from 'pinia'
 
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 
-interface TimelineItem {
-  Date: string
-  Icon: string
-  Title: string
-  Title_it?: string
-  Description: string
-  Description_it?: string
-}
-
-const items = ref<TimelineItem[]>([])
+const timelineStore = useTimelineStore()
+const { items } = storeToRefs(timelineStore)
 const visibleItems = ref<boolean[]>([])
-
-const fetchTimeline = async () => {
-  const { data, error } = await supabase
-      .from('Timeline')
-      .select('*')
-      .order('Date', { ascending: true })
-
-  if (error) {
-    console.error('Error', error)
-    return
-  }
-
-  items.value = data || []
-  visibleItems.value = Array(data?.length || 0).fill(false)
-}
 
 const translatedItems = computed(() =>
     items.value.map(item => ({
@@ -58,30 +37,28 @@ const translatedItems = computed(() =>
 )
 
 onMounted(async () => {
-  await fetchTimeline()
+  await timelineStore.fetchTimeline(supabase)
+
+  visibleItems.value = Array(items.value.length).fill(false)
+
   await nextTick(() => {
     const elements = document.querySelectorAll('.timeline-item')
 
     elements.forEach((el, index) => {
-      const observer = new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                visibleItems.value[index] = true
-                observer.unobserve(entry.target)
-              }
-            })
-          },
-          {
-            threshold: 0.1,
-            rootMargin: '-100px 0px -100px 0px'
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visibleItems.value[index] = true
+            observer.unobserve(entry.target)
           }
-      )
+        })
+      })
       observer.observe(el)
     })
   })
 })
 </script>
+
 
 <style module>
 .timelineContainer {
