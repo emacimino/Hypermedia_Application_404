@@ -103,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import MenuItem from '~/components/Single_Elements/menu_item.vue'
 

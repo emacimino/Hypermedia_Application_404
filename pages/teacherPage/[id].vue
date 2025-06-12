@@ -43,7 +43,7 @@ import {useRouter} from "#vue-router";
 
 const teacherStore = useTeacherIdStore()
 const { currentLang } = useLanguage()
-const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
+const { createTeacherUrl } = useActivityUrl()
 const supabase = useSupabaseClient()
 const route = useRoute()
 

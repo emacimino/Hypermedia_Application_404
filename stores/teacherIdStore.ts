@@ -24,13 +24,6 @@ export interface CV {
     CREATED_AT: string
 }
 
-interface EventItem {
-    Id: number
-    Course_id: number
-    Date?: string
-    Type?: string
-    Teacher_name?: string
-}
 
 
 export const useTeacherIdStore = defineStore('teacherIdPresentation', {

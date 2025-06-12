@@ -3,7 +3,9 @@
     <h2 style="font-size: 1.75vw; font-weight: 600;">
       {{currentLang == 'it' ? 'Esperienze' : 'Experiences'}}
     </h2>
-    <div v-if="cvs.length === 0" class="text-gray-500 italic">No previous experiebce.</div>
+    <div v-if="cvs.length === 0" class="text-gray-500 italic">
+      {{ currentLang === 'it' ? 'Nessuna esperienza precedente.' : 'No previous experience.' }}
+    </div>
     <div class="grid md:grid-cols-2 gap-6">
 
     <div
@@ -16,8 +18,10 @@
         <span class="text-sm text-gray-600">{{ work.DESCRIPTION }}</span>
       </div>
       <p class="text-sm text-gray-700 mt-1">
-        {{currentLang == 'it' ? 'Inizio:' : 'Start:'}} <strong>{{ work.START_DATE }}</strong><br />
-        {{ currentLang == 'it' ? 'Fine:' : 'End:' }} <strong>{{ work.END_DATE }}</strong>
+        {{ currentLang == 'it' ? 'Inizio:' : 'Start:' }}
+        <strong>{{ formatDate(work.START_DATE) }}</strong><br />
+        {{ currentLang == 'it' ? 'Fine:' : 'End:' }}
+        <strong>{{ formatDate(work.END_DATE) }}</strong>
       </p>
     </div>
     </div>
@@ -38,9 +42,8 @@ type CvItem = {
   LOCATION: string
 }
 
-const props = defineProps<{
-  cvs: CvItem[]
-}>()
+const { cvs } = defineProps<{ cvs: CvItem[] }>()
+
 
 function formatDate(dateStr: string) {
   const date = new Date(dateStr)
