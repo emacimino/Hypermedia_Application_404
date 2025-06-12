@@ -29,15 +29,21 @@ const props = defineProps<{
 <style module>
 .courseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: var(--gap);
   padding: var(--padding);
 }
 
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .courseGrid {
-    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+}
+
+@media (min-width: 2560px) {
+  .courseGrid {
+    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
   }
 }
 </style>

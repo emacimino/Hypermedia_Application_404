@@ -17,18 +17,12 @@ body {
     --padding: 1.5rem;
     --card-radius: 0.75rem;
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    --img-height: 12rem;
-    --font-base: 1rem;
-    --font-title: 1.5vw;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     :root {
         --gap: 1rem;
-        --padding: 1rem;
-        --img-height: 24rem;
-        --font-base: 1 rem;
-        --font-title: 5rem;
+        --padding: 0.75rem;
     }
 }
 
