@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 interface RawTeacher {
     Id: number
     Title_it: string
@@ -9,7 +10,7 @@ interface RawTeacher {
     Events?: any[]
 }
 
-interface CV {
+export interface CV {
     ID: number
     TEACHER_ID: number
     TITLE: string
@@ -31,38 +32,39 @@ interface EventItem {
     Teacher_name?: string
 }
 
-interface RawActivity {
-    Id: number
-    Title: string
-    Title_it: string
-    LongDescription: string
-    LongDescription_it: string
-    Image: string
-    Events?: EventItem[]
-}
 
 export const useTeacherIdStore = defineStore('teacherIdPresentation', {
     state: () => ({
         teacher: null as RawTeacher | null,
+        cvList: [] as CV[],
     }),
     actions: {
         async fetchTeacher(teacherId: number, supabase: any) {
-            if (isNaN(teacherId)) return
-
             const { data, error } = await supabase
-                .from("Teachers")
+                .from('Teachers')
                 .select(`*, Events:Events ( * )`)
-                .eq("Id", teacherId)
+                .eq('Id', teacherId)
                 .single()
 
-
-            if (error || !data) {
-                console.error('Errore nel caricamento attività:', error)
-                this.teacher = null
-                return
+            if (!error) {
+                this.teacher = data
+            } else {
+                console.error('fetchTeacher error:', error)
             }
+        },
 
-            this.teacher = data
+        async fetchCV(teacherId: number, supabase: any) {
+            const { data, error } = await supabase
+                .from('Teachers_cv')        // 👈 tabella CV come l'hai indicata
+                .select('*')
+                .eq('TEACHER_ID', teacherId)
+                .order('START_DATE', { ascending: false })
+
+            if (!error) {
+                this.cvList = data
+            } else {
+                console.error('fetchCV error:', error)
+            }
         }
-    }
+    },
 })

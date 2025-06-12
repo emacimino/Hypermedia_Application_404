@@ -9,7 +9,7 @@
         :reverse="true"
     />
 
-    <div v-if="cvList.length" class="mt-8">
+    <div v-if="teacherStore.cvList.length" class="mt-8">
       <Presentation
           :weekProgramming="true"
           :subscribe="false"
@@ -47,31 +47,6 @@ const { createTeacherUrl, extractIdFromSlug } = useActivityUrl()
 const supabase = useSupabaseClient()
 const route = useRoute()
 
-interface RawTeacher {
-  Id: number
-  Title_it: string
-  Title: string
-  LongDescription_it: string
-  LongDescription: string
-  Image: string
-  Events?: any[]
-}
-
-interface CV {
-  ID: number
-  TEACHER_ID: number
-  TITLE: string
-  TITLE_it: string
-  DESCRIPTION: string
-  DESCRIPTION_it: string
-  START_DATE: string
-  END_DATE: string
-  LOCATION: string
-  LOCATION_it: string
-  CREATED_AT: string
-}
-
-const cvList = ref<CV[]>([])
 const router = useRouter()
 
 const teacherId = computed(() => {
@@ -88,25 +63,8 @@ watch(() => teacherStore.teacher, (data) => {
     }
   }
 })
-
-const fetchCV = async () => {
-  if (isNaN(teacherId.value)) return
-
-  const { data, error } = await supabase
-      .from('Teachers_cv')
-      .select('*')
-      .eq('TEACHER_ID', teacherId.value)
-      .order('START_DATE', { ascending: false })
-
-  if (error) {
-    console.error('Errore nel caricamento CV:', error)
-    return
-  }
-
-  cvList.value = data || []
-}
 const translatedCvList = computed(() =>
-    cvList.value.map((entry) => ({
+    teacherStore.cvList.map((entry) => ({
       ...entry,
       TITLE: currentLang.value === 'it' ? entry.TITLE_it : entry.TITLE,
       DESCRIPTION: currentLang.value === 'it' ? entry.DESCRIPTION_it : entry.DESCRIPTION,
@@ -115,11 +73,8 @@ const translatedCvList = computed(() =>
 )
 onMounted(async () => {
   await teacherStore.fetchTeacher(teacherId.value, supabase)
-  await fetchCV()
+  await teacherStore.fetchCV(teacherId.value, supabase)
 })
-
-
-
 
 
 watch(currentLang, () => {
