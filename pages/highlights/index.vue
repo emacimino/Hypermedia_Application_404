@@ -22,7 +22,7 @@ import singleHighlightCard from '~/components/Single_Elements/singleHighlightCar
 import {useHighlightsStore} from "~/stores/highlightsStore";
 
 const highlightsStore = useHighlightsStore()
-
+const supabase = useSupabaseClient()
 const showTitle = ref(false)
 
 onMounted(() => {
@@ -42,7 +42,6 @@ onMounted(() => {
     showTitle.value = true
   }, 2000)
 
-  highlightsStore.fetchHighlights(supabase)
 })
 
 type Presentation = {
@@ -50,7 +49,7 @@ type Presentation = {
   Title_it: string
 }
 
-const supabase = useSupabaseClient()
+
 const { currentLang } = useLanguage()
 watch(currentLang, (lang) => {
   useHead({
@@ -60,11 +59,17 @@ watch(currentLang, (lang) => {
     ]
   })
 }, { immediate: true })
-const title = ref('')
 
+const title = computed(() => {
+  const t = highlightsStore.title
+  if (!t) return ''
+  return currentLang.value === 'it' ? t.Title_it : t.Title
+})
 watch(currentLang, () => {
   highlightsStore.fetchHighlights(supabase)
+  highlightsStore.fetchTitle(supabase)
 }, { immediate: true })
+
 
 </script>
 
