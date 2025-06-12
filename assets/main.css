@@ -7,29 +7,22 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     background-color: #f4f4f4;
     color: #1F3A5F;
 
 }
 
 :root {
-    --gap: 1.75vw;
-    --padding: 1.5vw;
+    --gap: 1.75rem;
+    --padding: 1.5rem;
     --card-radius: 0.75rem;
     --card-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    --img-height: 12vw;
-    --font-base: 1rem;
-    --font-title: 1.5vw;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     :root {
-        --gap: 3vw;
-        --padding: 4vw;
-        --img-height: 24vw;
-        --font-base: 1 rem;
-        --font-title: 5vw;
+        --gap: 1rem;
+        --padding: 0.75rem;
     }
 }
 

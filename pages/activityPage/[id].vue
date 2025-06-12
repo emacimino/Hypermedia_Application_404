@@ -103,13 +103,13 @@ watch(
             label: currentLang.value === 'it' ? 'Attività' : 'Activities',
             to: '/activityPage',
             ui: {
-              linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
+              linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
             }
           },
           {
             label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
             ui: {
-              linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
+              linkLabel: 'text-base md:text-2xl 2xl:text-4xl text-[#1F3A5F] font-sans font-bold underline'
             }
           }
         ]
@@ -120,6 +120,6 @@ watch(
 
 <style module>
 .bread {
-  padding: 1vw 0 0 1.5vw;
+  padding: var(--padding) 0 0 var(--padding)
 }
 </style>

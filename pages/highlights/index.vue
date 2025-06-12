@@ -53,9 +53,9 @@ type Presentation = {
 const { currentLang } = useLanguage()
 watch(currentLang, (lang) => {
   useHead({
-    title: pageMeta.highlights[lang] || 'White Lotus Activities',
+    title: pageMeta.highlights.title[lang] || 'White Lotus Activities',
     meta: [
-      { name: 'description', content: pageMeta.highlights.description[currentLang] }
+      { name: 'description', content: pageMeta.highlights.description[lang] }
     ]
   })
 }, { immediate: true })

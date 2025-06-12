@@ -45,6 +45,7 @@ const link = computed(() => {
   background-color: white;
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
+  height: 20rem;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -54,22 +55,52 @@ const link = computed(() => {
 }
 .image {
   width: 100%;
-  height: var(--img-height);
+  height: 12rem;
   object-fit: cover;
 }
 .content {
   padding: 1rem;
 }
 .title {
-  font-size: var(--font-title);
+  font-size: 1.5rem;
   font-weight: bold;
 }
 .description {
-  font-size: var(--font-base);
+  font-size: 1rem;
   color: #555;
 }
 :global(.linkWrapper) {
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 17rem;
+  }
+  .image {
+    height: 10rem;
+  }
+  .title {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .card {
+    height: 35rem;
+  }
+  .image {
+    height: 22rem;
+  }
+  .title {
+    font-size: 2.75rem;
+  }
+  .description {
+    font-size: 2rem;
+  }
 }
 </style>

@@ -16,9 +16,6 @@
   </div>
 </template>
 
-
-
-
 <script setup lang="ts">
 import { ref, watchEffect, onMounted, nextTick } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
@@ -35,7 +32,6 @@ useHead({
   ]
 })
 
-// Reactive refs for each section
 const whereAreWeTitle = ref('')
 const whereAreWeParagraph = ref('')
 
@@ -45,12 +41,10 @@ const contactsParagraph = ref('')
 const openingHoursTitle = ref('')
 const openingHoursParagraph = ref('')
 
-// Utility function to get correct column names
 function getColumnName(base: string): string {
   return currentLang.value === 'it' ? `${base}_it` : base
 }
 
-// WatchEffect per section
 watchEffect(async () => {
   const titleCol = getColumnName('Title')
   const paragraphCol = getColumnName('Paragraph')
@@ -99,7 +93,6 @@ watchEffect(async () => {
   }
 })
 
-// Leaflet map
 onMounted(async () => {
   await nextTick()
   const L = await import('leaflet')
@@ -156,6 +149,19 @@ onMounted(async () => {
     min-width: 100%;
     position: relative;
     z-index: 1;
+  }
+}
+
+@media (min-width: 2560px) {
+  .content h2 {
+    font-size: 4rem;
+  }
+  .content p {
+    font-size: 2.5rem;
+  }
+  .map {
+    height: 600px;
+    min-width: 400px;
   }
 }
 </style>
