@@ -39,9 +39,9 @@
               class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out cursor-pointer hover:scale-115 active:scale-115 hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)] group"
     >
       <NuxtImg  src="Logo2.png" alt="Website logo, go to home" title="Go to home" class="min-h-[4.5vh] max-h-[8vh] min-w-[2rem] max-w-[6rem]" />
-      <h2 class="text-[clamp(2rem,4.5vw,4rem)]] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+      <h1 class="text-[clamp(3rem,6vw,4.5rem)]] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
         White Lotus
-      </h2>
+      </h1>
     </NuxtLink>
     <!-- HAMBURGER BUTTON -->
     <button
