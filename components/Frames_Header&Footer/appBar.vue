@@ -55,26 +55,26 @@
       <!-- Line 1 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-transform duration-300',
+          'block w-full bg-[#1F3A5F] transition-transform duration-300',
           isMenuOpen ? 'translate-y-[1.4vw] rotate-45' : '',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
       <!-- Line 2 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-opacity duration-300',
+          'block w-full bg-[#1F3A5F] transition-opacity duration-300',
           isMenuOpen ? 'opacity-0' : 'opacity-100',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
       <!-- Line 3 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-transform duration-300',
+          'block w-full bg-[#1F3A5F] transition-transform duration-300',
           isMenuOpen ? '-translate-y-[1.4vw] -rotate-45' : '',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
     </button>
   </nav>
