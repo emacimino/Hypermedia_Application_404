@@ -33,7 +33,9 @@ import isoWeek from 'dayjs/plugin/isoWeek'
 import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
+import { useAllEventsStore } from '~/stores/allEventStore'
 
+const allEventsStore = useAllEventsStore()
 dayjs.extend(isoWeek)
 const { currentLang } = useLanguage()
 
@@ -77,14 +79,13 @@ const selectedWeekdayIndex = computed(() => {
   return (activeDate.value.day() + 6) % 7 // Lunedì = 0
 })
 
-const weeklyEvents = ref<any[]>([])
 
 const dayEvents = computed(() => {
   if (!activeDate.value) return []
   const dateStr = activeDate.value.format("YYYY-MM-DD")
   const weekdayStr = activeDate.value.format("dddd")
 
-  return weeklyEvents.value.filter(event => {
+  return allEventsStore.weeklyEvents.filter(event => {
     const type = event.Type // always in English
     const weekday = event.Weekday // always in English
     return (type === 'onetime' && event.Date === dateStr) ||
@@ -110,42 +111,20 @@ function resetToCalendar() {
   showCalendar.value = true
 }
 
-async function fetchWeeklyEvents() {
-  const base = currentDate.value
-  const startOfWeek = base.startOf('isoWeek')
-  const endOfWeek = base.endOf('isoWeek')
-  const from = startOfWeek.format("YYYY-MM-DD")
-  const to = endOfWeek.format("YYYY-MM-DD")
-  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-  const { data: onetimeEvents } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("Type", "onetime")
-      .gte("Date", from)
-      .lte("Date", to)
-
-  const { data: recurringEvents } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("Type", "recurring")
-      .in("Weekday", weekdays)
-
-  weeklyEvents.value = [...(onetimeEvents ?? []), ...(recurringEvents ?? [])]
-}
 
 function handleWeekNavigation(direction: 'prev' | 'next') {
   currentDate.value = currentDate.value.add(direction === 'next' ? 1 : -1, 'week')
-  fetchWeeklyEvents()
+  allEventsStore.fetchWeeklyEvents(currentDate.value,supabase)
 }
 
 onMounted(() => {
-  fetchWeeklyEvents()
+  allEventsStore.fetchWeeklyEvents(currentDate.value,supabase)
 })
 
 watch(selectedDateValue, () => {
   if (selectedDateValue.value !== null) {
-    fetchWeeklyEvents()
+    allEventsStore.fetchWeeklyEvents(currentDate.value,supabase)
   }
 })
 </script>
