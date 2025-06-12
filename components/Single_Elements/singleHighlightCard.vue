@@ -72,7 +72,7 @@ function onLeave() {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1.81rem;
+  font-size: 1.8rem;
   color: #ffe5b4;
   font-family: 'Rounded Mplus 1c Bold', serif;
   border-radius: 0.5rem;
@@ -107,16 +107,8 @@ function onLeave() {
   margin-bottom: 2rem;
 }
 .title {
-  min-height: 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  padding: 0 1rem;
-  line-height: 1.2;
-  word-wrap: break-word;
 }
 .btn {
   display: inline-flex;
@@ -144,10 +136,6 @@ function onLeave() {
 }
 .details {
   font-size: 1.2rem;
-  line-height: 1;
-  white-space: nowrap;
-  padding: 0;
-  margin: 0;
 }
 .arrow {
   width: 1.8rem;
@@ -206,7 +194,7 @@ function onLeave() {
     margin-bottom: 0.75rem;
   }
   .title{
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin-bottom: 0.25rem;
   }
   .details{
