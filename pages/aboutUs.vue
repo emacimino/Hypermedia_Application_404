@@ -15,41 +15,30 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncData } from '#app'
+import { onMounted } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
+import { pageMeta } from '~/locales/pages'
+import { useAboutUsStore } from '~/stores/aboutUsStore'
+import { storeToRefs } from 'pinia'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import Timeline from '~/components/timeline.vue'
-import {pageMeta} from '~/locales/pages'
 
-const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
+const { currentLang } = useLanguage()
+const aboutUsStore = useAboutUsStore()
+const { content: aboutUsContent } = storeToRefs(aboutUsStore)
+
 useHead({
   title: pageMeta.aboutUs.title[currentLang.value] || pageMeta.aboutUs.title.en,
   meta: [
     { name: 'description', content: pageMeta.aboutUs.description[currentLang.value] }
   ]
 })
-interface PresentationContent {
-  id: number
-  Title: string
-  Paragraph: string
-  Image: string
-  Title_it: string
-  Paragraph_it: string
-}
 
-const { data: aboutUsContent } = await useAsyncData<PresentationContent | null>('aboutUs', async () => {
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select('*')
-      .eq('Id', 3)
-      .single()
-
-  if (error) console.error('Errore Supabase:', error)
-  return data
+onMounted(() => {
+  aboutUsStore.fetchAboutUs(supabase)
 })
-
 </script>
 
 <style module>

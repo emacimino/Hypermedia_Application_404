@@ -17,14 +17,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, onMounted, nextTick } from 'vue'
+import { watchEffect } from 'vue'
+import { onMounted, nextTick } from 'vue'
+import { useSupabaseClient } from '#imports'
+import { useContactsStore } from '~/stores/contactsStore'
 import { useLanguage } from '~/composables/useLanguage'
+import { storeToRefs } from 'pinia'
+import { pageMeta } from '~/locales/pages'
 import 'leaflet/dist/leaflet.css'
-import {useSupabaseClient} from "#imports";
-import {pageMeta} from "~/locales/pages";
 
+// Init Supabase and language
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
+
+// Init store and refs
+const contactsStore = useContactsStore()
+const {
+  whereAreWeTitle,
+  whereAreWeParagraph,
+  contactsTitle,
+  contactsParagraph,
+  openingHoursTitle,
+  openingHoursParagraph,
+} = storeToRefs(contactsStore)
+
+// Set meta tags
 useHead({
   title: pageMeta.contacts.title[currentLang.value] || pageMeta.contacts.title.en,
   meta: [
@@ -32,70 +49,13 @@ useHead({
   ]
 })
 
-const whereAreWeTitle = ref('')
-const whereAreWeParagraph = ref('')
-
-const contactsTitle = ref('')
-const contactsParagraph = ref('')
-
-const openingHoursTitle = ref('')
-const openingHoursParagraph = ref('')
-
-function getColumnName(base: string): string {
-  return currentLang.value === 'it' ? `${base}_it` : base
-}
-
-watchEffect(async () => {
-  const titleCol = getColumnName('Title')
-  const paragraphCol = getColumnName('Paragraph')
-
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select(`${titleCol}, ${paragraphCol}`)
-      .eq('Title', 'Where are we?')
-      .single()
-
-  if (!error && data) {
-    whereAreWeTitle.value = data[titleCol]
-    whereAreWeParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
-  }
-})
-
-watchEffect(async () => {
-  const titleCol = getColumnName('Title')
-  const paragraphCol = getColumnName('Paragraph')
-
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select(`${titleCol}, ${paragraphCol}`)
-      .eq('Title', 'Contacts')
-      .single()
-
-  if (!error && data) {
-    contactsTitle.value = data[titleCol]
-    contactsParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
-  }
-})
-
-watchEffect(async () => {
-  const titleCol = getColumnName('Title')
-  const paragraphCol = getColumnName('Paragraph')
-
-  const { data, error } = await supabase
-      .from('Presentation')
-      .select(`${titleCol}, ${paragraphCol}`)
-      .eq('Title', 'Opening Hours')
-      .single()
-
-  if (!error && data) {
-    openingHoursTitle.value = data[titleCol]
-    openingHoursParagraph.value = (data[paragraphCol] as string).replace(/\n/g, '<br>')
-  }
-})
 
 onMounted(async () => {
+  await contactsStore.fetchAllContent(supabase, currentLang.value)
+
   await nextTick()
   const L = await import('leaflet')
+
   const map = L.map('map').setView([45.4565, 9.2019], 16)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -107,7 +67,12 @@ onMounted(async () => {
       .bindPopup('Via Privata Siracusa, Milano')
       .openPopup()
 })
+
+watchEffect(() => {
+  contactsStore.fetchAllContent(supabase, currentLang.value)
+})
 </script>
+
 
 
 <style module>
