@@ -43,13 +43,6 @@ onMounted(() => {
   }, 2000)
 
 })
-
-type Presentation = {
-  Title: string
-  Title_it: string
-}
-
-
 const { currentLang } = useLanguage()
 watch(currentLang, (lang) => {
   useHead({
@@ -76,13 +69,13 @@ watch(currentLang, () => {
 <style module>
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: var(--gap);
-  padding: 0 var(--padding);
+  padding: var(--padding);
 }
 .Title {
-  font-size: 5vw;
-  padding: 2vw;
+  font-size: 4.5rem;
+  padding: var(--padding);
   font-weight: bold;
   font-family: 'Rounded Mplus 1c Bold', serif;
   color:#0769a2;
@@ -108,14 +101,19 @@ watch(currentLang, () => {
 }
 
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .Title{
-    font-size: 8vw;
+    font-size: 2rem;
   }
   .gridContainer{
-    grid-template-columns: repeat(auto-fit, minmax(40vw, 1fr));
-    padding: 0 15vw;
-    margin-bottom: var(--gap);
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    padding: var(--padding);
+  }
+}
+
+@media (min-width: 2560px) {
+  .Title{
+    font-size: 8rem;
   }
 }
 </style>

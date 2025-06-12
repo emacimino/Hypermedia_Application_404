@@ -111,11 +111,11 @@ function handleNavigate(dir: 'prev' | 'next') {
   width: 100%;
 }
 .title {
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: bold;
 }
 .paragraphs {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 .weekWrapper {
   width: 100%;
