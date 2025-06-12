@@ -106,7 +106,7 @@ watch(currentLang, () => {
     font-size: 2rem;
   }
   .gridContainer{
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     padding: var(--padding);
   }
 }
