@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, onUnmounted, computed} from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
 import { defineProps } from 'vue';
 
 // Props

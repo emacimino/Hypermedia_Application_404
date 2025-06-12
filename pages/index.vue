@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch} from 'vue'
+import { onMounted, watch} from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/Single_Elements/presentation.vue'
@@ -47,7 +47,6 @@ const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 const yogaClass = "yoga"
 
-const images = ref<Array<{ Title: string; ImageUrl: string; Course_Id: number }>>([])
 
 const homeStore = useHomePresentationStore()
 const slideStore = useSlideStore()

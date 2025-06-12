@@ -1,5 +1,4 @@
 <template>
-  <!-- Vista settimanale -->
   <div v-if="!showCalendar" class="mt-8">
     <WeeklyView
         :current-date="currentDate"
@@ -12,7 +11,6 @@
     />
   </div>
 
-  <!-- Vista calendario -->
   <div v-else>
     <div class="flex flex-col">
       <Year @selected="changeYear" />
@@ -39,9 +37,7 @@ const allEventsStore = useAllEventsStore()
 dayjs.extend(isoWeek)
 const { currentLang } = useLanguage()
 
-const getField = (entry: any, key: string) => {
-  return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key];
-}
+
 
 const Year = defineAsyncComponent(() => import("~/components/Calendar/Year.vue"))
 const Month = defineAsyncComponent(() => import("~/components/Calendar/Month.vue"))
@@ -59,9 +55,7 @@ const selectedValues = reactive({
 
 const selectedDateValue = ref<number | null>(null)
 const selectedFullDate = ref(dayjs())
-const currentMonthLabel = computed(() =>
-    dayjs().locale(currentLang.value).format('MMMM')
-);
+
 
 watch(selectedDateValue, () => {
   if (selectedDateValue.value !== null) {
@@ -76,7 +70,7 @@ const activeDate = computed(() => selectedFullDate.value ?? currentDate.value)
 
 const selectedWeekdayIndex = computed(() => {
   if (!activeDate.value) return null
-  return (activeDate.value.day() + 6) % 7 // Lunedì = 0
+  return (activeDate.value.day() + 6) % 7 // Monday = 0
 })
 
 

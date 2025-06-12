@@ -47,7 +47,6 @@ function onClick() {
   router.push(`/activityPage/${card.id}`)
 }
 
-const activityImagePath = ref(card.image)
 const hoverClass = ref('')
 const style = useCssModule()
 

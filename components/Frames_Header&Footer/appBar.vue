@@ -39,9 +39,9 @@
               class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out cursor-pointer hover:scale-115 active:scale-115 hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)] group"
     >
       <NuxtImg  src="Logo2.png" alt="Website logo, go to home" title="Go to home" class="min-h-[4.5vh] max-h-[8vh] min-w-[2rem] max-w-[6rem]" />
-      <h2 class="text-[clamp(2rem,4.5vw,4rem)]] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+      <h1 class="text-[clamp(3rem,6vw,4.5rem)]] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
         White Lotus
-      </h2>
+      </h1>
     </NuxtLink>
     <!-- HAMBURGER BUTTON -->
     <button
@@ -55,26 +55,26 @@
       <!-- Line 1 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-transform duration-300',
+          'block w-full bg-[#1F3A5F] transition-transform duration-300',
           isMenuOpen ? 'translate-y-[1.4vw] rotate-45' : '',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
       <!-- Line 2 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-opacity duration-300',
+          'block w-full bg-[#1F3A5F] transition-opacity duration-300',
           isMenuOpen ? 'opacity-0' : 'opacity-100',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
       <!-- Line 3 -->
       <span
           :class="[
-          'block w-full bg-gray-800 transition-transform duration-300',
+          'block w-full bg-[#1F3A5F] transition-transform duration-300',
           isMenuOpen ? '-translate-y-[1.4vw] -rotate-45' : '',
         ]"
-          style="height: 0.4vw; min-height: 2px"
+          style="height: 0.6vw; min-height: 2px"
       />
     </button>
   </nav>
@@ -103,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import MenuItem from '~/components/Single_Elements/menu_item.vue'
 

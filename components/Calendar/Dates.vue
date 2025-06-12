@@ -60,14 +60,11 @@ function selected(d: number) {
 <template>
   <div class="w-full bg-gray-200 p-2 rounded-b-md">
     <div class="grid grid-cols-7 place-items-center gap-x-2 gap-y-4">
-      <!-- Giorni della settimana -->
       <div v-for="day in days" :key="day">
         <span class="text-[#1F3A5F] font-semibold">{{ day }}</span>
       </div>
 
-      <!-- Date -->
       <template v-for="(d, index) in dates" :key="index">
-        <!-- Offset solo prima riga -->
         <template v-if="index === 0">
           <div
               v-for="n in (d.day === 0 ? 6 : d.day - 1)"
