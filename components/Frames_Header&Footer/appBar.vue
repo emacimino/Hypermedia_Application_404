@@ -2,12 +2,12 @@
   <!-- DESKTOP NAVIGATION -->
   <nav
       class="hidden md:flex w-full items-center justify-between bg-blue-100 rounded-md min-h-[5vh] max-h-[10vh]"
-      style="padding: 0 2.75vw"
+      style="padding: 0 2vw"
   >
   <NuxtLink to="/" title="Go to home" alt="Website logo, go to home"
-            class="flex items-center gap-[1vw] transition-transform duration-200 ease-in-out hover:scale-115 group cursor-pointer active:scale-115 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
-    <NuxtImg src="Logo2.png" alt="Website logo, go to home" class="min-h-[4.5vh] max-h-[8vh] min-w-[2rem] max-w-[6rem]" />
-    <h1 class=" text-[clamp(2rem,4.5vw,4rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
+            class="flex items-center gap-[0.5vw] transition-transform duration-200 ease-in-out hover:scale-110 group cursor-pointer active:scale-110 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
+    <NuxtImg src="Logo2.png" alt="Website logo, go to home" class="w-[clamp(2rem,4.5vw,5rem)] h-auto" />
+    <h1 class=" text-[clamp(2rem,4vw,3.5rem)] font-playfair font-semibold text-[#1F3A5F] whitespace-nowrap">
       White Lotus
     </h1>
 </NuxtLink>
@@ -22,7 +22,7 @@
     </div>
 
     <NuxtImg
-        class="object-cover cursor-pointer hover:scale-115 group active:scale-115 group w-[6vw] min-w-[2rem] max-w-[6rem]"
+        class="object-cover cursor-pointer transition-transform duration-200 hover:scale-115 group active:scale-115 group w-[6vw] min-w-[2rem] max-w-[6rem]"
         style="width: 5vw; height: 5vw; min-width: 32px; min-height: 32px"
         :src="currentLang === 'en' ? '/Eng_blue.png' : '/Ita_blue.png'"
         alt="Switch language"

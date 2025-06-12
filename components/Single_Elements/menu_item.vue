@@ -25,7 +25,7 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 
-  font-size: clamp(1rem, 1.5vw, 2.2rem);
+  font-size: clamp(1rem, 1.75vw, 3.5rem);
   height: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 1.2;
 
@@ -37,7 +37,7 @@ defineProps<{
   transform: scale(1.15);
   text-shadow: 0 0 10px rgba(31, 58, 95, 0.5);
 }
-@media (max-width: 767px) {
+@media (max-width: 760px) {
   .menu-item {
     font-size: clamp(2rem, 3vw, 3rem);
     height: clamp(2.5rem, 7vw, 3.5rem);
