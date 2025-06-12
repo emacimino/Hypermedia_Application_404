@@ -4,19 +4,22 @@ import dayjs from "dayjs"
 import 'dayjs/locale/it';
 import 'dayjs/locale/en';
 import { ref, computed, onMounted, watch } from "vue"
-import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
+import { useEventsStore } from '~/stores/eventStore'
 
 const { currentLang } = useLanguage()
+const eventsStore = useEventsStore()
 
 const getField = (entry: any, key: string) => {
   return currentLang.value === 'it' ? entry[`${key}_it`] ?? entry[key] : entry[key]
 }
+
 const weekdayLabels = computed(() =>
     currentLang.value === 'it'
         ? ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom']
         : ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
-);
+)
+
 const props = defineProps<{
   currentDate?: any
   activeDate?: any
@@ -33,21 +36,25 @@ const emit = defineEmits<{
   (e: 'day-click', v: any): void
 }>()
 
-const supabase = useSupabaseClient()
-
 const internalDate = ref(props.currentDate ?? dayjs())
-const internalEvents = ref<any[]>([])
-
 const selectedLocalDate = ref((props.activeDate ?? internalDate.value).startOf('isoWeek'))
 const selectedLocalIndex = ref(props.selectedWeekdayIndex ?? ((selectedLocalDate.value.day() + 6) % 7))
 
 const internalActiveDate = computed(() => props.activeDate ?? selectedLocalDate.value)
 const internalWeekdayIndex = computed(() => props.selectedWeekdayIndex ?? selectedLocalIndex.value)
+
 const localizedDate = computed(() =>
     internalActiveDate.value.locale(currentLang.value).format('dddd DD MMMM')
-);
+)
+
+const formattedWeekDate = computed(() =>
+    (props.currentDate ?? internalDate.value)
+        .locale(currentLang.value)
+        .format("DD MMM YYYY")
+)
+
 const displayedEvents = computed(() => {
-  const source = props.dayEvents ?? internalEvents.value
+  const source = props.dayEvents ?? eventsStore.weeklyEvents
   const dateStr = internalActiveDate.value.format("YYYY-MM-DD")
   const weekdayStr = internalActiveDate.value.format("dddd")
 
@@ -56,11 +63,6 @@ const displayedEvents = computed(() => {
       (event.Type === 'recurring' && event.Weekday === weekdayStr)
   )
 })
-const formattedWeekDate = computed(() =>
-    (props.currentDate ?? internalDate.value)
-        .locale(currentLang.value)
-        .format("DD MMM YYYY")
-);
 
 function selectDay(index: number) {
   const selected = (props.currentDate ?? internalDate.value).startOf('isoWeek').add(index, 'day')
@@ -79,7 +81,7 @@ function goToPreviousWeek() {
   } else {
     internalDate.value = internalDate.value.subtract(1, 'week')
     selectedLocalDate.value = internalDate.value.startOf('isoWeek')
-    if (!props.dayEvents) fetchEvents()
+    if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
   }
 }
 
@@ -89,7 +91,7 @@ function goToNextWeek() {
   } else {
     internalDate.value = internalDate.value.add(1, 'week')
     selectedLocalDate.value = internalDate.value.startOf('isoWeek')
-    if (!props.dayEvents) fetchEvents()
+    if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
   }
 }
 
@@ -97,38 +99,19 @@ function resetToCalendar() {
   emit('back')
 }
 
-async function fetchEvents() {
-  const base = internalDate.value
-  const start = base.startOf('isoWeek').format("YYYY-MM-DD")
-  const end = base.endOf('isoWeek').format("YYYY-MM-DD")
-
-  const { data: onetimeEvents } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("Type", "onetime")
-      .gte("Date", start)
-      .lte("Date", end)
-
-  const { data: recurringEvents } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("Type", "recurring")
-      .in("Weekday", ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
-
-  internalEvents.value = [...(onetimeEvents ?? []), ...(recurringEvents ?? [])]
-}
-
 onMounted(() => {
-  if (!props.dayEvents) fetchEvents()
+  if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
 })
 
 watch(() => internalDate.value.format("YYYY-MM-DD"), () => {
-  if (!props.dayEvents) fetchEvents()
+  if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
 })
+
 watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
-  if (!props.dayEvents) fetchEvents()
+  if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
 })
 </script>
+
 
 <template>
   <div class="flex justify-between items-center my-[2vw] px-[2vw]">
