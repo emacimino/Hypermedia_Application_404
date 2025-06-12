@@ -8,9 +8,15 @@ interface HighlightItem {
     link: string;
 }
 
+interface Title{
+    Title: string
+    Title_it: string
+}
+
 export const useHighlightsStore = defineStore('highlights', {
     state: () => ({
         highlights: [] as HighlightItem[],
+        title: null as Title | null
     }),
 
     actions: {
@@ -46,6 +52,23 @@ export const useHighlightsStore = defineStore('highlights', {
                 link: item.Image
 
             }))
+        },
+        async fetchTitle(supabase: any){
+            const { data, error } = await supabase
+                .from("Presentation")
+                .select("*")
+                .in('Id', [14])
+
+            if (error || !data || data.length === 0) {
+                console.error("Errore nel recupero del titolo da Presentation:", error)
+                return
+            }
+
+            this.title = {
+                Title: data[0].Title ?? '',
+                Title_it: data[0].Title_it ?? ''
+            }
         }
+
     }
 })
