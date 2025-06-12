@@ -58,8 +58,8 @@ onMounted(async () => {
 
   const map = L.map('map').setView([45.4565, 9.2019], 16)
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap & CartoDB',
   }).addTo(map)
 
   L.marker([45.4565, 9.2019])
