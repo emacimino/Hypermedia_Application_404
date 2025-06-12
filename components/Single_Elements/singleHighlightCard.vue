@@ -4,7 +4,7 @@
     <img :class="$style.activityImage" alt="" :src="card.link" />
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
 
-    <b :class="$style.craftItYourself">{{ resolvedTitle }}</b>
+    <b :class="$style.title">{{ resolvedTitle }}</b>
 
     <div :class="[$style.btn, hoverClass]"
          @mouseover="onHover"
@@ -14,11 +14,13 @@
       <img :class="$style.arrow" alt="Arrow icon" src='/Arrow.svg' />
     </div>
 
+    <!--
     <div :class="$style.turnOffWhenSavingOut">
       <div :class="$style.grad" />
       <div :class="$style.pushingItSafeArea" />
       <div :class="$style.safeArea" />
     </div>
+    -->
   </div>
 </template>
 
@@ -63,7 +65,7 @@ function onLeave() {
 .property1default {
   position: relative;
   width: 100%;
-  height: 35vw;
+  height: 32rem;
   background-color: #0769a2;
   overflow: hidden;
   display: flex;
@@ -71,11 +73,10 @@ function onLeave() {
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  font-size: 1.81vw;
+  font-size: 1.81rem;
   color: #ffe5b4;
   font-family: 'Rounded Mplus 1c Bold', serif;
-  border-radius: 0.38vw;
+  border-radius: 0.5rem;
 }
 .shapeIcon {
   position: absolute;
@@ -101,20 +102,20 @@ function onLeave() {
   position: relative;
   z-index: 1;
   width: 68.89%;
-  height: 20vw;
+  height: 20rem;
   border-radius: 2%;
   object-fit: cover;
-  margin-bottom: 2vw;
+  margin-bottom: 2rem;
 }
-.craftItYourself {
-  min-height: 3.5vw;
+.title {
+  min-height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1.8vw;
-  margin-bottom: 1vw;
-  padding: 0 1vw;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
   line-height: 1.2;
   word-wrap: break-word;
 }
@@ -122,14 +123,14 @@ function onLeave() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5vw 1.5vw;
+  padding: 0.5rem 1.5rem;
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 1vw;
-  min-height: 2.5vw;
-  height: 2.5vw;
+  border-radius: 1rem;
+  min-height: 2.5rem;
+  height: 2.5rem;
   max-width: 100%;
   white-space: nowrap;
-  gap: 0.5vw;
+  gap: 0.5rem;
   transition: transform 0.2s ease;
   cursor: pointer;
 }
@@ -143,14 +144,14 @@ function onLeave() {
   transform: translateX(0.7vw);
 }
 .details {
-  font-size: 1.2vw;
+  font-size: 1.2rem;
   line-height: 1;
   white-space: nowrap;
   padding: 0;
   margin: 0;
 }
 .arrow {
-  width: 1.8vw;
+  width: 1.8rem;
   transition: transform 0.3s ease;
 }
 .turnOffWhenSavingOut {
@@ -197,27 +198,53 @@ function onLeave() {
 }
 
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .property1default{
-    height: 70vw;
+    height: 20rem;
   }
   .activityImage{
-    height: 40vw;
+    height: 11rem;
+    margin-bottom: 0.75rem;
   }
-  .craftItYourself{
-    font-size: 7vw;
-    margin-bottom: 2vw;
+  .title{
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
   }
   .details{
-    font-size: 5vw;
+    font-size: 01rem;
   }
   .arrow {
-    width: 4vw;
+    width: 1rem;
   }
   .btn{
-    height: 7vw;
-    border-radius: 3vw;
-    padding: 1vw 3vw;
+    height: 1.5rem;
+    border-radius: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  .property1default{
+    height: 55rem;
+  }
+  .activityImage{
+    height: 35rem;
+    margin-bottom: 4rem;
+  }
+  .title{
+    font-size: 3.75rem;
+    margin-bottom: 2rem;
+  }
+  .details{
+    font-size: 2.5rem;
+  }
+  .arrow {
+    width: 2.75rem;
+  }
+  .btn{
+    height: 5rem;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
   }
 }
 </style>
