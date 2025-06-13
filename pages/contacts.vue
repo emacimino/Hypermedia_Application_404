@@ -94,6 +94,13 @@ watchEffect(() => {
   border-radius: 12px;
   border: 1px solid #ccc;
 }
+.content p a {
+  text-decoration: underline;
+  color: inherit;
+}
+.content p a:hover {
+  color: #1d4ed8;
+}
 
 
 @media (max-width: 760px) {

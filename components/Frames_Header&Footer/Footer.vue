@@ -32,9 +32,9 @@
       </div>
 
       <div :class="$style.centerColumn">
-        <div>Reach out to us whenever you need:</div>
-        <div>- at Via Privata Siracusa, Milano</div>
-        <div>- calling +1 (310) 555-8123</div>
+        <div>{{currentLang === 'en' ? 'Reach out to us whenever you need:' : ' Contattacci per qualsiasi cosa:'}}</div>
+        <div>{{currentLang === 'en' ? '- at Via Privata Siracusa, Milano' : '-in Via Privata Siracusa, Milano'}}</div>
+        <div>{{currentLang === 'en' ? '- calling +1 (310) 555-8123' : '-chiama +1 (310) 555-8123'}}</div>
         <div>
           - sending an email to
           <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
@@ -66,7 +66,7 @@ const { currentLang } = useLanguage()
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 2vw;
   height: 9rem;
   box-sizing: border-box;
 }
@@ -93,9 +93,11 @@ const { currentLang } = useLanguage()
 .centerColumn {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 .emailLink {
   text-decoration: underline;
+  color: inherit;
 }
 .emailLink:hover {
   color: #1d4ed8;
@@ -103,6 +105,7 @@ const { currentLang } = useLanguage()
 .rightColumn {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 
@@ -115,9 +118,6 @@ const { currentLang } = useLanguage()
   }
   .socialIcon {
     justify-content: center;
-  }
-  .rightColumn {
-    text-align: center;
   }
   .whiteLotusCenter {
     font-size: 1.75rem;
