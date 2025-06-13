@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+//packet class
 export const usePacketStore = defineStore('packet', {
     state: () => ({
         packets: [] as Array<{ id: string; price: string; duration: string; color: string }>
