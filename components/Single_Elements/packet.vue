@@ -22,8 +22,8 @@ defineProps<{
 .packet {
   border: 0.15rem solid;
   border-radius: 12px;
-  width: 13.5rem;
-  height: 10rem;
+  width: 12rem;
+  height: 8rem;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -34,7 +34,7 @@ defineProps<{
   align-items: center;
 }
 .price {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: #1f3a5f;
 }
@@ -43,7 +43,7 @@ defineProps<{
   background-color: white;
 }
 .type {
-  font-size: 2rem;
+  font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

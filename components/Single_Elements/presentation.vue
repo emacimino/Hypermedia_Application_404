@@ -67,19 +67,15 @@ const props = defineProps<{
   alt?: string
 }>()
 
-// Stato interno reattivo per la settimana
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 
-// Aggiorna internalCurrentDate se cambia prop
 watch(() => props.currentDate, (val) => {
   if (val) internalCurrentDate.value = val
 })
 
-// Stato per giorno selezionato
 const activeDate = ref(props.activeDate ?? null)
 const selectedWeekdayIndex = ref(props.selectedWeekdayIndex ?? 0)
 
-// Gestione evento di navigazione
 function handleNavigate(dir: 'prev' | 'next') {
   internalCurrentDate.value = internalCurrentDate.value.add(dir === 'next' ? 1 : -1, 'week')
 }
@@ -111,11 +107,11 @@ function handleNavigate(dir: 'prev' | 'next') {
   width: 100%;
 }
 .title {
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 .paragraphs {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 .weekWrapper {
   width: 100%;

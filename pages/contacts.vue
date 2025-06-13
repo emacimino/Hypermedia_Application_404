@@ -73,8 +73,6 @@ watchEffect(() => {
 })
 </script>
 
-
-
 <style module>
 .content {
   display: flex;
@@ -83,11 +81,11 @@ watchEffect(() => {
   padding: 2rem;
 }
 .content h2 {
-  font-size: clamp(1rem, 3vw, 2rem);
+  font-size: clamp(1rem, 3vw, 1.75rem);
   font-weight: bold;
 }
 .content p {
-  font-size: clamp(0.75rem, 2vw, 1.5rem);
+  font-size: clamp(0.75rem, 2vw, 1.25rem);
 }
 .map {
   height: 500px;

@@ -136,7 +136,7 @@ const submitForm = async () => {
         `Message: ${formData.message}`
     )
 
-    window.location.href = `mailto:gabriele.lorenzetti18@gmail.com?subject=${subject}&body=${body}`
+    window.location.href = `mailto:info@whitelotus.com?subject=${subject}&body=${body}`
 
     setTimeout(() => {
       formData.firstName = ''

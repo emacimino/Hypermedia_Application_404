@@ -1,40 +1,123 @@
 <template>
-  <div class = "bg-blue-100" :class="$style.barraFooter">
-    <div :class="$style.whiteLotusCenter">White Lotus Center</div>
-    <div :class="$style.socialIcon">
-      <Icon name="mdi:facebook" :class="$style.responsiveIcon" />
-      <Icon name="mdi:instagram" :class="$style.responsiveIcon" />
-      <Icon name="mdi:youtube" :class="$style.responsiveIcon" />
+  <div class="bg-blue-100" :class="$style.barraFooter">
+    <div :class="$style.footerContainer">
+      <div :class="$style.leftColumn">
+        <div :class="$style.whiteLotusCenter">White Lotus Center</div>
+        <div :class="$style.socialIcon">
+          <a
+              href="https://www.facebook.com"
+              target="_blank"
+              :aria-label="currentLang === 'en' ? 'Visit our Facebook profile' : 'Visita il nostro profilo Facebook'"
+              role="link"
+          >
+            <Icon name="mdi:facebook" :class="$style.responsiveIcon" />
+          </a>
+          <a
+              href="https://www.instagram.com"
+              target="_blank"
+              :aria-label="currentLang === 'en' ? 'Visit our Instagram profile' : 'Visita il nostro profilo Instagram'"
+              role="link"
+          >
+            <Icon name="mdi:instagram" :class="$style.responsiveIcon" />
+          </a>
+          <a
+              href="https://www.youtube.com"
+              target="_blank"
+              :aria-label="currentLang === 'en' ? 'Visit our YouTube profile' : 'Visita il nostro profilo YouTube'"
+              role="link"
+          >
+            <Icon name="mdi:youtube" :class="$style.responsiveIcon" />
+          </a>
+        </div>
+      </div>
+
+      <div :class="$style.centerColumn">
+        <div>Reach out to us whenever you need:</div>
+        <div>- at Via Privata Siracusa, Milano</div>
+        <div>- calling +1 (310) 555-8123</div>
+        <div>
+          - sending an email to
+          <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
+        </div>
+      </div>
+
+      <div :class="$style.rightColumn">
+        <div>Credits: Gabriele Lorenzetti, Emanuele Cimino, Giorgio Sidari</div>
+        <div>@2025 WhiteLotus, All rights reserved</div>
+      </div>
+
     </div>
   </div>
 </template>
 
+
+<script setup lang="ts">
+import {useLanguage} from "~/composables/useLanguage.js";
+
+const { currentLang } = useLanguage()
+</script>
+
 <style module>
 .barraFooter {
   width: 100%;
-  height: 7rem;
-  padding-left: 4rem;
   box-sizing: border-box;
+}
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 9rem;
+  box-sizing: border-box;
+}
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .whiteLotusCenter {
   font-size: 2rem;
   line-height: 150%;
-  color: #1f3a5f;
 }
 .socialIcon {
   display: flex;
-  gap: 16px;
-  color: #1f3a5f;
+  gap: 1rem;
 }
 .responsiveIcon {
   font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+.responsiveIcon:hover {
+  transform: scale(1.25);
+}
+.centerColumn {
+  display: flex;
+  flex-direction: column;
+}
+.emailLink {
+  text-decoration: underline;
+}
+.emailLink:hover {
+  color: #1d4ed8;
+}
+.rightColumn {
+  display: flex;
+  flex-direction: column;
 }
 
 
 @media (max-width: 768px) {
-  .barraFooter {
-    height: 4rem;
-    padding-left: 2.5rem;
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 1rem;
+  }
+  .socialIcon {
+    justify-content: center;
+  }
+  .rightColumn {
+    text-align: center;
   }
   .whiteLotusCenter {
     font-size: 1.75rem;
@@ -44,15 +127,22 @@
   }
 }
 
+
 @media (min-width: 2560px){
-  .barraFooter {
-    height: 12rem;
+  .footerContainer {
+    height: 15rem;
   }
   .whiteLotusCenter {
     font-size: 3.5rem;
   }
   .responsiveIcon {
     font-size: 3.5rem;
+  }
+  .centerColumn {
+    font-size: 2rem;
+  }
+  .rightColumn {
+    font-size: 2rem;
   }
 }
 </style>
