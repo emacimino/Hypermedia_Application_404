@@ -32,7 +32,7 @@
       </div>
 
       <div :class="$style.centerColumn">
-        <div>{{currentLang === 'en' ? 'Reach out to us whenever you need:' : ' Contattacci per qualsiasi cosa:'}}</div>
+        <div>{{currentLang === 'en' ? 'Reach out to us whenever you need:' : 'Contattacci per qualsiasi cosa:'}}</div>
         <div>{{currentLang === 'en' ? '- at Via Privata Siracusa, Milano' : '-in Via Privata Siracusa, Milano'}}</div>
         <div>{{currentLang === 'en' ? '- calling +1 (310) 555-8123' : '-chiama +1 (310) 555-8123'}}</div>
         <div>

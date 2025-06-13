@@ -1,4 +1,3 @@
-
 <template>
   <div :class="$style.content">
     <div>
@@ -10,6 +9,26 @@
 
       <h2>{{ openingHoursTitle }}</h2>
       <p v-html="openingHoursParagraph" />
+
+      <h2>{{currentLang === 'en' ? 'Follow us on:' : 'Seguici su:'}}</h2>
+      <div :class="$style.socialIcons">
+        <a href="https://facebook.com"
+           target="_blank"
+           :aria-label="currentLang === 'en' ? 'Visit our Facebook profile' : 'Visita il nostro profilo Facebook'">
+          <Icon name="logos:facebook" :class="$style.icon" />
+        </a>
+        <a href="https://instagram.com"
+           target="_blank"
+           :aria-label="currentLang === 'en' ? 'Visit our Instagram profile' : 'Visita il nostro profilo Instagram'">
+          <Icon name="logos:instagram-icon" :class="$style.icon" />
+        </a>
+        <a href="https://youtube.com"
+           target="_blank"
+           :aria-label="currentLang === 'en' ? 'Visit our YouTube profile' : 'Visita il nostro profilo YouTube'">
+          <Icon name="logos:youtube-icon" :class="$style.icon" />
+        </a>
+      </div>
+
     </div>
 
     <div id="map" :class="$style.map"></div>
@@ -26,11 +45,9 @@ import { storeToRefs } from 'pinia'
 import { pageMeta } from '~/locales/pages'
 import 'leaflet/dist/leaflet.css'
 
-// Init Supabase and language
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 
-// Init store and refs
 const contactsStore = useContactsStore()
 const {
   whereAreWeTitle,
@@ -41,14 +58,12 @@ const {
   openingHoursParagraph,
 } = storeToRefs(contactsStore)
 
-// Set meta tags
 useHead({
   title: pageMeta.contacts.title[currentLang.value] || pageMeta.contacts.title.en,
   meta: [
     { name: 'description', content: pageMeta.contacts.description[currentLang.value] }
   ]
 })
-
 
 onMounted(async () => {
   await contactsStore.fetchAllContent(supabase, currentLang.value)
@@ -101,6 +116,18 @@ watchEffect(() => {
 .content p a:hover {
   color: #1d4ed8;
 }
+.socialIcons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.icon {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+.icon:hover {
+  transform: scale(1.25);
+}
 
 
 @media (max-width: 760px) {
@@ -120,18 +147,24 @@ watchEffect(() => {
     position: relative;
     z-index: 1;
   }
+  .icon {
+    font-size: 1.5rem;
+  }
 }
 
 @media (min-width: 2560px) {
   .content h2 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
   .content p {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
   .map {
-    height: 600px;
+    height: 700px;
     min-width: 400px;
+  }
+  .icon {
+    font-size: 3rem;
   }
 }
 </style>
