@@ -88,7 +88,7 @@ onMounted(async () => {
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  background-color: #93c5fd;
+  background-color: #e0e0e0;
   border-radius: 9999px;
   color: white;
   font-size: 2rem;
