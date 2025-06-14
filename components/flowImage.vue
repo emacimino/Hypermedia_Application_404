@@ -12,18 +12,17 @@ const props = defineProps({
 const currentSliderIndex = ref(0);
 const direction = ref('next');
 let intervalId;
-const isTimerPaused = ref(false);
 
 const nextSlide = () => {
   direction.value = 'next';
   currentSliderIndex.value = (currentSliderIndex.value + 1) % props.images.length;
-  if (!isTimerPaused.value) startSlider();
+  startSlider();
 };
 
 const prevSlide = () => {
   direction.value = 'prev';
   currentSliderIndex.value = (currentSliderIndex.value - 1 + props.images.length) % props.images.length;
-  if (!isTimerPaused.value) startSlider();
+  startSlider();
 };
 
 const startSlider = () => {
@@ -31,16 +30,6 @@ const startSlider = () => {
   intervalId = setInterval(() => {
     nextSlide();
   }, 5000);
-};
-
-const playSlider = () => {
-  isTimerPaused.value = false;
-  startSlider();
-};
-
-const stopSlider = () => {
-  clearInterval(intervalId);
-  isTimerPaused.value = true;
 };
 
 onMounted(() => {
@@ -71,7 +60,7 @@ onUnmounted(() => {
                     class="w-full h-full object-cover block"
                 />
 
-                <!-- ✅ ONLY arrows (bottom center) -->
+                <!-- ✅ Only arrows (bottom center) -->
                 <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-4 z-50">
                   <!-- Left Arrow -->
                   <div
@@ -98,30 +87,6 @@ onUnmounted(() => {
             </div>
           </transition>
         </template>
-      </div>
-
-      <!-- ▶️⏸️ Play/Pause Button -->
-      <div class="absolute bottom-4 right-5 z-[60] cursor-pointer">
-        <svg
-            v-if="isTimerPaused"
-            @click="playSlider"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-8 h-8 text-gray-500 hover:text-gray-700"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-        >
-          <path d="M8 5v14l11-7z" />
-        </svg>
-        <svg
-            v-else
-            @click="stopSlider"
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-8 h-8 text-gray-500 hover:text-gray-700"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-        >
-          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-        </svg>
       </div>
     </div>
   </div>
