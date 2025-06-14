@@ -77,10 +77,9 @@
 
 <script setup lang="ts">
 import {reactive, ref} from 'vue'
+import {useSupabaseClient} from '#imports'
 
-const prop = defineProps<{
-  Title: string
-}>()
+const supabase = useSupabaseClient()
 
 const formData = reactive({
   firstName: '',
@@ -128,27 +127,25 @@ const submitForm = async () => {
   isSubmitting.value = true
 
   try {
-    const subject = encodeURIComponent(`New subscription for ${prop.Title}`)
-    const body = encodeURIComponent(
-        `Name: ${formData.firstName}\n` +
-        `Last name: ${formData.lastName}\n` +
-        `Email: ${formData.email}\n` +
-        `Message: ${formData.message}`
-    )
+    const { error } = await (supabase as any)
+        .from('Subscription')
+        .insert([{
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          message: formData.message
+        }])
 
-    window.location.href = `mailto:info@whitelotus.com?subject=${subject}&body=${body}`
+    if (error) throw error
 
-    setTimeout(() => {
-      formData.firstName = ''
-      formData.lastName = ''
-      formData.email = ''
-      formData.message = ''
-      alert('Form submitted successfully! Your email client should open.')
-    }, 1000)
-
+    alert('Form inviato con successo!')
+    formData.firstName = ''
+    formData.lastName = ''
+    formData.email = ''
+    formData.message = ''
   } catch (error) {
-    alert('Error submitting form. Please try again.')
-    console.error('Form submission error:', error)
+    alert('Errore durante l\'invio del form. Riprova.')
+    console.error('Supabase error:', error)
   } finally {
     isSubmitting.value = false
   }
