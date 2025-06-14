@@ -81,11 +81,16 @@ import {useSupabaseClient} from '#imports'
 
 const supabase = useSupabaseClient()
 
+const prop = defineProps<{
+  Title: string
+}>()
+
 const formData = reactive({
   firstName: '',
   lastName: '',
   email: '',
-  message: ''
+  message: '',
+  type: prop.Title
 })
 
 const isSubmitting = ref(false)
@@ -133,7 +138,8 @@ const submitForm = async () => {
           first_name: formData.firstName,
           last_name: formData.lastName,
           email: formData.email,
-          message: formData.message
+          message: formData.message,
+          type: formData.type
         }])
 
     if (error) throw error
