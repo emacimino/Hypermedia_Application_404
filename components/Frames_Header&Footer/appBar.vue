@@ -50,7 +50,8 @@
         class="relative z-50 flex flex-col justify-between cursor-pointer focus:outline-none"
         style="width: 6vw; height: 4.5vw; min-width: 2rem; min-height: 1.5rem"
         aria-label="Toggle navigation"
-        :aria-expanded="isMenuOpen.toString()"
+        :aria-expanded="isMenuOpen"
+
     >
       <!-- Line 1 -->
       <span
