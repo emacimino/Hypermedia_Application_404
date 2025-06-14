@@ -1,8 +1,7 @@
 <script setup>
-import {ref, onMounted, onUnmounted} from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { defineProps } from 'vue';
 
-// Props
 const props = defineProps({
   images: {
     type: Array,
@@ -10,17 +9,19 @@ const props = defineProps({
   }
 });
 
-
 const currentSliderIndex = ref(0);
+const direction = ref('next');
 let intervalId;
 const isTimerPaused = ref(false);
 
 const nextSlide = () => {
+  direction.value = 'next';
   currentSliderIndex.value = (currentSliderIndex.value + 1) % props.images.length;
   if (!isTimerPaused.value) startSlider();
 };
 
 const prevSlide = () => {
+  direction.value = 'prev';
   currentSliderIndex.value = (currentSliderIndex.value - 1 + props.images.length) % props.images.length;
   if (!isTimerPaused.value) startSlider();
 };
@@ -49,18 +50,14 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(intervalId);
 });
-
-
 </script>
 
-
-
 <template>
-  <div >
-    <div class="flex relative w-full h-full">
+  <div>
+    <div class="relative w-full h-full">
       <div class="flex mx-auto justify-center items-center w-full h-full px-4">
         <template v-for="(image, index) in images" :key="index">
-          <transition name="slide" mode="out-in">
+          <transition :name="direction === 'next' ? 'slide' : 'slide-reverse'" mode="out-in">
             <div v-if="index === currentSliderIndex" class="absolute inset-0">
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md transition-all duration-500 ease-in-out">
                 <nuxt-link :to="`/activityPage/${image.Course_Id}`" class="linkWrapper">
@@ -73,43 +70,79 @@ onUnmounted(() => {
                     :alt="image.Title"
                     class="w-full h-full object-cover block"
                 />
+
+                <!-- ✅ ONLY arrows (bottom center) -->
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-4 z-50">
+                  <!-- Left Arrow -->
+                  <div
+                      class="bg-black/40 hover:bg-black/60 p-2 rounded-full cursor-pointer"
+                      @click="prevSlide"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </div>
+
+                  <!-- Right Arrow -->
+                  <div
+                      class="bg-black/40 hover:bg-black/60 p-2 rounded-full cursor-pointer"
+                      @click="nextSlide"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
               </div>
             </div>
           </transition>
         </template>
+      </div>
 
-
-        <!-- Pulsanti -->
-        <i class="fas fa-caret-right absolute right-0 top-1/3 text-4xl m-2 cursor-pointer text-white z-50"
-           @click="nextSlide"></i>
-        <i class="fas fa-caret-left absolute left-0 top-1/3 text-4xl m-2 cursor-pointer text-white z-50"
-           @click="prevSlide"></i>
-
-        <!-- Play/Pause -->
-        <i class="fa-solid fa-circle-play absolute bottom-5 text-3xl m-2 cursor-pointer text-gray-500 z-50"
-           @click="playSlider" v-if="isTimerPaused"></i>
-        <i class="fa-solid fa-pause absolute bottom-5 text-3xl m-2 cursor-pointer text-gray-500 z-50"
-           @click="stopSlider" v-else></i>
+      <!-- ▶️⏸️ Play/Pause Button -->
+      <div class="absolute bottom-4 right-5 z-[60] cursor-pointer">
+        <svg
+            v-if="isTimerPaused"
+            @click="playSlider"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 text-gray-500 hover:text-gray-700"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+        >
+          <path d="M8 5v14l11-7z" />
+        </svg>
+        <svg
+            v-else
+            @click="stopSlider"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 text-gray-500 hover:text-gray-700"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+        >
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+        </svg>
       </div>
     </div>
   </div>
-
 </template>
-
-
 
 <style>
 :global(.linkWrapper) {
   text-decoration: none;
   color: inherit;
 }
+
 .slide-enter-active,
-.slide-leave-active {
+.slide-leave-active,
+.slide-reverse-enter-active,
+.slide-reverse-leave-active {
   transition: all 0.6s ease;
   position: absolute;
   width: 100%;
 }
 
+/* Slide forward */
 .slide-enter-from {
   transform: translateX(100%);
   opacity: 0;
@@ -127,4 +160,21 @@ onUnmounted(() => {
   opacity: 0;
 }
 
+/* Slide backward */
+.slide-reverse-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.slide-reverse-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-reverse-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-reverse-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
 </style>
