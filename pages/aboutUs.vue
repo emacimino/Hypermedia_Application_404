@@ -7,6 +7,13 @@
         :alt="currentLang === 'it' ? `Una sala del centro` : `A center room`"
         :reverse="true"
     />
+    <Presentation
+        :title="currentLang === 'it' ? aboutUsContent.Title_it : aboutUsContent.Title"
+        :paragraphs="currentLang === 'it' ? aboutUsContent.Paragraph_it : aboutUsContent.Paragraph"
+        :image="aboutUsContent.Image"
+        :alt="currentLang === 'it' ? `Una sala del centro` : `A center room`"
+        :reverse="false"
+    />
   </div>
   <div v-else>
     <p>Loading...</p>
