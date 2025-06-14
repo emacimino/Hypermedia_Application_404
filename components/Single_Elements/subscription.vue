@@ -1,10 +1,10 @@
 <template>
   <div :class="$style.subscription">
-    <div :class="$style.subscribe">Subscribe</div>
+    <div :class="$style.subscribe">{{currentLang == 'it' ? 'Iscriviti' : 'Subscribe'}}</div>
     <form @submit.prevent="submitForm" :class="$style.form">
       <div :class="$style.row">
         <div :class="$style.input">
-          <div :class="$style.firstName">First name *</div>
+          <div :class="$style.firstName">{{currentLang == 'it' ? 'Nome' : 'First name'}} *</div>
           <div :class="[$style.field, errors.firstName && $style.fieldError]">
             <input
                 v-model="formData.firstName"
@@ -18,7 +18,7 @@
         </div>
 
         <div :class="$style.input1">
-          <div :class="$style.firstName">Last name *</div>
+          <div :class="$style.firstName">{{currentLang == 'it' ? 'Cognome' : 'Last name'}} *</div>
           <div :class="[$style.field, errors.lastName && $style.fieldError]">
             <input
                 v-model="formData.lastName"
@@ -34,7 +34,7 @@
 
       <div :class="$style.row">
         <div :class="$style.input2">
-          <div :class="$style.firstName">Email address *</div>
+          <div :class="$style.firstName">{{currentLang == 'it' ? 'Indirizzo email' : 'Email address'}} *</div>
           <div :class="[$style.field, errors.email && $style.fieldError]">
             <input
                 v-model="formData.email"
@@ -50,11 +50,11 @@
 
       <div :class="$style.row">
         <div :class="$style.input3">
-          <div :class="$style.firstName">Your message</div>
+          <div :class="$style.firstName">{{currentLang == 'it' ? 'Il tuo messaggio' : 'Your message'}}</div>
           <div :class="[$style.field, $style.fieldTextarea]">
             <textarea
                 v-model="formData.message"
-                placeholder="Enter your question or message"
+                :placeholder="currentLang === 'it' ? 'Inserisci la tua domanda' : 'Enter your question or message'"
                 :class="[$style.inputField, $style.textarea]"
                 rows="5"
             ></textarea>
@@ -67,9 +67,10 @@
           :class="[$style.button, isSubmitting && $style.buttonDisabled]"
           :disabled="isSubmitting"
       >
-        <div :class="$style.submit">
-          {{ isSubmitting ? 'Submitting...' : 'Submit' }}
-        </div>
+        {{ isSubmitting
+          ? (currentLang === 'it' ? 'Invio in corso...' : 'Submitting...')
+          : (currentLang === 'it' ? 'Invia' : 'Submit')
+        }}
       </button>
     </form>
   </div>
@@ -78,7 +79,9 @@
 <script setup lang="ts">
 import {reactive, ref} from 'vue'
 import {useSupabaseClient} from '#imports'
+import { useLanguage } from '~/composables/useLanguage'
 
+const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()
 
 const prop = defineProps<{
