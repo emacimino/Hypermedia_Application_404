@@ -65,7 +65,7 @@ watch(currentLang, (lang) => {
 }, { immediate: true })
 
 onMounted(() => {
-  slideStore.fetchImages(currentLang,supabase)
+  slideStore.fetchImages(currentLang.value,supabase)
   homeStore.fetchPresentationContent(supabase)
 })
 </script>
