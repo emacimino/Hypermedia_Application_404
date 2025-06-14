@@ -29,7 +29,7 @@
 import { ref, watchEffect } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import { useRouter } from 'vue-router'
-
+import type { HighlightItem } from '~/stores/highlightsStore'
 const { currentLang } = useLanguage()
 const router = useRouter()
 

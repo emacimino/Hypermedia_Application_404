@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-interface HighlightItem {
+export interface HighlightItem {
     id: number
     title: { en: string; it: string }
     subtitle: { en: string; it: string }
