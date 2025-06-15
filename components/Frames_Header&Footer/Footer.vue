@@ -32,7 +32,7 @@
       </div>
 
       <div :class="$style.centerColumn" class="gap-4 mt-4 flex flex-col md:items-center md:gap-6">
-        <div>
+        <div class="w-full md:text-center mb-2">
           {{ currentLang === 'en' ? 'Reach out to us whenever you need:' : 'Contattaci per qualsiasi cosa:' }}
         </div>
 
