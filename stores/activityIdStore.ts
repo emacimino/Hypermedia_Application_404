@@ -16,7 +16,10 @@ interface RawActivity {
     LongDescription_it: string
     Image: string
     Events?: EventItem[]
-}
+    Course_leader?: {
+        Id: number
+        Title: string
+    }}
 
 export const useActivityIdStore = defineStore('activityIdPresentation', {
     state: () => ({
@@ -28,7 +31,7 @@ export const useActivityIdStore = defineStore('activityIdPresentation', {
 
             const { data, error } = await supabase
                 .from("Activities")
-                .select(`*, Events:Events ( * )`)
+                .select(`*, Events:Events(*), Course_leader:Teachers(Id, Title)`)
                 .eq("Id", activityId)
                 .single()
 
@@ -40,5 +43,6 @@ export const useActivityIdStore = defineStore('activityIdPresentation', {
 
             this.activity = data
         }
+
     }
 })

@@ -7,6 +7,7 @@
         :paragraphs="currentLang === 'it' ? teacherStore.teacher.LongDescription_it : teacherStore.teacher.LongDescription"
         :image="teacherStore.teacher.Image"
         :reverse="true"
+        :responsible="teacherStore.teacher.LED_ACTIVITIES"
     />
 
     <div v-if="teacherStore.cvList.length" class="mt-8">
@@ -21,6 +22,7 @@
           :selectedWeekdayIndex="0"
           :dayEvents="teacherStore.teacher.Events ?? []"
           :experience="translatedCvList"
+
       />
     </div>
   </div>
@@ -74,6 +76,7 @@ const translatedCvList = computed(() =>
 onMounted(async () => {
   await teacherStore.fetchTeacher(teacherId.value, supabase)
   await teacherStore.fetchCV(teacherId.value, supabase)
+  await teacherStore.fetchLedActivities(teacherId.value, supabase)
 })
 
 

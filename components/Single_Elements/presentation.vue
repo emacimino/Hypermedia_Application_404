@@ -30,23 +30,51 @@
       <CV_experience v-else-if="cv" :cvs="experience ?? []" class="m-2" />
       <div v-else>
         <h1 :class="$style.title">{{ title }}</h1>
+
+        </div>
         <div v-if="paragraphs" :class="$style.paragraphs">
           <p>{{ paragraphs }}</p>
         </div>
+      <div v-if="respTeacher" class="mt-4">
+        <nuxt-link
+            :to="`/teacherPage/${respTeacherId}`"
+            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 inline-block"
+        >
+          {{ currentLang === 'it' ? 'Responsabile:' : 'Teacher in charge:' }}
+          <strong>{{ respTeacher }}</strong>
+        </nuxt-link>
       </div>
+
+      <div v-if="responsible?.length" class="mt-4 flex flex-col gap-2">
+        <div
+            v-for="activity in responsible"
+            :key="activity.Id"
+            class="mb-2"
+        >
+          <nuxt-link
+              :to="`/activityPage/${activity.Id}`"
+              class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 inline-block"
+          >
+            {{ currentLang === 'it' ? 'Titolare di corso' : 'Head of course' }}:
+            <strong>{{ currentLang === 'it' ? activity.Title_it : activity.Title }}</strong>
+          </nuxt-link>
+        </div>
     </div>
+  </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { defineAsyncComponent } from "vue"
+const { currentLang } = useLanguage()
 
 import dayjs from "dayjs"
 
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import Subscription from "~/components/Single_Elements/subscription.vue"
 import CV_experience from "~/components/CV_experience.vue"
+import {useLanguage} from "~/composables/useLanguage";
 const calendarComponent = defineAsyncComponent(() => import("../Calendar/index.vue"))
 
 const props = defineProps<{
@@ -65,6 +93,9 @@ const props = defineProps<{
   dayEvents?: any[]
   experience?: any[]
   alt?: string
+  responsible?: { Id: number; Title: string; Title_it: string }[]
+  respTeacher?: string
+  respTeacherId?: number
 }>()
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 

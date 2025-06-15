@@ -7,6 +7,8 @@
         :paragraphs="currentLang === 'it' ? activityStore.activity.LongDescription_it : activityStore.activity.LongDescription"
         :image="activityStore.activity.Image"
         :reverse="true"
+        :respTeacher="activityStore.activity.Course_leader?.Title"
+        :respTeacherId="activityStore.activity.Course_leader?.Id"
     />
     <Presentation
         :weekProgramming="true"
@@ -17,7 +19,7 @@
         :activeDate="dayjs()"
         :selectedWeekdayIndex="0"
         :dayEvents="activityStore.activity.Events ?? []"
-    />
+            />
   </div>
   <div v-else>
     <p>Loading...</p>

@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-
 interface RawTeacher {
     Id: number
     Title_it: string
@@ -8,6 +7,7 @@ interface RawTeacher {
     LongDescription: string
     Image: string
     Events?: any[]
+    LED_ACTIVITIES?: { Id: number, Title: string, Title_it: string }[]
 }
 
 export interface CV {
@@ -22,6 +22,7 @@ export interface CV {
     LOCATION: string
     LOCATION_it: string
     CREATED_AT: string
+    IS_LEADER: boolean
 }
 
 
@@ -58,6 +59,21 @@ export const useTeacherIdStore = defineStore('teacherIdPresentation', {
             } else {
                 console.error('fetchCV error:', error)
             }
+        },
+
+        async fetchLedActivities(teacherId: number, supabase: any) {
+            const { data, error } = await supabase
+                .from('Activities')
+                .select('Id, Title, Title_it')
+                .eq('Course_leader', teacherId)
+
+            if (!error && this.teacher) {
+                // Salva direttamente oggetti attività
+                this.teacher.LED_ACTIVITIES = data
+            } else {
+                console.error('fetchLedActivities error:', error)
+            }
         }
+
     },
 })
