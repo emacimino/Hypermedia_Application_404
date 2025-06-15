@@ -18,7 +18,7 @@ const config: Config = {
                 'auto-fit': 'repeat(auto-fit, minmax(16rem, 1fr))',
             },
             colors: {
-                blue: {
+                brand: {
                     50: '#eff6ff',
                     100: '#d0f0fd',
                     200: '#bfdbfe',
