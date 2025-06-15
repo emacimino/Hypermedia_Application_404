@@ -31,22 +31,27 @@
         </div>
       </div>
 
-      <div :class="$style.centerColumn">
-        <div>{{currentLang === 'en' ? 'Reach out to us whenever you need:' : 'Contattaci per qualsiasi cosa:'}}</div>
-        <div class="flex items-center gap-2">
-          <MapPinIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
-          <span>
-    {{currentLang === 'en' ? 'Via Privata Siracusa, Milan' : 'Via Privata Siracusa, Milano'}}
-  </span>
-          <div class="flex items-center gap-2">
-            <PhoneIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
-            <span>+39 345 678 9012</span>
-          </div>
-          <EnvelopeIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
-          <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
+      <div :class="$style.centerColumn" class="gap-4 mt-4 flex flex-col md:items-center md:gap-6">
+        <div>
+          {{ currentLang === 'en' ? 'Reach out to us whenever you need:' : 'Contattaci per qualsiasi cosa:' }}
         </div>
 
+        <div class="flex items-center gap-2 justify-center">
+          <MapPinIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
+          <span>
+      {{ currentLang === 'en' ? 'Via Privata Siracusa, Milan' : 'Via Privata Siracusa, Milano' }}
+    </span>
+        </div>
 
+        <div class="flex items-center gap-2 justify-center">
+          <PhoneIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
+          <span>+39 345 678 9012</span>
+        </div>
+
+        <div class="flex items-center gap-2 justify-center">
+          <EnvelopeIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
+          <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
+        </div>
       </div>
 
       <div :class="$style.rightColumn">
@@ -78,7 +83,7 @@ const { currentLang } = useLanguage()
   justify-content: space-between;
   align-items: center;
   padding: 0 2vw;
-  height: 9rem;
+  min-height: 9rem;
   box-sizing: border-box;
 }
 .leftColumn {
@@ -87,7 +92,7 @@ const { currentLang } = useLanguage()
   gap: 0.5rem;
 }
 .whiteLotusCenter {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 150%;
 }
 .socialIcon {
@@ -105,7 +110,19 @@ const { currentLang } = useLanguage()
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-items: center;
+  gap: 1rem;
 }
+
+@media (min-width: 768px) {
+  .centerColumn {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+}
+
 .emailLink {
   text-decoration: underline;
   color: inherit;
@@ -136,6 +153,7 @@ const { currentLang } = useLanguage()
   .responsiveIcon {
     font-size: 1.75rem;
   }
+
 }
 
 
