@@ -10,7 +10,7 @@
                 v-model="formData.firstName"
                 type="text"
                 placeholder="Jane"
-                :class="$style.inputField"
+                :class="[$style.inputField, 'placeholder-blue-500 focus:placeholder-blue-600']"
                 required
             />
           </div>
@@ -24,7 +24,7 @@
                 v-model="formData.lastName"
                 type="text"
                 placeholder="Smitherton"
-                :class="$style.inputField"
+                :class="[$style.inputField, 'placeholder-blue-500 focus:placeholder-blue-600']"
                 required
             />
           </div>
@@ -40,7 +40,7 @@
                 v-model="formData.email"
                 type="email"
                 placeholder="email@janesfakedomain.net"
-                :class="$style.inputField"
+                :class="[$style.inputField, 'placeholder-blue-500 focus:placeholder-blue-600']"
                 required
             />
           </div>
@@ -55,7 +55,7 @@
             <textarea
                 v-model="formData.message"
                 :placeholder="currentLang === 'it' ? 'Inserisci la tua domanda' : 'Enter your question or message'"
-                :class="[$style.inputField, $style.textarea]"
+                :class="[$style.inputField, 'placeholder-blue-500 focus:placeholder-blue-600',$style.textarea]"
                 rows="5"
             ></textarea>
           </div>
@@ -64,7 +64,7 @@
 
       <button
           type="submit"
-          :class="[$style.button, isSubmitting && $style.buttonDisabled]"
+          class="w-full px-8 py-4 bg-blue-300 text-white rounded shadow hover:bg-blue-400 hover:scale-105 active:scale-105 active:bg-blue-400 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
       >
         {{ isSubmitting
@@ -252,23 +252,20 @@ const submitForm = async () => {
 }
 .button {
   width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  background-color: #0077b6;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  background-color: #7ec8e3;
+  color: white;
   padding: 16px 32px;
   font-size: 20px;
-  color: #fff;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 .button:hover:not(.buttonDisabled) {
-  background-color: #005a8b;
+  background-color: #60a5fa;
 }
+
 .buttonDisabled {
   background-color: #94a3b8;
   cursor: not-allowed;

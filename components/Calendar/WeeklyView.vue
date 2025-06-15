@@ -178,7 +178,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
       <div class="mt-4 flex flex-col md:flex-row md:items-center md:gap-4">
         <nuxt-link
             :to="`/activityPage/${event.Course_Id}`"
-            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400"
+            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
         >
           {{ currentLang === 'it' ? 'Tipo Corso' : 'Course type' }}:
           <strong>{{ getField(event, 'Course_title') }}</strong>
@@ -186,7 +186,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
 
         <nuxt-link
             :to="`/teacherPage/${event.Teacher_id}`"
-            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400"
+            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
         >
           {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
           <strong>{{ getField(event, 'Teacher_name') }}</strong>
