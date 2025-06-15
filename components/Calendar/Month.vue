@@ -28,7 +28,7 @@ function modifyMonth(v){
       >
   <ChevronLeftIcon aria-hidden="true" />
 </button>
-      <span class=" w-[6vw] min-w-[64px]">
+      <span class="flex-1 text-center">
         {{ cMonth }}
       </span>
       <button
