@@ -33,12 +33,20 @@
 
       <div :class="$style.centerColumn">
         <div>{{currentLang === 'en' ? 'Reach out to us whenever you need:' : 'Contattaci per qualsiasi cosa:'}}</div>
-        <div>{{currentLang === 'en' ? '- at Via Privata Siracusa, Milano' : '-in Via Privata Siracusa, Milano'}}</div>
-        <div>{{currentLang === 'en' ? '- calling +1 (310) 555-8123' : '-chiama +1 (310) 555-8123'}}</div>
-        <div>
-          - sending an email to
+        <div class="flex items-center gap-2">
+          <MapPinIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
+          <span>
+    {{currentLang === 'en' ? 'Via Privata Siracusa, Milan' : 'Via Privata Siracusa, Milano'}}
+  </span>
+          <div class="flex items-center gap-2">
+            <PhoneIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
+            <span>+39 345 678 9012</span>
+          </div>
+          <EnvelopeIcon class="w-[1.5vw] h-[1.5vw] text-brand-500" />
           <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
         </div>
+
+
       </div>
 
       <div :class="$style.rightColumn">
@@ -53,6 +61,9 @@
 
 <script setup lang="ts">
 import {useLanguage} from "~/composables/useLanguage.js";
+import { MapPinIcon } from '@heroicons/vue/24/solid'
+import { PhoneIcon } from '@heroicons/vue/24/outline'
+import { EnvelopeIcon } from '@heroicons/vue/24/outline'
 
 const { currentLang } = useLanguage()
 </script>
