@@ -74,13 +74,17 @@ function selectDay(index: number) {
 
   emit('day-click', selected)
 }
-
 function goToPreviousWeek() {
   if (props.currentDate) {
     emit('navigate', 'prev')
+    const newWeekStart = dayjs(props.currentDate).subtract(1, 'week').startOf('isoWeek')
+    const newActiveDate = newWeekStart.add(internalWeekdayIndex.value, 'day')
+    emit('update:activeDate', newActiveDate)
   } else {
     internalDate.value = internalDate.value.subtract(1, 'week')
     selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    const newActiveDate = selectedLocalDate.value.add(internalWeekdayIndex.value, 'day')
+    emit('update:activeDate', newActiveDate)
     if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
   }
 }
@@ -88,9 +92,14 @@ function goToPreviousWeek() {
 function goToNextWeek() {
   if (props.currentDate) {
     emit('navigate', 'next')
+    const newWeekStart = dayjs(props.currentDate).add(1, 'week').startOf('isoWeek')
+    const newActiveDate = newWeekStart.add(internalWeekdayIndex.value, 'day')
+    emit('update:activeDate', newActiveDate)
   } else {
     internalDate.value = internalDate.value.add(1, 'week')
     selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    const newActiveDate = selectedLocalDate.value.add(internalWeekdayIndex.value, 'day')
+    emit('update:activeDate', newActiveDate)
     if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
   }
 }
