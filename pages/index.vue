@@ -37,20 +37,15 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import {pageMeta} from '~/locales/pages'
-
 import { useHomePresentationStore } from '~/stores/homePresentationStore'
 import PacketGrid from "~/components/Grids/packetGrid.vue";
 import { useSlideStore } from '~/stores/slideshow'
 
-
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 const yogaClass = "yoga"
-
-
 const homeStore = useHomePresentationStore()
 const slideStore = useSlideStore()
-
 const { firstPresentation, secondPresentation } = storeToRefs(homeStore)
 
 watch(currentLang, (lang) => {

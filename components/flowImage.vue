@@ -60,7 +60,6 @@ onUnmounted(() => {
                     class="w-full h-full object-cover block"
                 />
 
-                <!-- ✅ Only arrows (bottom center) -->
                 <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-4 z-50">
                   <!-- Left Arrow -->
                   <div
