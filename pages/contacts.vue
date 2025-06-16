@@ -1,6 +1,8 @@
 <template>
   <div :class="$style.content">
     <div>
+      <h1>{{ currentLang === 'en' ? 'Contacts' : 'Contatti' }}</h1>
+
       <h2>{{ whereAreWeTitle }}</h2>
       <p v-html="whereAreWeParagraph" />
 
@@ -95,6 +97,11 @@ watchEffect(() => {
   align-items: center;
   padding: 2rem;
 }
+.content h1 {
+  font-size: clamp(2rem, 3vw, 4rem);
+  font-weight: bold;
+}
+
 .content h2 {
   font-size: clamp(1rem, 3vw, 1.75rem);
   font-weight: bold;
