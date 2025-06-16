@@ -144,7 +144,7 @@ const wrapperClass = computed(() =>
 
     <span class="font-semibold text-center">
       {{ currentLang === 'it' ? 'Settimana ' + formattedWeekDate : formattedWeekDate + ' week' }}
-      <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] bg-blue-300 text-white rounded hover:bg-blue-400">
+      <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] btn-link">
         <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
       </button>
     </span>
@@ -194,7 +194,7 @@ const wrapperClass = computed(() =>
       <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
         <nuxt-link v-if="!isActivity"
             :to="`/activityPage/${event.Course_Id}`"
-            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
+           class="btn-link"
         >
           {{ currentLang === 'it' ? 'Tipo Corso' : 'Course type' }}:
           <strong>{{ getField(event, 'Course_title') }}</strong>
@@ -202,7 +202,7 @@ const wrapperClass = computed(() =>
 
         <nuxt-link v-if="!isTeacher"
             :to="`/teacherPage/${event.Teacher_id}`"
-            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
+                   class="btn-link"
         >
           {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
           <strong>{{ getField(event, 'Teacher_name') }}</strong>

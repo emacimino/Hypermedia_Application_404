@@ -37,10 +37,16 @@
         <div v-if="paragraphs" :class="$style.paragraphs">
           <p>{{ paragraphs }}</p>
         </div>
+      <div v-if="aboutInfo" class="mt-4">
+        <nuxt-link
+            :to="`/aboutUs`"
+            class="btn-link"
+        ><strong>{{ currentLang === 'it' ? 'Scopri di più!' : 'Discover more!' }}</strong></nuxt-link>
+      </div>
       <div v-if="respTeacher" class="mt-4">
         <nuxt-link
             :to="`/teacherPage/${respTeacherId}`"
-            class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 inline-block"
+            class="btn-link"
         >
           {{ currentLang === 'it' ? 'Responsabile:' : 'Teacher in charge:' }}
           <strong>{{ respTeacher }}</strong>
@@ -55,7 +61,7 @@
         >
           <nuxt-link
               :to="`/activityPage/${activity.Id}`"
-              class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 inline-block"
+              class="btn-link"
           >
             {{ currentLang === 'it' ? 'Titolare di corso' : 'Head of course' }}:
             <strong>{{ currentLang === 'it' ? activity.Title_it : activity.Title }}</strong>
@@ -101,6 +107,7 @@ const props = withDefaults(
       respTeacherId?: number
       isTeacher?: boolean
       isActivity?: boolean
+      aboutInfo?: boolean
     }>(),
     {
       isTeacher: false,
