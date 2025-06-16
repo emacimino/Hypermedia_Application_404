@@ -83,7 +83,7 @@
   <div
       v-if="isMenuOpen"
       ref="menuRef"
-      class="fixed inset-y-10 right-0 w-2/3 z-40 flex flex-col items-center justify-center gap-10 transition-opacity duration-300 bg-blue-100 rounded-s"
+      class="fixed right-0 inset-y-10 w-auto max-w-fit max-h-fit z-40 flex flex-col items-center justify-top gap-10 transition-opacity duration-300 bg-blue-100 p-2 rounded-s"
   >
     <MenuItem
         v-for="item in items"
