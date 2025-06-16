@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.content">
     <div>
-      <h1>{{ currentLang === 'en' ? 'Contacts' : 'Contatti' }}</h1>
+      <h1>{{ currentLang === 'en' ? 'Come visit us!' : 'Vieni a trovarci!' }}</h1>
 
       <h2>{{ whereAreWeTitle }}</h2>
       <p v-html="whereAreWeParagraph" />
