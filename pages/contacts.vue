@@ -205,7 +205,7 @@ watchEffect(() => {
     font-size: 3rem;
   }
   .Title{
-    font-size: 8rem;
+    font-size: 7.5rem;
   }
 }
 </style>
