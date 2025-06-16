@@ -1,9 +1,9 @@
 <template>
+  <h1 :class="[$style.Title, showTitle ? $style.titleEnter : '']">
+    {{ currentLang === 'en' ? '🧘‍♂️Come visit us!🧘‍♀️' : '🧘‍♂️Vieni a trovarci!🧘‍♀️' }}
+  </h1>
   <div :class="$style.content">
     <div>
-      <h1 :class="[$style.Title, showTitle ? $style.titleEnter : '']">
-        {{ currentLang === 'en' ? 'Come visit us!' : 'Vieni a trovarci!' }}
-      </h1>
       <h2>{{ whereAreWeTitle }}</h2>
       <p v-html="whereAreWeParagraph" />
 
@@ -106,7 +106,7 @@ watchEffect(() => {
 }
 .Title {
   font-size: 4.5rem;
-  padding: var(--padding);
+  padding: 1.5rem 1rem 0 1rem;
   font-weight: bold;
   font-family: 'Rounded Mplus 1c Bold', serif;
   color:#0769a2;
@@ -185,6 +185,9 @@ watchEffect(() => {
   .icon {
     font-size: 1.5rem;
   }
+  .Title{
+    font-size: 2rem;
+  }
 }
 
 @media (min-width: 2560px) {
@@ -200,6 +203,9 @@ watchEffect(() => {
   }
   .icon {
     font-size: 3rem;
+  }
+  .Title{
+    font-size: 7.5rem;
   }
 }
 </style>

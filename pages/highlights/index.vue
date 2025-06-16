@@ -113,7 +113,7 @@ watch(currentLang, () => {
 
 @media (min-width: 2560px) {
   .Title{
-    font-size: 8rem;
+    font-size: 7.5rem;
   }
 }
 </style>
