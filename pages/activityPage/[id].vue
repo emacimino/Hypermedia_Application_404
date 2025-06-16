@@ -19,7 +19,9 @@
         :activeDate="dayjs()"
         :selectedWeekdayIndex="0"
         :dayEvents="activityStore.activity.Events ?? []"
-            />
+        :isActivity="true"
+
+    />
   </div>
   <div v-else>
     <p>Loading...</p>

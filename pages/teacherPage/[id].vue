@@ -16,6 +16,7 @@
           :subscribe="false"
           :calendar="false"
           :cv="true"
+          :isTeacher="true"
           :Title="teacherStore.teacher.Title"
           :currentDate="dayjs()"
           :activeDate="dayjs()"

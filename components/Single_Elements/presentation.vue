@@ -21,6 +21,8 @@
           @update:selectedWeekdayIndex="val => selectedWeekdayIndex = val"
           @navigate="handleNavigate"
           :visualizeButton="false"
+          :isTeacher="isTeacher"
+          :isActivity="isActivity"
       />
     </div>
 
@@ -77,26 +79,37 @@ import CV_experience from "~/components/CV_experience.vue"
 import {useLanguage} from "~/composables/useLanguage";
 const calendarComponent = defineAsyncComponent(() => import("../Calendar/index.vue"))
 
-const props = defineProps<{
-  title?: string
-  paragraphs?: string
-  image?: string
-  reverse?: boolean
-  calendar?: boolean
-  weekProgramming?: boolean
-  subscribe?: boolean
-  cv?: boolean
-  Title?: string
-  currentDate?: any
-  activeDate?: any
-  selectedWeekdayIndex?: number | null
-  dayEvents?: any[]
-  experience?: any[]
-  alt?: string
-  responsible?: { Id: number; Title: string; Title_it: string }[]
-  respTeacher?: string
-  respTeacherId?: number
-}>()
+const props = withDefaults(
+    defineProps<{
+      title?: string
+      paragraphs?: string
+      image?: string
+      reverse?: boolean
+      calendar?: boolean
+      weekProgramming?: boolean
+      subscribe?: boolean
+      cv?: boolean
+      Title?: string
+      currentDate?: any
+      activeDate?: any
+      selectedWeekdayIndex?: number | null
+      dayEvents?: any[]
+      experience?: any[]
+      alt?: string
+      responsible?: { Id: number; Title: string; Title_it: string }[]
+      respTeacher?: string
+      respTeacherId?: number
+      isTeacher?: boolean
+      isActivity?: boolean
+    }>(),
+    {
+      isTeacher: false,
+      isActivity: false
+    }
+)
+
+
+
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 
 watch(() => props.currentDate, (val) => {

@@ -20,13 +20,21 @@ const weekdayLabels = computed(() =>
         : ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
 )
 
-const props = defineProps<{
-  currentDate?: any
-  activeDate?: any
-  selectedWeekdayIndex?: number | null
-  dayEvents?: any[] | null
-  visualizeButton?: boolean
-}>()
+const props = withDefaults(
+    defineProps<{
+      currentDate?: any
+      activeDate?: any
+      selectedWeekdayIndex?: number | null
+      dayEvents?: any[] | null
+      visualizeButton?: boolean
+      isTeacher?: boolean
+      isActivity?: boolean
+    }>(),
+    {
+      isTeacher: false,
+      isActivity: false
+    }
+)
 
 const emit = defineEmits<{
   (e: 'back'): void
@@ -119,6 +127,12 @@ watch(() => internalDate.value.format("YYYY-MM-DD"), () => {
 watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
   if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
 })
+
+const wrapperClass = computed(() =>
+    displayedEvents.value.length > 4
+        ? 'max-h-96 overflow-y-auto'
+        : ''
+)
 </script>
 
 
@@ -164,6 +178,8 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
     <div v-if="displayedEvents.length === 0" class="text-blue-500 italic">
       {{ currentLang == 'it' ? 'Nessun evento' : 'No events' }}
     </div>
+    <div :class="wrapperClass">
+      <div class="flex flex-col space-y-4 space-x-2">
 
     <div
         v-for="event in displayedEvents"
@@ -176,7 +192,7 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
       </div>
 
       <div class="mt-4 flex flex-col md:flex-row md:items-center md:gap-4">
-        <nuxt-link
+        <nuxt-link v-if="!isActivity"
             :to="`/activityPage/${event.Course_Id}`"
             class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
         >
@@ -184,13 +200,15 @@ watch(() => selectedLocalDate.value.format("YYYY-MM-DD"), () => {
           <strong>{{ getField(event, 'Course_title') }}</strong>
         </nuxt-link>
 
-        <nuxt-link
+        <nuxt-link v-if="!isTeacher"
             :to="`/teacherPage/${event.Teacher_id}`"
             class="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-400 hover:scale-105 active:bg-blue-400 active:scale-105"
         >
           {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
           <strong>{{ getField(event, 'Teacher_name') }}</strong>
         </nuxt-link>
+      </div>
+    </div>
       </div>
     </div>
   </div>
