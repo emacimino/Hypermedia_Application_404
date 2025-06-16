@@ -57,6 +57,8 @@ const link = computed(() => {
   width: 100%;
   height: 12rem;
   object-fit: cover;
+  object-position: top;
+
 }
 .content {
   padding: 1rem;
