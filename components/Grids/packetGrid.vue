@@ -13,8 +13,6 @@
 <script setup lang="ts">
 import Packet from "~/components/Single_Elements/packet.vue";
 import { usePacketStore } from '~/stores/homeRelatedStores/packetStores'
-import {useLanguage} from "~/composables/useLanguage";
-import {useSupabaseClient} from "#imports";
 
 const packetStore = usePacketStore()
 </script>
