@@ -49,7 +49,7 @@ onUnmounted(() => {
           <transition :name="direction === 'next' ? 'slide' : 'slide-reverse'" mode="out-in">
             <div v-if="index === currentSliderIndex" class="absolute inset-0">
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md transition-all duration-500 ease-in-out">
-                <nuxt-link :to="`/activityPage/${image.Course_Id}`" class="linkWrapper">
+                <nuxt-link :to="`/activities/${image.Course_Id}`" class="linkWrapper">
                   <h2 class="absolute top-4 left-4 z-[20] text-[#1F3A5F] text-4xl sm:text-5xl font-bold bg-blue-300/50 px-4 py-2 rounded hover:scale-105 group cursor-pointer active:scale-105 group hover:[text-shadow:0_0_10px_rgba(31,58,95,0.5)]">
                     {{ image.Title }}
                   </h2>

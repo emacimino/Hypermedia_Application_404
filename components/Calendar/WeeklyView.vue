@@ -207,7 +207,7 @@ const wrapperClass = computed(() =>
 
       <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
         <nuxt-link v-if="!isActivity"
-            :to="`/activityPage/${event.Course_Id}`"
+            :to="`/activities/${event.Course_Id}`"
            class="btn-link"
         >
           {{ currentLang === 'it' ? 'Tipo Corso' : 'Course type' }}:
@@ -215,7 +215,7 @@ const wrapperClass = computed(() =>
         </nuxt-link>
 
         <nuxt-link v-if="!isTeacher"
-            :to="`/teacherPage/${event.Teacher_id}`"
+            :to="`/teachers/${event.Teacher_id}`"
                    class="btn-link"
         >
           {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
