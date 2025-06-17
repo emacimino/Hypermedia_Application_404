@@ -115,8 +115,6 @@ const props = withDefaults(
     }
 )
 
-
-
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 
 watch(() => props.currentDate, (val) => {

@@ -1,7 +1,5 @@
 <template>
-  <h1 :class="[$style.Title, showTitle ? $style.titleEnter : '']">
-    {{ currentLang === 'en' ? '🧘‍♂️Come visit us!🧘‍♀️' : '🧘‍♂️Vieni a trovarci!🧘‍♀️' }}
-  </h1>
+  <Title :title = "currentLang === 'en' ? '🧘‍♂️Come visit us!🧘‍' : '🧘‍♂️Vieni a trovarci!🧘️'"/>
   <div :class="$style.content">
     <div>
       <h2>{{ whereAreWeTitle }}</h2>
@@ -47,6 +45,7 @@ import { useLanguage } from '~/composables/useLanguage'
 import { storeToRefs } from 'pinia'
 import { pageMeta } from '~/locales/pages'
 import 'leaflet/dist/leaflet.css'
+import Title from "~/components/Title.vue";
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
@@ -62,11 +61,6 @@ const {
 } = storeToRefs(contactsStore)
 const showTitle = ref(false)
 
-onMounted(() => {
-  setTimeout(() => {
-    showTitle.value = true
-  }, 300)
-})
 useHead({
   title: pageMeta.contacts.title[currentLang.value] || pageMeta.contacts.title.en,
   meta: [
@@ -103,32 +97,6 @@ watchEffect(() => {
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-}
-.Title {
-  font-size: 4.5rem;
-  padding: 1.5rem 1rem 0 1rem;
-  font-weight: bold;
-  font-family: 'Rounded Mplus 1c Bold', serif;
-  color:#0769a2;
-  text-align: center;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-}
-@keyframes fadeSlideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.titleEnter {
-  animation: fadeSlideDown 0.8s ease-out forwards;
-}
-.Title:not(.titleEnter) {
-  opacity: 0;
-  transform: translateY(-30px);
 }
 .content h2 {
   font-size: clamp(1rem, 3vw, 1.75rem);
@@ -185,9 +153,6 @@ watchEffect(() => {
   .icon {
     font-size: 1.5rem;
   }
-  .Title{
-    font-size: 2rem;
-  }
 }
 
 @media (min-width: 2560px) {
@@ -202,9 +167,6 @@ watchEffect(() => {
   }
   .icon {
     font-size: 3rem;
-  }
-  .Title{
-    font-size: 7.5rem;
   }
 }
 </style>

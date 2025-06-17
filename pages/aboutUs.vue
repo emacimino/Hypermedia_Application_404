@@ -1,4 +1,6 @@
 <template>
+  <Title :title = "currentLang === 'en' ? '🪷Discover White Lotus!' : '🪷Scopri White Lotus!'"/>
+
   <div v-if="aboutUsContent">
     <Presentation
         :title="currentLang === 'it' ? aboutUsContent.Title_it : aboutUsContent.Title"
@@ -29,12 +31,14 @@ import { pageMeta } from '~/locales/pages'
 import { useAboutUsStore } from '~/stores/aboutUsStore'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import Timeline from '~/components/timeline.vue'
+import Title from "~/components/Title.vue";
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
 const aboutUsStore = useAboutUsStore()
 const aboutUsContent = computed(() => aboutUsStore.content)
 const aboutUsContent2 = computed(() => aboutUsStore.content2)
+
 useHead({
   title: pageMeta.aboutUs.title[currentLang.value] || pageMeta.aboutUs.title.en,
   meta: [
@@ -49,5 +53,4 @@ onMounted(async () => {
 </script>
 
 <style module>
-
 </style>
