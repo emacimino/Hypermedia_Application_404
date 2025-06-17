@@ -40,7 +40,7 @@
 import { watchEffect } from 'vue'
 import { onMounted, nextTick } from 'vue'
 import { useSupabaseClient } from '#imports'
-import { useContactsStore } from '~/stores/contactsStore'
+import { useContactsStore } from '~/stores/contacts/contactsStore'
 import { useLanguage } from '~/composables/useLanguage'
 import { storeToRefs } from 'pinia'
 import { pageMeta } from '~/locales/pages'
