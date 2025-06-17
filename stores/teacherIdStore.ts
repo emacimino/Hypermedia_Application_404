@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 interface RawTeacher {
     Id: number
     Title_it: string
@@ -25,55 +26,29 @@ export interface CV {
     IS_LEADER: boolean
 }
 
-
-
 export const useTeacherIdStore = defineStore('teacherIdPresentation', {
     state: () => ({
         teacher: null as RawTeacher | null,
         cvList: [] as CV[],
     }),
     actions: {
-        async fetchTeacher(teacherId: number, supabase: any) {
-            const { data, error } = await supabase
-                .from('Teachers')
-                .select(`*, Events:Events ( * )`)
-                .eq('Id', teacherId)
-                .single()
+        async fetchTeacher(teacherId: number) {
+            const { data, error } = await useFetch<{
+                teacher: RawTeacher | null
+                cvList: CV[]
+                ledActivities: { Id: number; Title: string; Title_it: string }[]
+            }>(`/api/teachers/id?id=${teacherId}`)
 
-            if (!error) {
-                this.teacher = data
-            } else {
-                console.error('fetchTeacher error:', error)
+            if (error.value || !data.value || !data.value.teacher) {
+                console.error('Errore nel caricamento insegnante:', error.value)
+                this.teacher = null
+                this.cvList = []
+                return
             }
+
+            this.teacher = data.value.teacher
+            this.cvList = data.value.cvList
+            this.teacher.LED_ACTIVITIES = data.value.ledActivities
         },
-
-        async fetchCV(teacherId: number, supabase: any) {
-            const { data, error } = await supabase
-                .from('Teachers_cv')        // 👈 tabella CV come l'hai indicata
-                .select('*')
-                .eq('TEACHER_ID', teacherId)
-                .order('START_DATE', { ascending: false })
-
-            if (!error) {
-                this.cvList = data
-            } else {
-                console.error('fetchCV error:', error)
-            }
-        },
-
-        async fetchLedActivities(teacherId: number, supabase: any) {
-            const { data, error } = await supabase
-                .from('Activities')
-                .select('Id, Title, Title_it')
-                .eq('Course_leader', teacherId)
-
-            if (!error && this.teacher) {
-                // Salva direttamente oggetti attività
-                this.teacher.LED_ACTIVITIES = data
-            } else {
-                console.error('fetchLedActivities error:', error)
-            }
-        }
-
     },
 })
