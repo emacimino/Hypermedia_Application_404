@@ -68,6 +68,13 @@
           </nuxt-link>
         </div>
     </div>
+
+      <div v-if="calendar === true" class="mt-4">
+        <nuxt-link
+            :to="`/activityPage`"
+            class="btn-link"
+        ><strong>{{ currentLang === 'it' ? 'Scopri le nostre attività!' : 'Discover our activities!' }}</strong></nuxt-link>
+      </div>
   </div>
   </div>
 </template>
