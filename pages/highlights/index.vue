@@ -17,7 +17,7 @@ import {pageMeta} from "~/locales/pages";
 import Title from "~/components/Title.vue"
 
 import singleHighlightCard from '~/components/Single_Elements/singleHighlightCard.vue'
-import {useHighlightsStore} from "~/stores/highlightsStore";
+import {useHighlightsStore} from "~/stores/highlights/highlightsStore";
 
 const highlightsStore = useHighlightsStore()
 const supabase = useSupabaseClient()
@@ -40,8 +40,7 @@ const title = computed(() => {
 })
 
 watch(currentLang, () => {
-  highlightsStore.fetchHighlights(supabase)
-  highlightsStore.fetchTitle(supabase)
+  highlightsStore.fetchAllHighlights(currentLang.value)
 }, { immediate: true })
 </script>
 
