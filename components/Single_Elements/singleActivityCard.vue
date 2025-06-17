@@ -21,7 +21,7 @@ const props = defineProps<{
   Image: string;
 }>();
 
-const { createActivityUrl, createTeacherUrl } = useActivityUrl();
+const { createActivityUrl, createTeacherUrl } = useUrl();
 
 const link = computed(() => {
   if (props.Id > 49) {

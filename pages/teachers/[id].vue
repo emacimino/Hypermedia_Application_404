@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import {useActivityUrl, useSupabaseClient} from '#imports'
+import {useUrl, useSupabaseClient} from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import type { BreadcrumbItem } from "@nuxt/ui"
 import dayjs from "dayjs"
@@ -46,14 +46,14 @@ import {useRouter} from "#vue-router";
 
 const teacherStore = useTeacherIdStore()
 const { currentLang } = useLanguage()
-const { createTeacherUrl } = useActivityUrl()
+const { createTeacherUrl } = useUrl()
 const supabase = useSupabaseClient()
 const route = useRoute()
 
 const router = useRouter()
 
 const teacherId = computed(() => {
-  const { extractIdFromSlug } = useActivityUrl()
+  const { extractIdFromSlug } = useUrl()
   return extractIdFromSlug(route.params.id as string)
 })
 
@@ -87,7 +87,7 @@ watch(currentLang, () => {
 const items = ref<BreadcrumbItem[]>([
   {
     label: 'Teachers',
-    to: '/teacherPage',
+    to: '/teachers',
     ui: {
       linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
     }
@@ -117,7 +117,7 @@ watch(() =>teacherStore.teacher, (newVal) => {
     items.value = [
       {
         label: currentLang.value === 'it' ? 'Insegnanti' : 'Teachers',
-        to: '/teacherPage',
+        to: '/teachers',
         ui: {
           linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
         }

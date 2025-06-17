@@ -158,8 +158,8 @@ const { toggleLanguage, currentLang, t } = useLanguage()
 
 // Voci di menu
 const items = computed(() => [
-  { label: t.value.activities, to: '/activityPage' },
-  { label: t.value.teachers,   to: '/teacherPage' },
+  { label: t.value.activities, to: '/activities' },
+  { label: t.value.teachers,   to: '/teachers' },
   { label: t.value.highlights, to: '/highlights' },
   { label: t.value.aboutUs,    to: '/aboutUs' },
   { label: t.value.contacts,   to: '/contacts' }
