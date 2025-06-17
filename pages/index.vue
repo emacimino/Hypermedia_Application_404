@@ -41,7 +41,7 @@ import Presentation from '~/components/Single_Elements/presentation.vue'
 import {pageMeta} from '~/locales/pages'
 import { useHomePresentationStore } from '~/stores/homeRelatedStores/homePresentationStore'
 import PacketGrid from "~/components/Grids/packetGrid.vue";
-import { useSlideStore } from '~/stores/slideshow'
+import { useSlideStore } from '~/stores/homeRelatedStores/slideshow'
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
@@ -58,12 +58,10 @@ watch(currentLang, (lang) => {
     ]
   })
   homeStore.fetchPresentationContent()
-
+  slideStore.fetchImages(currentLang.value)
 }, { immediate: true })
 
-onMounted(() => {
-  slideStore.fetchImages(currentLang.value,supabase)
-})
+
 </script>
 
 <style module>
