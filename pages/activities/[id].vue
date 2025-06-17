@@ -34,7 +34,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useHead, useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '@/locales/pages'
-import { useActivityUrl } from '~/composables/useActivityUrl'
+import { useUrl } from '~/composables/useUrl'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import type { BreadcrumbItem } from '@nuxt/ui'
 import { useActivityIdStore } from '~/stores/activityIdStore'
@@ -48,11 +48,11 @@ const router = useRouter()
 const activityStore = useActivityIdStore()
 
 const activityId = computed(() => {
-  const { extractIdFromSlug } = useActivityUrl()
+  const { extractIdFromSlug } = useUrl()
   return extractIdFromSlug(route.params.id as string)
 })
 
-const { createActivityUrl } = useActivityUrl()
+const { createActivityUrl } = useUrl()
 watch(() => activityStore.activity, (data) => {
   if (data) {
     const correctUrl = createActivityUrl(data)
@@ -73,7 +73,7 @@ watch(currentLang, fetch)
 const items = ref<BreadcrumbItem[]>([
   {
     label: 'Activities',
-    to: '/activityPage',
+    to: '/activities',
     ui: {
       linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
     }
@@ -105,7 +105,7 @@ watch(
         items.value = [
           {
             label: currentLang.value === 'it' ? 'Attività' : 'Activities',
-            to: '/activityPage',
+            to: '/activities',
             ui: {
               linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
             }

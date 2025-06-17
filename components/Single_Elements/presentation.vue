@@ -45,7 +45,7 @@
       </div>
       <div v-if="respTeacher" class="mt-4">
         <nuxt-link
-            :to="`/teacherPage/${respTeacherId}`"
+            :to="`/teachers/${respTeacherId}`"
             class="btn-link"
         >
           {{ currentLang === 'it' ? 'Responsabile:' : 'Teacher in charge:' }}
@@ -60,7 +60,7 @@
             class="mb-2"
         >
           <nuxt-link
-              :to="`/activityPage/${activity.Id}`"
+              :to="`/activities/${activity.Id}`"
               class="btn-link"
           >
             {{ currentLang === 'it' ? 'Titolare di corso' : 'Head of course' }}:
@@ -71,7 +71,7 @@
 
       <div v-if="calendar === true" class="mt-4">
         <nuxt-link
-            :to="`/activityPage`"
+            :to="`/activities`"
             class="btn-link"
         ><strong>{{ currentLang === 'it' ? 'Scopri le nostre attività!' : 'Discover our activities!' }}</strong></nuxt-link>
       </div>

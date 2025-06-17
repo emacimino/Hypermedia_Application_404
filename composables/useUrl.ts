@@ -1,12 +1,9 @@
-import { useLanguage } from '~/composables/useLanguage'
-
 interface Raw {
     Id: number
     Title: string
 }
 
-export const useActivityUrl = () => {
-    const { currentLang } = useLanguage()
+export const useUrl = () => {
 
     const createSlug = (title: string): string => {
         return title
@@ -22,13 +19,13 @@ export const useActivityUrl = () => {
     const createActivityUrl = (activity: Raw): string => {
         const title = activity.Title
         const slug = createSlug(title)
-        return `/activityPage/${activity.Id}-${slug}`
+        return `/activities/${activity.Id}-${slug}`
     }
 
     const createTeacherUrl = (teacher: Raw): string => {
         const title = teacher.Title
         const slug = createSlug(title)
-        return `/teacherPage/${teacher.Id}-${slug}`
+        return `/teachers/${teacher.Id}-${slug}`
     }
 
     const extractIdFromSlug = (slug: string): number => {
