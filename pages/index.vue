@@ -57,7 +57,7 @@ watch(currentLang, (lang) => {
       { name: 'description', content: pageMeta.index.description[lang] }
     ]
   })
-  homeStore.fetchPresentationContent(supabase)
+  homeStore.fetchPresentationContent()
 
 }, { immediate: true })
 
