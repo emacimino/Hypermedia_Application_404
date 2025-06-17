@@ -19,30 +19,27 @@ interface RawActivity {
     Course_leader?: {
         Id: number
         Title: string
-    }}
+    }
+}
 
 export const useActivityIdStore = defineStore('activityIdPresentation', {
     state: () => ({
         activity: null as RawActivity | null,
     }),
     actions: {
-        async fetchActivity(activityId: number, supabase: any) {
-            if (isNaN(activityId)) return
+        async fetchActivity(activityId: number) {
+            console.log(activityId)
+            const { data, error } = await useFetch<{ activity: RawActivity | null }>(
+                `/api/activities/id?id=${activityId}`
+            )
 
-            const { data, error } = await supabase
-                .from("Activities")
-                .select(`*, Events:Events(*), Course_leader:Teachers(Id, Title)`)
-                .eq("Id", activityId)
-                .single()
-
-            if (error || !data) {
-                console.error('Errore nel caricamento attività:', error)
+            if (error.value || !data.value || !data.value.activity) {
+                console.error('Errore nel caricamento attività:', error.value)
                 this.activity = null
                 return
             }
 
-            this.activity = data
-        }
-
+            this.activity = data.value.activity
+        },
     }
 })
