@@ -2,8 +2,6 @@ import { createClient } from '@supabase/supabase-js'
 
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
-    console.log('SUPABASE_URL:', config.SUPABASE_URL)
-    console.log('SUPABASE_KEY:', config.SUPABASE_KEY)
     const client = createClient(
         config.SUPABASE_URL,
         config.SUPABASE_KEY

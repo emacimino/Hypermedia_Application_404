@@ -5,7 +5,7 @@ import 'dayjs/locale/it';
 import 'dayjs/locale/en';
 import { ref, computed, onMounted, watch } from "vue"
 import { useLanguage } from '@/composables/useLanguage'
-import { useEventsStore } from '~/stores/eventStore'
+import { useEventsStore } from '~/stores/events/eventStore'
 
 const { currentLang } = useLanguage()
 const eventsStore = useEventsStore()
