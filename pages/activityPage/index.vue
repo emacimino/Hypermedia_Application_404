@@ -20,13 +20,11 @@
 import {watch} from 'vue'
 import ElemGrid from '~/components/Grids/elemGrid.vue'
 import Presentation from '~/components/Single_Elements/presentation.vue'
-import {useSupabaseClient} from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
 import { useActivityStore } from '~/stores/activityPageStore'
 const activityStore = useActivityStore()
 const { currentLang } = useLanguage()
-const supabase = useSupabaseClient()
 
 watch(currentLang, (lang) => {
   useHead({
@@ -37,13 +35,14 @@ watch(currentLang, (lang) => {
   })
 }, { immediate: true })
 
-onMounted(() => {
-  activityStore.fetchActivities(currentLang.value, supabase)
-})
-
-watch(currentLang, (lang) => {
-  activityStore.fetchActivities(lang, supabase)
-})
+watch(currentLang, async (lang) => {
+  try {
+    await activityStore.fetchActivities(lang)
+  } catch (e) {
+    console.error('Errore fetch:', e)
+    navigateTo('/errore-connessione')
+  }
+}, { immediate: true })
 </script>
 
 <style  module>
