@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import type { EventItem } from '~/types/models' // opzionale
+import dayjs from 'dayjs'
 
 export const useAllEventsStore = defineStore('allEvents', {
     state: () => ({
@@ -6,27 +8,20 @@ export const useAllEventsStore = defineStore('allEvents', {
     }),
 
     actions: {
-        async fetchWeeklyEvents(base ,supabase) {
-            const startOfWeek = base.startOf('isoWeek')
-            const endOfWeek = base.endOf('isoWeek')
-            const from = startOfWeek.format("YYYY-MM-DD")
-            const to = endOfWeek.format("YYYY-MM-DD")
-            const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        async fetchWeeklyEvents(base: dayjs.Dayjs) {
+            const baseISO = base.toISOString()
 
-            const {data: onetimeEvents} = await supabase
-                .from("Events")
-                .select("*")
-                .eq("Type", "onetime")
-                .gte("Date", from)
-                .lte("Date", to)
+            const { data, error } = await useFetch<{ weeklyEvents: EventItem[] }>(
+                `/api/events/allCalendarEvents?base=${encodeURIComponent(baseISO)}`
+            )
 
-            const {data: recurringEvents} = await supabase
-                .from("Events")
-                .select("*")
-                .eq("Type", "recurring")
-                .in("Weekday", weekdays)
+            if (error.value || !data.value) {
+                console.error('Errore nel caricamento eventi settimanali:', error.value)
+                this.weeklyEvents = []
+                return
+            }
 
-            this.weeklyEvents = [...(onetimeEvents ?? []), ...(recurringEvents ?? [])]
+            this.weeklyEvents = data.value.weeklyEvents
         }
     }
 })
