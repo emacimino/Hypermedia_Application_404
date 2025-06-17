@@ -37,7 +37,7 @@ const translatedItems = computed(() =>
 )
 
 onMounted(async () => {
-  await timelineStore.fetchTimeline(supabase)
+  await timelineStore.fetchTimeline(currentLang.value)
 
   visibleItems.value = Array(items.value.length).fill(false)
 

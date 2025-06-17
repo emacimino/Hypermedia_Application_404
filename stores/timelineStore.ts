@@ -4,9 +4,9 @@ export interface TimelineItem {
     Date: string
     Icon: string
     Title: string
-    Title_it?: string
+    Title_it: string
     Description: string
-    Description_it?: string
+    Description_it: string
 }
 
 export const useTimelineStore = defineStore('timeline', {
@@ -15,17 +15,15 @@ export const useTimelineStore = defineStore('timeline', {
     }),
 
     actions: {
-        async fetchTimeline(supabase: any) {
-            const { data, error } = await supabase
-                .from('Timeline')
-                .select('*')
-                .order('Date', { ascending: true })
+        async fetchTimeline(lang: string) {
+            const { data, error } = await useFetch<{ items: TimelineItem[] }>(`/api/aboutUs/timeline?lang=${lang}`)
 
-            if (!error && data) {
-                this.items = data
-            } else {
-                console.error('Error fetching timeline:', error)
+            if (error.value || !data.value) {
+                console.error('Error fetching timeline:', error.value)
+                return
             }
+
+            this.items = data.value.items
         }
     }
 })
