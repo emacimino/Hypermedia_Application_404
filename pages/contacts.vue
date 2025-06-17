@@ -199,7 +199,6 @@ watchEffect(() => {
   }
   .map {
     height: 700px;
-    min-width: 400px;
   }
   .icon {
     font-size: 3rem;

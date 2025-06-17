@@ -64,7 +64,7 @@
 
       <button
           type="submit"
-          class="w-full px-8 py-4 bg-blue-300 text-white rounded shadow hover:bg-blue-400 hover:scale-105 active:scale-105 active:bg-blue-400 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
+          class="w-full py-3 text-3xl bg-blue-300 text-white rounded shadow hover:bg-blue-400 hover:scale-105 active:scale-105 active:bg-blue-400 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
       >
         {{ isSubmitting
