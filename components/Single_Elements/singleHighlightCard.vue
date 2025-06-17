@@ -44,7 +44,7 @@ watchEffect(() => {
 })
 
 function onClick() {
-  router.push(`/activityPage/${card.id}`)
+  router.push(`/activities/${card.id}`)
 }
 
 const hoverClass = ref('')
