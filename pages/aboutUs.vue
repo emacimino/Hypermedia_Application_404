@@ -28,12 +28,12 @@ import { onMounted } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
-import { useAboutUsStore } from '~/stores/aboutUsStore'
+import { useAboutUsStore } from '~/stores/aboutUs/aboutUsStore'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import Timeline from '~/components/timeline.vue'
 import Title from "~/components/Title.vue";
 
-const supabase = useSupabaseClient()
+
 const { currentLang } = useLanguage()
 const aboutUsStore = useAboutUsStore()
 const aboutUsContent = computed(() => aboutUsStore.content)
@@ -47,8 +47,8 @@ useHead({
 })
 
 onMounted(async () => {
-  await aboutUsStore.fetchAboutUs(supabase)
-  await aboutUsStore.fetchSecondAboutUs(supabase)
+  await aboutUsStore.fetchAboutUs()
+
 })
 </script>
 

@@ -23,7 +23,7 @@ import Presentation from '~/components/Single_Elements/presentation.vue'
 import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
-import { useTeacherStore } from '~/stores/teacherPageStore'
+import { useTeacherStore } from '~/stores/teachers/teacherPageStore'
 const teacherStore = useTeacherStore()
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()

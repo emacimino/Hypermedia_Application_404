@@ -41,7 +41,7 @@ import type { BreadcrumbItem } from "@nuxt/ui"
 import dayjs from "dayjs"
 import {pageMeta} from "~/locales/pages";
 import Presentation from '~/components/Single_Elements/presentation.vue'
-import { useTeacherIdStore } from '~/stores/teacherIdStore'
+import { useTeacherIdStore } from '~/stores/teachers/teacherIdStore'
 import {useRouter} from "#vue-router";
 
 const teacherStore = useTeacherIdStore()
