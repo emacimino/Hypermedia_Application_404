@@ -12,7 +12,7 @@ export const useAllEventsStore = defineStore('allEvents', {
             const baseISO = base.toISOString()
 
             const { data, error } = await useFetch<{ weeklyEvents: EventItem[] }>(
-                `/api/events/allCalendarEvents?base=${encodeURIComponent(baseISO)}`
+                `/api/events/weeklyCalendarEvents?base=${encodeURIComponent(baseISO)}`
             )
 
             if (error.value || !data.value) {

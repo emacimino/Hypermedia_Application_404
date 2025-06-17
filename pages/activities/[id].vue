@@ -37,7 +37,7 @@ import { pageMeta } from '@/locales/pages'
 import { useUrl } from '~/composables/useUrl'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import type { BreadcrumbItem } from '@nuxt/ui'
-import { useActivityIdStore } from '~/stores/activityIdStore'
+import { useActivityIdStore } from '~/stores/activities/activityIdStore'
 import dayjs from 'dayjs'
 
 const { currentLang } = useLanguage()

@@ -31,7 +31,7 @@ import isoWeek from 'dayjs/plugin/isoWeek'
 import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
-import { useAllEventsStore } from '~/stores/allEventStore'
+import { useAllEventsStore } from '~/stores/events/allEventStore'
 
 const allEventsStore = useAllEventsStore()
 dayjs.extend(isoWeek)

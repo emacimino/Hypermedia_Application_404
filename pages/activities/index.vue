@@ -21,7 +21,7 @@ import ElemGrid from '~/components/Grids/elemGrid.vue'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
-import { useActivityStore } from '~/stores/activityPageStore'
+import { useActivityStore } from '~/stores/activities/activityPageStore'
 const activityStore = useActivityStore()
 const { currentLang } = useLanguage()
 
