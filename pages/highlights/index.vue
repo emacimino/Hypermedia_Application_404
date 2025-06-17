@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import { watch } from 'vue'
-import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
 import Title from "~/components/Title.vue"
@@ -20,7 +19,6 @@ import singleHighlightCard from '~/components/Single_Elements/singleHighlightCar
 import {useHighlightsStore} from "~/stores/highlights/highlightsStore";
 
 const highlightsStore = useHighlightsStore()
-const supabase = useSupabaseClient()
 
 const { currentLang } = useLanguage()
 

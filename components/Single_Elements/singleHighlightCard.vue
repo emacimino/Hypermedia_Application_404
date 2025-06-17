@@ -13,14 +13,6 @@
       <b :class="$style.details">{{ resolvedParagraph }}</b>
       <img :class="$style.arrow" alt="Arrow icon" src='/Arrow.svg' />
     </div>
-
-    <!--
-    <div :class="$style.turnOffWhenSavingOut">
-      <div :class="$style.grad" />
-      <div :class="$style.pushingItSafeArea" />
-      <div :class="$style.safeArea" />
-    </div>
-    -->
   </div>
 </template>
 
@@ -140,48 +132,6 @@ function onLeave() {
 .arrow {
   width: 1.8rem;
   transition: transform 0.3s ease;
-}
-.turnOffWhenSavingOut {
-  position: absolute;
-  top: -0.26%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-.grad {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0) 21.35%, rgba(0, 0, 0, 0) 86.41%, rgba(0, 0, 0, 0.15));
-}
-.pushingItSafeArea {
-  position: absolute;
-  height: 81.09%;
-  width: 91.48%;
-  top: 10.16%;
-  right: 4.26%;
-  bottom: 8.75%;
-  left: 4.26%;
-  background-color: rgba(87, 99, 242, 0.1);
-  border: 0.19vw solid #404df2;
-  box-sizing: border-box;
-}
-.safeArea {
-  position: absolute;
-  height: 74.17%;
-  width: 82.78%;
-  top: 12.81%;
-  right: 8.61%;
-  bottom: 13.02%;
-  left: 8.61%;
-  background-color: rgba(87, 99, 242, 0.1);
-  border: 0.19vw solid #404df2;
-  box-sizing: border-box;
 }
 
 

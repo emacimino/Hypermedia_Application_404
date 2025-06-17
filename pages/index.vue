@@ -43,7 +43,6 @@
 
 <script setup lang="ts">
 import {nextTick, onMounted, ref, watch} from 'vue'
-import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import {pageMeta} from '~/locales/pages'

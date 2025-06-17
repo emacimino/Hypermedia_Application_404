@@ -4,7 +4,7 @@
         v-for="packet in packetStore.packets"
         :id="packet.id"
         :price="packet.price"
-        :duration="packet.duration"
+        :description="packet.duration"
         :color="packet.color"
     />
   </div>

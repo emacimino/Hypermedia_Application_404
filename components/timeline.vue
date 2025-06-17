@@ -16,13 +16,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
-import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { useTimelineStore } from '~/stores/timelineStore'
 import { storeToRefs } from 'pinia'
 
 const { currentLang } = useLanguage()
-const supabase = useSupabaseClient()
 
 const timelineStore = useTimelineStore()
 const { items } = storeToRefs(timelineStore)

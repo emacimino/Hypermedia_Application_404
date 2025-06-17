@@ -4,7 +4,7 @@
       <div :class="$style.price">{{ price }}</div>
     </div>
     <div :class="$style.bottom">
-      <div :class="$style.type">{{ duration }}</div>
+      <div :class="$style.type">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 defineProps<{
   id: string
   price: string
-  duration: string
+  description: string
   color: string
 }>()
 </script>
