@@ -64,7 +64,7 @@ watch(() => activityStore.activity, (data) => {
 
 const fetch = () => {
   if (activityId.value) {
-    activityStore.fetchActivity(activityId.value, supabase)
+    activityStore.fetchActivity(activityId.value)
   }
 }
 onMounted(fetch)

@@ -75,14 +75,14 @@ const translatedCvList = computed(() =>
     }))
 )
 onMounted(async () => {
-  await teacherStore.fetchTeacher(teacherId.value, supabase)
-  await teacherStore.fetchCV(teacherId.value, supabase)
-  await teacherStore.fetchLedActivities(teacherId.value, supabase)
+  await teacherStore.fetchTeacher(teacherId.value)
+  await teacherStore.fetchCV(teacherId.value)
+  await teacherStore.fetchLedActivities(teacherId.value)
 })
 
 
 watch(currentLang, () => {
-  teacherStore.fetchTeacher(teacherId.value, supabase)
+  teacherStore.fetchTeacher(teacherId.value)
 }, { immediate: true })
 const items = ref<BreadcrumbItem[]>([
   {

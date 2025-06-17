@@ -69,7 +69,7 @@ useHead({
 })
 
 onMounted(async () => {
-  await contactsStore.fetchAllContent(supabase, currentLang.value)
+  await contactsStore.fetchAllContent(currentLang.value)
 
   await nextTick()
   const L = await import('leaflet')
@@ -87,7 +87,7 @@ onMounted(async () => {
 })
 
 watchEffect(() => {
-  contactsStore.fetchAllContent(supabase, currentLang.value)
+  contactsStore.fetchAllContent(currentLang.value)
 })
 </script>
 
