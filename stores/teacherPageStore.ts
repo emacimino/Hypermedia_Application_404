@@ -31,8 +31,11 @@ export const useTeacherStore = defineStore('teacherPresentation', {
     }),
     actions: {
         async fetchTeachers(currentLang: string, supabase: any) {
-            const { data: presRaw } = await supabase.from('Presentation').select('*').eq('Id', 2)
-            const { data: cardsRaw } = await supabase.from('Teachers').select('*')
+            const { data, error } = await useFetch('/api/teachers')
+            const { presRaw, cardsRaw } = data.value as {
+                presRaw: RawPresentation[]
+                cardsRaw: RawTeacher[]
+            }
             const presData = ((presRaw || []) as RawPresentation[]).map((item) => ({
                 Title: currentLang === 'it' ? item.Title_it : item.Title,
                 Paragraph: currentLang === 'it' ? item.Paragraph_it : item.Paragraph,

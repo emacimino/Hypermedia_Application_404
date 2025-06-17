@@ -10,11 +10,11 @@ export default defineEventHandler(async (event) => {
     )
     const { data: presRaw, error: err1 } = await client
         .from('Presentation')
-        .select('*')
-        .eq('Id', 6)
+        .select('*').
+        eq('Id', 2)
 
     const { data: cardsRaw, error: err2 } = await client
-        .from('Activities')
+        .from('Teachers')
         .select('*')
 
     if (err1 || err2) {
