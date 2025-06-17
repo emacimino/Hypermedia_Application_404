@@ -12,6 +12,7 @@
         :alt="yogaClass"
         :reverse="true"
         :aboutInfo="true"
+
     />
     <div v-else>
       <p>Loading...</p>

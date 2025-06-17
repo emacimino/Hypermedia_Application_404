@@ -137,22 +137,36 @@ const wrapperClass = computed(() =>
 
 
 <template>
-  <div class="flex justify-between items-center my-[2vw] px-[2vw]">
-    <button @click="goToPreviousWeek" class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300">
-      ← {{currentLang == 'it' ? 'Settimana precedente' : 'Previous Week' }}
-    </button>
+  <div class="flex justify-between items-center my-[2vw] px-[2vw] w-full">
+    <div class="flex-1 flex justify-start">
+      <button
+          @click="goToPreviousWeek"
+          class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300"
+      >
+        ← {{ currentLang == 'it' ? 'Settimana precedente' : 'Previous Week' }}
+      </button>
+    </div>
 
-    <span class="font-semibold text-center">
-      {{ currentLang === 'it' ? 'Settimana ' + formattedWeekDate : formattedWeekDate + ' week' }}
-      <button v-if="visualizeButton" @click="resetToCalendar" class="ml-[1vw] px-[1.5vw] py-[0.8vw] btn-link">
+    <div class="flex-1 flex justify-center">
+      <button
+          v-if="visualizeButton"
+          @click="resetToCalendar"
+          class="px-[1.5vw] py-[0.8vw] btn-link"
+      >
         <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
       </button>
-    </span>
+    </div>
 
-    <button @click="goToNextWeek" class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300">
-      {{currentLang == 'it' ? 'Settimana successiva' : 'Next Week' }} →
-    </button>
+    <div class="flex-1 flex justify-end">
+      <button
+          @click="goToNextWeek"
+          class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300"
+      >
+        {{ currentLang == 'it' ? 'Settimana successiva' : 'Next Week' }} →
+      </button>
+    </div>
   </div>
+
 
   <div class="grid grid-cols-7 gap-[1vw] text-center mb-[2vw] px-[1vw]">
     <button
