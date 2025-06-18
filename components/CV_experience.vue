@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 style="font-size: 1.75vw; font-weight: 600;">
+    <h2 class="text-2xl md:text-xl 2xl:text-4xl font-semibold">
       {{currentLang == 'it' ? 'Esperienze' : 'Experiences'}}
     </h2>
     <div v-if="cvs.length === 0" class="text-gray-500 italic">
@@ -51,9 +51,5 @@ function formatDate(dateStr: string) {
 }
 </script>
 
-<style scoped>
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
+<style module>
 </style>

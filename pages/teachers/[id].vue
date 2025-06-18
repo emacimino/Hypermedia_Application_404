@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import {useUrl, useSupabaseClient} from '#imports'
+import { useUrl } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import type { BreadcrumbItem } from "@nuxt/ui"
 import dayjs from "dayjs"
@@ -47,7 +47,6 @@ import {useRouter} from "#vue-router";
 const teacherStore = useTeacherIdStore()
 const { currentLang } = useLanguage()
 const { createTeacherUrl } = useUrl()
-const supabase = useSupabaseClient()
 const route = useRoute()
 
 const router = useRouter()

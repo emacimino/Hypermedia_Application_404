@@ -4,7 +4,6 @@ export interface HighlightItem {
     id: number
     title: { en: string; it: string }
     subtitle: { en: string; it: string }
-    badge?: string
     link: string
 }
 
