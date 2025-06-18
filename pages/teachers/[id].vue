@@ -75,8 +75,6 @@ const translatedCvList = computed(() =>
 )
 onMounted(async () => {
   await teacherStore.fetchTeacher(teacherId.value)
-  await teacherStore.fetchCV(teacherId.value)
-  await teacherStore.fetchLedActivities(teacherId.value)
 })
 
 

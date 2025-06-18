@@ -227,3 +227,15 @@ const wrapperClass = computed(() =>
     </div>
   </div>
 </template>
+
+<style module>
+.bigText {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+@media (min-width: 1440px) {
+  .bigText {
+    font-size: clamp(2rem, 1.5vw, 2.5rem);
+  }
+}
+</style>

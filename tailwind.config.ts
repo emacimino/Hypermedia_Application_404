@@ -14,6 +14,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                'xl1440': '1440px',
+            },
             gridTemplateColumns: {
                 'auto-fit': 'repeat(auto-fit, minmax(16rem, 1fr))',
             },

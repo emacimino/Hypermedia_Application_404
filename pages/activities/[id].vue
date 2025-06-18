@@ -41,7 +41,6 @@ import { useActivityIdStore } from '~/stores/activities/activityIdStore'
 import dayjs from 'dayjs'
 
 const { currentLang } = useLanguage()
-const supabase = useSupabaseClient()
 const route = useRoute()
 const router = useRouter()
 
