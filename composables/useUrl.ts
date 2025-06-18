@@ -1,3 +1,4 @@
+//manage the creation of the URL for the activity and teacher
 interface Raw {
     Id: number
     Title: string
@@ -8,12 +9,12 @@ export const useUrl = () => {
     const createSlug = (title: string): string => {
         return title
             .toLowerCase()
-            .normalize('NFD') // Normalizza caratteri accentati
-            .replace(/[\u0300-\u036f]/g, '') // Rimuove accenti
-            .replace(/[^a-z0-9\s-]/g, '') // Mantiene solo lettere, numeri, spazi e trattini
-            .replace(/\s+/g, '-') // Sostituisce spazi con trattini
-            .replace(/-+/g, '-') // Sostituisce trattini multipli con uno singolo
-            .replace(/^-|-$/g, '') // Rimuove trattini all'inizio e alla fine
+            .normalize('NFD') // Normalise accented characters
+            .replace(/[\u0300-\u036f]/g, '') // Removes accents
+            .replace(/[^a-z0-9\s-]/g, '') // Retains only letters, numbers, spaces and hyphens
+            .replace(/\s+/g, '-') // Replaces spaces with dashes
+            .replace(/-+/g, '-') // Replaces multiple hyphens with a single one
+            .replace(/^-|-$/g, '') // Removes hyphens at the beginning and end
     }
 
     const createActivityUrl = (activity: Raw): string => {

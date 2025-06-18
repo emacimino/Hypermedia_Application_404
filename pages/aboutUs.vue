@@ -1,7 +1,9 @@
+<!--This is the aboutUs's page-->
 <template>
   <Title :title = "currentLang === 'en' ? '🪷Discover White Lotus!' : '🪷Scopri White Lotus!'"/>
 
   <div v-if="aboutUsContent">
+    <!--first description-->
     <Presentation
         :title="currentLang === 'it' ? aboutUsContent.Title_it : aboutUsContent.Title"
         :paragraphs="currentLang === 'it' ? aboutUsContent.Paragraph_it : aboutUsContent.Paragraph"
@@ -9,6 +11,7 @@
         :alt="currentLang === 'it' ? `Una sala del centro` : `A center room`"
         :reverse="true"
     />
+    <!--second description-->
     <Presentation
         :title="currentLang === 'it' ? aboutUsContent2!.Title_it : aboutUsContent2!.Title"
         :paragraphs="currentLang === 'it' ? aboutUsContent2!.Paragraph_it : aboutUsContent2!.Paragraph"
@@ -20,19 +23,20 @@
   <div v-else>
     <p>Loading...</p>
   </div>
+
+  <!--timiline with the history of the centre-->
   <Timeline/>
+
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
 import { useAboutUsStore } from '~/stores/aboutUs/aboutUsStore'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import Timeline from '~/components/Single_Elements/timeline.vue'
 import Title from "~/components/Single_Elements/Title.vue";
-
 
 const { currentLang } = useLanguage()
 const aboutUsStore = useAboutUsStore()

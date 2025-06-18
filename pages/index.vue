@@ -1,8 +1,10 @@
+<!--home page-->
 <template>
+  <!--manual carousel-->
   <div class="w-full aspect-video max-h-[80vh]">
     <flowImage :images="slideStore.slides" />
   </div>
-
+  <!--initial description-->
   <div class="flex flex-row">
     <Presentation
         v-if="firstPresentation"
@@ -19,6 +21,7 @@
     </div>
   </div>
 
+  <!--calendar with description-->
   <Presentation
       v-if="secondPresentation"
       :title="currentLang === 'it' ? secondPresentation.Title_it : secondPresentation.Title"
@@ -38,6 +41,7 @@
     <h2>🎁 {{currentLang  == 'it' ? 'I nostri pacchetti' : 'Our Packages' }}</h2>
   </div>
 
+  <!--various packages with the price-->
   <PacketGrid :packets="packetStore.packets"/>
 </template>
 
@@ -73,6 +77,7 @@ watch(currentLang, (lang) => {
 
 const showPackagesTitle = ref(false)
 
+//manage the animation of the packets' title
 const setupTitleAnimation = () => {
   nextTick(() => {
     const titleElement = document.querySelector('.packages-title')

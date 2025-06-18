@@ -1,7 +1,10 @@
+<!--This is the specific page of an activity-->
 <template>
+  <!--breadcrumbs-->
   <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="activityStore.activity">
+    <!--initial description-->
     <Presentation
         :title="currentLang === 'it' ? activityStore.activity.Title_it : activityStore.activity.Title"
         :paragraphs="currentLang === 'it' ? activityStore.activity.LongDescription_it : activityStore.activity.LongDescription"
@@ -10,6 +13,7 @@
         :respTeacher="activityStore.activity.Course_leader?.Title"
         :respTeacherId="activityStore.activity.Course_leader?.Id"
     />
+    <!--activity schedule and form to send an application form-->
     <Presentation
         :weekProgramming="true"
         :subscribe="true"
@@ -20,7 +24,6 @@
         :selectedWeekdayIndex="0"
         :dayEvents="activityStore.activity.Events ?? []"
         :isActivity="true"
-
     />
   </div>
   <div v-else>
@@ -31,7 +34,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useHead, useSupabaseClient } from '#imports'
+import { useHead } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '@/locales/pages'
 import { useUrl } from '~/composables/useUrl'
@@ -43,7 +46,6 @@ import dayjs from 'dayjs'
 const { currentLang } = useLanguage()
 const route = useRoute()
 const router = useRouter()
-
 const activityStore = useActivityIdStore()
 
 const activityId = computed(() => {
@@ -69,6 +71,7 @@ const fetch = () => {
 onMounted(fetch)
 watch(currentLang, fetch)
 
+//breadcrumbs
 const items = ref<BreadcrumbItem[]>([
   {
     label: 'Activities',
@@ -101,6 +104,7 @@ watch(
           ]
         })
 
+        //breadcrumbs
         items.value = [
           {
             label: currentLang.value === 'it' ? 'Attività' : 'Activities',

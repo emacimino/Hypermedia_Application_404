@@ -1,5 +1,7 @@
+<!--This is the page with all activities-->
 <template>
   <div v-if="activityStore.cardsValues.length && activityStore.presentationData.length">
+    <!--nitial description-->
     <Presentation
         :title="activityStore.presentationData[0].Title"
         :paragraphs="activityStore.presentationData[0].Paragraph"
@@ -7,6 +9,7 @@
         :reverse="true"
         class="px-4"
     />
+    <!--grid with activities-->
     <elemGrid :cards="activityStore.cardsValues" />
   </div>
 

@@ -1,3 +1,4 @@
+//SEO
 export const pageMeta = {
     index: {
         title: {

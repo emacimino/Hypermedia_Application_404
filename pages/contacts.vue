@@ -1,7 +1,9 @@
+<!--This is the page with the contacts and the map-->
 <template>
   <Title :title = "currentLang === 'en' ? '🧘‍♂️Come visit us!🧘‍' : '🧘‍♂️Vieni a trovarci!🧘️'"/>
   <div :class="$style.content">
     <div>
+      <!--general contacts-->
       <h2>{{ whereAreWeTitle }}</h2>
       <p v-html="whereAreWeParagraph" />
 
@@ -12,6 +14,7 @@
       <p v-html="openingHoursParagraph" />
 
       <h2>{{currentLang === 'en' ? 'Follow us on:' : 'Seguici su:'}}</h2>
+      <!--social icon-->
       <div :class="$style.socialIcons">
         <a href="https://facebook.com"
            target="_blank"
@@ -29,9 +32,9 @@
           <Icon name="logos:youtube-icon" :class="$style.icon" />
         </a>
       </div>
-
     </div>
 
+    <!--map-->
     <div id="map" :class="$style.map"></div>
   </div>
 </template>
@@ -39,7 +42,6 @@
 <script setup lang="ts">
 import { watchEffect } from 'vue'
 import { onMounted, nextTick } from 'vue'
-import { useSupabaseClient } from '#imports'
 import { useContactsStore } from '~/stores/contacts/contactsStore'
 import { useLanguage } from '~/composables/useLanguage'
 import { storeToRefs } from 'pinia'
@@ -47,10 +49,9 @@ import { pageMeta } from '~/locales/pages'
 import 'leaflet/dist/leaflet.css'
 import Title from "~/components/Single_Elements/Title.vue";
 
-const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()
-
 const contactsStore = useContactsStore()
+
 const {
   whereAreWeTitle,
   whereAreWeParagraph,
@@ -59,7 +60,6 @@ const {
   openingHoursTitle,
   openingHoursParagraph,
 } = storeToRefs(contactsStore)
-const showTitle = ref(false)
 
 useHead({
   title: pageMeta.contacts.title[currentLang.value] || pageMeta.contacts.title.en,
@@ -74,6 +74,7 @@ onMounted(async () => {
   await nextTick()
   const L = await import('leaflet')
 
+  //map management
   const map = L.map('map').setView([45.4565, 9.2019], 16)
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {

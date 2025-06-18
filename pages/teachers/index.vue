@@ -1,5 +1,7 @@
+<!--This is the page with all teachers-->
 <template>
   <div v-if="teacherStore.teacherCardsValues.length && teacherStore.teacherData.length && teacherStore.teacherData[0]">
+    <!--nitial description-->
     <Presentation
         :title="teacherStore.teacherData[0].Title"
         :paragraphs="teacherStore.teacherData[0].Paragraph"
@@ -7,6 +9,7 @@
         :reverse="true"
         class="px-4"
     />
+    <!--grid with teachers-->
     <elemGrid :cards="teacherStore.teacherCardsValues" />
   </div>
 
@@ -24,6 +27,7 @@ import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
 import { useTeacherStore } from '~/stores/teachers/teacherPageStore'
+
 const teacherStore = useTeacherStore()
 const { currentLang } = useLanguage()
 const supabase = useSupabaseClient()

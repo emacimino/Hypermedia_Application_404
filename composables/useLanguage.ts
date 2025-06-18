@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import en from '~/locales/en'
 import it from '~/locales/it'
 
-// ✅ Global reactive state (shared across components)
+// Global reactive state (shared across components)
 const currentLanguage = ref<'en' | 'it'>('en')
 
 const translations = {

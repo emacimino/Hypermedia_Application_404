@@ -1,7 +1,10 @@
+<!--This is the specific page of a teacher-->
 <template>
+  <!--breadcrumbs-->
   <UBreadcrumb :items="items" :class="$style.bread"/>
 
   <div v-if="teacherStore.teacher">
+    <!--initial description-->
     <Presentation
         :title="teacherStore.teacher.Title"
         :paragraphs="currentLang === 'it' ? teacherStore.teacher.LongDescription_it : teacherStore.teacher.LongDescription"
@@ -10,6 +13,7 @@
         :responsible="teacherStore.teacher.LED_ACTIVITIES"
     />
 
+    <!--teacher's lectures and CV with past experience-->
     <div v-if="teacherStore.cvList.length" class="mt-8">
       <Presentation
           :weekProgramming="true"
@@ -48,7 +52,6 @@ const teacherStore = useTeacherIdStore()
 const { currentLang } = useLanguage()
 const { createTeacherUrl } = useUrl()
 const route = useRoute()
-
 const router = useRouter()
 
 const teacherId = computed(() => {
