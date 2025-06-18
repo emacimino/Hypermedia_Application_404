@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const usePacketStore = defineStore('packet', {
     state: () => ({
-        packets: [] as Array<{ id: string; price: string; duration: string; color: string }>
+        packets: [] as Array<{ id: string; Price: string; Description: string; Color: string }>
     }),
     actions: {
         async fetchPackets(currentLang: string) {

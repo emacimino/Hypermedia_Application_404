@@ -1,20 +1,29 @@
 <template>
   <div :class="$style.courseGrid">
     <Packet
-        v-for="packet in packetStore.packets"
+        v-for="(packet, index) in props.packets"
+        :key="index"
         :id="packet.id"
-        :price="packet.price"
-        :description="packet.duration"
-        :color="packet.color"
+        :price="packet.Price"
+        :description="packet.Description"
+        :color="packet.Color"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import Packet from "~/components/Single_Elements/packet.vue";
-import { usePacketStore } from '~/stores/homeRelatedStores/packetStores'
 
-const packetStore = usePacketStore()
+interface Packets {
+  id: string;
+  Price: string;
+  Description: string;
+  Color: string;
+}
+
+const props = defineProps<{
+  packets: Packets[];
+}>();
 </script>
 
 <style module>

@@ -38,7 +38,7 @@
     <h2>🎁 {{currentLang  == 'it' ? 'I nostri pacchetti' : 'Our Packages' }}</h2>
   </div>
 
-  <PacketGrid/>
+  <PacketGrid :packets="packetStore.packets"/>
 </template>
 
 <script setup lang="ts">
@@ -49,7 +49,9 @@ import {pageMeta} from '~/locales/pages'
 import { useHomePresentationStore } from '~/stores/homeRelatedStores/homePresentationStore'
 import PacketGrid from "~/components/Grids/packetGrid.vue";
 import { useSlideStore } from '~/stores/homeRelatedStores/slideshow'
+import { usePacketStore } from '~/stores/homeRelatedStores/packetStores'
 
+const packetStore = usePacketStore()
 const { currentLang } = useLanguage()
 const yogaClass = "yoga"
 const homeStore = useHomePresentationStore()
@@ -65,6 +67,7 @@ watch(currentLang, (lang) => {
   })
   homeStore.fetchPresentationContent()
   slideStore.fetchImages(currentLang.value)
+  packetStore.fetchPackets(currentLang.value)
 }, { immediate: true })
 
 const showPackagesTitle = ref(false)
@@ -118,18 +121,12 @@ onMounted(() => {
 
 
 @media (max-width: 768px) {
-  .courseGrid {
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-  }
   .packetsTitle {
     font-size: 2.5rem;
   }
 }
 
 @media (min-width: 2560px) {
-  .courseGrid {
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-  }
   .packetsTitle {
     font-size: 8rem;
   }

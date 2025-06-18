@@ -8,19 +8,18 @@ export default defineEventHandler(async (event) => {
 
     const { data, error } = await client
         .from('Packets')
-        .select('Id, Price, Duration, Duration_it, Color')
+        .select('Id, Price, Description, Description_it, Color')
 
     if (error || !data) {
         console.error('⚠️ Supabase error:', error)
         throw createError({ statusCode: 500, statusMessage: 'Errore caricamento pacchetti' })
     }
-
     return {
         packets: data.map(p => ({
             id: String(p.Id),
-            price: p.Price,
-            duration: lang === 'it' ? p.Duration_it : p.Duration,
-            color: p.Color
+            Price: String(p.Price),
+            Description: String(lang === 'it' ? p.Description_it : p.Description),
+            Color: String(p.Color)
         }))
     }
 })
