@@ -1,73 +1,54 @@
-export interface EventItem {
-    ID: number
-    Title: string
-    Description?: string
-    Location?: string
-    Type: 'onetime' | 'recurring'
-    Date?: string
-    Weekday?: number
-    StartTime: string
-    EndTime: string
-    Image?: string
-    CourseId?: number
-    TeacherId?: number
-}
-
-export interface Presentation {
-    Id: number
+// Reusable interface for localized titles
+export interface LocalizedTitle {
     Title: string
     Title_it: string
+}
+
+// Reusable interface for localized paragraphs
+export interface LocalizedParagraph {
     Paragraph: string
     Paragraph_it: string
+}
+
+// Full presentation object with localized title and paragraph
+export interface PresentationContent extends LocalizedTitle, LocalizedParagraph {
+    Id: number
     Image: string
 }
 
-export interface HighlightItem {
-    id: number
-    title: { en: string; it: string }
-    subtitle: { en: string; it: string }
-    link: string
-}
+// Presentation data without the Id, typically used for creation or drafts
+export type RawPresentation = Omit<PresentationContent, 'Id'>
 
-export interface Title {
-    Title: string
-    Title_it: string
-}
+// Lightweight version of presentation content, used for display-only purposes
+export type PresentationItem = Pick<PresentationContent, 'Title' | 'Paragraph' | 'Image'>
 
-export interface RawActivity {
+// Data model for an activity, such as a course or event
+export interface RawActivity extends LocalizedTitle {
     Id: number
+    ShortDescription: string
+    ShortDescription_it: string
     Image: string
     Link: string
-    Title: string
-    Title_it: string
-    ShortDescription_it: string
-    ShortDescription: string
 }
 
-export interface RawPresentation {
-    Title: string
-    Title_it: string
-    Paragraph: string
-    Paragraph_it: string
-    Image: string
+// Highlighted content for homepage or featured sections
+export interface HighlightItem {
+    title: { en: string; it: string }
+    subtitle: { en: string; it: string }
+    image: string
 }
 
-export interface PresentationItem {
-    Title: string
-    Paragraph: string
-    Image: string
+// Slide item for a slideshow or image carousel
+export interface Slide {
+    Url: string
+    Position: number
 }
 
-export interface PresentationContent {
+// Event model, representing scheduled occurrences of an activity
+export interface EventItem {
     Id: number
-    Title: string
-    Paragraph: string
-    Image: string
-    Title_it: string
-    Paragraph_it: string
+    StartDate: string
+    EndDate: string
+    ActivityId: number
+    TeacherId: number
 }
- export interface Slide {
-     Title: string
-     ImageUrl: string
-     Course_Id: number
- }
