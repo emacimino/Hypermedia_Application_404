@@ -5,7 +5,7 @@ export const useEventsStore = defineStore('events', {
     state: () => ({
         weeklyEvents: [] as EventItem[]
     }),
-
+//Get the event for a week API
     actions: {
         async fetchWeeklyEvents(baseDate?: Date) {
             const base = (baseDate ?? new Date()).toISOString()

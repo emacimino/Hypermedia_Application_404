@@ -1,14 +1,8 @@
 import { defineStore } from 'pinia'
 
-interface Presentation {
-    Id: number
-    Title: string
-    Title_it: string
-    Paragraph: string
-    Paragraph_it: string
-    Image: string
-}
+import type { Presentation } from '~/types/models'
 
+//Get the content for home presentation data
 export const useHomePresentationStore = defineStore('homePresentation', {
     state: () => ({
         firstPresentation: null as Presentation | null,

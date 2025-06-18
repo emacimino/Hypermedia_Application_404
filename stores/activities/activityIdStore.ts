@@ -21,7 +21,7 @@ interface RawActivity {
         Title: string
     }
 }
-
+//Get the single activity content API
 export const useActivityIdStore = defineStore('activityIdPresentation', {
     state: () => ({
         activity: null as RawActivity | null,

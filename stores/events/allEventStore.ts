@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import type { EventItem } from '~/types/models'
 import dayjs from 'dayjs'
-
+//Get the events presentation content API
 export const useAllEventsStore = defineStore('allEvents', {
     state: () => ({
         weeklyEvents: [] as EventItem[]

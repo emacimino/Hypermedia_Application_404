@@ -1,11 +1,7 @@
 import { defineStore } from 'pinia'
+import type { Slide } from '~/types/models'
 
-interface Slide {
-    Title: string
-    ImageUrl: string
-    Course_Id: number
-}
-
+//Get the content for slides data
 export const useSlideStore = defineStore('slide', {
     state: () => ({
         slides: [] as Slide[]

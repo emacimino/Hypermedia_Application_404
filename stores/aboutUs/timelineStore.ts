@@ -8,7 +8,7 @@ export interface TimelineItem {
     Description: string
     Description_it: string
 }
-
+//Get the timeline content API
 export const useTimelineStore = defineStore('timeline', {
     state: () => ({
         items: [] as TimelineItem[]

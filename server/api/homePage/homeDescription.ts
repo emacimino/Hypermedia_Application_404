@@ -1,29 +1,28 @@
 import { createClient } from '@supabase/supabase-js'
+import type { Presentation } from '~/types/models'
 
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
 
-    {
-        const {data, error} = await client
-            .from<Presentation>('Presentation')
-            .select('*')
-            .in('Id', [4, 5])
+    const { data, error } = await client
+        .from('Presentation')
+        .select('*')
+        .in('Id', [4, 5])
 
-        if (error) {
-            console.error('Error fetching presentations:', error)
+    const typedData = data as Presentation[]
 
-            throw createError({
-                statusCode: 503,
-                statusMessage: process.env.NODE_ENV === 'development'
-                    ? internalMessage
-                    : 'Servizio momentaneamente non disponibile'
-            })
-        }
-        return{
-            firstPresentation : data.find(p => p.Id === 4) ?? null,
-            secondPresentation : data.find(p => p.Id === 5) ?? null
-        }
+    if (error) {
+        throw createError({
+            statusCode: 503,
+            statusMessage: process.env.NODE_ENV === 'development'
+                ? error.message
+                : 'Servizio momentaneamente non disponibile'
+        })
     }
 
+    return {
+        firstPresentation: typedData.find(p => p.Id === 4) ?? null,
+        secondPresentation: typedData.find(p => p.Id === 5) ?? null
+    }
 })

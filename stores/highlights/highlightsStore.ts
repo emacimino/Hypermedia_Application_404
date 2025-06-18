@@ -1,17 +1,11 @@
 import { defineStore } from 'pinia'
 
-export interface HighlightItem {
-    id: number
-    title: { en: string; it: string }
-    subtitle: { en: string; it: string }
-    link: string
-}
+import type { HighlightItem } from '~/types/models'
+import type { Title } from '~/types/models'
 
-interface Title {
-    Title: string
-    Title_it: string
-}
 
+
+//Get the about us presentation content API
 export const useHighlightsStore = defineStore('highlights', {
     state: () => ({
         highlights: [] as HighlightItem[],

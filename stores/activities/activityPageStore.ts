@@ -1,29 +1,10 @@
 import { defineStore } from 'pinia'
+import type { RawActivity } from '~/types/models'
+import type { RawPresentation } from '~/types/models'
+import type { PresentationItem } from '~/types/models'
 
-interface RawActivity {
-    Id: number
-    Image: string
-    Link: string
-    Title: string
-    Title_it: string
-    ShortDescription_it: string
-    ShortDescription: string
-}
 
-interface RawPresentation {
-    Title: string
-    Title_it: string
-    Paragraph: string
-    Paragraph_it: string
-    Image: string
-}
-
-interface PresentationItem {
-    Title: string
-    Paragraph: string
-    Image: string
-}
-
+//Get the group activity content API and map to used interface
 export const useActivityStore = defineStore('activityPresentation', {
     state: () => ({
         presentationData: [] as PresentationItem[],

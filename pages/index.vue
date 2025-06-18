@@ -50,11 +50,12 @@ import {nextTick, onMounted, ref, watch} from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import {pageMeta} from '~/locales/pages'
-import { useHomePresentationStore } from '~/stores/homeRelatedStores/homePresentationStore'
 import PacketGrid from "~/components/Grids/packetGrid.vue";
 import { useSlideStore } from '~/stores/homeRelatedStores/slideshow'
 import { usePacketStore } from '~/stores/homeRelatedStores/packetStores'
 import flowImage from '~/components/Single_Elements/flowImage.vue'
+import { storeToRefs } from 'pinia'
+import { useHomePresentationStore } from '~/stores/homeRelatedStores/homePresentationStore'
 
 const packetStore = usePacketStore()
 const { currentLang } = useLanguage()
