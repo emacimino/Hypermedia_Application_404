@@ -19,11 +19,11 @@ export const useHighlightsStore = defineStore('highlights', {
     }),
 
     actions: {
-        async fetchAllHighlights(lang: string) {
+        async fetchAllHighlights(currentLang: string) {
             const { data, error } = await useFetch<{
                 highlights: HighlightItem[]
                 title: Title
-            }>(`/api/highlights?lang=${lang}`)
+            }>(`/api/highlights?lang=${currentLang}`)
 
             if (error.value || !data.value) {
                 console.error('Error fetching highlights:', error.value)

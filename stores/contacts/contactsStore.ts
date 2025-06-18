@@ -11,12 +11,12 @@ export const useContactsStore = defineStore('contacts', {
     }),
 
     actions: {
-        async fetchAllContent(lang: string) {
+        async fetchAllContent(currentLang: string) {
             const { data, error } = await useFetch<{
                 whereAreWe: { title: string; paragraph: string }
                 contacts: { title: string; paragraph: string }
                 openingHours: { title: string; paragraph: string }
-            }>(`/api/contacts?lang=${lang}`)
+            }>(`/api/contacts?lang=${currentLang}`)
 
             if (error.value || !data.value) {
                 console.error('Errore nel caricamento contatti:', error.value)
