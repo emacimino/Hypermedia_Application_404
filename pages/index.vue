@@ -1,6 +1,6 @@
 <template>
   <div class="w-full aspect-video max-h-[80vh]">
-    <flow-image :images="slideStore.slides" />
+    <flowImage :images="slideStore.slides" />
   </div>
 
   <div class="flex flex-row">
@@ -50,6 +50,7 @@ import { useHomePresentationStore } from '~/stores/homeRelatedStores/homePresent
 import PacketGrid from "~/components/Grids/packetGrid.vue";
 import { useSlideStore } from '~/stores/homeRelatedStores/slideshow'
 import { usePacketStore } from '~/stores/homeRelatedStores/packetStores'
+import flowImage from '~/components/Single_Elements/flowImage.vue'
 
 const packetStore = usePacketStore()
 const { currentLang } = useLanguage()

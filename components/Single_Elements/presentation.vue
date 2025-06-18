@@ -29,7 +29,7 @@
     <!-- Contenuto -->
     <div :class="$style.content">
       <Subscription v-if="subscribe && Title" :Title="Title" />
-      <CV_experience v-else-if="cv" :cvs="experience ?? []" class="m-2" />
+      <CV_experience v-else-if="cv" :cvs="experience ?? []" />
       <div v-else>
         <h1 :class="$style.title">{{ title }}</h1>
 
