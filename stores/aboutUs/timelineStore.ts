@@ -15,8 +15,8 @@ export const useTimelineStore = defineStore('timeline', {
     }),
 
     actions: {
-        async fetchTimeline(lang: string) {
-            const { data, error } = await useFetch<{ items: TimelineItem[] }>(`/api/aboutUs/timeline?lang=${lang}`)
+        async fetchTimeline(currentLang: string) {
+            const { data, error } = await useFetch<{ items: TimelineItem[] }>(`/api/aboutUs/timeline?lang=${currentLang}`)
 
             if (error.value || !data.value) {
                 console.error('Error fetching timeline:', error.value)

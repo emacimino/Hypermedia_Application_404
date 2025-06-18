@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
-import { useTimelineStore } from '~/stores/timelineStore'
+import { useTimelineStore } from '~/stores/aboutUs/timelineStore'
 import { storeToRefs } from 'pinia'
 
 const { currentLang } = useLanguage()

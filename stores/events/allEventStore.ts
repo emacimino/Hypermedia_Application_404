@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { EventItem } from '~/types/models' // opzionale
+import type { EventItem } from '~/types/models'
 import dayjs from 'dayjs'
 
 export const useAllEventsStore = defineStore('allEvents', {
