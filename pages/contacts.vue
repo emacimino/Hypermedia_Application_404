@@ -45,7 +45,7 @@ import { useLanguage } from '~/composables/useLanguage'
 import { storeToRefs } from 'pinia'
 import { pageMeta } from '~/locales/pages'
 import 'leaflet/dist/leaflet.css'
-import Title from "~/components/Title.vue";
+import Title from "~/components/Single_Elements/Title.vue";
 
 const supabase = useSupabaseClient()
 const { currentLang } = useLanguage()

@@ -30,8 +30,8 @@ import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
 import { useAboutUsStore } from '~/stores/aboutUs/aboutUsStore'
 import Presentation from '~/components/Single_Elements/presentation.vue'
-import Timeline from '~/components/timeline.vue'
-import Title from "~/components/Title.vue";
+import Timeline from '~/components/Single_Elements/timeline.vue'
+import Title from "~/components/Single_Elements/Title.vue";
 
 
 const { currentLang } = useLanguage()

@@ -88,7 +88,7 @@ import dayjs from "dayjs"
 
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import Subscription from "~/components/Single_Elements/subscription.vue"
-import CV_experience from "~/components/CV_experience.vue"
+import CV_experience from "~/components/Single_Elements/CV_experience.vue"
 import {useLanguage} from "~/composables/useLanguage";
 const calendarComponent = defineAsyncComponent(() => import("../Calendar/index.vue"))
 

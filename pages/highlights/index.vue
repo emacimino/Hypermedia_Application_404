@@ -13,7 +13,7 @@
 import { watch } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
-import Title from "~/components/Title.vue"
+import Title from "~/components/Single_Elements/Title.vue"
 
 import singleHighlightCard from '~/components/Single_Elements/singleHighlightCard.vue'
 import {useHighlightsStore} from "~/stores/highlights/highlightsStore";
