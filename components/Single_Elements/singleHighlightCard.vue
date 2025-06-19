@@ -4,11 +4,7 @@
 
 
     <img :class="$style.shapeIcon" alt="" src="/shape1.svg" />
-
-
-    <img :class="$style.activityImage" alt="" :src="card.link" />
-
-
+    <img :class="$style.activityImage" alt="" :src="card.image" />
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
 
 
@@ -36,9 +32,7 @@
 import { ref, watchEffect } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import { useRouter } from 'vue-router'
-import type { HighlightItem } from '~/stores/highlights/highlightsStore'
-
-
+import type { HighlightItem } from '~/types/models'
 const { currentLang } = useLanguage()
 
 

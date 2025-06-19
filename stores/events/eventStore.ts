@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import type { EventItem } from '~/types/models'
 
+
 export const useEventsStore = defineStore('events', {
     state: () => ({
         weeklyEvents: [] as EventItem[]
     }),
-//Get the event for a week API
+//Get the event for a week  from API
     actions: {
         async fetchWeeklyEvents(baseDate?: Date) {
             const base = (baseDate ?? new Date()).toISOString()

@@ -1,14 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
-
-export interface TimelineItem {
-    Date: string
-    Icon: string
-    Title: string
-    Title_it: string
-    Description: string
-    Description_it: string
-}
-
+import type { TimelineItem } from "~/types/models"
+//Get the timeline content API, instantiate a supababse config, and get the elements
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const lang = getQuery(event).lang === 'it' ? 'it' : 'en'

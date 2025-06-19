@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
+//Get the group activity content API
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const client = createClient(

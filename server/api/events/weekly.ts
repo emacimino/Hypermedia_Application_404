@@ -2,6 +2,7 @@ import { getQuery } from 'h3'
 import { createClient } from '@supabase/supabase-js'
 import { getWeekDates } from '~/utils/date'
 
+//Get the event calendar API
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)

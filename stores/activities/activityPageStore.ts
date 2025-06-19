@@ -4,7 +4,7 @@ import type { RawPresentation } from '~/types/models'
 import type { PresentationItem } from '~/types/models'
 
 
-//Get the group activity content API and map to used interface
+//Get the group activity content from API and map to the used interface
 export const useActivityStore = defineStore('activityPresentation', {
     state: () => ({
         presentationData: [] as PresentationItem[],

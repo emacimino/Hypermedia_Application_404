@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
+//Get the about us presentation content API
 export default defineEventHandler(async () => {
     const config = useRuntimeConfig()
 
