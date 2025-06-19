@@ -1,56 +1,36 @@
 import { defineStore } from 'pinia'
+import type { RawPresentation, PresentationItem, TeacherCard } from '~/types/models'
 
-interface RawTeacher {
-    Id: number
-    Image: string
-    Link: string
-    Title: string
-    Title_it: string
-    ShortDescription: string
-    ShortDescription_it: string
-}
-
-interface RawPresentation {
-    Title: string
-    Title_it: string
-    Paragraph: string
-    Paragraph_it: string
-    Image: string
-}
-
-interface PresentationItem {
-    Title: string
-    Paragraph: string
-    Image: string
-}
-
+//Get the teacher info from API and map to the used interface
 export const useTeacherStore = defineStore('teacherPresentation', {
     state: () => ({
         teacherData: [] as PresentationItem[],
-        teacherCardsValues: [] as RawTeacher[],
+        teacherCardsValues: [] as TeacherCard[],
     }),
     actions: {
         async fetchTeachers(currentLang: string, supabase: any) {
             const { data, error } = await useFetch('/api/teachers')
             const { presRaw, cardsRaw } = data.value as {
                 presRaw: RawPresentation[]
-                cardsRaw: RawTeacher[]
+                cardsRaw: TeacherCard[]
             }
-            const presData = ((presRaw || []) as RawPresentation[]).map((item) => ({
+
+            const presData = (presRaw || []).map((item) => ({
                 Title: currentLang === 'it' ? item.Title_it : item.Title,
                 Paragraph: currentLang === 'it' ? item.Paragraph_it : item.Paragraph,
                 Image: item.Image,
             }))
 
-            const cards = ((cardsRaw || []) as RawTeacher[]).map((item) => ({
+            const cards = (cardsRaw || []).map((item) => ({
                 Id: item.Id,
                 Image: item.Image,
                 Link: item.Link,
                 Title: item.Title,
-                Title_it: currentLang === 'en' ? item.Title : item.Title_it,
+                Title_it: item.Title_it,
                 ShortDescription: currentLang === 'it' ? item.ShortDescription_it : item.ShortDescription,
-                ShortDescription_it: currentLang === 'en' ? item.ShortDescription : item.ShortDescription_it,
+                ShortDescription_it: currentLang === 'it' ? item.ShortDescription_it : item.ShortDescription,
             }))
+
             this.teacherData = presData
             this.teacherCardsValues = cards
         },

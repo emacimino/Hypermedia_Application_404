@@ -1,31 +1,8 @@
 import { defineStore } from 'pinia'
+import type { RawTeacher } from '~/types/models'
+import type { CV } from '~/types/models'
 
-interface RawTeacher {
-    Id: number
-    Title_it: string
-    Title: string
-    LongDescription_it: string
-    LongDescription: string
-    Image: string
-    Events?: any[]
-    LED_ACTIVITIES?: { Id: number, Title: string, Title_it: string }[]
-}
-
-export interface CV {
-    ID: number
-    TEACHER_ID: number
-    TITLE: string
-    TITLE_it: string
-    DESCRIPTION: string
-    DESCRIPTION_it: string
-    START_DATE: string
-    END_DATE: string
-    LOCATION: string
-    LOCATION_it: string
-    CREATED_AT: string
-    IS_LEADER: boolean
-}
-
+//Map the tacher taken from DB to the correct interface used
 export const useTeacherIdStore = defineStore('teacherIdPresentation', {
     state: () => ({
         teacher: null as RawTeacher | null,

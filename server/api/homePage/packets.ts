@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-
+//get the packets contents from the DB
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)

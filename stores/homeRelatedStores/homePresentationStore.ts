@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import type { Presentation } from '~/types/models'
 
-//Get the content for home presentation data
+//Get the content for home presentation data from API
 export const useHomePresentationStore = defineStore('homePresentation', {
     state: () => ({
         firstPresentation: null as Presentation | null,

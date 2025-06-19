@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-//Get the content for packets data
+//Get the content for packets data from the API
 
 export const usePacketStore = defineStore('packet', {
     state: () => ({

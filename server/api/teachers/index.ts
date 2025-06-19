@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
+//Get the group teacher informatio from database
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     console.log('SUPABASE_URL:', config.SUPABASE_URL)

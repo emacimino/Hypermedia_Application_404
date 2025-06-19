@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
+//Get the teacher from DB
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
 

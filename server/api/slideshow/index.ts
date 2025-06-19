@@ -1,11 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
+import type { Slide } from '~/types/models'
 
-interface Slide {
-    Title: string
-    ImageUrl: string
-    Course_Id: number
-}
-
+//Get from the database the slideshow items
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const lang = getQuery(event).lang === 'it' ? 'it' : 'en' // Future-proof, even if not used now

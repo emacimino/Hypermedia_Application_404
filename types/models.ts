@@ -52,6 +52,9 @@ export interface EventItem {
     EndDate: string
     ActivityId: number
     TeacherId: number
+    Type?: 'onetime' | 'recurring'
+    Weekday?: string
+    Date?: string
 }
 
 // Timeline model, representing the timeline in about us
@@ -95,4 +98,48 @@ export interface SponsorHighlight {
     Sponsor_paragraph: string | null
     Sponsor_paragraph_it: string | null
     Image: string
+}
+
+// Slide with course reference
+export interface Slide {
+    Title: string
+    ImageUrl: string
+    Course_Id: number
+}
+
+// Full teacher profile with events and activities
+export interface RawTeacher {
+    Id: number
+    Title_it: string
+    Title: string
+    LongDescription_it: string
+    LongDescription: string
+    Image: string
+    Events?: any[]
+    LED_ACTIVITIES?: { Id: number, Title: string, Title_it: string }[]
+}
+
+// Lightweight version of a teacher, used in card components
+export interface TeacherCard extends LocalizedTitle {
+    Id: number
+    Image: string
+    Link: string
+    ShortDescription: string
+    ShortDescription_it: string
+}
+
+// Curriculum Vitae entry for a teacher
+export interface CV {
+    ID: number
+    TEACHER_ID: number
+    TITLE: string
+    TITLE_it: string
+    DESCRIPTION: string
+    DESCRIPTION_it: string
+    START_DATE: string
+    END_DATE: string
+    LOCATION: string
+    LOCATION_it: string
+    CREATED_AT: string
+    IS_LEADER: boolean
 }

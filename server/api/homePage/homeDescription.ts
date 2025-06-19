@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import type { Presentation } from '~/types/models'
+//Get the content for home presentation data and map to the used data
 
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()

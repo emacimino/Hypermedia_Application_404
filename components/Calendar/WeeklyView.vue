@@ -1,32 +1,33 @@
 <template>
-  <div class="flex justify-between items-center my-[2vw] px-[2vw] w-full">
-
+  <div class="flex justify-between items-center my-6 px-6 w-full max-w-screen-2xl mx-auto">
     <!-- Button to go to previous week -->
+
     <div class="flex-1 flex justify-start">
       <button
           @click="goToPreviousWeek"
-          class="px-[2vw] py-[0.8vw] bg-gray-200 text-blue-500 rounded hover:bg-gray-300"
+          class="px-6 py-2 bg-gray-200 text-blue-500 rounded hover:bg-gray-300"
+          style="font-size: clamp(1rem, 1.5vw, 1.75rem)"
       >
         ← {{ currentLang == 'it' ? 'Settimana precedente' : 'Previous Week' }}
       </button>
     </div>
+    <!-- Calendar toggle button -->
 
-    <!-- Ccalendar toggle button -->
     <div class="flex-1 flex justify-center">
       <button
           v-if="visualizeButton"
           @click="resetToCalendar"
-          class="px-[1.5vw] py-[0.8vw] btn-link"
+          class="px-4 py-2 btn-link"
       >
-        <CalendarIcon class="inline w-[1.8vw] h-[1.8vw]" />
+        <CalendarIcon class="inline" style="width: clamp(1.5rem, 2vw, 2.5rem); height: clamp(1.5rem, 2vw, 2.5rem)" />
       </button>
     </div>
-
     <!-- Button to go to next week -->
     <div class="flex-1 flex justify-end">
       <button
           @click="goToNextWeek"
-          class="px-[2vw] py-[0.8vw] text-blue-500 bg-gray-200 rounded hover:bg-gray-300"
+          class="px-6 py-2 text-blue-500 bg-gray-200 rounded hover:bg-gray-300"
+          style="font-size: clamp(1rem, 1.5vw, 1.75rem)"
       >
         {{ currentLang == 'it' ? 'Settimana successiva' : 'Next Week' }} →
       </button>
@@ -34,74 +35,78 @@
   </div>
 
   <!-- Grid of weekday labels -->
-  <div class="grid grid-cols-7 gap-[1vw] text-center mb-[2vw] px-[1vw]">
+  <div class="grid grid-cols-7 gap-4 text-center mb-6 px-4 max-w-screen-2xl mx-auto">
     <button
         v-for="(day, index) in weekdayLabels"
         :key="index"
         @click="selectDay(index)"
         :class="[
-        'py-[1.2vw] rounded font-semibold w-full transition-transform',
+        'py-3 rounded font-semibold w-full transition-transform',
         'hover:scale-105 hover:bg-blue-300 active:scale-105 active:bg-blue-300',
         index === internalWeekdayIndex ? 'bg-blue-300 text-white' : 'bg-gray-100 text-blue-500'
       ]"
+        style="font-size: clamp(1rem, 1.2vw, 1.5rem)"
     >
       {{ day }}
     </button>
   </div>
 
-  <div class="space-y-[2vw] px-[2vw]">
-
-    <!-- Heading showing localized date of selected weekday -->
-    <h2 class="text-lg font-semibold">
+  <!-- Heading showing localized date of selected weekday -->
+  <div class="space-y-6 px-6 max-w-screen-2xl mx-auto">
+    <h2 class="font-semibold" style="font-size: clamp(1.5rem, 2vw, 2.75rem)">
       {{ currentLang === 'it' ? 'Eventi di' : 'Events for' }} {{ localizedDate }}
     </h2>
 
     <!-- Message when no events are available -->
-    <div v-if="displayedEvents.length === 0" class="text-blue-500 italic">
+    <div v-if="displayedEvents.length === 0" class="text-blue-500 italic" style="font-size: clamp(1rem, 1.2vw, 1.5rem)">
       {{ currentLang == 'it' ? 'Nessun evento' : 'No events' }}
     </div>
 
     <div :class="wrapperClass">
       <div class="flex flex-col space-y-4 space-x-2">
-
         <!-- Render each event in a styled card -->
         <div
             v-for="event in displayedEvents"
             :key="event.id"
-            class="bg-white border rounded p-[2vw] shadow"
+            class="bg-white border rounded p-6 shadow"
         >
           <div class="flex justify-between items-center">
-            <h3 class="text-blue-400 font-semibold">{{ getField(event, 'Title') }}</h3>
-            <span class="text-gray-600">{{ event.Time }}</span>
+            <h3 class="text-blue-400 font-semibold" style="font-size: clamp(1.25rem, 1.75vw, 2rem)">
+              {{ getField(event, 'Title') }}
+            </h3>
+            <span class="text-gray-600" style="font-size: clamp(0.875rem, 1vw, 1.25rem)">
+              {{ event.Time }}
+            </span>
           </div>
-
           <!-- Event details: course and teacher links -->
-          <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
+          <div class="flex flex-col gap-2 md:flex-row md:items-center md:gap-4 mt-2">
             <nuxt-link
                 v-if="!isActivity"
                 :to="`/activities/${event.Course_Id}`"
                 class="btn-link"
+                style="font-size: clamp(1rem, 1.2vw, 1.4rem)"
             >
               {{ currentLang === 'it' ? 'Tipo Corso' : 'Course type' }}:
               <strong>{{ getField(event, 'Course_title') }}</strong>
             </nuxt-link>
-
             <!-- Link to teacher page, if not viewing as teacher -->
             <nuxt-link
                 v-if="!isTeacher"
                 :to="`/teachers/${event.Teacher_id}`"
                 class="btn-link"
+                style="font-size: clamp(1rem, 1.2vw, 1.4rem)"
             >
               {{ currentLang === 'it' ? 'Insegnante' : 'Teacher' }}:
               <strong>{{ getField(event, 'Teacher_name') }}</strong>
             </nuxt-link>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </template>
+
+
 
 
 
@@ -260,14 +265,7 @@ const wrapperClass = computed(() =>
 
 
 
-<style module>
-.bigText {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-}
 
-@media (min-width: 1440px) {
-  .bigText {
-    font-size: clamp(2rem, 1.5vw, 2.5rem);
-  }
-}
+<style module>
+
 </style>

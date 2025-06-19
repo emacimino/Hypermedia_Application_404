@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
 
-    // Fetch highlights from Activities table
+    // Fetch highlights from Activities table and map the used interfaces
     const { data: activityData, error: activityError } = await client
         .from('Activities')
         .select(`
