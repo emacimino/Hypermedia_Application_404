@@ -1,16 +1,18 @@
 <template>
+
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
-    <!-- Immagine -->
+
+    <!-- If an image is provided, show the image section -->
     <div v-if="image" :class="$style.imageWrapper">
       <img :class="$style.image" :src="image" :alt="alt" />
     </div>
 
-    <!-- Calendario -->
+    <!-- If `calendar` is true, display the calendar component -->
     <div v-else-if="calendar === true" :class="$style.calendar">
       <calendarComponent />
     </div>
 
-    <!-- Vista Settimanale -->
+    <!-- render the weekly view -->
     <div v-else-if="calendar === false && weekProgramming === true" :class="$style.weekWrapper">
       <WeeklyView
           :current-date="internalCurrentDate"
@@ -26,23 +28,35 @@
       />
     </div>
 
-    <!-- Contenuto -->
+
     <div :class="$style.content">
+
       <Subscription v-if="subscribe && Title" :Title="Title" />
+
+
       <CV_experience v-else-if="cv" :cvs="experience ?? []" />
+
+
       <div v-else>
         <h1 :class="$style.title">{{ title }}</h1>
+      </div>
 
-        </div>
-        <div v-if="paragraphs" :class="$style.paragraphs">
-          <p>{{ paragraphs }}</p>
-        </div>
+
+      <div v-if="paragraphs" :class="$style.paragraphs">
+        <p>{{ paragraphs }}</p>
+      </div>
+
+      <!-- Link to About Us section if `aboutInfo` is true -->
       <div v-if="aboutInfo" class="mt-4">
         <nuxt-link
             :to="`/aboutUs`"
             class="btn-link"
-        ><strong>{{ currentLang === 'it' ? 'Scopri di più!' : 'Discover more!' }}</strong></nuxt-link>
+        >
+          <strong>{{ currentLang === 'it' ? 'Scopri di più!' : 'Discover more!' }}</strong>
+        </nuxt-link>
       </div>
+
+      <!-- Link to responsible teacher's profile if `respTeacher` is available -->
       <div v-if="respTeacher" class="mt-4">
         <nuxt-link
             :to="`/teachers/${respTeacherId}`"
@@ -53,6 +67,7 @@
         </nuxt-link>
       </div>
 
+      <!-- List of other responsible activities if any are defined -->
       <div v-if="responsible?.length" class="mt-4 flex flex-col gap-2">
         <div
             v-for="activity in responsible"
@@ -67,31 +82,40 @@
             <strong>{{ currentLang === 'it' ? activity.Title_it : activity.Title }}</strong>
           </nuxt-link>
         </div>
-    </div>
+      </div>
 
+      <!-- Link to all activities if `calendar` is true -->
       <div v-if="calendar === true" class="mt-4">
         <nuxt-link
             :to="`/activities`"
             class="btn-link"
-        ><strong>{{ currentLang === 'it' ? 'Scopri le nostre attività!' : 'Discover our activities!' }}</strong></nuxt-link>
+        >
+          <strong>{{ currentLang === 'it' ? 'Scopri le nostre attività!' : 'Discover our activities!' }}</strong>
+        </nuxt-link>
       </div>
-  </div>
+    </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { defineAsyncComponent } from "vue"
-const { currentLang } = useLanguage()
-
+import { useLanguage } from "~/composables/useLanguage"
 import dayjs from "dayjs"
 
+// Get the current language from the language composable
+const { currentLang } = useLanguage()
+
+// Import calendar and UI components
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import Subscription from "~/components/Single_Elements/subscription.vue"
 import CV_experience from "~/components/Single_Elements/CV_experience.vue"
-import {useLanguage} from "~/composables/useLanguage";
+
+// Define async import for the calendar index component
 const calendarComponent = defineAsyncComponent(() => import("../Calendar/index.vue"))
 
+// Define component props
 const props = withDefaults(
     defineProps<{
       title?: string
@@ -122,19 +146,24 @@ const props = withDefaults(
     }
 )
 
+
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 
+// Watch for external changes to currentDate and sync internal state
 watch(() => props.currentDate, (val) => {
   if (val) internalCurrentDate.value = val
 })
 
+// Set up reactive states for calendar navigation
 const activeDate = ref(props.activeDate ?? null)
 const selectedWeekdayIndex = ref(props.selectedWeekdayIndex ?? 0)
 
+// Function to navigate between calendar weeks (previous/next)
 function handleNavigate(dir: 'prev' | 'next') {
   internalCurrentDate.value = internalCurrentDate.value.add(dir === 'next' ? 1 : -1, 'week')
 }
 </script>
+
 
 <style module>
 .property_default {
