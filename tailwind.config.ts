@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import colors from 'tailwindcss/defaultTheme'
 
 const config: Config = {
     content: [

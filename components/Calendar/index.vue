@@ -31,7 +31,6 @@
 import dayjs from "dayjs"
 import { defineAsyncComponent, ref, reactive, computed, watch, onMounted } from "vue"
 import isoWeek from 'dayjs/plugin/isoWeek'
-import { useSupabaseClient } from "#imports"
 import { useLanguage } from '@/composables/useLanguage'
 import WeeklyView from "~/components/Calendar/WeeklyView.vue"
 import { useAllEventsStore } from '~/stores/events/allEventStore'
@@ -49,7 +48,6 @@ const Year = defineAsyncComponent(() => import("~/components/Calendar/Year.vue")
 const Month = defineAsyncComponent(() => import("~/components/Calendar/Month.vue"))
 const Dates = defineAsyncComponent(() => import("~/components/Calendar/Dates.vue"))
 
-const supabase = useSupabaseClient()
 
 const currentDate = ref(dayjs())
 const showCalendar = ref(true)
