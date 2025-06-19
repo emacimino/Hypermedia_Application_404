@@ -1,3 +1,4 @@
+<!--grid for packets with price-->
 <template>
   <div :class="$style.courseGrid">
     <Packet
@@ -20,7 +21,7 @@ interface Packets {
   Description: string;
   Color: string;
 }
-
+//packets to put in the grid
 const props = defineProps<{
   packets: Packets[];
 }>();
