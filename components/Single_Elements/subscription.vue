@@ -147,13 +147,21 @@ const submitForm = async () => {
 
     if (error) throw error
 
-    alert('Form inviato con successo!')
+    alert(
+        currentLang.value === 'it'
+            ? 'Form inviato con successo!'
+            : 'Form submitted successfully!'
+    )
     formData.firstName = ''
     formData.lastName = ''
     formData.email = ''
     formData.message = ''
   } catch (error) {
-    alert('Errore durante l\'invio del form. Riprova.')
+    alert(
+        currentLang.value === 'it'
+            ? "Errore durante l'invio del form. Riprova."
+            : 'Error while submitting the form. Please try again.'
+    )
     console.error('Supabase error:', error)
   } finally {
     isSubmitting.value = false
