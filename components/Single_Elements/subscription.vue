@@ -1,10 +1,22 @@
 <template>
+
   <div :class="$style.subscription">
+
+    <!-- Section title, switches between Italian and English -->
     <div :class="$style.subscribe">{{currentLang == 'it' ? 'Iscriviti' : 'Subscribe'}}</div>
+
+    <!-- Form element with preventDefault and submit handler -->
     <form @submit.prevent="submitForm" :class="$style.form">
+
+
       <div :class="$style.row">
+
+
         <div :class="$style.input">
+
           <div :class="$style.firstName">{{currentLang == 'it' ? 'Nome' : 'First name'}} *</div>
+
+          <!-- Input field with validation error class if needed -->
           <div :class="[$style.field, errors.firstName && $style.fieldError]">
             <input
                 v-model="formData.firstName"
@@ -14,11 +26,17 @@
                 required
             />
           </div>
+
+
           <div v-if="errors.firstName" :class="$style.error">{{ errors.firstName }}</div>
         </div>
 
+
         <div :class="$style.input1">
+
           <div :class="$style.firstName">{{currentLang == 'it' ? 'Cognome' : 'Last name'}} *</div>
+
+          <!-- Input field with validation error class if needed -->
           <div :class="[$style.field, errors.lastName && $style.fieldError]">
             <input
                 v-model="formData.lastName"
@@ -28,13 +46,19 @@
                 required
             />
           </div>
+
+          <!-- Error message for last name -->
           <div v-if="errors.lastName" :class="$style.error">{{ errors.lastName }}</div>
         </div>
       </div>
 
+
       <div :class="$style.row">
         <div :class="$style.input2">
+          <!-- Label for email address -->
           <div :class="$style.firstName">{{currentLang == 'it' ? 'Indirizzo email' : 'Email address'}} *</div>
+
+          <!-- Email input field with validation -->
           <div :class="[$style.field, errors.email && $style.fieldError]">
             <input
                 v-model="formData.email"
@@ -44,13 +68,19 @@
                 required
             />
           </div>
+
+
           <div v-if="errors.email" :class="$style.error">{{ errors.email }}</div>
         </div>
       </div>
 
+      <!-- Row containing message textarea -->
       <div :class="$style.row">
         <div :class="$style.input3">
+
           <div :class="$style.firstName">{{currentLang == 'it' ? 'Il tuo messaggio' : 'Your message'}}</div>
+
+          <!-- Textarea for user message -->
           <div :class="[$style.field, $style.fieldTextarea]">
             <textarea
                 v-model="formData.message"
@@ -62,6 +92,7 @@
         </div>
       </div>
 
+      <!-- Submit button with dynamic text and disabled state -->
       <button
           type="submit"
           class="w-full py-3 text-3xl bg-blue-300 text-white rounded shadow hover:bg-blue-400 hover:scale-105 active:scale-105 active:bg-blue-400 transition disabled:bg-slate-400 disabled:cursor-not-allowed"
@@ -76,18 +107,24 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
-import {reactive, ref} from 'vue'
-import {useSupabaseClient} from '#imports'
+import { reactive, ref } from 'vue'
+import { useSupabaseClient } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
 
+// Get the current language (e.g., 'en' or 'it') from custom composable
 const { currentLang } = useLanguage()
+
+// Initialize Supabase client for database operations
 const supabase = useSupabaseClient()
+
 
 const prop = defineProps<{
   Title: string
 }>()
 
+// Form data and error states are initialized as reactive objects
 const formData = reactive({
   firstName: '',
   lastName: '',
@@ -103,6 +140,7 @@ const errors = reactive({
   email: '',
 })
 
+// Validate required fields and email format
 const validateForm = () => {
   errors.firstName = ''
   errors.lastName = ''
@@ -129,12 +167,15 @@ const validateForm = () => {
   return isValid
 }
 
+// Handle form submission and insert data into Supabase
 const submitForm = async () => {
+
   if (!validateForm()) return
 
   isSubmitting.value = true
 
   try {
+    // Insert the form data into the 'Subscription' table
     const { error } = await (supabase as any)
         .from('Subscription')
         .insert([{
@@ -145,8 +186,10 @@ const submitForm = async () => {
           type: formData.type
         }])
 
+
     if (error) throw error
 
+    // Show success message and clear form
     alert(
         currentLang.value === 'it'
             ? 'Form inviato con successo!'
@@ -156,18 +199,23 @@ const submitForm = async () => {
     formData.lastName = ''
     formData.email = ''
     formData.message = ''
+
   } catch (error) {
+    // Show error message on failure
     alert(
         currentLang.value === 'it'
             ? "Errore durante l'invio del form. Riprova."
             : 'Error while submitting the form. Please try again.'
     )
     console.error('Supabase error:', error)
+
   } finally {
+    // Re-enable the submit button
     isSubmitting.value = false
   }
 }
 </script>
+
 
 <style module>
 .subscribe {

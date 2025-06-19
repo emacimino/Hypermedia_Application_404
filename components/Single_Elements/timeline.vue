@@ -1,14 +1,20 @@
 <template>
+  <!-- Timeline container  -->
   <div :class="$style.timelineContainer">
+    <!-- Render each timeline item -->
     <div
         v-for="(item, index) in translatedItems"
         :key="index"
         :class="[$style.timelineItem, { [$style.visible]: visibleItems[index] }]"
         class="timeline-item"
     >
+      <!-- Circle icon for the event -->
       <span :class="$style.iconCircle">{{ item.Icon }}</span>
+
       <p :class="$style.dateText">{{ item.Date }}</p>
+
       <h2 :class="$style.titleText">{{ item.Title }}</h2>
+
       <p :class="$style.descriptionText">{{ item.Description }}</p>
     </div>
   </div>
@@ -20,12 +26,17 @@ import { useLanguage } from '~/composables/useLanguage'
 import { useTimelineStore } from '~/stores/aboutUs/timelineStore'
 import { storeToRefs } from 'pinia'
 
+// Get current language from composable
 const { currentLang } = useLanguage()
 
+// Access items from Pinia store
 const timelineStore = useTimelineStore()
 const { items } = storeToRefs(timelineStore)
+
+
 const visibleItems = ref<boolean[]>([])
 
+// Dynamically choose the translation for each field
 const translatedItems = computed(() =>
     items.value.map(item => ({
       ...item,
@@ -34,20 +45,24 @@ const translatedItems = computed(() =>
     }))
 )
 
+// When component is mounted, fetch timeline and set up visibility detection
 onMounted(async () => {
+  // Load data for the selected language
   await timelineStore.fetchTimeline(currentLang.value)
 
+  // Initialize the visibility array with false
   visibleItems.value = Array(items.value.length).fill(false)
 
   await nextTick(() => {
     const elements = document.querySelectorAll('.timeline-item')
 
+    // Create one observer per element to detect if it's in view
     elements.forEach((el, index) => {
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             visibleItems.value[index] = true
-            observer.unobserve(entry.target)
+            observer.unobserve(entry.target) // Stop observing once visible
           }
         })
       })
@@ -57,15 +72,17 @@ onMounted(async () => {
 })
 </script>
 
-
 <style module>
+
 .timelineContainer {
   position: relative;
   border-left: 3px solid #d1d5db;
   margin-left: 2.5rem;
   margin-top: 2.5rem;
-  color: #1F3A5F
+  color: #1F3A5F;
 }
+
+
 .timelineItem {
   margin-bottom: 2.5rem;
   margin-left: 1.5rem;
@@ -74,10 +91,14 @@ onMounted(async () => {
   transform: translateY(3rem);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+
+
 .timelineItem.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+
 .iconCircle {
   position: absolute;
   left: -3rem;
@@ -92,15 +113,19 @@ onMounted(async () => {
   font-size: 2rem;
   box-shadow: 0 0 0 4px #0769a2;
 }
+
+
 .dateText {
   font-size: 1rem;
   margin: 0 0 0.25rem 0.7rem;
 }
+
 .titleText {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0.7rem;
 }
+
 .descriptionText {
   font-size: 1.25rem;
   margin: 0 0 0 0.7rem;
@@ -133,6 +158,7 @@ onMounted(async () => {
     margin: 0 0 0 0.25rem;
   }
 }
+
 
 @media(min-width: 2560px){
   .timelineContainer {
