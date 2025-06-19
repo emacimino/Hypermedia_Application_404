@@ -1,4 +1,5 @@
 <template>
+  <!-- packet template with the defined style -->
   <div :class="$style.packet" :style="{ borderColor: color }">
     <div :class="$style.top" :style="{ backgroundColor: color + '70' }">
       <div :class="$style.price">{{ price }}</div>
