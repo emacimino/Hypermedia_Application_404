@@ -33,6 +33,7 @@ export interface RawActivity extends LocalizedTitle {
 
 // Highlighted content for homepage or featured sections
 export interface HighlightItem {
+    id: number
     title: { en: string; it: string }
     subtitle: { en: string; it: string }
     image: string
