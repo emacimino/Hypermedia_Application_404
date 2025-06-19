@@ -1,42 +1,62 @@
 <template>
+
   <nuxt-link :to="link" class="linkWrapper">
+
     <div :class="$style.card">
-      <img :src="Image" :alt="currentLang === 'it' ? 'Insegnante '+ Title : 'Teacher ' + Title" :class="$style.image" />
+
+      <!-- Card image with dynamic text based on language -->
+      <img
+          :src="Image"
+          :alt="currentLang === 'it' ? 'Insegnante ' + Title : 'Teacher ' + Title"
+          :class="$style.image"
+      />
+
+      <!-- Content section containing title and description -->
       <div :class="$style.content">
         <h2 :class="$style.title">{{ Title }}</h2>
         <p :class="$style.description">{{ ShortDescription }}</p>
       </div>
     </div>
+
   </nuxt-link>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
+
+
 const { currentLang } = useLanguage()
+
+
 const props = defineProps<{
   Id: number;
   Title: string;
   ShortDescription: string;
   Image: string;
-}>();
+}>()
 
-const { createActivityUrl, createTeacherUrl } = useUrl();
+// Get utility functions to generate URLs
+const { createActivityUrl, createTeacherUrl } = useUrl()
 
+// Compute the navigation link based on the ID
+// If the ID is greater than 49, it's considered a teacher
+// Otherwise, it's an activity
 const link = computed(() => {
   if (props.Id > 49) {
     return createTeacherUrl({
       Id: props.Id,
       Title: props.Title,
-    });
+    })
   } else {
     return createActivityUrl({
       Id: props.Id,
       Title: props.Title,
-    });
+    })
   }
-});
+})
 </script>
+
 
 <style module>
 .card {

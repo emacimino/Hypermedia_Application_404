@@ -1,20 +1,35 @@
 <template>
+
   <div :class="$style.property1default">
+
+
     <img :class="$style.shapeIcon" alt="" src="/shape1.svg" />
+
+
     <img :class="$style.activityImage" alt="" :src="card.link" />
+
+
     <img :class="$style.shapeIcon1" alt="" src="/shape2.svg" />
+
 
     <b :class="$style.title">{{ resolvedTitle }}</b>
 
+    <!-- Interactive button area with hover and click events -->
     <div :class="[$style.btn, hoverClass]"
          @mouseover="onHover"
          @mouseleave="onLeave"
          @click="onClick">
+
+      <!-- Label inside the button -->
       <b :class="$style.details">{{ resolvedParagraph }}</b>
+
+      <!-- Arrow icon inside the button -->
       <img :class="$style.arrow" alt="Arrow icon" src='/Arrow.svg' />
     </div>
+
   </div>
 </template>
+
 
 
 <script setup lang="ts">
@@ -22,34 +37,46 @@ import { ref, watchEffect } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import { useRouter } from 'vue-router'
 import type { HighlightItem } from '~/stores/highlights/highlightsStore'
+
+
 const { currentLang } = useLanguage()
+
+
 const router = useRouter()
+
 
 const { card } = defineProps<{ card: HighlightItem }>()
 
+// Reactive references for the translated title and paragraph
 const resolvedTitle = ref('')
 const resolvedParagraph = ref('')
 
+// Reactively update the title and paragraph when language or card changes
 watchEffect(() => {
   resolvedTitle.value = card.title[currentLang.value] ?? ''
   resolvedParagraph.value = card.subtitle[currentLang.value] ?? ''
 })
 
+// Handle click event to navigate to the activity detail page
 function onClick() {
   router.push(`/activities/${card.id}`)
 }
 
+// Dynamic class binding for hover effects
 const hoverClass = ref('')
 const style = useCssModule()
 
+// Apply effect when mouse arrives
 function onHover() {
   hoverClass.value = style.hoverEffect
 }
 
+// Remove effect when mouse leaves
 function onLeave() {
   hoverClass.value = ''
 }
 </script>
+
 
 
 <style  module>
