@@ -1,7 +1,5 @@
 <template>
-  <!-- Container for the entire timeline -->
   <div :class="$style.timelineContainer">
-    <!-- Loop through translatedItems to display each timeline entry -->
     <div
         v-for="(item, index) in translatedItems"
         :key="index"
@@ -26,97 +24,140 @@ const { currentLang } = useLanguage()
 
 const timelineStore = useTimelineStore()
 const { items } = storeToRefs(timelineStore)
-
-// Track which items should be visible
 const visibleItems = ref<boolean[]>([])
 
-// Generate items translated according to the current language
 const translatedItems = computed(() =>
     items.value.map(item => ({
-      Icon: item.Icon,
-      Date: item[`Date_${currentLang.value}`],
-      Title: item[`Title_${currentLang.value}`],
-      Description: item[`Description_${currentLang.value}`],
+      ...item,
+      Title: currentLang.value === 'it' ? item.Title_it : item.Title,
+      Description: currentLang.value === 'it' ? item.Description_it : item.Description,
     }))
 )
 
-// Trigger item visibility using IntersectionObserver after mount
-onMounted(() => {
-  nextTick(() => {
+onMounted(async () => {
+  await timelineStore.fetchTimeline(currentLang.value)
+
+  visibleItems.value = Array(items.value.length).fill(false)
+
+  await nextTick(() => {
     const elements = document.querySelectorAll('.timeline-item')
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = Array.from(elements).indexOf(entry.target)
-          if (index !== -1) visibleItems.value[index] = true
-        }
+    elements.forEach((el, index) => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visibleItems.value[index] = true
+            observer.unobserve(entry.target)
+          }
+        })
       })
-    }, { threshold: 0.1 })
-
-    elements.forEach((el, i) => {
-      visibleItems.value[i] = false
       observer.observe(el)
     })
   })
 })
 </script>
 
+
 <style module>
-/* Styling for the timeline component */
 .timelineContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  padding: 2rem;
-  padding-top: 3rem;
-  align-items: center;
+  position: relative;
+  border-left: 3px solid #d1d5db;
+  margin-left: 2.5rem;
+  margin-top: 2.5rem;
+  color: #1F3A5F
 }
-
 .timelineItem {
+  margin-bottom: 2.5rem;
+  margin-left: 1.5rem;
+  position: relative;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(3rem);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  text-align: center;
-  max-width: 900px;
 }
-
-.visible {
+.timelineItem.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
 .iconCircle {
-  display: inline-flex;
-  justify-content: center;
+  position: absolute;
+  left: -3rem;
+  display: flex;
   align-items: center;
-  background-color: #0769a2;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #e0e0e0;
+  border-radius: 9999px;
   color: white;
-  width: 4rem;
-  height: 4rem;
   font-size: 2rem;
-  border-radius: 50%;
-  margin-bottom: 0.5rem;
+  box-shadow: 0 0 0 4px #0769a2;
 }
-
 .dateText {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 0.3rem;
-}
-
-.titleText {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #0769a2;
-  margin-bottom: 0.3rem;
-}
-
-.descriptionText {
   font-size: 1rem;
-  color: #333;
-  max-width: 80%;
-  margin: 0 auto;
+  margin: 0 0 0.25rem 0.7rem;
+}
+.titleText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0.7rem;
+}
+.descriptionText {
+  font-size: 1.25rem;
+  margin: 0 0 0 0.7rem;
+}
+
+
+@media(max-width: 768px){
+  .timelineContainer {
+    border-left: 3px solid #d1d5db;
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .iconCircle {
+    left: -2.5rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    box-shadow: 0 0 0 3px #0769a2;
+  }
+  .dateText {
+    font-size: 0.75rem;
+    margin: 0 0 0.25rem 0.25rem;
+  }
+  .titleText {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem 0.25rem;
+  }
+  .descriptionText {
+    font-size: 1rem;
+    margin: 0 0 0 0.25rem;
+  }
+}
+
+@media(min-width: 2560px){
+  .timelineContainer {
+    border-left: 6px solid #d1d5db;
+    margin-left: 4.55rem;
+    margin-top: 4.55rem;
+  }
+  .iconCircle {
+    left: -4.5rem;
+    width: 6rem;
+    height: 6rem;
+    font-size: 4rem;
+    box-shadow: 0 0 0 8px #0769a2;
+  }
+  .dateText {
+    font-size: 2rem;
+    margin: 0 0 0.4rem 3rem;
+  }
+  .titleText {
+    font-size: 3rem;
+    margin: 0 0 0.4rem 3rem;
+  }
+  .descriptionText {
+    font-size: 2.5rem;
+    margin: 0 0 0 3rem;
+  }
 }
 </style>
