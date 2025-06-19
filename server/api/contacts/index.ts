@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
+//Get the contacts presentation content API
+
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const lang = getQuery(event).lang === 'it' ? 'it' : 'en'

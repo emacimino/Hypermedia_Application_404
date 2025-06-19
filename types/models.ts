@@ -16,7 +16,7 @@ export interface PresentationContent extends LocalizedTitle, LocalizedParagraph 
     Image: string
 }
 
-// Presentation data without the Id, typically used for creation or drafts
+// Presentation data without the Id
 export type RawPresentation = Omit<PresentationContent, 'Id'>
 
 // Lightweight version of presentation content, used for display-only purposes
@@ -51,4 +51,47 @@ export interface EventItem {
     EndDate: string
     ActivityId: number
     TeacherId: number
+}
+
+// Timeline model, representing the timeline in about us
+export interface TimelineItem {
+    Date: string
+    Icon: string
+    Title: string
+    Title_it: string
+    Description: string
+    Description_it: string
+}
+
+// Represents a simplified view of an event, typically used for activity listings
+export interface DisplayEventItem {
+    Id: number
+    Course_id: number
+    Date?: string
+    Type?: string
+    Teacher_name?: string
+}
+
+// Represents an activity with localized titles and descriptions, plus linked events and leader
+export interface ActivityDetails {
+    Id: number
+    Title: string
+    Title_it: string
+    LongDescription: string
+    LongDescription_it: string
+    Image: string
+    Events?: DisplayEventItem[]
+    Course_leader?: {
+        Id: number
+        Title: string
+    }
+}
+
+export interface SponsorHighlight {
+    Id: number
+    Sponsor_title: string | null
+    Sponsor_title_it: string | null
+    Sponsor_paragraph: string | null
+    Sponsor_paragraph_it: string | null
+    Image: string
 }

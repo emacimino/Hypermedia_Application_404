@@ -1,45 +1,27 @@
 import { defineStore } from 'pinia'
+import type { ActivityDetails } from '~/types/models'
 
-interface EventItem {
-    Id: number
-    Course_id: number
-    Date?: string
-    Type?: string
-    Teacher_name?: string
-}
-
-interface RawActivity {
-    Id: number
-    Title: string
-    Title_it: string
-    LongDescription: string
-    LongDescription_it: string
-    Image: string
-    Events?: EventItem[]
-    Course_leader?: {
-        Id: number
-        Title: string
-    }
-}
-//Get the single activity content API
+// Store to fetch and hold the data of a specific activity by ID
 export const useActivityIdStore = defineStore('activityIdPresentation', {
     state: () => ({
-        activity: null as RawActivity | null,
+        activity: null as ActivityDetails | null,
     }),
+
     actions: {
         async fetchActivity(activityId: number) {
-            console.log(activityId)
-            const { data, error } = await useFetch<{ activity: RawActivity | null }>(
+            console.log('Fetching activity with ID:', activityId)
+
+            const { data, error } = await useFetch<{ activity: ActivityDetails | null }>(
                 `/api/activities/id?id=${activityId}`
             )
 
             if (error.value || !data.value || !data.value.activity) {
-                console.error('Errore nel caricamento attività:', error.value)
+                console.error('Error while loading activity:', error.value)
                 this.activity = null
                 return
             }
 
             this.activity = data.value.activity
-        },
+        }
     }
 })

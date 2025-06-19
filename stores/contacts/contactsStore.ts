@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-//Get the contacts presentation content API
+//Get the contacts presentation content from API
 
 export const useContactsStore = defineStore('contacts', {
     state: () => ({

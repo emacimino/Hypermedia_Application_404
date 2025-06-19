@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import type {PresentationContent} from "~/types/models";
 
-
-//Get the about us presentation content API
+//Set the store of the about us presentation content
 export const useAboutUsStore = defineStore('aboutUs', {
     state: () => ({
         content: null as PresentationContent | null,

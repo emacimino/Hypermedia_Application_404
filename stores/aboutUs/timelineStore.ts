@@ -1,14 +1,6 @@
 import { defineStore } from 'pinia'
-
-export interface TimelineItem {
-    Date: string
-    Icon: string
-    Title: string
-    Title_it: string
-    Description: string
-    Description_it: string
-}
-//Get the timeline content API
+import type { TimelineItem } from "~/types/models"
+//Get the timeline content
 export const useTimelineStore = defineStore('timeline', {
     state: () => ({
         items: [] as TimelineItem[]

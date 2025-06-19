@@ -23,7 +23,6 @@ export const useHighlightsStore = defineStore('highlights', {
                 console.error('Error fetching highlights:', error.value)
                 return
             }
-
             this.highlights = data.value.highlights
             this.title = data.value.title
         }

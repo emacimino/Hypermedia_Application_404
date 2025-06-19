@@ -2,6 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 import { getQuery } from 'h3'
 import dayjs from 'dayjs'
 
+//Get the events presentation content API for Calendar
+
 export default defineEventHandler(async (event) => {
     const config = useRuntimeConfig()
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
