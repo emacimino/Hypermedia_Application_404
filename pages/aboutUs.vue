@@ -24,7 +24,7 @@
     <p>Loading...</p>
   </div>
 
-  <!--timiline with the history of the centre-->
+  <!--timeline with the history of the centre-->
   <Timeline/>
 
 </template>

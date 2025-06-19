@@ -1,3 +1,4 @@
+<!--component for footer-->
 <template>
   <div class="bg-blue-100" :class="$style.barraFooter">
     <div :class="$style.footerContainer">
@@ -155,7 +156,6 @@ const { currentLang } = useLanguage()
   }
 
 }
-
 
 @media (min-width: 2560px){
   .footerContainer {

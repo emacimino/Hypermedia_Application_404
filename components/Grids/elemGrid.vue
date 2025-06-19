@@ -1,3 +1,4 @@
+<!--grid for activities and teachers cards-->
 <template>
   <div :class="$style.courseGrid">
     <singleActivityCard
@@ -19,12 +20,11 @@ interface Cards {
   ShortDescription: string;
   Image: string;
 }
-
+//cards to put in the grid
 const props = defineProps<{
   cards: Cards[];
 }>();
 </script>
-
 
 <style module>
 .courseGrid {
