@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, computed } from 'vue'
+import { watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useHead } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
@@ -63,30 +63,40 @@ watch(() => activityStore.activity, (data) => {
   }
 })
 
-const fetch = () => {
-  if (activityId.value) {
-    activityStore.fetchActivity(activityId.value)
+watch([activityId, currentLang], ([id]) => {
+  if (id) {
+    activityStore.fetchActivity(id)
   }
-}
-onMounted(fetch)
-watch(currentLang, fetch)
+}, { immediate: true })
 
 //breadcrumbs
-const items = ref<BreadcrumbItem[]>([
-  {
-    label: 'Activities',
+const items = computed<BreadcrumbItem[]>(() => {
+  const base = {
+    label: currentLang.value === 'it' ? 'Attività' : 'Activities',
     to: '/activities',
     ui: {
-      linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
-    }
-  },
-  {
-    label: 'Loading...',
-    ui: {
-      linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
+      linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
     }
   }
-])
+
+  const second = activityStore.activity
+      ? {
+        label: currentLang.value === 'it'
+            ? activityStore.activity.Title_it
+            : activityStore.activity.Title,
+        ui: {
+          linkLabel: 'text-base md:text-2xl 2xl:text-4xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+      : {
+        label: 'Loading...',
+        ui: {
+          linkLabel: 'text-base md:text-2xl 2xl:text-4xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+
+  return [base, second]
+})
 
 watch(
     () => activityStore.activity,
@@ -103,23 +113,6 @@ watch(
             }
           ]
         })
-
-        //breadcrumbs
-        items.value = [
-          {
-            label: currentLang.value === 'it' ? 'Attività' : 'Activities',
-            to: '/activities',
-            ui: {
-              linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
-            }
-          },
-          {
-            label: currentLang.value === 'it' ? newVal.Title_it : newVal.Title,
-            ui: {
-              linkLabel: 'text-base md:text-2xl 2xl:text-4xl text-[#1F3A5F] font-sans font-bold underline'
-            }
-          }
-        ]
       }
     }
 )

@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, computed } from 'vue'
+import { watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUrl } from '#imports'
 import { useLanguage } from '~/composables/useLanguage'
@@ -84,21 +84,34 @@ onMounted(async () => {
 watch(currentLang, () => {
   teacherStore.fetchTeacher(teacherId.value)
 }, { immediate: true })
-const items = ref<BreadcrumbItem[]>([
-  {
-    label: 'Teachers',
+const items = computed<BreadcrumbItem[]>(() => {
+  const base = {
+    label: currentLang.value === 'it' ? 'Docenti' : 'Teachers',
     to: '/teachers',
     ui: {
       linkLabel: 'text-sm md:text-xl text-[#1F3A5F] font-sans'
     }
-  },
-  {
-    label: 'Loading...',
-    ui: {
-      linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
-    }
   }
-])
+
+  const second = teacherStore.teacher
+      ? {
+        label: currentLang.value === 'it'
+            ? teacherStore.teacher.Title_it
+            : teacherStore.teacher.Title,
+        ui: {
+          linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+      : {
+        label: 'Loading...',
+        ui: {
+          linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'
+        }
+      }
+
+  return [base, second]
+})
+
 
 watch(() =>teacherStore.teacher, (newVal) => {
   if (newVal) {
@@ -113,22 +126,6 @@ watch(() =>teacherStore.teacher, (newVal) => {
         }
       ]
     })
-
-    items.value = [
-      {
-        label: currentLang.value === 'it' ? 'Insegnanti' : 'Teachers',
-        to: '/teachers',
-        ui: {
-          linkLabel: 'text-sm md:text-xl 2xl:text-3xl text-[#1F3A5F] font-sans'
-        }
-      },
-      {
-        label: newVal.Title,
-        ui: {
-          linkLabel: 'text-base md:text-2xl 2xl:text-4xl text-[#1F3A5F] font-sans font-bold underline'
-        }
-      }
-    ]
   }
 })
 </script>

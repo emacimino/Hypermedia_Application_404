@@ -30,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { useLanguage } from '~/composables/useLanguage'
 import { pageMeta } from '~/locales/pages'
 import { useAboutUsStore } from '~/stores/aboutUs/aboutUsStore'
@@ -40,6 +39,7 @@ import Title from "~/components/Single_Elements/Title.vue";
 
 const { currentLang } = useLanguage()
 const aboutUsStore = useAboutUsStore()
+const timelineStore = useTimelineStore()
 const aboutUsContent = computed(() => aboutUsStore.content)
 const aboutUsContent2 = computed(() => aboutUsStore.content2)
 
@@ -50,10 +50,9 @@ useHead({
   ]
 })
 
-onMounted(async () => {
-  await aboutUsStore.fetchAboutUs()
+await useAsyncData('about-us', () => aboutUsStore.fetchAboutUs())
+await useAsyncData('about-us', () => timelineStore.fetchTimeline(currentLang.value))
 
-})
 </script>
 
 <style module>
