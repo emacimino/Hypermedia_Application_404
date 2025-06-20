@@ -11,7 +11,10 @@
         <div :class="$style.input">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Nome' : 'First name' }} *</div>
           <div :class="[$style.field, errors.firstName && $style.fieldError]">
+            <label :for="'firstName'">{{ currentLang === 'it' ? 'Nome' : 'First name' }} *</label>
+
             <input
+
                 v-model="formData.firstName"
                 type="text"
                 placeholder="Jane"
@@ -26,6 +29,8 @@
         <div :class="$style.input1">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Cognome' : 'Last name' }} *</div>
           <div :class="[$style.field, errors.lastName && $style.fieldError]">
+            <label :for="'lastName'">{{ currentLang === 'it' ? 'Cognome' : 'lastName' }} *</label>
+
             <input
                 v-model="formData.lastName"
                 type="text"
@@ -43,6 +48,8 @@
         <div :class="$style.input2">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Email' : 'Email address' }} *</div>
           <div :class="[$style.field, errors.email && $style.fieldError]">
+            <label :for="'email'">{{ currentLang === 'it' ? 'email' : 'email' }} *</label>
+
             <input
                 v-model="formData.email"
                 type="email"
@@ -60,6 +67,7 @@
         <div :class="$style.input3">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Messaggio' : 'Message' }}</div>
           <div :class="[$style.field, $style.fieldTextarea]">
+            <label :for="'message'">{{ currentLang === 'it' ? 'messaggio' : 'Message' }} *</label>
             <textarea
                 v-model="formData.message"
                 rows="5"
