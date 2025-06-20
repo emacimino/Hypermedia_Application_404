@@ -249,31 +249,7 @@ const submitForm = async () => {
   justify-content: flex-start;
   gap: 8px;
 }
-.submit {
-  position: relative;
-  line-height: 150%;
-  font-weight: 500;
-}
-.button {
-  width: 100%;
-  border-radius: 8px;
-  background-color: #7ec8e3;
-  color: white;
-  padding: 16px 32px;
-  font-size: 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
 
-.button:hover:not(.buttonDisabled) {
-  background-color: #60a5fa;
-}
-
-.buttonDisabled {
-  background-color: #94a3b8;
-  cursor: not-allowed;
-}
 .form {
   align-self: stretch;
   display: flex;
