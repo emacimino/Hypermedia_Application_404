@@ -7,6 +7,7 @@ export default defineNuxtConfig({
 
   alias:{
     "@":resolve(__dirname,"."),
+    '~': resolve(__dirname, '.'),
   },
 
   css: [
