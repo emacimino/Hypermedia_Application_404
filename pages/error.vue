@@ -1,5 +1,10 @@
 <script setup lang="ts">
-defineProps({ error: Object })
+    defineProps<{
+      error: {
+        statusCode: number
+        statusMessage?: string
+      }
+    }>()
 </script>
 
 <template>
