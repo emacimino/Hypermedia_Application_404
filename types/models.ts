@@ -143,3 +143,10 @@ export interface CV {
     CREATED_AT: string
     IS_LEADER: boolean
 }
+export interface SubscriptionItem{
+    first_name: string
+    last_name: string
+    email: string
+    message: string
+    type: string
+}
