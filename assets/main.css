@@ -54,6 +54,8 @@ html, body {
     hover:bg-blue-400 hover:scale-105
     active:bg-blue-400 active:scale-105
     transition duration-200 ease-in-out
-    font-semibold
-    text-[clamp(1rem,1.3vw,1.5rem)];
+    font-semibold;
+
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+
 }
