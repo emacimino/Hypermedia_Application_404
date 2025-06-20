@@ -1,5 +1,4 @@
 <template>
-
   <div :class="[$style.property_default, reverse ? $style.reversed : '']">
 
     <!-- If an image is provided, show the image section -->

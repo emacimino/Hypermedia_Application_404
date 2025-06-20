@@ -1,7 +1,8 @@
 <!--This is the page with all activities-->
 <template>
   <div v-if="activityStore.cardsValues.length && activityStore.presentationData.length">
-    <!--nitial description-->
+    <!--Initial description-->
+
     <Presentation
         :title="activityStore.presentationData[0].Title"
         :paragraphs="activityStore.presentationData[0].Paragraph"
@@ -29,7 +30,7 @@ import { useActivityStore } from '~/stores/activities/activityPageStore'
 
 const activityStore = useActivityStore()
 const { currentLang } = useLanguage()
-const yogaClass = "yoga"
+const yogaClass = "activity image"
 
 watch(currentLang, (lang) => {
   useHead({

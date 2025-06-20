@@ -12,6 +12,7 @@
         :reverse="true"
         :respTeacher="activityStore.activity.Course_leader?.Title"
         :respTeacherId="activityStore.activity.Course_leader?.Id"
+        :alt="activityImage"
     />
     <!--activity schedule and form to send an application form-->
     <Presentation
@@ -48,7 +49,7 @@ const { currentLang } = useLanguage()
 const route = useRoute()
 const router = useRouter()
 const activityStore = useActivityIdStore()
-
+const activityImage = "activity image"
 const activityId = computed(() => {
   const { extractIdFromSlug } = useUrl()
   return extractIdFromSlug(route.params.id as string)
