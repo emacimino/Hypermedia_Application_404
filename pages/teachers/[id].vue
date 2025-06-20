@@ -22,9 +22,9 @@
           :cv="true"
           :isTeacher="true"
           :Title="teacherStore.teacher.Title"
-          :currentDate="dayjs()"
+          :currentDate="dayjs().startOf('isoWeek')"
           :activeDate="dayjs()"
-          :selectedWeekdayIndex="0"
+          :selectedWeekdayIndex="dayjs().isoWeekday() - 1"
           :dayEvents="teacherStore.teacher.Events ?? []"
           :experience="translatedCvList"
 
@@ -47,6 +47,8 @@ import {pageMeta} from "~/locales/pages";
 import Presentation from '~/components/Single_Elements/presentation.vue'
 import { useTeacherIdStore } from '~/stores/teachers/teacherIdStore'
 import {useRouter} from "#vue-router";
+import isoWeek from 'dayjs/plugin/isoWeek'
+dayjs.extend(isoWeek)
 
 const teacherStore = useTeacherIdStore()
 const { currentLang } = useLanguage()

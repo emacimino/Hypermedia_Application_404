@@ -19,9 +19,9 @@
         :subscribe="true"
         :calendar="false"
         :Title="activityStore.activity.Title"
-        :currentDate="dayjs()"
+        :currentDate="dayjs().startOf('isoWeek')"
         :activeDate="dayjs()"
-        :selectedWeekdayIndex="0"
+        :selectedWeekdayIndex="dayjs().isoWeekday() - 1"
         :dayEvents="activityStore.activity.Events ?? []"
         :isActivity="true"
     />
@@ -42,7 +42,8 @@ import Presentation from '~/components/Single_Elements/presentation.vue'
 import type { BreadcrumbItem } from '@nuxt/ui'
 import { useActivityIdStore } from '~/stores/activities/activityIdStore'
 import dayjs from 'dayjs'
-
+import isoWeek from 'dayjs/plugin/isoWeek'
+dayjs.extend(isoWeek)
 const { currentLang } = useLanguage()
 const route = useRoute()
 const router = useRouter()

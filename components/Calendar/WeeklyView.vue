@@ -160,9 +160,17 @@ const emit = defineEmits<{
 }>()
 
 // Internal state to track current and selected week data
-const internalDate = ref(props.currentDate ?? dayjs())
-const selectedLocalDate = ref((props.activeDate ?? internalDate.value).startOf('isoWeek'))
-const selectedLocalIndex = ref(props.selectedWeekdayIndex ?? ((selectedLocalDate.value.day() + 6) % 7))
+const internalDate = ref((props.activeDate ?? props.currentDate ?? dayjs()).startOf('isoWeek'))
+
+// The selected active date within the current week
+const selectedLocalDate = ref(props.activeDate ?? dayjs())
+
+// Index of the selected day (0=Monday, 6=Sunday)
+const selectedLocalIndex = ref(
+    props.selectedWeekdayIndex ?? (selectedLocalDate.value.isoWeekday() - 1)
+)
+
+
 
 // Use computed fallbacks when parent does not control state
 const internalActiveDate = computed(() => props.activeDate ?? selectedLocalDate.value)
@@ -184,7 +192,7 @@ const formattedWeekDate = computed(() =>
 const displayedEvents = computed(() => {
   const source = props.dayEvents ?? eventsStore.weeklyEvents
   const dateStr = internalActiveDate.value.format("YYYY-MM-DD")
-  const weekdayStr = internalActiveDate.value.format("dddd")
+  const weekdayStr = internalActiveDate.value.locale('en').format("dddd")
 
   return source.filter(event =>
       (event.Type === 'onetime' && event.Date === dateStr) ||
@@ -212,8 +220,9 @@ function goToPreviousWeek() {
     const newActiveDate = newWeekStart.add(internalWeekdayIndex.value, 'day')
     emit('update:activeDate', newActiveDate)
   } else {
-    internalDate.value = internalDate.value.subtract(1, 'week')
-    selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    internalDate.value = internalDate.value.subtract(1, 'week').startOf('isoWeek')
+    selectedLocalDate.value = internalDate.value.add(internalWeekdayIndex.value, 'day')
+
     const newActiveDate = selectedLocalDate.value.add(internalWeekdayIndex.value, 'day')
     emit('update:activeDate', newActiveDate)
     if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
@@ -228,8 +237,8 @@ function goToNextWeek() {
     const newActiveDate = newWeekStart.add(internalWeekdayIndex.value, 'day')
     emit('update:activeDate', newActiveDate)
   } else {
-    internalDate.value = internalDate.value.add(1, 'week')
-    selectedLocalDate.value = internalDate.value.startOf('isoWeek')
+    internalDate.value = internalDate.value.add(1, 'week').startOf('isoWeek')
+    selectedLocalDate.value = internalDate.value.add(internalWeekdayIndex.value, 'day')
     const newActiveDate = selectedLocalDate.value.add(internalWeekdayIndex.value, 'day')
     emit('update:activeDate', newActiveDate)
     if (!props.dayEvents) eventsStore.fetchWeeklyEvents(internalDate.value.toDate())
