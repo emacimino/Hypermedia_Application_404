@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 import { getQuery } from 'h3'
 import dayjs from 'dayjs'
+import isoWeek from 'dayjs/plugin/isoWeek'
+dayjs.extend(isoWeek)
 
 //Get the events presentation content API for Calendar
 

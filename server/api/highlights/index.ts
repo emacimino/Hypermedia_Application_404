@@ -31,13 +31,16 @@ export default defineEventHandler(async (event) => {
     const highlights: HighlightItem[] = (activityData as SponsorHighlight[]).map(item => ({
         id: item.Id,
         title: {
-            [lang]: item[titleCol as keyof SponsorHighlight] || ''
+            en: item.Sponsor_title ?? '',
+            it: item.Sponsor_title_it ?? ''
         },
         subtitle: {
-            [lang]: item[subtitleCol as keyof SponsorHighlight] || ''
+            en: item.Sponsor_paragraph ?? '',
+            it: item.Sponsor_paragraph_it ?? ''
         },
         image: item.Image
     }))
+
 
     // Fetch title from Presentation where Id = 14
     const { data: presentationData, error: presentationError } = await client

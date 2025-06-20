@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Presentation } from '~/types/models'
+import type { PresentationContent } from '~/types/models'
 //Get the content for home presentation data and map to the used data
 
 export default defineEventHandler(async (event) => {
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
         .select('*')
         .in('Id', [4, 5])
 
-    const typedData = data as Presentation[]
+    const typedData = data as PresentationContent[]
 
     if (error) {
         throw createError({

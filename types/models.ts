@@ -41,8 +41,9 @@ export interface HighlightItem {
 
 // Slide item for a slideshow or image carousel
 export interface Slide {
-    Url: string
-    Position: number
+    Title: string
+    ImageUrl: string
+    Course_Id: number
 }
 
 // Event model, representing scheduled occurrences of an activity

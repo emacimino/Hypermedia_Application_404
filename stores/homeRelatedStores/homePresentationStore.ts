@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia'
 
-import type { Presentation } from '~/types/models'
+import type { PresentationContent } from '~/types/models'
 
 //Get the content for home presentation data from API
 export const useHomePresentationStore = defineStore('homePresentation', {
-    state: () => ({
-        firstPresentation: null as Presentation | null,
-        secondPresentation: null as Presentation | null,
+    state: (): {
+        firstPresentation: PresentationContent | null
+        secondPresentation: PresentationContent | null
+    } => ({
+        firstPresentation: null,
+        secondPresentation: null,
     }),
 
     actions: {
