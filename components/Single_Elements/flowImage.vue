@@ -126,48 +126,5 @@ onUnmounted(() => {
   color: inherit;
 }
 
-.slide-enter-active,
-.slide-leave-active,
-.slide-reverse-enter-active,
-.slide-reverse-leave-active {
-  transition: all 0.6s ease;
-  position: absolute;
-  width: 100%;
-}
 
-/* Slide forward */
-.slide-enter-from {
-  transform: translateX(100%);
-  opacity: 0;
-}
-.slide-enter-to {
-  transform: translateX(0%);
-  opacity: 1;
-}
-.slide-leave-from {
-  transform: translateX(0%);
-  opacity: 1;
-}
-.slide-leave-to {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
-/* Slide backward */
-.slide-reverse-enter-from {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-.slide-reverse-enter-to {
-  transform: translateX(0%);
-  opacity: 1;
-}
-.slide-reverse-leave-from {
-  transform: translateX(0%);
-  opacity: 1;
-}
-.slide-reverse-leave-to {
-  transform: translateX(100%);
-  opacity: 0;
-}
 </style>
