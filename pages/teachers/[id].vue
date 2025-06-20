@@ -13,7 +13,7 @@
         :responsible="teacherStore.teacher.LED_ACTIVITIES"
     />
 
-    <!--teacher's lectures and CV with past experience-->
+    <!--teacher's lectures and CV with past experience.-->
     <div v-if="teacherStore.cvList.length" class="mt-8">
       <Presentation
           :weekProgramming="true"
