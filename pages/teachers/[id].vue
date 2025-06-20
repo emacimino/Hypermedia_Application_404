@@ -9,6 +9,7 @@
         :title="teacherStore.teacher.Title"
         :paragraphs="currentLang === 'it' ? teacherStore.teacher.LongDescription_it : teacherStore.teacher.LongDescription"
         :image="teacherStore.teacher.Image"
+        :alt="yogaClass"
         :reverse="true"
         :responsible="teacherStore.teacher.LED_ACTIVITIES"
     />
@@ -86,6 +87,11 @@ onMounted(async () => {
 watch(currentLang, () => {
   teacherStore.fetchTeacher(teacherId.value)
 }, { immediate: true })
+const yogaClass = computed(() =>
+    currentLang.value === 'it'
+        ? 'L\'immagine profilo dell\'insegnante'
+        : 'The profile image of the teacher'
+)
 const items = computed<BreadcrumbItem[]>(() => {
   const base = {
     label: currentLang.value === 'it' ? 'Docenti' : 'Teachers',

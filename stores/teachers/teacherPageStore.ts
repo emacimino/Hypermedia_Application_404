@@ -8,7 +8,7 @@ export const useTeacherStore = defineStore('teacherPresentation', {
         teacherCardsValues: [] as TeacherCard[],
     }),
     actions: {
-        async fetchTeachers(currentLang: string, supabase: any) {
+        async fetchTeachers(currentLang: string) {
             const { data, error } = await useFetch('/api/teachers')
             const { presRaw, cardsRaw } = data.value as {
                 presRaw: RawPresentation[]
