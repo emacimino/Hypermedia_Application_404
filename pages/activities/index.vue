@@ -6,6 +6,7 @@
         :title="activityStore.presentationData[0].Title"
         :paragraphs="activityStore.presentationData[0].Paragraph"
         :image="activityStore.presentationData[0].Image"
+        :alt="yogaClass"
         :reverse="true"
         class="px-4"
     />
@@ -25,8 +26,10 @@ import Presentation from '~/components/Single_Elements/presentation.vue'
 import { useLanguage } from '~/composables/useLanguage'
 import {pageMeta} from "~/locales/pages";
 import { useActivityStore } from '~/stores/activities/activityPageStore'
+
 const activityStore = useActivityStore()
 const { currentLang } = useLanguage()
+const yogaClass = "yoga"
 
 watch(currentLang, (lang) => {
   useHead({
