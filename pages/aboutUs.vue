@@ -16,7 +16,7 @@
         :title="currentLang === 'it' ? aboutUsContent2!.Title_it : aboutUsContent2!.Title"
         :paragraphs="currentLang === 'it' ? aboutUsContent2!.Paragraph_it : aboutUsContent2!.Paragraph"
         :image="aboutUsContent2!.Image"
-        :alt="currentLang === 'it' ? `Un momento del corso` : `A course moment`"
+        :alt="currentLang === 'it' ? `` : ``"
         :reverse="false"
     />
   </div>
