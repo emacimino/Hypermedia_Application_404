@@ -30,8 +30,11 @@ import { useActivityStore } from '~/stores/activities/activityPageStore'
 
 const activityStore = useActivityStore()
 const { currentLang } = useLanguage()
-const yogaClass = "activity image"
-
+const yogaClass = computed(() =>
+    currentLang.value === 'it'
+        ? 'Un uomo che sta facendo un esercizio'
+        : 'A man who is making an exercise'
+)
 watch(currentLang, (lang) => {
   useHead({
     title: pageMeta.activityPage.title[lang] || 'White Lotus Activities',

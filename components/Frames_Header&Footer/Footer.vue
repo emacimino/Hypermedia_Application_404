@@ -38,29 +38,43 @@
         </div>
 
         <div class="flex items-center gap-2 justify-center">
-          <MapPinIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
-          <span>
-      {{ currentLang === 'en' ? 'Via Privata Siracusa, Milan' : 'Via Privata Siracusa, Milano' }}
-    </span>
+          <MapPinIcon
+              class="w-[1.5rem] h-[1.5rem] text-brand-500"
+              aria-hidden="true"
+          />
+          <span aria-label="Address">
+    {{ currentLang === 'en' ? 'Via Privata Siracusa, Milan' : 'Via Privata Siracusa, Milano' }}
+  </span>
         </div>
 
         <div class="flex items-center gap-2 justify-center">
-          <PhoneIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
-          <span>+39 345 678 9012</span>
+          <PhoneIcon
+              class="w-[1.5rem] h-[1.5rem] text-brand-500"
+              aria-hidden="true"
+          />
+          <a href="tel:+393456789012" aria-label="Phone number">
+            +39 345 678 9012
+          </a>
         </div>
 
         <div class="flex items-center gap-2 justify-center">
-          <EnvelopeIcon class="w-[1.5rem] h-[1.5rem] text-brand-500" />
-          <a href="mailto:info@whitelotus.com" :class="$style.emailLink">info@whitelotus.com</a>
+          <EnvelopeIcon
+              class="w-[1.5rem] h-[1.5rem] text-brand-500"
+              aria-hidden="true"
+          />
+          <a href="mailto:info@whitelotus.com" aria-label="Email address" :class="$style.emailLink">
+            info@whitelotus.com
+          </a>
         </div>
-      </div>
 
-      <div :class="$style.rightColumn">
+
+        <div :class="$style.rightColumn">
         <div>Credits: Gabriele Lorenzetti, Emanuele Cimino, Giorgio Sidari</div>
         <div>@2025 WhiteLotus, All rights reserved</div>
       </div>
 
     </div>
+  </div>
   </div>
 </template>
 

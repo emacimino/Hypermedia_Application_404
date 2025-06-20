@@ -49,7 +49,11 @@ const { currentLang } = useLanguage()
 const route = useRoute()
 const router = useRouter()
 const activityStore = useActivityIdStore()
-const activityImage = "activity image"
+const activityImage = computed(() =>
+    currentLang.value === 'it'
+        ? "immagine attività relativa alla descrizione del paragrafo"
+        : "activity image related to paragraph description"
+)
 const activityId = computed(() => {
   const { extractIdFromSlug } = useUrl()
   return extractIdFromSlug(route.params.id as string)
