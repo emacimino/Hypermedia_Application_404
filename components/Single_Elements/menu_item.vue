@@ -25,7 +25,7 @@ defineProps<{
   text-align: center;
   text-decoration: none;
 
-  font-size: clamp(1rem, 1.75vw, 3.5rem);
+  font-size: clamp(1rem, 1.75vw, 3rem);
   height: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 1.2;
 
