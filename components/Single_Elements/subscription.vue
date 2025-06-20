@@ -11,10 +11,9 @@
         <div :class="$style.input">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Nome' : 'First name' }} *</div>
           <div :class="[$style.field, errors.firstName && $style.fieldError]">
-            <label :for="'firstName'">{{ currentLang === 'it' ? 'Nome' : 'First name' }} *</label>
-
+            <label for="firstName">{{ currentLang === 'it' ? 'Nome' : 'First name' }} *</label>
             <input
-
+                id="firstName"
                 v-model="formData.firstName"
                 type="text"
                 placeholder="Jane"
@@ -29,9 +28,9 @@
         <div :class="$style.input1">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Cognome' : 'Last name' }} *</div>
           <div :class="[$style.field, errors.lastName && $style.fieldError]">
-            <label :for="'lastName'">{{ currentLang === 'it' ? 'Cognome' : 'lastName' }} *</label>
-
+            <label for="lastName">{{ currentLang === 'it' ? 'Cognome' : 'Last name' }} *</label>
             <input
+                id="lastName"
                 v-model="formData.lastName"
                 type="text"
                 placeholder="Smith"
@@ -48,9 +47,9 @@
         <div :class="$style.input2">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Email' : 'Email address' }} *</div>
           <div :class="[$style.field, errors.email && $style.fieldError]">
-            <label :for="'email'">{{ currentLang === 'it' ? 'email' : 'email' }} *</label>
-
+            <label for="email">{{ currentLang === 'it' ? 'Email' : 'Email address' }} *</label>
             <input
+                id="email"
                 v-model="formData.email"
                 type="email"
                 placeholder="email@domain.com"
@@ -67,8 +66,9 @@
         <div :class="$style.input3">
           <div :class="$style.firstName">{{ currentLang === 'it' ? 'Messaggio' : 'Message' }}</div>
           <div :class="[$style.field, $style.fieldTextarea]">
-            <label :for="'message'">{{ currentLang === 'it' ? 'messaggio' : 'Message' }} *</label>
+            <label for="message">{{ currentLang === 'it' ? 'Messaggio' : 'Message' }}</label>
             <textarea
+                id="message"
                 v-model="formData.message"
                 rows="5"
                 :placeholder="currentLang === 'it' ? 'Inserisci la tua domanda' : 'Enter your message'"
