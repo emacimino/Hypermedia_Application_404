@@ -11,7 +11,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #1F3A5F;
-
 }
 
 :root {
@@ -32,6 +31,7 @@ html, body {
     overflow-x: hidden;
 }
 
+/*for the buttons*/
 @layer components {
     .btn {
         @apply px-6 py-3 text-white text-lg font-medium rounded-md
@@ -50,9 +50,12 @@ html, body {
 }
 
 .btn-link {
-    @apply mt-2 px-4 py-2 text-white bg-blue-300 rounded
+    @apply inline-block mt-2 px-4 py-2 text-white bg-blue-300 rounded
     hover:bg-blue-400 hover:scale-105
     active:bg-blue-400 active:scale-105
-    transition;
+    transition duration-200 ease-in-out
+    font-semibold;
+
     font-size: clamp(1rem, 1.3vw, 1.5rem);
+
 }
