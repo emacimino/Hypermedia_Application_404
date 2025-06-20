@@ -12,7 +12,7 @@
           <transition :name="direction === 'next' ? 'slide' : 'slide-reverse'" mode="out-in">
 
             <!-- Show only the active slide -->
-            <div v-if="index === currentSliderIndex" class="absolute inset-0">
+            <div v-if="index === currentSliderIndex" :key="currentSliderIndex" class="absolute inset-0">
               <div class="relative w-full aspect-video max-h-[80vh] overflow-hidden rounded-lg shadow-md transition-all duration-500 ease-in-out">
 
                 <!-- Clickable course title linking to its page -->
@@ -66,16 +66,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { defineProps } from 'vue';
-
+import {ref} from 'vue'
+import {defineProps} from 'vue'
 
 const props = defineProps({
   images: {
     type: Array,
     required: true,
   }
-});
+})
 
 // Index of the currently visible slide
 const currentSliderIndex = ref(0)
@@ -83,40 +82,17 @@ const currentSliderIndex = ref(0)
 // Direction of the slide transition: 'next' or 'prev'
 const direction = ref('next')
 
-// Store interval ID to control automatic slide cycling
-let intervalId
-
-// Show the next slide and reset the interval
+// Show the next slide
 const nextSlide = () => {
   direction.value = 'next'
   currentSliderIndex.value = (currentSliderIndex.value + 1) % props.images.length
-  startSlider()
 }
 
-// Show the previous slide and reset the interval
+// Show the previous slide
 const prevSlide = () => {
   direction.value = 'prev'
   currentSliderIndex.value = (currentSliderIndex.value - 1 + props.images.length) % props.images.length
-  startSlider()
 }
-
-// Start or restart the automatic slideshow every 5 seconds
-const startSlider = () => {
-  clearInterval(intervalId)
-  intervalId = setInterval(() => {
-    nextSlide()
-  }, 5000)
-}
-
-// Start the slideshow when component is mounted
-onMounted(() => {
-  startSlider()
-})
-
-// Clear the slideshow interval when component is unmounted
-onUnmounted(() => {
-  clearInterval(intervalId)
-})
 </script>
 
 
@@ -126,5 +102,53 @@ onUnmounted(() => {
   color: inherit;
 }
 
+.slide-enter-active,
+.slide-leave-active,
+.slide-reverse-enter-active,
+.slide-reverse-leave-active {
+  transition: all 0.6s ease;
+  position: absolute;
+  width: 100%;
+}
+
+/* Slide forward */
+.slide-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* Slide backward */
+.slide-reverse-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-reverse-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-reverse-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-reverse-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
 
 </style>
