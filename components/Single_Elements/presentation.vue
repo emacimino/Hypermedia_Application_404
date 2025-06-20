@@ -28,19 +28,15 @@
       />
     </div>
 
-
     <div :class="$style.content">
 
       <Subscription v-if="subscribe && Title" :Title="Title" />
 
-
       <CV_experience v-else-if="cv" :cvs="experience ?? []" />
-
 
       <div v-else>
         <h1 :class="$style.title">{{ title }}</h1>
       </div>
-
 
       <div v-if="paragraphs" :class="$style.paragraphs">
         <p>{{ paragraphs }}</p>
@@ -97,7 +93,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { defineAsyncComponent } from "vue"
@@ -146,7 +141,6 @@ const props = withDefaults(
     }
 )
 
-
 const internalCurrentDate = ref(props.currentDate ?? dayjs())
 
 // Watch for external changes to currentDate and sync internal state
@@ -164,7 +158,6 @@ function handleNavigate(dir: 'prev' | 'next') {
 }
 </script>
 
-
 <style module>
 .property_default {
   display: flex;
@@ -173,7 +166,6 @@ function handleNavigate(dir: 'prev' | 'next') {
   font-family: Inter;
   align-items: center;
   color: #1F3A5F;
-
 }
 .reversed {
   flex-direction: row-reverse;

@@ -45,13 +45,9 @@
   </div>
 </template>
 
-
-
-
 <script setup lang="ts">
 import { watch, onMounted, ref } from "vue"
 import dayjs from "dayjs"
-
 
 type SelectedValues = {
   year: number
