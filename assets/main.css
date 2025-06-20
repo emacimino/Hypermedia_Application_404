@@ -11,7 +11,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #1F3A5F;
-
 }
 
 :root {
@@ -32,6 +31,7 @@ html, body {
     overflow-x: hidden;
 }
 
+/*for the buttons*/
 @layer components {
     .btn {
         @apply px-6 py-3 text-white text-lg font-medium rounded-md

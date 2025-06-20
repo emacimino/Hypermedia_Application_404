@@ -106,10 +106,6 @@
   </div>
 </template>
 
-
-
-
-
 <script setup lang="ts">
 import { CalendarIcon } from "@heroicons/vue/24/outline"
 import dayjs from "dayjs"
