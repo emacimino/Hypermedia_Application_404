@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { getQuery } from 'h3'
-import dayjs from 'dayjs'
-import isoWeek from 'dayjs/plugin/isoWeek'
-dayjs.extend(isoWeek)
+import { getWeekDates } from '~/utils/date'
+
 
 //Get the events presentation content API for Calendar
 
@@ -11,14 +10,8 @@ export default defineEventHandler(async (event) => {
     const client = createClient(config.SUPABASE_URL, config.SUPABASE_KEY)
 
     const query = getQuery(event)
-    const baseDate = query.base ? dayjs(query.base as string) : dayjs()
-
-    const startOfWeek = baseDate.startOf('isoWeek')
-    const endOfWeek = baseDate.endOf('isoWeek')
-    const from = startOfWeek.format("YYYY-MM-DD")
-    const to = endOfWeek.format("YYYY-MM-DD")
-    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
+    const baseDate = query.base ? new Date(query.base.toString()) : new Date()
+    const { start: from, end: to, weekdays } = getWeekDates(baseDate)
     const { data: onetimeEvents, error: oneErr } = await client
         .from("Events")
         .select("*")
