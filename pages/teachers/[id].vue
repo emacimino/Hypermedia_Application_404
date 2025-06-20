@@ -98,7 +98,7 @@ const items = computed<BreadcrumbItem[]>(() => {
   const second = teacherStore.teacher
       ? {
         label: currentLang.value === 'it'
-            ? teacherStore.teacher.Title_it
+            ? teacherStore.teacher.Title
             : teacherStore.teacher.Title,
         ui: {
           linkLabel: 'text-base md:text-2xl text-[#1F3A5F] font-sans font-bold underline'

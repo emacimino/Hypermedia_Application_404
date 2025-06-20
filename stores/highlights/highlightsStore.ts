@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 import type { HighlightItem } from '~/types/models'
-import type { Title } from '~/types/models'
+import type { LocalizedTitle } from '~/types/models'
 
 
 
@@ -9,14 +9,14 @@ import type { Title } from '~/types/models'
 export const useHighlightsStore = defineStore('highlights', {
     state: () => ({
         highlights: [] as HighlightItem[],
-        title: null as Title | null
+        title: null as LocalizedTitle | null
     }),
 
     actions: {
         async fetchAllHighlights(currentLang: string) {
             const { data, error } = await useFetch<{
                 highlights: HighlightItem[]
-                title: Title
+                title: LocalizedTitle
             }>(`/api/highlights?lang=${currentLang}`)
 
             if (error.value || !data.value) {
