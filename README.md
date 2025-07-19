@@ -27,10 +27,10 @@ This is a mockup website for a fictional yoga center, developed as a team projec
  **Emanuele Cimino**  
   📧 [emanuele.cimino@mail.polimi.it](mailto:emanuele.cimino@mail.polimi.it)
 
-- **Gabriele Lorenzetti**  
+**Gabriele Lorenzetti**  
   📧 [Gabriele.lorenzetti@mail.polimi.it](mailto:gabriele.lorenzetti@mail.polimi.it)
 
-- **Giorgio Sidari**  
+**Giorgio Sidari**  
   📧 [Giorgio1.sidari@mail.polimi.it](mailto:giorgio1.sidari@mail.polimi.it)
 ---
 
